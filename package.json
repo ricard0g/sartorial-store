@@ -1,0 +1,12 @@
+{
+  "name": "sartorial",
+  "version": "1.0.0",
+  "description": "Sartorial store",
+  "main": "index.js",
+  "scripts": {
+    "tw": "npx tailwindcss -i ./src/css/styles.css -o ./assets/styles.css --watch"
+  },
+  "devDependencies": {
+    "tailwindcss": "^3.4.15"
+  }
+}

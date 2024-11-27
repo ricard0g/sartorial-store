@@ -34,7 +34,6 @@
     <script src="{{ 'details-disclosure.js' | asset_url }}" defer="defer"></script>
     <script src="{{ 'details-modal.js' | asset_url }}" defer="defer"></script>
     <script src="{{ 'search-form.js' | asset_url }}" defer="defer"></script>
-
     {%- if settings.animations_reveal_on_scroll -%}
       <script src="{{ 'animations.js' | asset_url }}" defer="defer"></script>
     {%- endif -%}
@@ -176,7 +175,7 @@
         --drawer-shadow-blur-radius: {{ settings.drawer_shadow_blur }}px;
 
         --spacing-sections-desktop: {{ settings.spacing_sections }}px;
-        --spacing-sections-mobile: {% if settings.spacing_sections < 24 %}{{ settings.spacing_sections }}{% else %}{{ settings.spacing_sections | times: 0.7 | round | at_least: 20 }}{% endif %}px;
+        --spacing-sections-mobile: {% if settings.spacing_sections <link 24 %}{{ settings.spacing_sections }}{% else %}{{ settings.spacing_sections | times: 0.7 | round | at_least: 20 }}{% endif %}px;
 
         --grid-desktop-vertical-spacing: {{ settings.spacing_grid_vertical }}px;
         --grid-desktop-horizontal-spacing: {{ settings.spacing_grid_horizontal }}px;
@@ -296,9 +295,11 @@
         document.documentElement.classList.add('shopify-design-mode');
       }
     </script>
+    {{ "styles.css" | asset_url | stylesheet_tag }}
   </head>
 
-  <body class="gradient{% if settings.animations_hover_elements != 'none' %} animate--hover-{{ settings.animations_hover_elements }}{% endif %}">
+  <body class="gradient{% if settings.animations_hover_elements != 'none' %}  animate--hover-{{ settings.animations_hover_elements }}{% endif %}">
+    {% section "test" %}
     <a class="skip-to-content-link button visually-hidden" href="#MainContent">
       {{ 'accessibility.skip_to_text' | t }}
     </a>
