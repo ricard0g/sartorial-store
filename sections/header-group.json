@@ -1,14 +1,59 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
-    "type": "header",
-    "name": "Header Group",
-    "sections": {
-        "announcement-bar": {
-            "type": "announcement-bar",
-            "settings": {}
+  "type": "header",
+  "name": "Header Group",
+  "sections": {
+    "announcement-bar": {
+      "type": "announcement-bar",
+      "blocks": {
+        "links_9cyp7x": {
+          "type": "links",
+          "settings": {
+            "link_url": "shopify://collections",
+            "text": "Hola que tal"
+          }
         },
-        "header": {
-            "type": "header",
-            "settings": {}
+        "links_rHq4fL": {
+          "type": "links",
+          "settings": {
+            "link_url": "",
+            "text": "Link"
+          }
+        },
+        "links_xdpE4Q": {
+          "type": "links",
+          "settings": {
+            "link_url": "",
+            "text": "Link"
+          }
         }
+      },
+      "block_order": [
+        "links_9cyp7x",
+        "links_rHq4fL",
+        "links_xdpE4Q"
+      ],
+      "settings": {
+        "show_announcement_bar": true,
+        "background_color": "#242424",
+        "text_color": "#FFF"
+      }
+    },
+    "header": {
+      "type": "header",
+      "settings": {}
     }
+  },
+  "order": [
+    "announcement-bar",
+    "header"
+  ]
 }

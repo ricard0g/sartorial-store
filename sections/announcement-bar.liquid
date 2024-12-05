@@ -1,7 +1,8 @@
 {{ 'carousel.min.js' | asset_url | stylesheet_tag }}
+{{ 'announcement-bar.css' | asset_url | stylesheet_tag }}
 <script src="{{ "carousel.min.js" | asset_url }}" defer></script>
 {% if section.settings.show_announcement_bar %}
-    <section class="main-carousel">
+    <section class="main-carousel announcement-bar-container" style="--background-color: {{ section.settings.background_color }}; --text-color: {{ section.settings.text_color }}" data-flickity='{ "autoPlay": true, "pageDots": false }'>
         {% for block in section.blocks %}
             <div class="carousel-cell">
                 <a href="{{ block.settings.link_url }}">{{ block.settings.text }}</a>
@@ -9,14 +10,6 @@
         {% endfor %}
     </section>
 {% endif %}
-
-<script>
-    const elem = document.querySelector('.main-carousel');
-    const flkty = new Flickity( elem, {
-        cellAlign: "left",
-        contain: true
-    })
-</script>
 
 {% schema %}
 {
