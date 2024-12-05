@@ -1,0 +1,79 @@
+{{ 'carousel.min.js' | asset_url | stylesheet_tag }}
+<script src="{{ "carousel.min.js" | asset_url }}" defer></script>
+{% if section.settings.show_announcement_bar %}
+    <section class="main-carousel">
+        {% for block in section.blocks %}
+            <div class="carousel-cell">
+                <a href="{{ block.settings.link_url }}">{{ block.settings.text }}</a>
+            </div>
+        {% endfor %}
+    </section>
+{% endif %}
+
+<script>
+    const elem = document.querySelector('.main-carousel');
+    const flkty = new Flickity( elem, {
+        cellAlign: "left",
+        contain: true
+    })
+</script>
+
+{% schema %}
+{
+    "name": "Announcement Bar",
+    "tag": "div",
+    "class": "announcement-bar",
+    "settings": [
+        {
+            "type": "checkbox",
+            "id": "show_announcement_bar",
+            "label": "Show Announcement Bar",
+            "default": true
+        },
+        {
+            "type": "image_picker",
+            "id": "left_image",
+            "label": "Pick Left Image/Icon",
+            "info": "Pick an image/icon to show on the left"
+        },
+        {
+            "type": "image_picker",
+            "id": "right_image",
+            "label": "Pick Right Image/Icon",
+            "info": "Pick an image/icon to show on the right"
+        },
+        {
+            "type": "color_background",
+            "id": "background_color",
+            "label": "Background Color",
+            "default": "#242424"
+        },
+        {
+            "type": "color",
+            "id": "text_color",
+            "label": "Text Color",
+            "default": "#FFF"
+        }
+    ],
+    "blocks": [
+        {
+            "type": "links",
+            "name": "Links",
+            "limit": 4,
+            "settings": [
+                {
+                    "type": "url",
+                    "id": "link_url",
+                    "label": "Link URL"
+                },
+                {
+                    "type": "inline_richtext",
+                    "id": "text",
+                    "label": "Text",
+                    "default": "Link"
+                }
+            ]
+        }
+    ]
+}
+{% endschema %}
