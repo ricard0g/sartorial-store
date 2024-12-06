@@ -1,42 +1,48 @@
-* { box-sizing: border-box; }
-
-body { font-family: sans-serif; }
-
-.announcement-bar-container {
-    background: var(--background-color);
-    width: 100%;
+body {
+  margin: 0;
 }
-
-.announcement-bar-container a {
-    text-decoration: none;
-    color: var(--text-color)
-}
-
-.flickity-viewport {
-    overflow: hidden;
-}
-
 
 .carousel {
-  background: #EEE;
   width: 100%;
-  overflow: hidden;
-}
-
-.carousel-cell {
-  width: 66%;
   height: 4vh;
-  margin-right: 10px;
-  background: #242424;
-  border-radius: 5px;
-  text-align: center;
+  position: relative;
+  background-color: var(--background-color);
 }
 
-/* cell number */
-.carousel-cell:before {
-  display: block;
+.slider {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  padding: 0;
+  margin: 0;
+}
+
+.slide {
+  display: grid;
+  align-items: center;
+  position: absolute;
   text-align: center;
-  line-height: 200px;
-  font-size: 80px;
-  color: white;
+  inset: 0;
+  opacity: 0;
+}
+
+.slide[data-active] {
+  z-index: 1;
+  opacity: 1;
+}
+
+.slide > a {
+  font-size: 0.875rem;
+  text-decoration: none;
+  color: var(--text-color);
+}
+
+.carousel-button {
+  position: absolute;
+  background: none;
+  border: none;
+  font-size: 2rem;
+  color: var(--text-color);
+  cursor: pointer;
 }

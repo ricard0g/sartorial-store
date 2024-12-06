@@ -1,72 +1,137 @@
-{{ 'carousel.min.js' | asset_url | stylesheet_tag }}
 {{ 'announcement-bar.css' | asset_url | stylesheet_tag }}
-<script src="{{ "carousel.min.js" | asset_url }}" defer></script>
 {% if section.settings.show_announcement_bar %}
-    <section class="main-carousel announcement-bar-container" style="--background-color: {{ section.settings.background_color }}; --text-color: {{ section.settings.text_color }}" data-flickity='{ "autoPlay": true, "pageDots": false }'>
-        {% for block in section.blocks %}
-            <div class="carousel-cell">
-                <a href="{{ block.settings.link_url }}">{{ block.settings.text }}</a>
-            </div>
-        {% endfor %}
-    </section>
+  <section class="carousel" style=" --background-color: {{ section.settings.background_color }} ;  ">
+    {% case section.settings.arrow_type %}
+      {% when 'common_arrows' %}
+        <button style="--text-color: {{ section.settings.text_color }}" class="carousel-button prev">&#8592;</button>
+        <button style="--text-color: {{ section.settings.text_color }}"  class="carousel-button next">&#8594;</button>
+      {% when 'triangle_headed_arrows' %}
+        <button style="--text-color: {{ section.settings.text_color }}" class="carousel-button prev">&#11104;</button>
+        <button style="--text-color: {{ section.settings.text_color }}" class="carousel-button next">&#11106;</button>
+      {% when 'double_arrows' %}
+        <button style="--text-color: {{ section.settings.text_color }}" class="carousel-button prev">&#8656;</button>
+        <button style="--text-color: {{ section.settings.text_color }}" class="carousel-button next">&#8658;</button>
+      {% when 'triple_arrows' %}
+        <button style="--text-color: {{ section.settings.text_color }}" class="carousel-button prev">&#8666;</button>
+        <button style="--text-color: {{ section.settings.text_color }}" class="carousel-button next">&#8667;</button>
+      {% when 'dashed_arrows' %}
+        <button style="--text-color: {{ section.settings.text_color }}" class="carousel-button prev">&#8672;</button>
+        <button style="--text-color: {{ section.settings.text_color }}" class="carousel-button next">&#8674;</button>
+      {% when 'harpoon_arrows' %}
+        <button style="--text-color: {{ section.settings.text_color }}" class="carousel-button prev">&#10594;</button>
+        <button style="--text-color: {{ section.settings.text_color }}" class="carousel-button next">&#10596;</button>
+      {% when 'bold_triangle_headed_arrows' %}
+        <button style="--text-color: {{ section.settings.text_color }}" class="carousel-button prev">&#11013;</button>
+        <button style="--text-color: {{ section.settings.text_color }}" class="carousel-button next">&#11157;</button>
+    {% endcase %}
+    <ul class="slider">
+      {% for block in section.blocks %}
+        {% if forloop.first %}
+          <li class="slide" data-active>
+            <a style="--text-color: {{ section.settings.text_color }}" href="{{ block.settings.link_url }}">{{ block.settings.text }}</a>
+          </li>
+        {% else %}
+          <li class="slide"  >
+            <a style="--text-color: {{ section.settings.text_color }}" href="{{ block.settings.link_url }}">{{ block.settings.text }}</a>
+          </li>
+        {% endif %}
+      {% endfor %}
+    </ul>
+  </section>
 {% endif %}
 
 {% schema %}
 {
-    "name": "Announcement Bar",
-    "tag": "div",
-    "class": "announcement-bar",
-    "settings": [
+  "name": "Announcement Bar",
+  "tag": "div",
+  "class": "announcement-bar",
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "show_announcement_bar",
+      "label": "Show Announcement Bar",
+      "default": true
+    },
+    {
+      "type": "image_picker",
+      "id": "left_image",
+      "label": "Pick Left Image/Icon",
+      "info": "Pick an image/icon to show on the left"
+    },
+    {
+      "type": "image_picker",
+      "id": "right_image",
+      "label": "Pick Right Image/Icon",
+      "info": "Pick an image/icon to show on the right"
+    },
+    {
+      "type": "color_background",
+      "id": "background_color",
+      "label": "Background Color",
+      "default": "#242424"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text Color",
+      "default": "#FFF"
+    },
+    {
+      "type": "select",
+      "id": "arrow_type",
+      "label": "Arrow Type",
+      "options": [
         {
-            "type": "checkbox",
-            "id": "show_announcement_bar",
-            "label": "Show Announcement Bar",
-            "default": true
+          "value": "common_arrows",
+          "label": "Common Arrows"
         },
         {
-            "type": "image_picker",
-            "id": "left_image",
-            "label": "Pick Left Image/Icon",
-            "info": "Pick an image/icon to show on the left"
+          "value": "triangle_headed_arrows",
+          "label": "Triangle Heded Arrows"
         },
         {
-            "type": "image_picker",
-            "id": "right_image",
-            "label": "Pick Right Image/Icon",
-            "info": "Pick an image/icon to show on the right"
+          "value": "bold_triangle_headed_arrows",
+          "label": "Bold Triangle Headed Arrows"
         },
         {
-            "type": "color_background",
-            "id": "background_color",
-            "label": "Background Color",
-            "default": "#242424"
+          "value": "double_arrows",
+          "label": "Double Arrows"
         },
         {
-            "type": "color",
-            "id": "text_color",
-            "label": "Text Color",
-            "default": "#FFF"
+          "value": "triple_arrows",
+          "label": "Triple Arrows"
+        },
+        {
+          "value": "dashed_arrows",
+          "label": "Dashed Arrows"
+        },
+        {
+          "value": "harpoon_arrows",
+          "label": "Harpoon Arrows"
         }
-    ],
-    "blocks": [
+      ],
+      "default": "common_arrows"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "links",
+      "name": "Links",
+      "limit": 4,
+      "settings": [
         {
-            "type": "links",
-            "name": "Links",
-            "limit": 4,
-            "settings": [
-                {
-                    "type": "url",
-                    "id": "link_url",
-                    "label": "Link URL"
-                },
-                {
-                    "type": "inline_richtext",
-                    "id": "text",
-                    "label": "Text",
-                    "default": "Link"
-                }
-            ]
+          "type": "url",
+          "id": "link_url",
+          "label": "Link URL"
+        },
+        {
+          "type": "inline_richtext",
+          "id": "text",
+          "label": "Text",
+          "default": "Link"
         }
-    ]
+      ]
+    }
+  ]
 }
 {% endschema %}
