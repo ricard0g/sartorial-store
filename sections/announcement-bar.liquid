@@ -1,39 +1,144 @@
 {{ 'announcement-bar.css' | asset_url | stylesheet_tag }}
+<script src="{{ 'announcement-bar.js' | asset_url }}" defer></script>
 {% if section.settings.show_announcement_bar %}
-  <section class="carousel" style=" --background-color: {{ section.settings.background_color }} ;  ">
+  <section class="carousel" data-carousel style=" --background-color: {{ section.settings.background_color }} ;  ">
     {% case section.settings.arrow_type %}
       {% when 'common_arrows' %}
-        <button style="--text-color: {{ section.settings.text_color }}" class="carousel-button prev">&#8592;</button>
-        <button style="--text-color: {{ section.settings.text_color }}"  class="carousel-button next">&#8594;</button>
+        <button
+          style="--text-color: {{ section.settings.text_color }}"
+          class="carousel-button prev"
+          data-carousel-button="prev"
+        >
+          &#8592;
+        </button>
+        <button
+          style="--text-color: {{ section.settings.text_color }}"
+          class="carousel-button next"
+          data-carousel-button="next"
+        >
+          &#8594;
+        </button>
       {% when 'triangle_headed_arrows' %}
-        <button style="--text-color: {{ section.settings.text_color }}" class="carousel-button prev">&#11104;</button>
-        <button style="--text-color: {{ section.settings.text_color }}" class="carousel-button next">&#11106;</button>
+        <button
+          style="--text-color: {{ section.settings.text_color }}"
+          class="carousel-button prev"
+          data-carousel-button="prev"
+        >
+          &#11104;
+        </button>
+        <button
+          style="--text-color: {{ section.settings.text_color }}"
+          class="carousel-button next"
+          data-carousel-button="next"
+        >
+          &#11106;
+        </button>
       {% when 'double_arrows' %}
-        <button style="--text-color: {{ section.settings.text_color }}" class="carousel-button prev">&#8656;</button>
-        <button style="--text-color: {{ section.settings.text_color }}" class="carousel-button next">&#8658;</button>
+        <button
+          style="--text-color: {{ section.settings.text_color }}"
+          class="carousel-button prev"
+          data-carousel-button="prev"
+        >
+          &#8656;
+        </button>
+        <button
+          style="--text-color: {{ section.settings.text_color }}"
+          class="carousel-button next"
+          data-carousel-button="next"
+        >
+          &#8658;
+        </button>
       {% when 'triple_arrows' %}
-        <button style="--text-color: {{ section.settings.text_color }}" class="carousel-button prev">&#8666;</button>
-        <button style="--text-color: {{ section.settings.text_color }}" class="carousel-button next">&#8667;</button>
+        <button
+          style="--text-color: {{ section.settings.text_color }}"
+          class="carousel-button prev"
+          data-carousel-button="prev"
+        >
+          &#8666;
+        </button>
+        <button
+          style="--text-color: {{ section.settings.text_color }}"
+          class="carousel-button next"
+          data-carousel-button="next"
+        >
+          &#8667;
+        </button>
       {% when 'dashed_arrows' %}
-        <button style="--text-color: {{ section.settings.text_color }}" class="carousel-button prev">&#8672;</button>
-        <button style="--text-color: {{ section.settings.text_color }}" class="carousel-button next">&#8674;</button>
+        <button
+          style="--text-color: {{ section.settings.text_color }}"
+          class="carousel-button prev"
+          data-carousel-button="prev"
+        >
+          &#8672;
+        </button>
+        <button
+          style="--text-color: {{ section.settings.text_color }}"
+          class="carousel-button next"
+          data-carousel-button="next"
+        >
+          &#8674;
+        </button>
       {% when 'harpoon_arrows' %}
-        <button style="--text-color: {{ section.settings.text_color }}" class="carousel-button prev">&#10594;</button>
-        <button style="--text-color: {{ section.settings.text_color }}" class="carousel-button next">&#10596;</button>
+        <button
+          style="--text-color: {{ section.settings.text_color }}"
+          class="carousel-button prev"
+          data-carousel-button="prev"
+        >
+          &#10594;
+        </button>
+        <button
+          style="--text-color: {{ section.settings.text_color }}"
+          class="carousel-button next"
+          data-carousel-button="next"
+        >
+          &#10596;
+        </button>
       {% when 'bold_triangle_headed_arrows' %}
-        <button style="--text-color: {{ section.settings.text_color }}" class="carousel-button prev">&#11013;</button>
-        <button style="--text-color: {{ section.settings.text_color }}" class="carousel-button next">&#11157;</button>
+        <button
+          style="--text-color: {{ section.settings.text_color }}"
+          class="carousel-button prev"
+          data-carousel-button="prev"
+        >
+          &#11013;
+        </button>
+        <button
+          style="--text-color: {{ section.settings.text_color }}"
+          class="carousel-button next"
+          data-carousel-button="next"
+        >
+          &#11157;
+        </button>
     {% endcase %}
-    <ul class="slider">
+    <ul class="slider" data-slides>
       {% for block in section.blocks %}
         {% if forloop.first %}
-          <li class="slide" data-active>
-            <a style="--text-color: {{ section.settings.text_color }}" href="{{ block.settings.link_url }}">{{ block.settings.text }}</a>
-          </li>
+          {% if block.settings.text != blank %}
+            {% if block.settings.link_url != blank %}
+              <li class="slide" data-active>
+                <a style="--text-color: {{ section.settings.text_color }}" href="{{ block.settings.link_url }}">
+                  {{- block.settings.text -}}
+                </a>
+              </li>
+            {% else %}
+              <li class="slide" style="--text-color: {{ section.settings.text_color }}">
+                {{ block.settings.text }}
+              </li>
+            {% endif %}
+          {% endif %}
         {% else %}
-          <li class="slide"  >
-            <a style="--text-color: {{ section.settings.text_color }}" href="{{ block.settings.link_url }}">{{ block.settings.text }}</a>
-          </li>
+          {% if block.settings.text != blank %}
+            {% if block.settings.link_url != blank %}
+              <li class="slide">
+                <a style="--text-color: {{ section.settings.text_color }}" href="{{ block.settings.link_url }}">
+                  {{- block.settings.text -}}
+                </a>
+              </li>
+            {% else %}
+              <li class="slide" style="--text-color: {{ section.settings.text_color }}">
+                {{ block.settings.text }}
+              </li>
+            {% endif %}
+          {% endif %}
         {% endif %}
       {% endfor %}
     </ul>

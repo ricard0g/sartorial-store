@@ -9,6 +9,12 @@ body {
   background-color: var(--background-color);
 }
 
+.carousel > ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
 .slider {
   display: flex;
   justify-content: center;
@@ -25,14 +31,32 @@ body {
   text-align: center;
   inset: 0;
   opacity: 0;
+  color: var(--text-color);
+  font-size: 0.875rem;
 }
 
 .slide[data-active] {
   z-index: 1;
   opacity: 1;
+  animation: left-to-right 300ms ease-in-out;
+}
+
+@keyframes left-to-right {
+  0% {
+    transform: translateX(-2.5rem);
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
 }
 
 .slide > a {
+  display: inline-block;
+  width: 40%;
+  margin: 0 auto;
   font-size: 0.875rem;
   text-decoration: none;
   color: var(--text-color);
@@ -42,7 +66,50 @@ body {
   position: absolute;
   background: none;
   border: none;
-  font-size: 2rem;
+  font-size: 1rem;
   color: var(--text-color);
   cursor: pointer;
+  top: 50%;
+  transform: scale(0.9) translateY(-50%);
+  z-index: 2;
+  transition: all 250ms ease;
+}
+
+.carousel-button:hover {
+  transform: scale(1) translateY(-50%);
+}
+
+.prev {
+  left: 25%;
+}
+
+.next {
+  right: 25%;
+}
+
+@media only screen and (max-width: 768px) {
+  .prev {
+    left: 10%;
+  }
+
+  .next {
+    right: 10%;
+  }
+
+  .slide > a {
+    width: 60%;
+  }
+}
+
+@media only screen and (max-width: 425px) {
+  .prev {
+    left: 5%;
+  }
+
+  .next {
+    right: 5%;
+  }
+.slide > a {
+    width: 70%;
+  }
 }
