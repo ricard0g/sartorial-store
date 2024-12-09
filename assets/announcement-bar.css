@@ -7,6 +7,8 @@ body {
   height: 4vh;
   position: relative;
   background-color: var(--background-color);
+  letter-spacing: var(--letter-spacing);
+  font-size: var(--font-size);
 }
 
 .carousel > ul {
@@ -32,7 +34,6 @@ body {
   inset: 0;
   opacity: 0;
   color: var(--text-color);
-  font-size: 0.875rem;
 }
 
 .slide[data-active] {
@@ -57,9 +58,15 @@ body {
   display: inline-block;
   width: 40%;
   margin: 0 auto;
-  font-size: 0.875rem;
+  font-size: var(--font-size);
   text-decoration: none;
   color: var(--text-color);
+}
+
+.slide > div {
+  letter-spacing: var(--letter-spacing);
+  font-size: var(--font-size);
+  margin: 0 auto;
 }
 
 .slide > div > a {
@@ -71,7 +78,7 @@ body {
   background: none;
   padding: 0;
   border: none;
-  font-size: 1.125rem;
+  font-size: var(--buttons-size);
   color: var(--text-color);
   cursor: pointer;
   top: 50%;
@@ -93,6 +100,15 @@ body {
 }
 
 @media only screen and (max-width: 768px) {
+  .carousel {
+    min-height: 5vh;
+    height: auto;
+  }
+
+  .slide > div {
+    width: 85%;
+  }
+
   .prev {
     left: 10%;
   }

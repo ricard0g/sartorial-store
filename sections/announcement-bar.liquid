@@ -1,18 +1,26 @@
 {{ 'announcement-bar.css' | asset_url | stylesheet_tag }}
 <script src="{{ 'announcement-bar.js' | asset_url }}" defer></script>
+{% comment %} These variables are initialized here because I use the 'append' filter {% endcomment %}
+{% liquid
+  assign font_size = section.settings.font_size | append: 'px'
+  assign letter_spacing = section.settings.letter_spacing | append: 'px' 
+  assign buttons_size = section.settings.buttons_size | append: 'px'
+%}
 {% if section.settings.show_announcement_bar %}
-  <section class="carousel" data-carousel style=" --background-color: {{ section.settings.background_color }} ;  ">
+  <section
+    class="carousel"
+    data-carousel
+    style=" --background-color: {{ section.settings.background_color }}; --text-color: {{ section.settings.text_color }}; --letter-spacing: {{ letter_spacing }}; --buttons-size: {{ buttons_size }}; --font-size: {{ font_size }}"
+  >
     {% case section.settings.arrow_type %}
       {% when 'common_arrows' %}
-        <button
-          style="--text-color: {{ section.settings.text_color }}"
+        <button 
           class="carousel-button prev"
           data-carousel-button="prev"
         >
           &#8592;
         </button>
         <button
-          style="--text-color: {{ section.settings.text_color }}"
           class="carousel-button next"
           data-carousel-button="next"
         >
@@ -20,14 +28,12 @@
         </button>
       {% when 'triangle_headed_arrows' %}
         <button
-          style="--text-color: {{ section.settings.text_color }}"
           class="carousel-button prev"
           data-carousel-button="prev"
         >
           &#11104;
         </button>
         <button
-          style="--text-color: {{ section.settings.text_color }}"
           class="carousel-button next"
           data-carousel-button="next"
         >
@@ -35,14 +41,12 @@
         </button>
       {% when 'double_arrows' %}
         <button
-          style="--text-color: {{ section.settings.text_color }}"
           class="carousel-button prev"
           data-carousel-button="prev"
         >
           &#8656;
         </button>
         <button
-          style="--text-color: {{ section.settings.text_color }}"
           class="carousel-button next"
           data-carousel-button="next"
         >
@@ -50,14 +54,12 @@
         </button>
       {% when 'triple_arrows' %}
         <button
-          style="--text-color: {{ section.settings.text_color }}"
           class="carousel-button prev"
           data-carousel-button="prev"
         >
           &#8666;
         </button>
         <button
-          style="--text-color: {{ section.settings.text_color }}"
           class="carousel-button next"
           data-carousel-button="next"
         >
@@ -65,14 +67,12 @@
         </button>
       {% when 'dashed_arrows' %}
         <button
-          style="--text-color: {{ section.settings.text_color }}"
           class="carousel-button prev"
           data-carousel-button="prev"
         >
           &#8672;
         </button>
         <button
-          style="--text-color: {{ section.settings.text_color }}"
           class="carousel-button next"
           data-carousel-button="next"
         >
@@ -80,14 +80,12 @@
         </button>
       {% when 'harpoon_arrows' %}
         <button
-          style="--text-color: {{ section.settings.text_color }}"
           class="carousel-button prev"
           data-carousel-button="prev"
         >
           &#10594;
         </button>
         <button
-          style="--text-color: {{ section.settings.text_color }}"
           class="carousel-button next"
           data-carousel-button="next"
         >
@@ -95,14 +93,12 @@
         </button>
       {% when 'bold_triangle_headed_arrows' %}
         <button
-          style="--text-color: {{ section.settings.text_color }}"
           class="carousel-button prev"
           data-carousel-button="prev"
         >
           &#11013;
         </button>
         <button
-          style="--text-color: {{ section.settings.text_color }}"
           class="carousel-button next"
           data-carousel-button="next"
         >
@@ -110,14 +106,12 @@
         </button>
       {% when 'pointing_hands' %}
         <button
-          style="--text-color: {{ section.settings.text_color }}"
           class="carousel-button prev"
           data-carousel-button="prev"
         >
           &#9756;
         </button>
         <button
-          style="--text-color: {{ section.settings.text_color }}"
           class="carousel-button next"
           data-carousel-button="next"
         >
@@ -125,14 +119,12 @@
         </button>
       {% when 'pointing_hands_minimalist' %}
         <button
-          style="--text-color: {{ section.settings.text_color }}"
           class="carousel-button prev"
           data-carousel-button="prev"
         >
           &#9754;
         </button>
         <button
-          style="--text-color: {{ section.settings.text_color }}"
           class="carousel-button next"
           data-carousel-button="next"
         >
@@ -140,14 +132,12 @@
         </button>
       {% when 'pointing_angle_brackets_medium' %}
         <button
-          style="--text-color: {{ section.settings.text_color }}"
           class="carousel-button prev"
           data-carousel-button="prev"
         >
           &#10092;
         </button>
         <button
-          style="--text-color: {{ section.settings.text_color }}"
           class="carousel-button next"
           data-carousel-button="next"
         >
@@ -155,14 +145,12 @@
         </button>
       {% when 'pointing_angle_brackets_heavy' %}
         <button
-          style="--text-color: {{ section.settings.text_color }}"
           class="carousel-button prev"
           data-carousel-button="prev"
         >
           &#10094;
         </button>
         <button
-          style="--text-color: {{ section.settings.text_color }}"
           class="carousel-button next"
           data-carousel-button="next"
         >
@@ -170,14 +158,12 @@
         </button>
       {% when 'pointing_angle_brackets_heavy_bold' %}
         <button
-          style="--text-color: {{ section.settings.text_color }}"
           class="carousel-button prev"
           data-carousel-button="prev"
         >
           &#10096;
         </button>
         <button
-          style="--text-color: {{ section.settings.text_color }}"
           class="carousel-button next"
           data-carousel-button="next"
         >
@@ -185,14 +171,12 @@
         </button>
       {% when 'less_and_more_than_signs' %}
         <button
-          style="--text-color: {{ section.settings.text_color }}"
           class="carousel-button prev"
           data-carousel-button="prev"
         >
           &#60;
         </button>
         <button
-          style="--text-color: {{ section.settings.text_color }}"
           class="carousel-button next"
           data-carousel-button="next"
         >
@@ -200,14 +184,12 @@
         </button>
       {% when 'less_and_more_than_signs_italics' %}
         <button
-          style="--text-color: {{ section.settings.text_color }}"
           class="carousel-button prev"
           data-carousel-button="prev"
         >
           &#8826;
         </button>
         <button
-          style="--text-color: {{ section.settings.text_color }}"
           class="carousel-button next"
           data-carousel-button="next"
         >
@@ -215,14 +197,12 @@
         </button>
       {% when 'less_and_more_than_signs_fold' %}
         <button
-          style="--text-color: {{ section.settings.text_color }}"
           class="carousel-button prev"
           data-carousel-button="prev"
         >
           &#8880;
         </button>
         <button
-          style="--text-color: {{ section.settings.text_color }}"
           class="carousel-button next"
           data-carousel-button="next"
         >
@@ -230,14 +210,12 @@
         </button>
       {% when 'less_and_more_than_signs_dots' %}
         <button
-          style="--text-color: {{ section.settings.text_color }}"
           class="carousel-button prev"
           data-carousel-button="prev"
         >
           &#8918;
         </button>
         <button
-          style="--text-color: {{ section.settings.text_color }}"
           class="carousel-button next"
           data-carousel-button="next"
         >
@@ -245,28 +223,29 @@
         </button>
       {% when 'horizontal_cones' %}
         <button
-          style="--text-color: {{ section.settings.text_color }}"
           class="carousel-button prev"
           data-carousel-button="prev"
         >
           &#8882;
         </button>
         <button
-          style="--text-color: {{ section.settings.text_color }}"
           class="carousel-button next"
           data-carousel-button="next"
         >
           &#8883;
         </button>
     {% endcase %}
-    <ul class="slider" data-slides>
+    <ul
+      class="slider"
+      data-slides
+    >
       {% for block in section.blocks %}
         {% if forloop.first %}
           {% if block.settings.text != blank %}
             {% if block.settings.link_url != blank %}
               <li class="slide" data-active>
                 <a
-                  style="--text-color: {{ section.settings.text_color }}; {% if section.settings.uppercase %} text-transform: uppercase; {% endif %}"
+                  style="{% if section.settings.uppercase %} text-transform: uppercase; {% endif %}"
                   href="{{ block.settings.link_url }}"
                 >
                   {{- block.settings.text -}}
@@ -275,7 +254,7 @@
             {% else %}
               <li
                 class="slide"
-                style="--text-color: {{ section.settings.text_color }}; {% if section.settings.uppercase %} text-transform: uppercase; {% endif %}"
+                style="{% if section.settings.uppercase %} text-transform: uppercase; {% endif %}"
                 data-active
               >
                 <div style="{% if section.settings.uppercase %} text-transform: uppercase; {% endif %}">
@@ -288,12 +267,12 @@
           {% if block.settings.text != blank %}
             {% if block.settings.link_url != blank %}
               <li class="slide">
-                <a style="--text-color: {{ section.settings.text_color }}" href="{{ block.settings.link_url }}">
+                <a href="{{ block.settings.link_url }}">
                   {{- block.settings.text -}}
                 </a>
               </li>
             {% else %}
-              <li class="slide" style="--text-color: {{ section.settings.text_color }}">
+              <li class="slide">
                 <div style="{% if section.settings.uppercase %} text-transform: uppercase; {% endif %}">
                   {{ block.settings.text }}
                 </div>
@@ -335,6 +314,36 @@
       "id": "text_color",
       "label": "Text Color",
       "default": "#FFF"
+    },
+    {
+      "type": "range",
+      "id": "letter_spacing",
+      "label": "Spacing Between Letters",
+      "min": 0,
+      "max": 3,
+      "step": 1,
+      "unit": "px",
+      "default": 1
+    },
+    {
+      "type": "range",
+      "id": "font_size",
+      "label": "Font Size",
+      "min": 8,
+      "max": 14,
+      "step": 1,
+      "unit": "px",
+      "default": 10
+    },
+    {
+      "type": "range",
+      "id": "buttons_size",
+      "label": "Size of Buttons",
+      "min": 8,
+      "max": 14,
+      "step": 1,
+      "unit": "px",
+      "default": 14
     },
     {
       "type": "select",
@@ -429,6 +438,36 @@
           "id": "text",
           "label": "Text",
           "default": "Welcome to our store! 🕺🏾"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Announcement Bar",
+      "settings": {
+        "show_announcement_bar": true,
+        "uppercase": true,
+        "arrow_type": "pointing_angle_brackets_heavy"
+      },
+      "blocks": [
+        {
+          "type": "links",
+          "settings": {
+            "text": "Welcome To Our Store! 🕺🏾"
+          }
+        },
+        {
+          "type": "links",
+          "settings": {
+            "text": "Shipping Worldide ✈️"
+          }
+        },
+        {
+          "type": "links",
+          "settings": {
+            "text": "Free Shipping in orders Above $100"
+          }
         }
       ]
     }

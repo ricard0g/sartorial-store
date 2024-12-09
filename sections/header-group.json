@@ -11,42 +11,45 @@
   "type": "header",
   "name": "Header Group",
   "sections": {
-    "announcement-bar": {
+    "announcement_bar_tNRJ6d": {
       "type": "announcement-bar",
       "blocks": {
-        "links_JCegy6": {
+        "links_jdWWM3": {
           "type": "links",
           "settings": {
             "link_url": "",
-            "text": "<strong>Welcome</strong> to our <a href=\"https://google.es\" target=\"_blank\" title=\"https://google.es\"><em>store</em></a>! 🕺🏾"
+            "text": "Welcome To Our Store! 🕺🏾"
           }
         },
-        "links_9cyp7x": {
-          "type": "links",
-          "settings": {
-            "link_url": "shopify://collections",
-            "text": "Hola que tal"
-          }
-        },
-        "links_jaETJ3": {
+        "links_6Xp8tL": {
           "type": "links",
           "settings": {
             "link_url": "",
-            "text": "Welcome to our store! 🕺🏾"
+            "text": "Shipping Worldide ✈️"
+          }
+        },
+        "links_qPM3MB": {
+          "type": "links",
+          "settings": {
+            "link_url": "",
+            "text": "Free Shipping in orders Above $100"
           }
         }
       },
       "block_order": [
-        "links_JCegy6",
-        "links_9cyp7x",
-        "links_jaETJ3"
+        "links_jdWWM3",
+        "links_6Xp8tL",
+        "links_qPM3MB"
       ],
       "settings": {
         "show_announcement_bar": true,
-        "uppercase": false,
+        "uppercase": true,
         "background_color": "#242424",
         "text_color": "#ffffff",
-        "arrow_type": "common_arrows"
+        "letter_spacing": 4,
+        "font_size": 14,
+        "buttons_size": 14,
+        "arrow_type": "pointing_angle_brackets_heavy"
       }
     },
     "pre-header": {
@@ -59,7 +62,7 @@
     }
   },
   "order": [
-    "announcement-bar",
+    "announcement_bar_tNRJ6d",
     "pre-header",
     "header"
   ]
