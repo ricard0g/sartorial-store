@@ -292,28 +292,41 @@
   "class": "announcement-bar",
   "settings": [
     {
+      "type": "header",
+      "content": "Announcement Bar Core Settings",
+      "info": "Core settings you can choose. Showing or not the bar and the colors of text and background."
+    },
+    {
       "type": "checkbox",
       "id": "show_announcement_bar",
       "label": "Show Announcement Bar",
       "default": true
     },
     {
-      "type": "checkbox",
-      "id": "uppercase",
-      "label": "Uppercase Text",
-      "default": false
-    },
-    {
       "type": "color_background",
       "id": "background_color",
       "label": "Background Color",
       "default": "#242424"
-    },
-    {
+    },{
       "type": "color",
       "id": "text_color",
       "label": "Text Color",
       "default": "#FFF"
+    },
+    {
+      "type": "header",
+      "content": "Text Settings",
+      "info": "Here you can customize how your text inside the announcement bar appears."
+    },
+    {
+      "type": "paragraph",
+      "content": "Be careful with the size of text and letter spacing you choose. Make sure to select the 'mobile' view and check if everything looks fine."
+    },
+    {
+      "type": "checkbox",
+      "id": "uppercase",
+      "label": "Uppercase Text",
+      "default": false
     },
     {
       "type": "range",
@@ -330,7 +343,7 @@
       "id": "font_size",
       "label": "Font Size",
       "min": 8,
-      "max": 14,
+      "max": 12,
       "step": 1,
       "unit": "px",
       "default": 10
@@ -340,15 +353,20 @@
       "id": "buttons_size",
       "label": "Size of Buttons",
       "min": 8,
-      "max": 14,
+      "max": 12,
       "step": 1,
       "unit": "px",
       "default": 14
     },
     {
+      "type": "header",
+      "content": "Lateral Buttons Selection",
+      "info": "Select the icon you want to appear as lateral buttons."
+    },
+    {
       "type": "select",
       "id": "arrow_type",
-      "label": "Arrow Type",
+      "label": "Button Type",
       "options": [
         {
           "value": "common_arrows",

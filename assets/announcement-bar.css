@@ -106,15 +106,16 @@ body {
   }
 
   .slide > div {
-    width: 85%;
+    width: 90%;
+    text-wrap: balance;
   }
 
   .prev {
-    left: 10%;
+    left: 5%;
   }
 
   .next {
-    right: 10%;
+    right: 5%;
   }
 
   .slide > a {
