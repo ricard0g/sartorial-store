@@ -69,18 +69,19 @@ body {
 .carousel-button {
   position: absolute;
   background: none;
+  padding: 0;
   border: none;
-  font-size: 1rem;
+  font-size: 1.125rem;
   color: var(--text-color);
   cursor: pointer;
   top: 50%;
-  transform: scale(0.9) translateY(-50%);
+  transform: translateY(-50%);
   z-index: 2;
   transition: all 250ms ease;
 }
 
 .carousel-button:hover {
-  transform: scale(1) translateY(-50%);
+  transform: translateY(-50%);
 }
 
 .prev {

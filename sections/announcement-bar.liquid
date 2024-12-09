@@ -183,24 +183,81 @@
         >
           &#10097;
         </button>
-      {% when 'pointing_angle_brackets_medium' %}
+      {% when 'less_and_more_than_signs' %}
         <button
           style="--text-color: {{ section.settings.text_color }}"
           class="carousel-button prev"
           data-carousel-button="prev"
         >
-          &#10092;
+          &#60;
         </button>
         <button
           style="--text-color: {{ section.settings.text_color }}"
           class="carousel-button next"
           data-carousel-button="next"
         >
-          &#10093;
+          &#62;
         </button>
-
-      {% when 'pointing_angle_brackets_heavy' %}
-
+      {% when 'less_and_more_than_signs_italics' %}
+        <button
+          style="--text-color: {{ section.settings.text_color }}"
+          class="carousel-button prev"
+          data-carousel-button="prev"
+        >
+          &#8826;
+        </button>
+        <button
+          style="--text-color: {{ section.settings.text_color }}"
+          class="carousel-button next"
+          data-carousel-button="next"
+        >
+          &#8827;
+        </button>
+      {% when 'less_and_more_than_signs_fold' %}
+        <button
+          style="--text-color: {{ section.settings.text_color }}"
+          class="carousel-button prev"
+          data-carousel-button="prev"
+        >
+          &#8880;
+        </button>
+        <button
+          style="--text-color: {{ section.settings.text_color }}"
+          class="carousel-button next"
+          data-carousel-button="next"
+        >
+          &#8881;
+        </button>
+      {% when 'less_and_more_than_signs_dots' %}
+        <button
+          style="--text-color: {{ section.settings.text_color }}"
+          class="carousel-button prev"
+          data-carousel-button="prev"
+        >
+          &#8918;
+        </button>
+        <button
+          style="--text-color: {{ section.settings.text_color }}"
+          class="carousel-button next"
+          data-carousel-button="next"
+        >
+          &#8919;
+        </button>
+      {% when 'horizontal_cones' %}
+        <button
+          style="--text-color: {{ section.settings.text_color }}"
+          class="carousel-button prev"
+          data-carousel-button="prev"
+        >
+          &#8882;
+        </button>
+        <button
+          style="--text-color: {{ section.settings.text_color }}"
+          class="carousel-button next"
+          data-carousel-button="next"
+        >
+          &#8883;
+        </button>
     {% endcase %}
     <ul class="slider" data-slides>
       {% for block in section.blocks %}
