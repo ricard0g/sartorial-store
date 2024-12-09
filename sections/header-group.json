@@ -11,24 +11,24 @@
   "type": "header",
   "name": "Header Group",
   "sections": {
-    "announcement_bar_tNRJ6d": {
+    "announcement_bar_Jm3h6w": {
       "type": "announcement-bar",
       "blocks": {
-        "links_jdWWM3": {
+        "links_beCB4W": {
           "type": "links",
           "settings": {
             "link_url": "",
             "text": "Welcome To Our Store! 🕺🏾"
           }
         },
-        "links_6Xp8tL": {
+        "links_RGTaNt": {
           "type": "links",
           "settings": {
             "link_url": "",
             "text": "Shipping Worldide ✈️"
           }
         },
-        "links_qPM3MB": {
+        "links_CVn7UR": {
           "type": "links",
           "settings": {
             "link_url": "",
@@ -37,18 +37,18 @@
         }
       },
       "block_order": [
-        "links_jdWWM3",
-        "links_6Xp8tL",
-        "links_qPM3MB"
+        "links_beCB4W",
+        "links_RGTaNt",
+        "links_CVn7UR"
       ],
       "settings": {
         "show_announcement_bar": true,
-        "uppercase": true,
         "background_color": "#242424",
-        "text_color": "#ffffff",
-        "letter_spacing": 4,
-        "font_size": 14,
-        "buttons_size": 14,
+        "text_color": "#FFF",
+        "uppercase": true,
+        "letter_spacing": 2,
+        "font_size": 10,
+        "buttons_size": 12,
         "arrow_type": "pointing_angle_brackets_heavy"
       }
     },
@@ -62,7 +62,7 @@
     }
   },
   "order": [
-    "announcement_bar_tNRJ6d",
+    "announcement_bar_Jm3h6w",
     "pre-header",
     "header"
   ]
