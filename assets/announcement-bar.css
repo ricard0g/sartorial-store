@@ -62,6 +62,10 @@ body {
   color: var(--text-color);
 }
 
+.slide > div > a {
+  color: var(--text-color);
+}
+
 .carousel-button {
   position: absolute;
   background: none;

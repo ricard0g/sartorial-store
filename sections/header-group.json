@@ -14,6 +14,13 @@
     "announcement-bar": {
       "type": "announcement-bar",
       "blocks": {
+        "links_JCegy6": {
+          "type": "links",
+          "settings": {
+            "link_url": "",
+            "text": "<strong>Welcome</strong> to our <a href=\"https://google.es\" target=\"_blank\" title=\"https://google.es\"><em>store</em></a>! 🕺🏾"
+          }
+        },
         "links_9cyp7x": {
           "type": "links",
           "settings": {
@@ -21,31 +28,30 @@
             "text": "Hola que tal"
           }
         },
-        "links_rHq4fL": {
+        "links_jaETJ3": {
           "type": "links",
           "settings": {
             "link_url": "",
-            "text": "Link"
-          }
-        },
-        "links_xdpE4Q": {
-          "type": "links",
-          "settings": {
-            "link_url": "",
-            "text": "Link"
+            "text": "Welcome to our store! 🕺🏾"
           }
         }
       },
       "block_order": [
+        "links_JCegy6",
         "links_9cyp7x",
-        "links_rHq4fL",
-        "links_xdpE4Q"
+        "links_jaETJ3"
       ],
       "settings": {
         "show_announcement_bar": true,
+        "uppercase": false,
         "background_color": "#242424",
-        "text_color": "#FFF"
+        "text_color": "#ffffff",
+        "arrow_type": "common_arrows"
       }
+    },
+    "pre-header": {
+      "type": "pre-header",
+      "settings": {}
     },
     "header": {
       "type": "header",
@@ -54,6 +60,7 @@
   },
   "order": [
     "announcement-bar",
+    "pre-header",
     "header"
   ]
 }

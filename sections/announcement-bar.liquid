@@ -108,6 +108,99 @@
         >
           &#11157;
         </button>
+      {% when 'pointing_hands' %}
+        <button
+          style="--text-color: {{ section.settings.text_color }}"
+          class="carousel-button prev"
+          data-carousel-button="prev"
+        >
+          &#9756;
+        </button>
+        <button
+          style="--text-color: {{ section.settings.text_color }}"
+          class="carousel-button next"
+          data-carousel-button="next"
+        >
+          &#9758;
+        </button>
+      {% when 'pointing_hands_minimalist' %}
+        <button
+          style="--text-color: {{ section.settings.text_color }}"
+          class="carousel-button prev"
+          data-carousel-button="prev"
+        >
+          &#9754;
+        </button>
+        <button
+          style="--text-color: {{ section.settings.text_color }}"
+          class="carousel-button next"
+          data-carousel-button="next"
+        >
+          &#9755;
+        </button>
+      {% when 'pointing_angle_brackets_medium' %}
+        <button
+          style="--text-color: {{ section.settings.text_color }}"
+          class="carousel-button prev"
+          data-carousel-button="prev"
+        >
+          &#10092;
+        </button>
+        <button
+          style="--text-color: {{ section.settings.text_color }}"
+          class="carousel-button next"
+          data-carousel-button="next"
+        >
+          &#10093;
+        </button>
+      {% when 'pointing_angle_brackets_heavy' %}
+        <button
+          style="--text-color: {{ section.settings.text_color }}"
+          class="carousel-button prev"
+          data-carousel-button="prev"
+        >
+          &#10094;
+        </button>
+        <button
+          style="--text-color: {{ section.settings.text_color }}"
+          class="carousel-button next"
+          data-carousel-button="next"
+        >
+          &#10095;
+        </button>
+      {% when 'pointing_angle_brackets_heavy_bold' %}
+        <button
+          style="--text-color: {{ section.settings.text_color }}"
+          class="carousel-button prev"
+          data-carousel-button="prev"
+        >
+          &#10096;
+        </button>
+        <button
+          style="--text-color: {{ section.settings.text_color }}"
+          class="carousel-button next"
+          data-carousel-button="next"
+        >
+          &#10097;
+        </button>
+      {% when 'pointing_angle_brackets_medium' %}
+        <button
+          style="--text-color: {{ section.settings.text_color }}"
+          class="carousel-button prev"
+          data-carousel-button="prev"
+        >
+          &#10092;
+        </button>
+        <button
+          style="--text-color: {{ section.settings.text_color }}"
+          class="carousel-button next"
+          data-carousel-button="next"
+        >
+          &#10093;
+        </button>
+
+      {% when 'pointing_angle_brackets_heavy' %}
+
     {% endcase %}
     <ul class="slider" data-slides>
       {% for block in section.blocks %}
@@ -115,13 +208,22 @@
           {% if block.settings.text != blank %}
             {% if block.settings.link_url != blank %}
               <li class="slide" data-active>
-                <a style="--text-color: {{ section.settings.text_color }}" href="{{ block.settings.link_url }}">
+                <a
+                  style="--text-color: {{ section.settings.text_color }}; {% if section.settings.uppercase %} text-transform: uppercase; {% endif %}"
+                  href="{{ block.settings.link_url }}"
+                >
                   {{- block.settings.text -}}
                 </a>
               </li>
             {% else %}
-              <li class="slide" style="--text-color: {{ section.settings.text_color }}">
-                {{ block.settings.text }}
+              <li
+                class="slide"
+                style="--text-color: {{ section.settings.text_color }}; {% if section.settings.uppercase %} text-transform: uppercase; {% endif %}"
+                data-active
+              >
+                <div style="{% if section.settings.uppercase %} text-transform: uppercase; {% endif %}">
+                  {{ block.settings.text }}
+                </div>
               </li>
             {% endif %}
           {% endif %}
@@ -135,7 +237,9 @@
               </li>
             {% else %}
               <li class="slide" style="--text-color: {{ section.settings.text_color }}">
-                {{ block.settings.text }}
+                <div style="{% if section.settings.uppercase %} text-transform: uppercase; {% endif %}">
+                  {{ block.settings.text }}
+                </div>
               </li>
             {% endif %}
           {% endif %}
@@ -158,16 +262,10 @@
       "default": true
     },
     {
-      "type": "image_picker",
-      "id": "left_image",
-      "label": "Pick Left Image/Icon",
-      "info": "Pick an image/icon to show on the left"
-    },
-    {
-      "type": "image_picker",
-      "id": "right_image",
-      "label": "Pick Right Image/Icon",
-      "info": "Pick an image/icon to show on the right"
+      "type": "checkbox",
+      "id": "uppercase",
+      "label": "Uppercase Text",
+      "default": false
     },
     {
       "type": "color_background",
@@ -213,9 +311,49 @@
         {
           "value": "harpoon_arrows",
           "label": "Harpoon Arrows"
+        },
+        {
+          "value": "pointing_hands",
+          "label": "Pointing Hands"
+        },
+        {
+          "value": "pointing_hands_minimalist",
+          "label": "Pointing Hands (Minimalist)"
+        },
+        {
+          "value": "pointing_angle_brackets_medium",
+          "label": "Pointing Angle Brackets (Medium)"
+        },
+        {
+          "value": "pointing_angle_brackets_heavy",
+          "label": "Pointing Angle Brackets (Heavy)"
+        },
+        {
+          "value": "pointing_angle_brackets_heavy_bold",
+          "label": "Pointing Angle Brackets Bold (Heavy)"
+        },
+        {
+          "value": "less_and_more_than_signs",
+          "label": "Less and More Than Signs"
+        },
+        {
+          "value": "less_and_more_than_signs_italics",
+          "label": "Less and More Than Signs (Italics)"
+        },
+        {
+          "value": "less_and_more_than_signs_dots",
+          "label": "Less and More Than Signs (With Dot)"
+        },
+        {
+          "value": "less_and_more_than_signs_fold",
+          "label": "Less and More Than Signs (With a Fold)"
+        },
+        {
+          "value": "horizontal_cones",
+          "label": "Horizontal Cones"
         }
       ],
-      "default": "common_arrows"
+      "default": "pointing_angle_brackets_heavy"
     }
   ],
   "blocks": [
@@ -233,7 +371,7 @@
           "type": "inline_richtext",
           "id": "text",
           "label": "Text",
-          "default": "Link"
+          "default": "Welcome to our store! 🕺🏾"
         }
       ]
     }

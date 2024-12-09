@@ -9,7 +9,7 @@ setInterval(() => {
 
   slides.children[newIndex].dataset.active = true;
   delete activeSlide.dataset.active;
-}, 3000);
+}, 5000);
 
 // Button's Functionality
 const buttons = document.querySelectorAll('[data-carousel-button]');
