@@ -1,9 +1,30 @@
-<section>
-  <ul>
-    <li>
-      <a href="{{ routes.account_login_url }}">Login</a>
+{{ 'pre-header.css' | asset_url | stylesheet_tag }}
+<section class="menu-container">
+  <ul class="menu-list">
+    <li class="menu-item">
+      {% if shop.customer_accounts_enabled %}
+        <a class="icon-wrapper" href="{% if customer %}{{ routes.account_url }}{% else %}{{ routes.account_login_url }}{% endif %}">
+          {% if section.settings.enable_customer_avatar %}
+            <account-icon>
+              {% if customer and customer.has_avatar? %}
+                {{ customer | avatar }}<span>My Account</span>
+              {% else %}
+                <span class="svg-wrapper">{{ 'user-icon.svg' | inline_asset_content }}</span>
+                <span>Login</span>
+              {% endif %}
+            </account-icon>
+          {% else %}
+            <span class="svg-wrapper">{{ 'user-icon.svg' | inline_asset_content }}</span>
+          {% endif %}
+        </a>
+      {% endif %}
     </li>
-    <li></li>
+    <li class="menu-item">
+      <a class="icon-wrapper" href="{{ routes.cart_url }}">
+        <span class="svg-wrapper">{{ 'cart-icon.svg' | inline_asset_content }}</span>
+        <span class="item-count">{{ cart.item_count }}</span>
+      </a>
+    </li>
   </ul>
 </section>
 
@@ -12,7 +33,15 @@
   "name": "Pre-Header",
   "tag": "section",
   "class": "pre-header",
-  "settings": [],
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "enable_customer_avatar",
+      "default": true,
+      "label": "Enable Customer Avatar",
+      "info": "If enabled, the icon will show the avatar/photo the customer has for his account."
+    }
+  ],
   "presets": []
 }
 {% endschema %}
