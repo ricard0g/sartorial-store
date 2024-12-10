@@ -1,6 +1,10 @@
+.pre-header {
+    border-bottom: 0.5px solid hsl(0, 0%, 75%);
+}
+
 .menu-container {
     width: 100%;
-    padding: 1vh 1.5vw;
+    padding: 0.75vh 1.5vw;
 }
 
 .menu-list {
@@ -12,7 +16,7 @@
 }
 
 .menu-item {
-    margin-left: 1.5vw;
+    margin-left: 2vw;
 }
 
 .icon-wrapper {
@@ -23,4 +27,16 @@
 .svg-wrapper > svg {
     position: relative;
     top: 2px;
+}
+
+.item-text {
+    font-size: 0.75rem;
+    color: hsl(0, 0%, 40%);
+    font-weight: 300;
+}
+
+@media only screen and (max-width: 768px) {
+    .pre-header {
+        display: none;
+    }
 }

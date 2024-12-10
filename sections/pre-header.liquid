@@ -7,10 +7,10 @@
           {% if section.settings.enable_customer_avatar %}
             <account-icon>
               {% if customer and customer.has_avatar? %}
-                {{ customer | avatar }}<span>My Account</span>
+                {{ customer | avatar }}<span class="item-text">My Account</span>
               {% else %}
                 <span class="svg-wrapper">{{ 'user-icon.svg' | inline_asset_content }}</span>
-                <span>Login</span>
+                <span class="item-text">Login</span>
               {% endif %}
             </account-icon>
           {% else %}
@@ -22,7 +22,7 @@
     <li class="menu-item">
       <a class="icon-wrapper" href="{{ routes.cart_url }}">
         <span class="svg-wrapper">{{ 'cart-icon.svg' | inline_asset_content }}</span>
-        <span class="item-count">{{ cart.item_count }}</span>
+        <span class="item-text">{{ cart.item_count }}</span>
       </a>
     </li>
   </ul>
@@ -40,7 +40,7 @@
       "default": true,
       "label": "Enable Customer Avatar",
       "info": "If enabled, the icon will show the avatar/photo the customer has for his account."
-    }
+    },
   ],
   "presets": []
 }
