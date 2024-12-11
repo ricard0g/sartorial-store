@@ -1,31 +1,39 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
+  <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% if settings.favicon != blank %}
+      <link rel="icon" type="image/x-icon" href="{{ settings.favicon | asset_url }}">
+    {% else %}
+      <link rel="icon" type="image/x-icon" href="{{ 'favicon-sartorial.svg' | asset_url }}">
+    {% endif %}
     {{ content_for_header }}
-    <title>Store Title</title>
+    <title>{% if settings.store_title != blank %}{{ settings.store_title }}{% else %}Sartorial Paris{% endif %}</title>
     <script src="{{ 'global.js' | asset_url }}" defer></script>
     <style>
-        *, *::before, *:after {
-            box-sizing: border-box
-        }
-        
-        html {
-            font-size: 16px;
-        }
+      *,
+      *::before,
+      *:after {
+        box-sizing: border-box;
+      }
 
-        body {
-            padding: 0;
-            margin: 0
-        }
+      html {
+        font-size: 16px;
+      }
+
+      body {
+        padding: 0;
+        margin: 0;
+      }
     </style>
-</head>
-<body>
-        {% sections 'header-group' %}
+  </head>
+  <body>
+    <header>
+      {% sections 'header-group' %}
+    </header>
     <main>
-        {{ content_for_layout }}
+      {{ content_for_layout }}
     </main>
-
-</body>
+  </body>
 </html>

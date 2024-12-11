@@ -56,14 +56,14 @@
       "type": "pre-header",
       "settings": {}
     },
-    "header": {
-      "type": "header",
+    "navbar": {
+      "type": "navbar",
       "settings": {}
     }
   },
   "order": [
     "announcement_bar_Jm3h6w",
     "pre-header",
-    "header"
+    "navbar"
   ]
 }
