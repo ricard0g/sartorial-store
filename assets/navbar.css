@@ -34,6 +34,15 @@
     margin: 0;
 }
 
+.inner-item {
+    position: relative;
+}
+
 .inner-item:not(:first-child) {
     margin-left: 2vw;
+}
+
+.inner-item > a {
+    text-decoration: none;
+    color: black;
 }

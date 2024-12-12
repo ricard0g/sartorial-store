@@ -1,4 +1,6 @@
 {{ 'navbar.css' | asset_url | stylesheet_tag }}
+{{ 'mega-menu.css' | asset_url | stylesheet_tag }}
+<script src="{{ 'navbar.js' | asset_url }}" defer></script>
 {% if section.settings.logo_position == 'middle' %}
   <nav class="subnavbar-wrapper">
     <ul class="nav-list">
@@ -18,7 +20,8 @@
               {% break %}
             {% else %}
               <li class="inner-item">
-                <a href="{{ link.url }}">{{ link.title }}</a>
+                <a data-index="{{ forloop.index0 }}" class="nav-link" href="{{ link.url }}">{{ link.title }}</a>
+                {% render 'mega-menu', link: link, collection: link.object %}
               </li>
             {% endif %}
           {% endfor %}
@@ -31,7 +34,8 @@
               {% break %}
             {% else %}
               <li class="inner-item">
-                <a href="{{ link.url }}">{{ link.title }}</a>
+                <a data-index="{{ forloop.index0 }}" class="nav-link" href="{{ link.url }}">{{ link.title }}</a>
+                {% render 'mega-menu', link: link, collection: link.object %}
               </li>
             {% endif %}
           {% endfor %}

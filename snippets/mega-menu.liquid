@@ -4,9 +4,19 @@
     Usage:
     {% render 'mega-menu' %}
 {% endcomment %}
-<nav class="header__inline-menu">
+<nav class="mega-menu-wrapper">
     <ul>
-        <li>hola</li>
+        {% for link in link.links %}
+            <li>
+                {{ link.title }}
+            </li>
+            <li>
+                <ul>
+                    {% for link in link.links %}
+                        <li>{{ link.title }}</li>
+                    {% endfor %}
+                </ul>
+            </li>
+        {% endfor %}
     </ul>
-
 </nav>
