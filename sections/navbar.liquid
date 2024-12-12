@@ -12,12 +12,12 @@
         </a>
       </li>
       <li class="nav-item" id="second-item">
-        <ul>
+        <ul class="inner-list">
           {% for link in linklists['main-menu'].links %}
             {% if forloop.index0 == 3 %}
               {% break %}
             {% else %}
-              <li>
+              <li class="inner-item">
                 <a href="{{ link.url }}">{{ link.title }}</a>
               </li>
             {% endif %}
@@ -25,20 +25,20 @@
         </ul>
       </li>
       <li class="nav-item" id="third-item">
-        <ul>
+        <ul class="inner-list">
           {% for link in linklists['main-menu'].links offset: 3 %}
             {% if forloop.index0 == 6 %}
               {% break %}
             {% else %}
-              <li>
+              <li class="inner-item">
                 <a href="{{ link.url }}">{{ link.title }}</a>
               </li>
             {% endif %}
           {% endfor %}
-          <li>
-             <input>
-          </li>
         </ul>
+      </li>
+      <li class="nav-item" id="fourth-item">
+        <input>
       </li>
     </ul>
   </nav>

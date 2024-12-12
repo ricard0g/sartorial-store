@@ -1,6 +1,11 @@
 .nav-list {
+    position: relative;
     display: flex;
     flex-flow: row nowrap;
+    align-items: center;
+    justify-content: center;
+    list-style: none;
+    padding: 0;
 }
 
 #logo {
@@ -13,4 +18,22 @@
 
 #third-item {
     order: 3;
+}
+
+#fourth-item {
+    position: absolute;
+    right: 1vw;
+    order: 4;
+}
+
+.inner-list {
+    display: flex;
+    flex-flow: row nowrap;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.inner-item:not(:first-child) {
+    margin-left: 2vw;
 }
