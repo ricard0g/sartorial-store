@@ -1,6 +1,14 @@
 .mega-menu-wrapper {
     position: absolute;
     display: none;
+    width: 100vw;
+    min-height: 40vh;
+    height: auto;
+    left: 0;
+}
+
+.mega-menu-wrapper:hover {
+    display: block;
 }
 
 .show {

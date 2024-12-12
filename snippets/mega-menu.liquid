@@ -1,22 +1,46 @@
-{% comment %} 
-    Renders the mega-menu that appears on hover to any main link in the navbar.
- 
-    Usage:
-    {% render 'mega-menu' %}
+{% comment %}
+  Renders the mega-menu that appears on hover to any main link in the navbar.
+
+  Usage:
+  {% render 'mega-menu' %}
 {% endcomment %}
 <nav class="mega-menu-wrapper">
-    <ul>
-        {% for link in link.links %}
-            <li>
-                {{ link.title }}
-            </li>
-            <li>
-                <ul>
-                    {% for link in link.links %}
-                        <li>{{ link.title }}</li>
-                    {% endfor %}
-                </ul>
-            </li>
-        {% endfor %}
-    </ul>
+  <ul>
+    {% for link in link.links %}
+      <li>
+        {{ link.title }}
+      </li>
+      <li>
+        <ul>
+          {% for link in link.links %}
+            <li>{{ link.title }}</li>
+          {% endfor %}
+        </ul>
+      </li>
+    {% endfor %}
+    <li>
+      <figure>
+        {{ link.object.image | image_url: width: 300 | image_tag }}
+        <figcaption>{{ link.object.title }}</figcaption>
+      </figure>
+    </li>
+    <li>
+      {% liquid
+        for link in link.links
+          assign link_title = link.title
+          for link in link.links
+            if forloop.index0 > 0
+              assign link_title_3 = link.handle
+            else
+              assign link_title_2 = link.handle
+            endif
+          endfor
+        endfor
+      %}
+      <p>{{ link.links }}</p>
+      <p>{{ link_title }}</p>
+      <p>{{ link_title_2 }}</p>
+      <p>{{ link_title_3 }}</p>
+    </li>
+  </ul>
 </nav>
