@@ -4,43 +4,82 @@
   Usage:
   {% render 'mega-menu' %}
 {% endcomment %}
+{% liquid
+  assign link_title = link.title
+  if link.links.size > 1
+    for link in link.links
+      if forloop.first
+        assign collection_title = link.object.title
+        assign collection_image = link.object.image
+      else
+        assign collection_title_2 = link.object.title
+        assign collection_image_2 = link.object.image
+      endif
+    endfor
+  else
+    for link in link.links
+      for link in link.links
+        if forloop.first
+          assign collection_title = link.object.title
+          assign collection_image = link.object.image
+        else
+          assign collection_title_2 = link.object.title
+          assign collection_image_2 = link.object.image
+        endif
+      endfor
+    endfor
+  endif
+%}
 <nav class="mega-menu-wrapper">
-  <ul>
-    {% for link in link.links %}
-      <li>
-        {{ link.title }}
-      </li>
-      <li>
-        <ul>
-          {% for link in link.links %}
-            <li>{{ link.title }}</li>
-          {% endfor %}
-        </ul>
-      </li>
-    {% endfor %}
-    <li>
+  <ul class="mega-menu-list">
+    <li class="mega-menu-list-item"></li>
+    <li class="mega-menu-list-item">
+      <ul class="links-list">
+        {% liquid
+          if link.links
+            for link in link.links
+              if link.links.size == 0
+                assign title_string = 'Shop by Collection'
+              endif
+            endfor
+          endif
+        %}
+        {% if title_string %}
+          <li>
+            <h3>{{ title_string }}</h3>
+          </li>
+        {% endif %}
+        {% for link in link.links %}
+          <li>
+            {% if title_string %}
+              <span>{{ link.title }}</span>
+            {% else %}
+              <h3>{{ link.title }}</h3>
+            {% endif %}
+          </li>
+          {% unless title_string %}
+            <li>
+              <ul class="inner-links-list">
+                {% for link in link.links %}
+                  <li>{{ link.title }}</li>
+                {% endfor %}
+              </ul>
+            </li>
+          {% endunless %}
+        {% endfor %}
+      </ul>
+    </li>
+    <li class="mega_menu-list-item">
       <figure>
-        {{ link.object.image | image_url: width: 300 | image_tag }}
-        <figcaption>{{ link.object.title }}</figcaption>
+        {{ collection_image | image_url: width: 300 | image_tag }}
+        <figcaption>{{ collection_title }}</figcaption>
       </figure>
     </li>
-    <li>
-      {% liquid
-        for link in link.links
-          assign link_title = link.title
-          for link in link.links
-            if forloop.index0 > 0
-              assign link_title_3 = link.handle
-            else
-              assign link_title_2 = link.handle
-            endif
-          endfor
-        endfor
-      %}
-      <p>{{ link.links }}</p>
-      <p>{{ link_title }}</p>
-      <p>{{ link_title_2 }}</p>
-      <p>{{ link_title_3 }}</p>
+    <li class="mega-menu-list-item">
+      <figure>
+        {{ collection_image_2 | image_url: width: 300 | image_tag }}
+        <figcaption>{{ collection_title_2 }}</figcaption>
+      </figure>
     </li>
   </ul>
 </nav>

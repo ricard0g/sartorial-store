@@ -1,16 +1,39 @@
 .mega-menu-wrapper {
     position: absolute;
-    display: none;
+    opacity: 0;
+    visibility: hidden;
     width: 100vw;
     min-height: 40vh;
     height: auto;
     left: 0;
+    transition: all 250ms ease;
 }
 
 .mega-menu-wrapper:hover {
-    display: block;
+    opacity: 1;
+    visibility: visible;
 }
 
 .show {
-    display: block !important;
+    opacity: 1;
+    visibility: visible;
+}
+
+.mega-menu-list {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.links-list {
+    list-style: none !important;
+    padding: 0;
+    margin: 0;
+}
+
+.inner-links-list {
+    list-style: none;
+    padding: 0;
 }
