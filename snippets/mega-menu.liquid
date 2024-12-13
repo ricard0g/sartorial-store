@@ -11,9 +11,11 @@
       if forloop.first
         assign collection_title = link.object.title
         assign collection_image = link.object.image
+        assign collection_link = link.object.url
       else
         assign collection_title_2 = link.object.title
         assign collection_image_2 = link.object.image
+        assign collection_link_2 = link.object.url
       endif
     endfor
   else
@@ -22,15 +24,17 @@
         if forloop.first
           assign collection_title = link.object.title
           assign collection_image = link.object.image
+          assign collection_link = link.object.url
         else
           assign collection_title_2 = link.object.title
           assign collection_image_2 = link.object.image
+          assign collection_link_2 = link.object.url
         endif
       endfor
     endfor
   endif
 %}
-<nav class="mega-menu-wrapper">
+<nav class="mega-menu-wrapper" style="display: none">
   <ul class="mega-menu-list">
     <li class="mega-menu-list-item"></li>
     <li class="mega-menu-list-item">
@@ -46,22 +50,28 @@
         %}
         {% if title_string %}
           <li>
-            <h3>{{ title_string }}</h3>
+            <h3 class="shop-by-title">{{ title_string }}</h3>
           </li>
         {% endif %}
         {% for link in link.links %}
           <li>
             {% if title_string %}
-              <span>{{ link.title }}</span>
+              <a class="link-to-collection" href="{{ link.url }}">
+                <span class="link-to-collection-title">{{ link.title }}</span>
+              </a>
             {% else %}
-              <h3>{{ link.title }}</h3>
+              <h3 class="title-of-collection">{{ link.title }}</h3>
             {% endif %}
           </li>
           {% unless title_string %}
             <li>
               <ul class="inner-links-list">
                 {% for link in link.links %}
-                  <li>{{ link.title }}</li>
+                  <li>
+                    <a class="link-to-collection" href="{{ link.url }}">
+                      <span class="link-to-collection-title">{{ link.title }}</span>
+                    </a>
+                  </li>
                 {% endfor %}
               </ul>
             </li>
@@ -71,13 +81,17 @@
     </li>
     <li class="mega_menu-list-item">
       <figure>
-        {{ collection_image | image_url: width: 300 | image_tag }}
+        <a href="{{ collection_link }}">
+          {{ collection_image | image_url: width: 300 | image_tag }}
+        </a>
         <figcaption>{{ collection_title }}</figcaption>
       </figure>
     </li>
     <li class="mega-menu-list-item">
       <figure>
-        {{ collection_image_2 | image_url: width: 300 | image_tag }}
+        <a href="{{ collection_link_2 }}">
+          {{ collection_image_2 | image_url: width: 300 | image_tag }}
+        </a>
         <figcaption>{{ collection_title_2 }}</figcaption>
       </figure>
     </li>

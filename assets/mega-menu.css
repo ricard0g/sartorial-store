@@ -5,8 +5,10 @@
     width: 100vw;
     min-height: 40vh;
     height: auto;
+    top: 35px;
     left: 0;
-    transition: all 250ms ease;
+    background-color: white;
+    transition: all 300ms ease;
 }
 
 .mega-menu-wrapper:hover {
@@ -36,4 +38,26 @@
 .inner-links-list {
     list-style: none;
     padding: 0;
+}
+
+.shop-by-title {
+    font-size: 0.8rem;
+}
+
+.title-of-collection {
+    font-size: 0.8rem;
+}
+
+.link-to-collection-title {
+    font-size: 0.75rem;
+    font-weight: 100;
+}
+
+.link-to-collection {
+    text-decoration: none;
+    color: black;
+}
+
+.link-to-collection:hover {
+    text-decoration: underline;
 }

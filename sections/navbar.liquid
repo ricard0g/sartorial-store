@@ -34,8 +34,8 @@
               {% break %}
             {% else %}
               <li class="inner-item">
-                <a data-index="{{ forloop.index0 }}" class="nav-link" href="{{ link.url }}">{{ link.title }}</a>
-                {% render 'mega-menu', link: link, collection: link.object %}
+                <a class="nav-link" href="{{ link.url }}">{{ link.title }}</a>
+                {% render 'mega-menu', link: link %}
               </li>
             {% endif %}
           {% endfor %}
