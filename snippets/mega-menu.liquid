@@ -5,7 +5,6 @@
   {% render 'mega-menu' %}
 {% endcomment %}
 {% liquid
-  assign link_title = link.title
   if link.links.size > 1
     for link in link.links
       if forloop.first
