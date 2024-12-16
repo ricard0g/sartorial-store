@@ -1,5 +1,4 @@
 .subnavbar-wrapper {
-    background-color: aliceblue;
     padding: 1.5vh 1vw;
 }
 
@@ -12,6 +11,12 @@
     list-style: none;
     padding: 0;
     margin: 0;
+}
+
+.nav-link {
+    text-transform: uppercase;
+    font-size: 0.7rem;
+    font-weight: 500;
 }
 
 #logo {
@@ -56,4 +61,15 @@
 
 .underline {
     border-bottom: 1px solid black;
+}
+
+.search-input {
+    padding: 1.25vh;
+    border: 1px solid gray;
+}
+
+.search-input::placeholder {
+    color: gray;
+    font-size: 0.7rem;
+    font-weight: 300;
 }

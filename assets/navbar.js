@@ -20,6 +20,7 @@ navLinks.forEach((link, index) => {
     }, 150);
 
     subNavbarWrapper.addEventListener('mouseleave', () => {
+      link.classList.remove('underline');
       megaMenu.classList.remove('show');
       megaMenu.style.display = 'none';
     });

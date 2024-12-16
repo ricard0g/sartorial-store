@@ -2,7 +2,7 @@
     position: absolute;
     opacity: 0;
     visibility: hidden;
-    width: 100vw;
+    width: 100%;
     min-height: 40vh;
     height: auto;
     top: 7vh;

@@ -12,10 +12,12 @@
     <title>{% if settings.store_title != blank %}{{ settings.store_title }}{% else %}Sartorial Paris{% endif %}</title>
     <script src="{{ 'global.js' | asset_url }}" defer></script>
     <style>
+        @import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap');
       *,
       *::before,
       *:after {
         box-sizing: border-box;
+        font-family: "Open Sans", sans-serif;
       }
 
       html {
