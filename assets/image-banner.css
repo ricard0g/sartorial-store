@@ -1,0 +1,9 @@
+.sales-bar-container {
+    background-color: var(--background-color);
+}
+
+.sales-bar-container > a {
+    color: var(--text-color);
+    text-decoration: none;
+    text-align: center;
+}

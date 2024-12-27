@@ -1,0 +1,133 @@
+{{ 'image-banner.css' | asset_url | stylesheet_tag }}
+{% if section.settings.show_sales_bar %}
+  {% if section.blocks.size > 0 %}
+    {% liquid
+      assign block = section.blocks.first
+    %}
+    <section
+      class="sales-bar-container"
+      style=" --background-color: {{ block.settings.background_color }}; --text-color: {{ block.settings.sales_bar_text_color }}"
+    >
+      <a href="{{ block.settings.url }}">
+        {{ block.settings.sales_bar_text }}
+      </a>
+    </section>
+  {% endif %}
+{% endif %}
+<section></section>
+
+{% schema %}
+{
+  "name": "image banner",
+  "tag": "section",
+  "class": "image-banner-container",
+  "settings": [
+    {
+      "type": "header",
+      "content": "sales bar",
+      "info": "you can include a mini sales bar that looks like an announcement bar embedded inside the image baner section. we suggest to use this when you have a sales promotion collection where you would like customers to visit, since it will appear on top of the image banner, it will have a secondary role inside the banner overall."
+    },
+    {
+      "type": "checkbox",
+      "id": "show_sales_bar",
+      "label": "show inner sales bar",
+      "default": false
+    },
+    {
+      "type": "header",
+      "content": "select collection",
+      "info": "based on the collection you choose this section will direct customers to a specific collection."
+    },
+    {
+      "type": "collection",
+      "id": "collection",
+      "label": "collection to show"
+    },
+    {
+      "type": "image_picker",
+      "id": "background_image",
+      "label": "background image",
+      "info": "if no image is added here the collection's image will be shown."
+    },
+    {
+      "type": "range",
+      "id": "background_opacity",
+      "label": "Background Opacity",
+      "min": 0,
+      "max": 100,
+      "step": 10,
+      "unit": "%",
+      "default": 50
+    },
+    {
+      "type": "header",
+      "content": "Text & Typography"
+    },
+    {
+      "type": "select",
+      "id": "typeface",
+      "label": "Typeface",
+      "options": [
+        {
+          "value": "normal",
+          "label": "Normal"
+        },
+        {
+          "value": "sophisticated",
+          "label": "Sophisticated"
+        }
+      ]
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title",
+      "info": "If you don't specify a Title here, the Collection Title will be used as Title."
+    },
+    {
+      "type": "color",
+      "id": "title_color",
+      "label": "Title Color",
+      "default": "#FFFFFF"
+    }
+  ],
+  "max_blocks": 1,
+  "blocks": [
+    {
+      "type": "sales_bar",
+      "name": "Sales Bar",
+      "settings": [
+        {
+          "type": "url",
+          "id": "sales_bar_url",
+          "label": "Sales Bar Url",
+          "info": "This URL will redirect customers to wherever you choose to send them. You can send them to any part of your own store (collections, pages, articles, products...) or any external links to other websites."
+        },
+        {
+          "type": "color_background",
+          "id": "background_color",
+          "label": "Background Color",
+          "default": "#000000"
+        },
+        {
+          "type": "text",
+          "id": "sales_bar_text",
+          "label": "Sales Bar Text",
+          "default": "Sales on our best pieces!"
+        },
+        {
+          "type": "color",
+          "id": "sales_bar_text_color",
+          "label": "Sales Bar Text Color",
+          "default": "#FFFFFF"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Image Banner"
+    }
+  ]
+}
+{% endschema %}

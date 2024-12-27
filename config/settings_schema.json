@@ -40,5 +40,9 @@
                 "info": "Your store description is crucial for SEO. Make sure to describe what your store is all about while being concise and Google will show your store higher in the rankings. If you want to learn more about SEO [click here](https://developers.google.com/search/docs/fundamentals/seo-starter-guide)"
             }
         ]
+    },
+    {
+        "name": "Typography",
+        "settings": []
     }
 ]
