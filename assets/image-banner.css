@@ -3,6 +3,7 @@
 }
 
 .sales-bar-container > a {
+    display: block;
     color: var(--text-color);
     text-decoration: none;
     text-align: center;

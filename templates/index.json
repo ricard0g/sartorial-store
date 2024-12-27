@@ -1,9 +1,41 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
-    "sections": {
-        "image-banner": {
-            "type": "image-banner",
-            "settings": {}
+  "sections": {
+    "image-banner": {
+      "type": "image-banner",
+      "blocks": {
+        "sales_bar_GqhHWi": {
+          "type": "sales_bar",
+          "settings": {
+            "sales_bar_url": "shopify://collections/new-arrivals",
+            "background_color": "#000000",
+            "sales_bar_text": "Sales on our best pieces!",
+            "sales_bar_text_color": "#FFFFFF"
+          }
         }
-    },
-    "order": ["image-banner"]
+      },
+      "block_order": [
+        "sales_bar_GqhHWi"
+      ],
+      "settings": {
+        "show_sales_bar": true,
+        "collection": "",
+        "background_opacity": 50,
+        "typeface": "normal",
+        "title": "",
+        "title_color": "#FFFFFF"
+      }
+    }
+  },
+  "order": [
+    "image-banner"
+  ]
 }
