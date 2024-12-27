@@ -16,7 +16,10 @@
           "type": "sales_bar",
           "settings": {
             "sales_bar_url": "shopify://collections/new-arrivals",
-            "background_color": "#000000",
+            "background_color": "#242424",
+            "padding_y": 8,
+            "padding_x": 8,
+            "font_size": 12,
             "sales_bar_text": "Sales on our best pieces!",
             "sales_bar_text_color": "#FFFFFF"
           }
@@ -30,7 +33,7 @@
         "collection": "",
         "background_opacity": 50,
         "typeface": "normal",
-        "title": "",
+        "title": "ELEVATE YOUR STYLE WITH OUR LATEST COLLECTION",
         "title_color": "#FFFFFF"
       }
     }

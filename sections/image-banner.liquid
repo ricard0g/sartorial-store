@@ -1,20 +1,41 @@
 {{ 'image-banner.css' | asset_url | stylesheet_tag }}
-{% if section.settings.show_sales_bar %}
-  {% if section.blocks.size > 0 %}
-    {% liquid
-      assign block = section.blocks.first
-    %}
-    <section
-      class="sales-bar-container"
-      style=" --background-color: {{ block.settings.background_color }}; --text-color: {{ block.settings.sales_bar_text_color }}"
-    >
-      <a href="{{ block.settings.url }}">
-        {{ block.settings.sales_bar_text }}
-      </a>
-    </section>
+<div
+  class="banner-container"
+  {% comment %} style="{% if section.settings.background_image != blank %}--background-image: url('{{ section.settings.background_image | image_url: width: 500 }}'){% elsif section.settings.collection %}--background-image: url('{{ section.settings.collection.featured_image | image_url: width: 500 }}') {% else %}--background-image: url('{{ 'background-image.webp' | asset_url }}');{% endif %}" {% endcomment %}
+  style="--background-image: url('{{ 'background-image.webp' | asset_url }}'); --background-opacity: {{ section.settings.background_opacity | divided_by: 100.0 }};"
+>
+  {% if section.settings.show_sales_bar %}
+    {% if section.blocks.size > 0 %}
+      {% liquid
+        assign block = section.blocks.first
+      %}
+      <section
+        class="sales-bar-container"
+        style=" --background-color: {{ block.settings.background_color }}; --text-color: {{ block.settings.sales_bar_text_color }}; --padding-x: {{ block.settings.padding_x }}px; --padding-y: {{ block.settings.padding_y }}px; --font-size: {{ block.settings.font_size }}px;"
+      >
+        <a href="{{ block.settings.url }}">
+          {{ block.settings.sales_bar_text }}
+        </a>
+      </section>
+    {% endif %}
   {% endif %}
-{% endif %}
-<section></section>
+  <section class="banner-content">
+    <h1
+      class="banner-title"
+      style="color: {{ section.settings.title_color }};"
+    >
+      {% if section.settings.title != blank %}
+        {{ section.settings.title }}
+      {% else %}
+        {{ section.settings.collection.title }}
+      {% endif %}
+    </h1>
+    <button class="banner-button" type="button">
+        <a href="{{ section.settings.collection.url }}">SHOP NOW</a>
+    </button>
+
+  </section>
+</div>
 
 {% schema %}
 {
@@ -98,6 +119,10 @@
       "name": "Sales Bar",
       "settings": [
         {
+          "type": "header",
+          "content": "General"
+        },
+        {
           "type": "url",
           "id": "sales_bar_url",
           "label": "Sales Bar Url",
@@ -107,7 +132,41 @@
           "type": "color_background",
           "id": "background_color",
           "label": "Background Color",
-          "default": "#000000"
+          "default": "#242424"
+        },
+        {
+          "type": "range",
+          "id": "padding_y",
+          "label": "Padding on Y axis",
+          "min": 5,
+          "max": 15,
+          "step": 1,
+          "unit": "px",
+          "default": 10
+        },
+        {
+          "type": "range",
+          "id": "padding_x",
+          "label": "Padding on X axis",
+          "min": 5,
+          "max": 15,
+          "step": 1,
+          "unit": "px",
+          "default": 10
+        },
+        {
+          "type": "header",
+          "content": "Text & Typography"
+        },
+        {
+          "type": "range",
+          "id": "font_size",
+          "label": "Font Size",
+          "min": 8,
+          "max": 14,
+          "step": 1,
+          "unit": "px",
+          "default": 12,
         },
         {
           "type": "text",
