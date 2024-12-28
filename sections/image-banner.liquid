@@ -3,36 +3,38 @@
   class="banner-container"
   style="{% if section.settings.background_image != blank %}--background-image: url('{{ section.settings.background_image | image_url: width: 1920, height: 1080, crop: "center" }}'); {% else %}--background-image: url('{{ 'background-image.webp' | asset_url }}');{% endif %} --background-opacity: {{ section.settings.background_opacity | divided_by: 100.0 }}; --title-color: {{ section.settings.title_color }}; --title-size-desktop: {{ section.settings.title_size_desktop }}px; --title-size-mobile: {{ section.settings.title_size_mobile }}px; {% unless section.settings.typeface == 'normal' %} --title-typeface: 'Cormorant Unicase', serif{% endunless %}; --title-width-desktop: {{ section.settings.title_width_desktop }}px; --title-width-tablet: {{ section.settings.title_width_tablet }}px; --title-width-mobile: {{ section.settings.title_width_mobile }}px; --title-letter-spacing: {{ section.settings.title_letter_spacing }}px;"
 >
-  {% if section.settings.show_sales_bar %}
-    {% if section.blocks.size > 0 %}
-      {% liquid
-        assign block = section.blocks.first
-      %}
-      <section
-        class="sales-bar-container"
-        style="--background-color: {{ block.settings.background_color }}; --text-color: {{ block.settings.sales_bar_text_color }}; --padding-x: {{ block.settings.padding_x }}px; --padding-y: {{ block.settings.padding_y }}px; --font-size: {{ block.settings.font_size }}px;"
-      >
-        <a href="{{ block.settings.url }}">
-          {{ block.settings.sales_bar_text }}
-        </a>
-      </section>
-    {% endif %}
-  {% endif %}
-  <section class="banner-content">
-    <h1
-      class="banner-title"
-      style="color: {{ section.settings.title_color }};"
-    >
-      {% if section.settings.title != blank %}
-        {{ section.settings.title }}
-      {% else %}
-        {{ section.settings.collection.title }}
+  <a href="{{ section.settings.collection.url }}" class="banner-link">
+    {% if section.settings.show_sales_bar %}
+      {% if section.blocks.size > 0 %}
+        {% liquid
+          assign block = section.blocks.first
+        %}
+        <section
+          class="sales-bar-container"
+          style="--background-color: {{ block.settings.background_color }}; --text-color: {{ block.settings.sales_bar_text_color }}; --padding-x: {{ block.settings.padding_x }}px; --padding-y: {{ block.settings.padding_y }}px; --font-size: {{ block.settings.font_size }}px;"
+        >
+          <a href="{{ block.settings.url }}">
+            {{ block.settings.sales_bar_text }}
+          </a>
+        </section>
       {% endif %}
-    </h1>
-    <button class="banner-button" type="button">
-      <a href="{{ section.settings.collection.url }}">SHOP NOW</a>
-    </button>
-  </section>
+    {% endif %}
+    <section class="banner-content">
+      <h1
+        class="banner-title"
+        style="color: {{ section.settings.title_color }};"
+      >
+        {% if section.settings.title != blank %}
+          {{ section.settings.title }}
+        {% else %}
+          {{ section.settings.collection.title }}
+        {% endif %}
+      </h1>
+      <button class="banner-button" type="button">
+        <a href="{{ section.settings.collection.url }}">SHOP NOW</a>
+      </button>
+    </section>
+  </a>
 </div>
 
 {% schema %}
