@@ -21,7 +21,7 @@
 .sales-bar-container {
     background-color: var(--background-color);
     padding: var(--padding-y) var(--padding-x);
-    z-index: 2;
+    z-index: 1;
 }
 
 .sales-bar-container > a {
@@ -43,7 +43,13 @@
 }
 
 .banner-title {
-    text-wrap: wrap;
+    text-wrap: balance;
+    font-size: var(--title-size-desktop);
+    color: var(--title-color);
+    font-family: var(--title-typeface);
+    width: var(--title-width);
+    letter-spacing: var(--title-letter-spacing);
+    text-align: center;
 }
 
 .banner-button {
@@ -65,4 +71,23 @@
     padding: 1.5vh 1.5vw;
     text-decoration: none;
     font-weight: 600;
+}
+
+@media only screen and (max-width: 1024px) {
+    .banner-container {
+        width: 100%;
+    }
+}
+
+@media only screen and (max-width: 768px) {
+    .banner-title {
+        width: var(--title-width-table);
+        font-size: var(--title-size-mobile);
+    }
+}
+
+@media only screen and (max-width: 576px) {
+    .banner-title {
+        width: var(--title-width-mobile);
+    }
 }

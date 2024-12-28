@@ -1,8 +1,7 @@
 {{ 'image-banner.css' | asset_url | stylesheet_tag }}
 <div
   class="banner-container"
-  {% comment %} style="{% if section.settings.background_image != blank %}--background-image: url('{{ section.settings.background_image | image_url: width: 500 }}'){% elsif section.settings.collection %}--background-image: url('{{ section.settings.collection.featured_image | image_url: width: 500 }}') {% else %}--background-image: url('{{ 'background-image.webp' | asset_url }}');{% endif %}" {% endcomment %}
-  style="--background-image: url('{{ 'background-image.webp' | asset_url }}'); --background-opacity: {{ section.settings.background_opacity | divided_by: 100.0 }};"
+  style="{% if section.settings.background_image != blank %}--background-image: url('{{ section.settings.background_image | image_url: width: 1920, height: 1080, crop: "center" }}'); {% else %}--background-image: url('{{ 'background-image.webp' | asset_url }}');{% endif %} --background-opacity: {{ section.settings.background_opacity | divided_by: 100.0 }}; --title-color: {{ section.settings.title_color }}; --title-size-desktop: {{ section.settings.title_size_desktop }}px; --title-size-mobile: {{ section.settings.title_size_mobile }}px; {% unless section.settings.typeface == 'normal' %} --title-typeface: 'Cormorant Unicase', serif{% endunless %}; --title-width-desktop: {{ section.settings.title_width_desktop }}px; --title-width-tablet: {{ section.settings.title_width_tablet }}px; --title-width-mobile: {{ section.settings.title_width_mobile }}px; --title-letter-spacing: {{ section.settings.title_letter_spacing }}px;"
 >
   {% if section.settings.show_sales_bar %}
     {% if section.blocks.size > 0 %}
@@ -11,7 +10,7 @@
       %}
       <section
         class="sales-bar-container"
-        style=" --background-color: {{ block.settings.background_color }}; --text-color: {{ block.settings.sales_bar_text_color }}; --padding-x: {{ block.settings.padding_x }}px; --padding-y: {{ block.settings.padding_y }}px; --font-size: {{ block.settings.font_size }}px;"
+        style="--background-color: {{ block.settings.background_color }}; --text-color: {{ block.settings.sales_bar_text_color }}; --padding-x: {{ block.settings.padding_x }}px; --padding-y: {{ block.settings.padding_y }}px; --font-size: {{ block.settings.font_size }}px;"
       >
         <a href="{{ block.settings.url }}">
           {{ block.settings.sales_bar_text }}
@@ -31,9 +30,8 @@
       {% endif %}
     </h1>
     <button class="banner-button" type="button">
-        <a href="{{ section.settings.collection.url }}">SHOP NOW</a>
+      <a href="{{ section.settings.collection.url }}">SHOP NOW</a>
     </button>
-
   </section>
 </div>
 
@@ -45,8 +43,8 @@
   "settings": [
     {
       "type": "header",
-      "content": "sales bar",
-      "info": "you can include a mini sales bar that looks like an announcement bar embedded inside the image baner section. we suggest to use this when you have a sales promotion collection where you would like customers to visit, since it will appear on top of the image banner, it will have a secondary role inside the banner overall."
+      "content": "Sales Bar",
+      "info": "You can include a mini sales bar that looks like an announcement bar embedded inside the image baner section. we suggest to use this when you have a sales promotion collection where you would like customers to visit, since it will appear on top of the image banner, it will have a secondary role inside the banner overall."
     },
     {
       "type": "checkbox",
@@ -56,8 +54,8 @@
     },
     {
       "type": "header",
-      "content": "select collection",
-      "info": "based on the collection you choose this section will direct customers to a specific collection."
+      "content": "Select Collection",
+      "info": "Based on the collection you choose this section will direct customers to a specific collection."
     },
     {
       "type": "collection",
@@ -85,6 +83,12 @@
       "content": "Text & Typography"
     },
     {
+      "type": "color",
+      "id": "title_color",
+      "label": "Title Color",
+      "default": "#FFFFFF"
+    },
+    {
       "type": "select",
       "id": "typeface",
       "label": "Typeface",
@@ -97,19 +101,81 @@
           "value": "sophisticated",
           "label": "Sophisticated"
         }
-      ]
+      ],
+      "default": "sophisticated",
+      "info": "Choose the type of font you want for the title."
     },
     {
       "type": "text",
       "id": "title",
       "label": "Title",
+      "default": "ELEVATE YOUR STYLE WITH OUR LATEST COLLECTION",
       "info": "If you don't specify a Title here, the Collection Title will be used as Title."
     },
     {
-      "type": "color",
-      "id": "title_color",
-      "label": "Title Color",
-      "default": "#FFFFFF"
+      "type": "header",
+      "content": "Title Size & Width",
+      "info": "On the top-right corner of your screen you have three screen sizes based on device (Desktop, Tablet, Mobile), when changing the sizes make sure to be on the respective device to see the changes."
+    },
+    {
+      "type": "range",
+      "id": "title_size_desktop",
+      "label": "Title Size (Desktop)",
+      "min": 20,
+      "max": 40,
+      "step": 2,
+      "unit": "px",
+      "default": 30
+    },
+    {
+      "type": "range",
+      "id": "title_size_mobile",
+      "label": "Title Size (Tablet & Mobile)",
+      "min": 16,
+      "max": 32,
+      "step": 2,
+      "unit": "px",
+      "default": 26
+    },
+    {
+      "type": "range",
+      "id": "title_width_desktop",
+      "label": "Title Width (Desktop)",
+      "min": 200,
+      "max": 800,
+      "step": 50,
+      "unit": "px",
+      "default": 400
+    },
+    {
+      "type": "range",
+      "id": "title_width_tablet",
+      "label": "Title Width (Tablet)",
+      "min": 200,
+      "max": 500,
+      "step": 20,
+      "unit": "px",
+      "default": 300
+    },
+    {
+      "type": "range",
+      "id": "title_width_mobile",
+      "label": "Title Width (Mobile)",
+      "min": 200,
+      "max": 400,
+      "step": 20,
+      "unit": "px",
+      "default": 280
+    },
+    {
+      "type": "range",
+      "id": "title_letter_spacing",
+      "label": "Title Letter Spacing",
+      "min": 0,
+      "max": 10,
+      "step": 1,
+      "unit": "px",
+      "default": 0
     }
   ],
   "max_blocks": 1,
@@ -166,7 +232,7 @@
           "max": 14,
           "step": 1,
           "unit": "px",
-          "default": 12,
+          "default": 12
         },
         {
           "type": "text",
