@@ -56,7 +56,7 @@
     font-size: var(--title-size-desktop);
     color: var(--title-color);
     font-family: var(--title-typeface);
-    width: var(--title-width);
+    width: var(--title-width-desktop);
     letter-spacing: var(--title-letter-spacing);
     text-align: center;
 }
