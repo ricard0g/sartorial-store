@@ -1,0 +1,49 @@
+{% comment %}
+  Renders a search modal. Should be used with "header.liquid"
+
+  Accepts:
+  - input_id: {String} - The id of the search input (required)
+
+  Usage:
+  {% render 'header-search', input_id: 'search' %}
+{% endcomment %}
+<predictive-search>
+  <form action="{{ routes.search_url }}" method="get" role="search">
+    <input
+      id="{{ input_id }}"
+      type="search"
+      name="q"
+      value="{{ search.terms | escape }}"
+      placeholder="Search"
+      role="combobox"
+      aria-expanded="false"
+      aria-owns="predictive-search-results"
+      aria-controls="predictive-search-resulst"
+      aria-haspopup="listbox"
+      aria-autocomplete="list"
+    >
+  </form>
+
+  <div id="predictive-search" tabindex="-1">
+    {% if predictive_search.performed %}
+      <div id="predictive-search-results">
+        {% if predictive_search.resources.products.size > 0 %}
+          <h3 id="predictive-search-products">Products</h3>
+          <ul role="listbox" aria-labelledby="predictive-search-products">
+            {% for product in predictive_search.resources.products %}
+              <li role="option">
+                <a href="{{ product.url }}">
+                  {{ product.featured_image | image_url: width: 50 | image_tag }}
+                  <span>{{ product.title }}</span>
+                </a>
+              </li>
+            {% endfor %}
+          </ul>
+        {% endif %}
+        <button>
+          Search for "{{ predictive_search.terms }}"
+        </button>
+      </div>
+    {% endif %}
+  </div>
+</predictive-search>

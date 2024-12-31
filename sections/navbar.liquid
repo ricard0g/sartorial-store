@@ -1,6 +1,7 @@
 {{ 'navbar.css' | asset_url | stylesheet_tag }}
 {{ 'mega-menu.css' | asset_url | stylesheet_tag }}
 <script src="{{ 'navbar.js' | asset_url }}" defer></script>
+<script src="{{ "predictive-search.js" | asset_url }}" defer></script>
 {% if section.settings.logo_position == 'middle' %}
   <nav class="subnavbar-wrapper">
     <ul class="nav-list">
@@ -42,7 +43,7 @@
         </ul>
       </li>
       <li class="nav-item" id="fourth-item">
-        <input placeholder="Search" type="text" class="search-input">
+        {% render 'header-search' %}
       </li>
     </ul>
   </nav>
