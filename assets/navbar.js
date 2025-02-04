@@ -17,7 +17,7 @@ navLinks.forEach((link, index) => {
     megaMenu.style.display = 'block';
     setTimeout(() => {
       megaMenu.classList.add('show');
-    }, 150);
+    }, 10);
 
     subNavbarWrapper.addEventListener('mouseleave', () => {
       link.classList.remove('underline');
