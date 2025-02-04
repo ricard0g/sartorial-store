@@ -4,81 +4,83 @@
 <script src="{{ 'navbar.js' | asset_url }}" defer></script>
 <script src="{{ "predictive-search.js" | asset_url }}" defer></script>
 {% if section.settings.logo_position == 'middle' %}
-  <nav class="subnavbar-wrapper">
-    <ul class="nav-list">
-      <li class="nav-item" id="logo">
-        <a href="{{ routes.root_url }}">
-          {% if settings.logo != blank %}
-            {{ settings.logo | image_url: width: settings.logo_width }}
-          {% else %}
-            <img src="{{ 'sartorial-logo.webp' | asset_url }}" width="150" height="auto">
-          {% endif -%}
-        </a>
-      </li>
-      <li class="nav-item" id="second-item">
-        <ul class="inner-list">
-          {% for link in linklists['main-menu'].links %}
-            {% if forloop.index0 == 3 %}
-              {% break %}
-            {% else %}
-              <li class="inner-item">
-                <a data-index="{{ forloop.index0 }}" class="nav-link" href="{{ link.url }}">{{ link.title }}</a>
-                {% render 'mega-menu', link: link, index: forloop.index0 %}
-              </li>
-            {% endif %}
-          {% endfor %}
+    <nav class="subnavbar-wrapper">
+        <ul class="nav-list">
+            <li class="nav-item" id="logo">
+                <a href="{{ routes.root_url }}">
+                    {% if settings.logo != blank %}
+                        {{ settings.logo | image_url: width: settings.logo_width }}
+                    {% else %}
+                        <img src="{{ 'sartorial-logo.webp' | asset_url }}" width="150" height="auto">
+                    {% endif -%}
+                </a>
+            </li>
+            <li class="nav-item" id="second-item">
+                <ul class="inner-list">
+                    {% for link in linklists['main-menu'].links %}
+                        {% if forloop.index0 == 3 %}
+                            {% break %}
+                        {% else %}
+                            <li class="inner-item">
+                                <a data-index="{{ forloop.index0 }}" class="nav-link" href="{{ link.url }}">
+                                    {{- link.title -}}
+                                </a>
+                                {% render 'mega-menu', link: link, index: forloop.index0 %}
+                            </li>
+                        {% endif %}
+                    {% endfor %}
+                </ul>
+            </li>
+            <li class="nav-item" id="third-item">
+                <ul class="inner-list">
+                    {% for link in linklists['main-menu'].links offset: 3 %}
+                        {% if forloop.index0 == 6 %}
+                            {% break %}
+                        {% else %}
+                            <li class="inner-item">
+                                <a class="nav-link" href="{{ link.url }}">{{ link.title }}</a>
+                                {% render 'mega-menu', link: link %}
+                            </li>
+                        {% endif %}
+                    {% endfor %}
+                </ul>
+            </li>
+            <li class="nav-item" id="fourth-item">
+                {% render 'header-search' %}
+            </li>
         </ul>
-      </li>
-      <li class="nav-item" id="third-item">
-        <ul class="inner-list">
-          {% for link in linklists['main-menu'].links offset: 3 %}
-            {% if forloop.index0 == 6 %}
-              {% break %}
-            {% else %}
-              <li class="inner-item">
-                <a class="nav-link" href="{{ link.url }}">{{ link.title }}</a>
-                {% render 'mega-menu', link: link %}
-              </li>
-            {% endif %}
-          {% endfor %}
-        </ul>
-      </li>
-      <li class="nav-item" id="fourth-item">
-        {% render 'header-search' %}
-      </li>
-    </ul>
-  </nav>
+    </nav>
 {% else %}
     <div></div>
-  {% endif %}
+{% endif %}
 
 {% schema %}
 {
-  "name": "NavBar",
-  "tag": "section",
-  "class": "main-navbar-wrapper",
-  "settings": [
-    {
-      "type": "select",
-      "id": "logo_position",
-      "label": "Logo Position",
-      "options": [
+    "name": "NavBar",
+    "tag": "section",
+    "class": "main-navbar-wrapper",
+    "settings": [
         {
-          "value": "left",
-          "label": "Left"
-        },
-        {
-          "value": "middle",
-          "label": "Middle"
+            "type": "select",
+            "id": "logo_position",
+            "label": "Logo Position",
+            "options": [
+                {
+                    "value": "left",
+                    "label": "Left"
+                },
+                {
+                    "value": "middle",
+                    "label": "Middle"
+                }
+            ],
+            "default": "middle"
         }
-      ],
-      "default": "middle"
-    }
-  ],
-  "presets": [
-    {
-      "name": "NavBar"
-    }
-  ]
+    ],
+    "presets": [
+        {
+            "name": "NavBar"
+        }
+    ]
 }
 {% endschema %}

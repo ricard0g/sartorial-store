@@ -1,49 +1,47 @@
 {% comment %}
-  Renders a search modal. Should be used with "header.liquid"
+    Renders a search modal. Should be used with "header.liquid"
 
-  Accepts:
-  - input_id: {String} - The id of the search input (required)
+    Accepts:
+    - input_id: {String} - The id of the search input (required)
 
-  Usage:
-  {% render 'header-search', input_id: 'search' %}
+    Usage:
+    {% render 'header-search', input_id: 'search' %}
 {% endcomment %}
 <predictive-search>
-  <form action="{{ routes.search_url }}" method="get" role="search">
-    <input
-      id="{{ input_id }}"
-      type="search"
-      name="q"
-      value="{{ search.terms | escape }}"
-      placeholder="Search"
-      role="combobox"
-      aria-expanded="false"
-      aria-owns="predictive-search-results"
-      aria-controls="predictive-search-resulst"
-      aria-haspopup="listbox"
-      aria-autocomplete="list"
-    >
-  </form>
+    <form action="{{ routes.search_url }}" method="get" role="search">
+        <input
+            id="{{ input_id }}"
+            type="search"
+            name="q"
+            value="{{ search.terms | escape }}"
+            placeholder="Search"
+            role="combobox"
+            aria-expanded="false"
+            aria-owns="predictive-search-results"
+            aria-controls="predictive-search-resulst"
+            aria-haspopup="listbox"
+            aria-autocomplete="list"
+        >
+    </form>
 
-  <div id="predictive-search" tabindex="-1">
-    {% if predictive_search.performed %}
-      <div id="predictive-search-results">
-        {% if predictive_search.resources.products.size > 0 %}
-          <h3 id="predictive-search-products">Products</h3>
-          <ul class="products-list" role="listbox" aria-labelledby="predictive-search-products">
-            {% for product in predictive_search.resources.products %}
-              <li class="product-item" role="option">
-                <a href="{{ product.url }}">
-                  {{ product.featured_image | image_url: width: 50 | image_tag }}
-                  <span class="product-title">{{ product.title }}</span>
-                </a>
-              </li>
-            {% endfor %}
-          </ul>
+    <div id="predictive-search" tabindex="-1">
+        {% if predictive_search.performed %}
+            <div id="predictive-search-results">
+                {% if predictive_search.resources.products.size > 0 %}
+                    <h3 id="predictive-search-products">Product Suggestions</h3>
+                    <ul class="products-list" role="listbox" aria-labelledby="predictive-search-products">
+                        {% for product in predictive_search.resources.products %}
+                            <li class="product-item" role="option">
+                                <a href="{{ product.url }}">
+                                    {{ product.featured_image | image_url: width: 50 | image_tag }}
+                                    <span class="product-title">{{ product.title }}</span>
+                                </a>
+                            </li>
+                        {% endfor %}
+                    </ul>
+                {% endif %}
+                <button>Search for "{{ predictive_search.terms }}"</button>
+            </div>
         {% endif %}
-        <button>
-          Search for "{{ predictive_search.terms }}"
-        </button>
-      </div>
-    {% endif %}
-  </div>
+    </div>
 </predictive-search>

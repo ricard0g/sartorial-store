@@ -4,9 +4,26 @@
 
 #predictive-search-results {
     position: absolute;
-    left: 0;
-    background: gray;
-    width: 100%;
+    right: 0;
+    background: white;
+    width: 200%;
     height: auto;
+    padding: 0 1rem;
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
     z-index: 5;
+}
+
+#predictive-search-products {
+    font-size: 1.5rem;
+}
+
+.products-list {
+    display: grid !important;
+    grid-template-columns: repeat(3, 1fr) !important;
+    grid-template-rows: auto !important;
+    list-style: none !important;
+}
+
+.products-list .product-item {
+    list-style: none !important;
 }
