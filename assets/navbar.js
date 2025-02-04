@@ -1,9 +1,7 @@
 const navLinks = document.querySelectorAll('.nav-link');
 const subNavbarWrapper = document.querySelector('.subnavbar-wrapper');
-console.log(navLinks);
 navLinks.forEach((link, index) => {
   const megaMenu = link.nextElementSibling;
-  console.log(megaMenu);
   link.addEventListener('mouseover', () => {
     navLinks.forEach((innerLink, innerIndex) => {
       const innerMegaMenu = innerLink.nextElementSibling;

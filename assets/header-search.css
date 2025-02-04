@@ -1,0 +1,12 @@
+#predictive-search {
+    position: relative;
+}
+
+#predictive-search-results {
+    position: absolute;
+    left: 0;
+    background: gray;
+    width: 100%;
+    height: auto;
+    z-index: 5;
+}
