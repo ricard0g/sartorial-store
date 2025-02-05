@@ -96,8 +96,12 @@
     transform: scale(0.95);
 }
 
-@media only screen and (min-width: 875px) {
+@media only screen and (min-width: 1024px) {
     #subnavbar-wrapper-xl {
-        display: block; /* This line is for testing purposes */
+        display: block;
+    }
+
+    #subnavbar-wrapper-md {
+        display: none;
     }
 }
