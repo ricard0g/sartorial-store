@@ -82,6 +82,20 @@
     font-weight: 300;
 }
 
+.search-button {
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+}
+
+.search-button:hover {
+    border-bottom: 1px solid black;
+}
+
+.search-button:active {
+    transform: scale(0.95);
+}
+
 @media only screen and (min-width: 875px) {
     #subnavbar-wrapper-xl {
         display: block; /* This line is for testing purposes */
