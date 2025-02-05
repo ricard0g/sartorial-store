@@ -1,26 +1,46 @@
 const navLinks = document.querySelectorAll('.nav-link');
-const subNavbarWrapper = document.querySelector('.subnavbar-wrapper');
-navLinks.forEach((link, index) => {
-  const megaMenu = link.nextElementSibling;
-  link.addEventListener('mouseover', () => {
-    navLinks.forEach((innerLink, innerIndex) => {
-      const innerMegaMenu = innerLink.nextElementSibling;
-      if (innerMegaMenu.classList.contains('show') && innerIndex !== index) {
-        innerLink.classList.remove('underline');
-        innerMegaMenu.classList.remove('show');
-        innerMegaMenu.style.display = 'none';
-      }
-    });
-    link.classList.add('underline');
-    megaMenu.style.display = 'block';
-    setTimeout(() => {
-      megaMenu.classList.add('show');
-    }, 10);
+const subNavbarWrapper = document.querySelectorAll('.subnavbar-wrapper');
 
-    subNavbarWrapper.addEventListener('mouseleave', () => {
-      link.classList.remove('underline');
-      megaMenu.classList.remove('show');
-      megaMenu.style.display = 'none';
+// Cache mega menus
+const megaMenus = Array.from(navLinks).map((link) => ({
+    link,
+    menu: link.nextElementSibling,
+}));
+
+// Single event handler for mouseover
+const handleMouseOver = (activeIndex) => {
+    megaMenus.forEach(({ link, menu }, index) => {
+        if (menu.classList.contains('show') && index !== activeIndex) {
+            link.classList.remove('underline');
+            menu.classList.remove('show');
+            menu.style.display = 'none';
+        }
     });
-  });
+
+    const { link, menu } = megaMenus[activeIndex];
+    link.classList.add('underline');
+    menu.style.display = 'block';
+    setTimeout(() => {
+        requestAnimationFrame(() => menu.classList.add('show'));
+    }, 5);
+};
+
+// Single event handler for mouseleave
+const handleMouseLeave = (activeIndex) => {
+    const { link, menu } = megaMenus[activeIndex];
+    link.classList.remove('underline');
+    menu.classList.remove('show');
+    menu.style.display = 'none';
+};
+
+// Attach events
+navLinks.forEach((_, index) => {
+    navLinks[index].addEventListener('mouseover', () => handleMouseOver(index));
+});
+
+subNavbarWrapper.forEach((wrapper) => {
+    wrapper.addEventListener('mouseleave', () => {
+        const activeIndex = megaMenus.findIndex(({ menu }) => menu.classList.contains('show'));
+        if (activeIndex !== -1) handleMouseLeave(activeIndex);
+    });
 });

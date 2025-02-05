@@ -65,6 +65,7 @@
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     grid-template-rows: auto;
+    row-gap: 2vh;
     column-gap: 1vw;
     padding: 0;
 }
