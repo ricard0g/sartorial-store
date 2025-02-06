@@ -5,7 +5,7 @@
     width: 100%;
     min-height: 40vh;
     height: auto;
-    top: 7vh;
+    top: 6vh;
     left: 0;
     background-color: white;
     transition: all 300ms ease;
@@ -61,4 +61,10 @@
 
 .link-to-collection:hover {
     text-decoration: underline;
+}
+
+@media only screen and (min-width: 1440px) {
+    .mega-menu-wrapper {
+        top: 3vh;
+    }
 }
