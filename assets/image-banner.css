@@ -59,6 +59,7 @@
     width: var(--title-width-desktop);
     letter-spacing: var(--title-letter-spacing);
     text-align: center;
+    max-width: 100%;
 }
 
 .banner-button {

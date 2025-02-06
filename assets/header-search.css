@@ -151,7 +151,7 @@
     font-weight: 300;
 }
 
-@media only screen and (max-width: 768px) {
+@media only screen and (max-width: 1024px) {
     #predictive-search-results {
         flex-flow: column nowrap;
         top: 12vh;

@@ -3,7 +3,7 @@
 }
 
 #subnavbar-wrapper-md {
-    display: block; /* Added for testing purposes. Original Property: "block" */
+    display: none; /* Added for testing purposes. Original Property: "block" */
 }
 
 #subnavbar-wrapper-sm {
@@ -111,12 +111,15 @@
 }
 
 #hamburguer-menu-container {
-    width: 5vw
+    width: 40px;
 }
 
-.hamburguer-menu-mobile {
+.hamburger-menu-mobile {
     width: 100%;
     height: auto;
+    cursor: pointer;
+    background-color: transparent;
+    border: none;
 }
 
 .hamburguer-line {
@@ -127,12 +130,30 @@
     border-radius: 50px;
 }
 
-@media only screen and (min-width: 1024px) {
+@media only screen and (min-width: 768px) {
     #subnavbar-wrapper-xl {
         display: none; /* Added for testing purposes */
     }
 
     #subnavbar-wrapper-md {
         display: block; /* Added for testing purposes */
+    }
+
+    #subnavbar-wrapper-sm {
+        display: none;
+    }
+}
+
+@media only screen and (min-width: 1024px) {
+    #subnavbar-wrapper-xl {
+        display: block; /* Added for testing purposes */
+    }
+
+    #subnavbar-wrapper-md {
+        display: none; /* Added for testing purposes */
+    }
+
+    #subnavbar-wrapper-sm {
+        display: none;
     }
 }

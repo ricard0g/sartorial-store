@@ -46,26 +46,34 @@ subNavbarWrapper.forEach((wrapper) => {
 });
 
 // Adding dropdown menu to navbar on smaller screens
-const dropdownSearch = document.querySelector('.main-search-small-screens');
-const searchButtons = Object.values(document.querySelectorAll('.search-button'));
+const searchParents = Array.of(
+    document.getElementById('subnavbar-wrapper-md'),
+    document.getElementById('subnavbar-wrapper-sm')
+);
+let activeParent = searchParents.find((el) => window.getComputedStyle(el).display !== 'none');
+let activeDropdownSearch = activeParent.querySelector('.main-search-small-screens');
+let activeSearchButton = activeParent.querySelector('.search-button');
+let activeSearchInput = activeParent.querySelector('.header-search-input-small-screens');
 const predictiveSearchResults = document.getElementById('predictive-search-results');
-const searchInput = document.querySelector('.header-search-input-small-screens');
 
 const handleSearchButtonClick = () => {
-    dropdownSearch.classList.toggle('show-main-search-small-screens');
+    activeDropdownSearch.classList.toggle('show-main-search-small-screens');
 };
 
 const handleClickOutside = (e) => {
-    const isClickInsideSearch = dropdownSearch.contains(e.target);
-    const isClickOnSearchButton = searchButtons.some((btn) => btn.contains(e.target));
+    const isClickInsideSearch = activeDropdownSearch.contains(e.target);
+    const isClickOnSearchButton = activeSearchButton.contains(e.target);
     const isClickInsidePredictiveSearch = predictiveSearchResults?.contains(e.target);
     if (!isClickInsideSearch && !isClickOnSearchButton && !isClickInsidePredictiveSearch) {
-        dropdownSearch.classList.remove('show-main-search-small-screens');
+        activeDropdownSearch.classList.remove('show-main-search-small-screens');
         setTimeout(() => {
-            searchInput.value = '';
+            activeSearchInput.value = '';
         }, 350);
     }
 };
 
-searchButtons.forEach((btn) => btn.addEventListener('click', handleSearchButtonClick));
+activeSearchButton.addEventListener('click', handleSearchButtonClick);
 document.addEventListener('click', handleClickOutside);
+window.onresize = () => {
+    activeParent = searchParents.find((el) => window.getComputedStyle(el).display !== 'none');
+};

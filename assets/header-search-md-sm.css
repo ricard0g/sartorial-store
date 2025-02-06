@@ -2,7 +2,7 @@
     visibility: hidden;
     position: absolute;
     top: 5vh;
-    left: -9.568px;
+    left: 0px;
     width: 100vw;
     height: 15vh;
     background: white;
@@ -12,8 +12,8 @@
 }
 
 .show-main-search-small-screens {
-    visibility: visible;
-    opacity: 1;
+    visibility: visible !important;
+    opacity: 1 !important;
 }
 
 .predictive-search-element-small-screens {
@@ -37,7 +37,7 @@
     margin: 0 auto;
     width: 50%;
     height: 100%;
-    font-size: 2rem;
+    font-size: 1.4rem;
     font-family: 'Cormorant Unicase', serif;
     padding: 2vh 2vw;
     border: none;
@@ -54,11 +54,25 @@
 
 .header-search-input-small-screens::placeholder {
     font-family: 'Cormorant Unicase', serif;
-    font-size: 2rem;
+    font-size: 1.4rem;
 }
 
 .search-icon-small-screens {
     position: absolute;
     top: 50%;
     right: 28%;
+}
+
+@media only screen and (min-width: 768px) {
+    .main-search-small-screens {
+        left: -10px;
+    }
+
+    .header-search-input-small-screens {
+        font-size: 2rem;
+    }
+
+    .header-search-input-small-screens::placeholder {
+        font-size: 2rem;
+    }
 }
