@@ -3,6 +3,10 @@
 }
 
 #subnavbar-wrapper-md {
+    display: block; /* Added for testing purposes. Original Property: "block" */
+}
+
+#subnavbar-wrapper-sm {
     display: block;
 }
 
@@ -19,6 +23,16 @@
     list-style: none;
     padding: 0;
     margin: 0;
+}
+
+.nav-list-mobile {
+    position: relative;
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 1.5vw;
+    list-style: none;
 }
 
 .nav-link {
@@ -96,12 +110,29 @@
     transform: scale(0.95);
 }
 
+#hamburguer-menu-container {
+    width: 5vw
+}
+
+.hamburguer-menu-mobile {
+    width: 100%;
+    height: auto;
+}
+
+.hamburguer-line {
+    width: 100%;
+    height: 2px;
+    background-color: black;
+    margin: 0.75vh 0;
+    border-radius: 50px;
+}
+
 @media only screen and (min-width: 1024px) {
     #subnavbar-wrapper-xl {
-        display: block;
+        display: none; /* Added for testing purposes */
     }
 
     #subnavbar-wrapper-md {
-        display: none;
+        display: block; /* Added for testing purposes */
     }
 }

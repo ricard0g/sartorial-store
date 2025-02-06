@@ -47,22 +47,25 @@ subNavbarWrapper.forEach((wrapper) => {
 
 // Adding dropdown menu to navbar on smaller screens
 const dropdownSearch = document.querySelector('.main-search-small-screens');
-const searchButton = document.querySelector('.search-button');
+const searchButtons = Object.values(document.querySelectorAll('.search-button'));
+const predictiveSearchResults = document.getElementById('predictive-search-results');
+const searchInput = document.querySelector('.header-search-input-small-screens');
 
 const handleSearchButtonClick = () => {
     dropdownSearch.classList.toggle('show-main-search-small-screens');
 };
 
 const handleClickOutside = (e) => {
-    const predictiveSearchResults = document.getElementById('predictive-search-results');
-    if (
-        !dropdownSearch.contains(e.target) &&
-        !searchButton.contains(e.target) &&
-        !predictiveSearchResults?.contains(e.target)
-    ) {
+    const isClickInsideSearch = dropdownSearch.contains(e.target);
+    const isClickOnSearchButton = searchButtons.some((btn) => btn.contains(e.target));
+    const isClickInsidePredictiveSearch = predictiveSearchResults?.contains(e.target);
+    if (!isClickInsideSearch && !isClickOnSearchButton && !isClickInsidePredictiveSearch) {
         dropdownSearch.classList.remove('show-main-search-small-screens');
+        setTimeout(() => {
+            searchInput.value = '';
+        }, 350);
     }
 };
 
-searchButton.addEventListener('click', handleSearchButtonClick);
+searchButtons.forEach((btn) => btn.addEventListener('click', handleSearchButtonClick));
 document.addEventListener('click', handleClickOutside);
