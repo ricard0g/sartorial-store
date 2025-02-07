@@ -42,15 +42,19 @@
 }
 
 .shop-by-title {
-    font-size: 0.8rem;
+    font-size: 0.9rem;
 }
 
 .title-of-collection {
-    font-size: 0.8rem;
+    font-size: 0.9rem;
+}
+
+.inner-link-item {
+    margin-bottom: 0.5vh;
 }
 
 .link-to-collection-title {
-    font-size: 0.75rem;
+    font-size: 0.8rem;
     font-weight: 100;
 }
 

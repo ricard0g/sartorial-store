@@ -157,8 +157,8 @@
         flex-flow: column-reverse nowrap;
         top: 12vh;
         padding: 0;
-        transform: translateX(-15%);
-        min-width: 75vw;
+        transform: translateX(-5%);
+        min-width: 90vw;
     }
 
     .predictive-search-products-list {
