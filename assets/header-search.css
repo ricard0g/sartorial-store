@@ -88,6 +88,7 @@
     display: block;
     font-size: 0.75rem;
     font-weight: 300;
+    text-wrap: balance;
 }
 
 .predictive-search-all-results-link {
@@ -153,11 +154,28 @@
 
 @media only screen and (max-width: 1024px) {
     #predictive-search-results {
-        flex-flow: column nowrap;
+        flex-flow: column-reverse nowrap;
         top: 12vh;
         padding: 0;
         transform: translateX(-15%);
         min-width: 75vw;
+    }
+
+    .predictive-search-products-list {
+        margin: 0 auto;
+        column-gap: 2vw;
+    }
+
+    .predictive-search-product-item a {
+        display: flex;
+        flex-flow: column nowrap;
+        justify-content: start;
+        align-items: center;
+        row-gap: 1vh;
+    }
+
+    .predictive-search-product-title {
+        font-size: 0.85rem;
     }
 
     .predictive-search-left-bar {
@@ -166,7 +184,7 @@
     }
 
     .predictive-search-collections {
-        padding: 0 2vw;
+        display: none;
     }
 
     .predictive-search-products {
