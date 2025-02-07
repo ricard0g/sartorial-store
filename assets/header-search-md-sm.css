@@ -43,6 +43,7 @@
     padding: 2vh 2vw;
     border: none;
     border-bottom: 1px solid black;
+    border-radius: 0;
 }
 
 .header-search-input-small-screens::-webkit-search-cancel-button {
