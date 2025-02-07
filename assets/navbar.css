@@ -130,6 +130,12 @@
     border-radius: 50px;
 }
 
+#logo-mobile {
+    position: absolute;
+    transform: translateX(-50%);
+    left: 50%;
+}
+
 @media only screen and (min-width: 768px) {
     #subnavbar-wrapper-xl {
         display: none; /* Added for testing purposes */

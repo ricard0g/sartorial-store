@@ -115,7 +115,7 @@
                     <div id="first-line-hamburguer" class="hamburguer-line"></div>
                 </button>
             </li>
-            <li class="nav-item-mobile">
+            <li class="nav-item-mobile" id="logo-mobile">
                 <a href="{{ routes.root_url }}">
                     {% if settings.logo != blank %}
                         {{ settings.logo | image_url: width: settings.logo_width }}
