@@ -1,8 +1,11 @@
 {% comment %}
   Renders the mega-menu that appears on hover to any main link in the navbar.
 
+  Accepts:
+    - Link: <String> The link the user hovered on.
+
   Usage:
-  {% render 'mega-menu' %}
+  {% render 'mega-menu', link: link %}
 {% endcomment %}
 {% liquid
   if link.links.size > 1

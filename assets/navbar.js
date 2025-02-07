@@ -77,3 +77,20 @@ document.addEventListener('click', handleClickOutside);
 window.onresize = () => {
     activeParent = searchParents.find((el) => window.getComputedStyle(el).display !== 'none');
 };
+
+// Showing Menu Drawer on Hamburger Btn Click
+
+const hamburgerBtn = document.getElementById('hamburger-btn-mobile');
+const firstLineHamburger = document.getElementById('first-line-hamburguer');
+const secondLineHamburger = document.getElementById('second-line-hamburguer');
+const thirdLineHamburger = document.getElementById('third-line-hamburguer');
+const menuDrawer = document.querySelector('.mobile-navbar__links-container');
+
+const handleHamburgerBtnClick = () => {
+        firstLineHamburger.classList.toggle('first-line');
+        secondLineHamburger.classList.toggle('second-line');
+        thirdLineHamburger.classList.toggle('third-line');
+        menuDrawer.style.display = 'block';
+}
+
+hamburgerBtn.addEventListener('click', handleHamburgerBtnClick);

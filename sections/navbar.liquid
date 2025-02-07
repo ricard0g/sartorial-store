@@ -109,10 +109,10 @@
     <nav id="subnavbar-wrapper-sm">
         <ul class="nav-list-mobile">
             <li class="nav-item-mobile" id="hamburguer-menu-container">
-                <button class="hamburger-menu-mobile">
+                <button id="hamburger-btn-mobile" class="hamburger-menu-mobile">
                     <div id="first-line-hamburguer" class="hamburguer-line"></div>
-                    <div id="first-line-hamburguer" class="hamburguer-line"></div>
-                    <div id="first-line-hamburguer" class="hamburguer-line"></div>
+                    <div id="second-line-hamburguer" class="hamburguer-line"></div>
+                    <div id="third-line-hamburguer" class="hamburguer-line"></div>
                 </button>
             </li>
             <li class="nav-item-mobile" id="logo-mobile">
@@ -160,6 +160,39 @@
             </li>
         </ul>
     </nav>
+    {% comment %} Mobile Navbar {% endcomment %}
+    <div class="mobile-navbar__links-container">
+        <div class="mobile-navbar__links">
+            <ul class="mobile-navbar__primary-list">
+                {% for link in linklists['main-menu'].links %}
+                    <li class="mobile-navbar__primary-item">
+                        <a data-dropdown-rel="{{ link.title | downcase }}" href="{{ link.url }}">
+                            <span>{{ link.title | upcase }}</span></a
+                        >
+                        {% render 'mega-menu-mobile', link: link %}
+                    </li>
+                {% endfor %}
+            </ul>
+            <ul class="mobile-navbar__secondary-list">
+                <li>
+                    <a href="{% if customer %}{{ routes.account_url }}{% else %}{{ routes.account_login_url }}{% endif %}">
+                        {% if customer %}
+                            {% if customer.has_avatar? %}
+                                {{ customer | avatar -}}
+                                <span class="item-text">My Account</span>
+                            {% else %}
+                                <span class="svg-wrapper">{{ 'user-icon.svg' | inline_asset_content }}</span>
+                                <span class="item-text">My Account</span>
+                            {% endif %}
+                        {% else %}
+                            <span class="svg-wrapper">{{ 'user-icon.svg' | inline_asset_content }}</span>
+                            <span class="item-text">Login</span>
+                        {% endif %}
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
 {% else %}
     <div></div>
 {% endif %}
