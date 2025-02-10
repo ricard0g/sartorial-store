@@ -132,7 +132,8 @@
 }
 
 .first-line {
-    transform: translateY(100%) rotate(45deg);
+    width: 120%;
+    transform: rotate(45deg) translateY(6px) translateX(4px);
 }
 
 .second-line {
@@ -140,7 +141,8 @@
 }
 
 .third-line {
-    transform: translateY(-50%) rotate(-45deg);
+    width: 120%;
+    transform: rotate(-45deg) translateY(-6px) translateX(4px);
 }
 
 #logo-mobile {

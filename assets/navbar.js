@@ -90,7 +90,7 @@ const handleHamburgerBtnClick = () => {
         firstLineHamburger.classList.toggle('first-line');
         secondLineHamburger.classList.toggle('second-line');
         thirdLineHamburger.classList.toggle('third-line');
-        menuDrawer.style.display = 'block';
+        menuDrawer.style.display = menuDrawer.style.display === 'none' ? 'block' : 'none';
 }
 
 hamburgerBtn.addEventListener('click', handleHamburgerBtnClick);
