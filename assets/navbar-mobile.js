@@ -71,12 +71,10 @@ document.addEventListener('DOMContentLoaded', () => {
             const menu = e.target.nextElementSibling;
             if (!menu) return;
 
-            requestAnimationFrame(() => {
-                menu.style.display = 'block';
-                setTimeout(() => {
-                    menu.classList.add('mobile-navbar__show-mega-menu');
-                }, 10)
-            });
+            menu.style.display = 'block';
+            setTimeout(() => {
+                menu.classList.add('mobile-navbar__show-mega-menu');
+            }, 10);
         }
 
         if (
