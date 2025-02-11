@@ -85,6 +85,7 @@ const firstLineHamburger = document.getElementById('first-line-hamburguer');
 const secondLineHamburger = document.getElementById('second-line-hamburguer');
 const thirdLineHamburger = document.getElementById('third-line-hamburguer');
 const menuDrawer = document.querySelector('.mobile-navbar__container');
+const backgroundNavbarMobile = document.querySelector('.mobile-navbar__container-background');
 
 const handleHamburgerBtnClick = () => {
     firstLineHamburger.classList.toggle('first-line');
@@ -96,4 +97,13 @@ const handleHamburgerBtnClick = () => {
     }, 10);
 };
 
+const handleClickOnNavbarBg = () => {
+    firstLineHamburger.classList.remove('first-line');
+    secondLineHamburger.classList.remove('second-line');
+    thirdLineHamburger.classList.remove('third-line');
+    menuDrawer.style.display = 'none';
+    menuDrawer.style.opacity = '0';
+} 
+
 hamburgerBtn.addEventListener('click', handleHamburgerBtnClick);
+backgroundNavbarMobile.addEventListener('click', handleClickOnNavbarBg);

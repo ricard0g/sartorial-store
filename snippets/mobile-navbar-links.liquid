@@ -6,32 +6,45 @@
 {% endcomment %}
 <div class="mobile-navbar__container" style="display: none; opacity: 0;">
     <div class="mobile-navbar__container-background"></div>
-    <div class="mobile-navbar__links-container" >
+    <div class="mobile-navbar__links-container">
         <div class="mobile-navbar__links">
             <ul class="mobile-navbar__primary-list">
                 {% for link in linklists['main-menu'].links %}
                     <li class="mobile-navbar__primary-item">
-                        <a data-dropdown-rel="{{ link.title | downcase }}" href="{{ link.url }}">
-                            <span>{{ link.title | upcase }}</span></a
-                        >
+                        <a class="mobile-navbar__primary-inner-link" data-dropdown-rel="{{ link.title | downcase }}" href="{{ link.url }}">
+                            <span>{{ link.title | upcase }}</span
+                            ><span>
+                                <svg
+                                    width="12px"
+                                    height="12px"
+                                    viewBox="0 0 512 512"
+                                    version="1.1"
+                                    xml:space="preserve"
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    xmlns:xlink="http://www.w3.org/1999/xlink"
+                                    fill="#000000"
+                                >
+                                    <g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <g id="_x37_17-_next__x2C__arrow__x2C__right_arrow__x2C__direction__x2C_"> <g> <path d=" M146.662,26.814L358.221,238.27c10.755,10.222,10.755,26.193,0,36.414L146.662,486.139" style="fill:none;stroke:#000000;stroke-width:70.4167;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:2.6131;"></path> </g> </g> <g id="Layer_1"></g> </g>
+                                </svg></span
+                        ></a>
                         {% render 'mega-menu-mobile', link: link %}
                     </li>
                 {% endfor %}
             </ul>
             <ul class="mobile-navbar__secondary-list">
-                <li>
-                    <a href="{% if customer %}{{ routes.account_url }}{% else %}{{ routes.account_login_url }}{% endif %}">
+                <li class="mobile-navbar__secondary-item">
+                    <a class="mobile-navbar__secondary-inner-link" href="{% if customer %}{{ routes.account_url }}{% else %}{{ routes.account_login_url }}{% endif %}">
                         {% if customer %}
                             {% if customer.has_avatar? %}
+                                <span class="item-text">My Account</span>
                                 {{ customer | avatar -}}
-                                <span class="item-text">My Account</span>
                             {% else %}
-                                <span class="svg-wrapper">{{ 'user-icon.svg' | inline_asset_content }}</span>
                                 <span class="item-text">My Account</span>
+                                <span class="svg-wrapper">{{ 'user-icon.svg' | inline_asset_content }}</span>
                             {% endif %}
                         {% else %}
+                            <span class="item-text">LOGIN</span>
                             <span class="svg-wrapper">{{ 'user-icon.svg' | inline_asset_content }}</span>
-                            <span class="item-text">Login</span>
                         {% endif %}
                     </a>
                 </li>
