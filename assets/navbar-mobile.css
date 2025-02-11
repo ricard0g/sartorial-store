@@ -70,3 +70,9 @@
         display: none;
     }
 }
+
+@media only screen and (min-height: 700px) {
+    .mobile-navbar__links-container {
+        top: 14%;
+    }
+}
