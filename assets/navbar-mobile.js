@@ -73,7 +73,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
             requestAnimationFrame(() => {
                 menu.style.display = 'block';
-                requestAnimationFrame(() => menu.classList.add('mobile-navbar__show-mega-menu'));
+                setTimeout(() => {
+                    menu.classList.add('mobile-navbar__show-mega-menu');
+                }, 10)
             });
         }
 
