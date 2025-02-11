@@ -84,13 +84,16 @@ const hamburgerBtn = document.getElementById('hamburger-btn-mobile');
 const firstLineHamburger = document.getElementById('first-line-hamburguer');
 const secondLineHamburger = document.getElementById('second-line-hamburguer');
 const thirdLineHamburger = document.getElementById('third-line-hamburguer');
-const menuDrawer = document.querySelector('.mobile-navbar__links-container');
+const menuDrawer = document.querySelector('.mobile-navbar__container');
 
 const handleHamburgerBtnClick = () => {
-        firstLineHamburger.classList.toggle('first-line');
-        secondLineHamburger.classList.toggle('second-line');
-        thirdLineHamburger.classList.toggle('third-line');
-        menuDrawer.style.display = menuDrawer.style.display === 'none' ? 'block' : 'none';
-}
+    firstLineHamburger.classList.toggle('first-line');
+    secondLineHamburger.classList.toggle('second-line');
+    thirdLineHamburger.classList.toggle('third-line');
+    menuDrawer.style.display = menuDrawer.style.display === 'none' ? 'block' : 'none';
+    setTimeout(() => {
+        menuDrawer.style.opacity = menuDrawer.style.opacity === '0' ? '1' : '0';
+    }, 10);
+};
 
 hamburgerBtn.addEventListener('click', handleHamburgerBtnClick);
