@@ -37,6 +37,7 @@
     width: 30px;
     margin-left: 6px;
     transform: rotate(45deg) translateY(12px);
+    z-index: 10;
 }
 
 .second-line {
@@ -47,6 +48,7 @@
     width: 30px;
     margin-left: 6px;
     transform: rotate(-45deg) translateY(-12px);
+    z-index: 10;
 }
 
 #logo-mobile {
