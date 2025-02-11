@@ -1,0 +1,33 @@
+#subnavbar-wrapper-md {
+    display: none; /* Added for testing purposes. Original Property: "block" */
+}
+
+.subnavbar-wrapper {
+    padding: 1.5vh 1vw;
+}
+
+.search-button {
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+}
+
+.search-button:hover {
+    border-bottom: 1px solid black;
+}
+
+.search-button:active {
+    transform: scale(0.95);
+}
+
+@media only screen and (min-width: 768px) {
+    #subnavbar-wrapper-md {
+        display: block;
+    }
+}
+
+@media only screen and (min-width: 1024px) {
+    #subnavbar-wrapper-md {
+        display: none;
+    }
+}

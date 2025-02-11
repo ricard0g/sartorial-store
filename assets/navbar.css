@@ -2,14 +2,6 @@
     display: none;
 }
 
-#subnavbar-wrapper-md {
-    display: none; /* Added for testing purposes. Original Property: "block" */
-}
-
-#subnavbar-wrapper-sm {
-    display: block;
-}
-
 .subnavbar-wrapper {
     padding: 1.5vh 1vw;
 }
@@ -23,16 +15,6 @@
     list-style: none;
     padding: 0;
     margin: 0;
-}
-
-.nav-list-mobile {
-    position: relative;
-    display: flex;
-    flex-flow: row nowrap;
-    justify-content: space-between;
-    align-items: center;
-    padding: 0 1.5vw;
-    list-style: none;
 }
 
 .nav-link {
@@ -96,85 +78,14 @@
     font-weight: 300;
 }
 
-.search-button {
-    background-color: transparent;
-    border: none;
-    cursor: pointer;
-}
-
-.search-button:hover {
-    border-bottom: 1px solid black;
-}
-
-.search-button:active {
-    transform: scale(0.95);
-}
-
-#hamburguer-menu-container {
-    width: 40px;
-}
-
-.hamburger-menu-mobile {
-    width: 100%;
-    height: auto;
-    cursor: pointer;
-    background-color: transparent;
-    border: none;
-}
-
-.hamburguer-line {
-    width: 100%;
-    height: 2px;
-    background-color: black;
-    margin: 0.75vh 0;
-    border-radius: 50px;
-    transition: all 200ms ease;
-}
-
-.first-line {
-    width: 120%;
-    transform: rotate(45deg) translateY(6px) translateX(4px);
-}
-
-.second-line {
-    opacity: 0;
-}
-
-.third-line {
-    width: 120%;
-    transform: rotate(-45deg) translateY(-6px) translateX(4px);
-}
-
-#logo-mobile {
-    position: absolute;
-    transform: translateX(-50%);
-    left: 50%;
-}
-
 @media only screen and (min-width: 768px) {
     #subnavbar-wrapper-xl {
-        display: none; /* Added for testing purposes */
-    }
-
-    #subnavbar-wrapper-md {
-        display: block; /* Added for testing purposes */
-    }
-
-    #subnavbar-wrapper-sm {
         display: none;
     }
 }
 
 @media only screen and (min-width: 1024px) {
     #subnavbar-wrapper-xl {
-        display: block; /* Added for testing purposes */
-    }
-
-    #subnavbar-wrapper-md {
-        display: none; /* Added for testing purposes */
-    }
-
-    #subnavbar-wrapper-sm {
-        display: none;
+        display: block;
     }
 }
