@@ -1,4 +1,4 @@
-{% comment %} 
+{% comment %}
     Mega Menu for Mobiles & Tablets. Will display the correspondant links to the link the user clicked on first drawer menu. We'll be talking about links but these "links" are just our way to access the submenus of the main menu.
 
     Accepts:
@@ -7,8 +7,49 @@
     Usage:
         {% render 'mega-menu-mobile', link: link %}
 {% endcomment %}
-<div>
-    <ul>
-        
+<div class="mobile-navbar__mega-menu-container">
+    <div class="mobile-navbar__mega-menu-header">
+        <button class="mobile-navbar__mega-menu-back">
+            <svg
+                width="15px"
+                height="15px"
+                viewBox="0 0 512 512"
+                version="1.1"
+                xml:space="preserve"
+                xmlns="http://www.w3.org/2000/svg"
+                xmlns:xlink="http://www.w3.org/1999/xlink"
+                fill="#000000"
+            >
+                <g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <g id="_x37_16-_back__x2C__left_arrow__x2C__direction__x2C_"> <g> <path d=" M366.277,26.814L154.719,238.271c-10.729,10.221-10.729,26.192,0,36.413l211.559,211.455" style="fill:none;stroke:#000000;stroke-width:70.4167;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:2.6131;"></path> </g> </g> <g id="Layer_1"></g> </g>
+            </svg>
+        </button>
+        <span class="mobile-navbar__mega-menu-title">{{ link.title | upcase }}</span>
+    </div>
+    <ul class="mobile-navbar__mega-menu-list">
+        {% assign submenus_num = link.levels %}
+        {% if submenus_num > 1 %}
+            {% assign level_one = link.links %}
+            {% for link in level_one %}
+                <li class="mobile-navbar__mega-menu-item">
+                    <h3 class="mobile-navbar__item-title">{{ link.title | upcase }}</h3>
+                    <ul class="mobile-navbar__mega-menu-sublist">
+                        {% for link in link.links %}
+                            <li class="mobile-navbar__mega-menu-subitem">
+                                <a href="{{ link.url }}">{{ link.title }}</a>
+                            </li>
+                        {% endfor %}
+                    </ul>
+                </li>
+            {% endfor %}
+        {% else %}
+            <li>
+                <h3 class="mobile-navbar__item-title">Shop by Collection</h3>
+            </li>
+            {% for link in link.links %}
+                <li class="mobile-navbar__mega-menu-item">
+                    <a href="{{ link.url }}">{{ link.title }}</a>
+                </li>
+            {% endfor %}
+        {% endif %}
     </ul>
-</div> 
+</div>
