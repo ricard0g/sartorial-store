@@ -53,9 +53,9 @@ const searchParents = Array.of(
     document.getElementById('subnavbar-wrapper-sm')
 );
 let activeParent = searchParents.find((el) => window.getComputedStyle(el).display !== 'none');
-let activeDropdownSearch = activeParent.querySelector('.main-search-small-screens');
-let activeSearchButton = activeParent.querySelector('.search-button');
-let activeSearchInput = activeParent.querySelector('.header-search-input-small-screens');
+let activeDropdownSearch = activeParent?.querySelector('.main-search-small-screens');
+let activeSearchButton = activeParent?.querySelector('.search-button');
+let activeSearchInput = activeParent?.querySelector('.header-search-input-small-screens');
 const predictiveSearchResults = document.getElementById('predictive-search-results');
 
 const handleSearchButtonClick = () => {
@@ -77,7 +77,7 @@ const handleClickOutside = (e) => {
     }
 };
 
-activeSearchButton.addEventListener('click', handleSearchButtonClick);
+activeSearchButton?.addEventListener('click', handleSearchButtonClick);
 document.addEventListener('click', handleClickOutside);
 window.onresize = () => {
     activeParent = searchParents.find((el) => window.getComputedStyle(el).display !== 'none');
