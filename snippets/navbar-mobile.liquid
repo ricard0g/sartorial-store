@@ -7,7 +7,7 @@
 <nav id="subnavbar-wrapper-sm">
     <ul class="nav-list-mobile">
         <li class="nav-item-mobile" id="hamburguer-menu-container">
-            <button id="hamburger-btn-mobile" class="hamburger-menu-mobile">
+            <button aria-label="Menu Button for Mobile" aria-roledescription="Button that opens up the menu in mobile devices" id="hamburger-btn-mobile" class="hamburger-menu-mobile">
                 <div id="first-line-hamburguer" class="hamburguer-line"></div>
                 <div id="second-line-hamburguer" class="hamburguer-line"></div>
                 <div id="third-line-hamburguer" class="hamburguer-line"></div>
@@ -28,7 +28,7 @@
             </a>
         </li>
         <li class="nav-item-mobile">
-            <button class="search-button">
+            <button aria-label="Search Button" aria-roledescription="Search Button to search anything on the store" class="search-button">
                 <svg width="20px" height="20px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <g id="SVGRepo_bgCarrier" stroke-width="0"/>
 
@@ -38,7 +38,7 @@
                 </svg>
             </button>
             {% render 'main-search' %}
-            <a class="cart-link-mobile" href="{{ routes.cart_url }}">
+            <a aria-label="Cart Button" aria-roledescription="Cart Button to check how many items the customer have" class="cart-link-mobile" href="{{ routes.cart_url }}">
                 <span data-item-count="{{ cart.item_count }}" class="cart-icon-mobile">
                     <svg
                         width="20px"
