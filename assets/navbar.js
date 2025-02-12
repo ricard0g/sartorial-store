@@ -1,3 +1,5 @@
+import { mobileNavManager } from './navbar-mobile.js';
+
 const navLinks = document.querySelectorAll('.nav-link');
 const subNavbarWrapper = document.querySelectorAll('.subnavbar-wrapper');
 
@@ -57,6 +59,9 @@ let activeSearchInput = activeParent.querySelector('.header-search-input-small-s
 const predictiveSearchResults = document.getElementById('predictive-search-results');
 
 const handleSearchButtonClick = () => {
+    if (mobileNavManager.menuDrawer.style.display === 'block') {
+        mobileNavManager.closeMenu();
+    }
     activeDropdownSearch.classList.toggle('show-main-search-small-screens');
 };
 
