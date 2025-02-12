@@ -11,9 +11,13 @@
             <ul class="mobile-navbar__primary-list">
                 {% for link in linklists['main-menu'].links %}
                     <li class="mobile-navbar__primary-item">
-                        <a class="mobile-navbar__primary-inner-link" data-dropdown-rel="{{ link.title | downcase }}" href="{{ link.url }}">
-                            <span>{{ link.title | upcase }}</span
-                            ><span>
+                        <a
+                            class="mobile-navbar__primary-inner-link"
+                            data-dropdown-rel="{{ link.title | downcase }}"
+                            href="{{ link.url }}"
+                        >
+                            {{ link.title | upcase -}}
+                            <span>
                                 <svg
                                     width="12px"
                                     height="12px"
@@ -33,7 +37,10 @@
             </ul>
             <ul class="mobile-navbar__secondary-list">
                 <li class="mobile-navbar__secondary-item">
-                    <a class="mobile-navbar__secondary-inner-link" href="{% if customer %}{{ routes.account_url }}{% else %}{{ routes.account_login_url }}{% endif %}">
+                    <a
+                        class="mobile-navbar__secondary-inner-link"
+                        href="{% if customer %}{{ routes.account_url }}{% else %}{{ routes.account_login_url }}{% endif %}"
+                    >
                         {% if customer %}
                             {% if customer.has_avatar? %}
                                 <span class="item-text">My Account</span>
