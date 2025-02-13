@@ -42,9 +42,14 @@
         "title_width_mobile": 380,
         "title_letter_spacing": 5
       }
+    },
+    "product_slider_bXRmCx": {
+      "type": "product-slider",
+      "settings": {}
     }
   },
   "order": [
-    "image-banner"
+    "image-banner",
+    "product_slider_bXRmCx"
   ]
 }

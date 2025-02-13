@@ -66,11 +66,11 @@ const handleSearchButtonClick = () => {
 };
 
 const handleClickOutside = (e) => {
-    const isClickInsideSearch = activeDropdownSearch.contains(e.target);
-    const isClickOnSearchButton = activeSearchButton.contains(e.target);
+    const isClickInsideSearch = activeDropdownSearch?.contains(e.target);
+    const isClickOnSearchButton = activeSearchButton?.contains(e.target);
     const isClickInsidePredictiveSearch = predictiveSearchResults?.contains(e.target);
     if (!isClickInsideSearch && !isClickOnSearchButton && !isClickInsidePredictiveSearch) {
-        activeDropdownSearch.classList.remove('show-main-search-small-screens');
+        activeDropdownSearch?.classList.remove('show-main-search-small-screens');
         setTimeout(() => {
             activeSearchInput.value = '';
         }, 350);
