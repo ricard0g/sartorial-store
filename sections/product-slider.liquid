@@ -11,11 +11,13 @@
     <div
         class="product-slider__carousel"
     >
-        <div class="product-slider__carousel-cell"></div>
-        <div class="product-slider__carousel-cell"></div>
-        <div class="product-slider__carousel-cell"></div>
-        <div class="product-slider__carousel-cell"></div>
-        <div class="product-slider__carousel-cell"></div>
+        {% for product in section.settings.collection.products %}
+            <article class="product-slider__carousel-cell">
+                <div>
+                    {{ product.featured_image | image_url: width: 200 | image_tag: alt: product.title }}
+                </div>
+            </article>
+        {% endfor %}
     </div>
 </div>
 
@@ -30,18 +32,18 @@
             "id": "header",
             "label": "Carousel Header",
             "default": "Header for Carousel",
-            "info": "This is the header that goes on the left of the carousel. Pointing to the selected collection",
+            "info": "This is the header that goes on the left of the carousel. Pointing to the selected collection"
         },
         {
             "type": "text",
             "id": "link",
             "label": "Link to Collection Text",
-            "default": "Link to Collection",
+            "default": "Link to Collection"
         },
         {
             "type": "collection",
             "id": "collection",
-            "label": "Collection to Display",
+            "label": "Collection to Display"
         }
     ],
     "presets": [

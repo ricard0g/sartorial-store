@@ -5,7 +5,7 @@
     align-items: center;
     /* overflow-x: hidden; */
     width: 100%;
-    padding: 5vh 0;
+    padding: 3.5vh 0;
     column-gap: 10vh;
 }
 
@@ -15,8 +15,8 @@
 }
 
 .product-slider__carousel-cell {
-    width: 22%;
-    height: 200px;
+    width: 24%;
+    height: 400px;
     margin-right: 10px;
     background: #8c8;
     border-radius: 5px;
@@ -27,7 +27,7 @@
 .product-slider__carousel-cell:before {
     display: block;
     text-align: center;
-    content: counter(carousel-cell);
+    /* content: counter(carousel-cell); */
     line-height: 200px;
     font-size: 80px;
     color: white;

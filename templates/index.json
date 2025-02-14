@@ -45,7 +45,11 @@
     },
     "product_slider_bXRmCx": {
       "type": "product-slider",
-      "settings": {}
+      "settings": {
+        "header": "Header for Carousel",
+        "link": "Link to Collection",
+        "collection": "new-arrivals"
+      }
     }
   },
   "order": [
