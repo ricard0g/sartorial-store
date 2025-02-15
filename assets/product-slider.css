@@ -11,24 +11,98 @@
 
 .product-slider__carousel {
     width: 70%;
-    background: #eee;
 }
 
 .product-slider__carousel-cell {
-    width: 24%;
-    height: 400px;
-    margin-right: 10px;
-    background: #8c8;
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: start;
+    align-content: center;
+    width: 20%;
+    height: 450px;
     border-radius: 5px;
-    counter-increment: carousel-cell;
 }
 
-/* cell number */
-.product-slider__carousel-cell:before {
+.product-slider__carousel-cell:hover .product-slider__second-image {
     display: block;
+}
+
+.product-slider__carousel-cell:hover .product-slider__image {
+    display: none;
+}
+
+.product-slider__carousel-cell:hover .product-slider__open-modal {
+    transform: translateY(-50px) translateX(-50%);
+    opacity: 1;
+}
+
+.product-slider__carousel-cell a {
+    text-decoration: none;
+    color: inherit;
+}
+
+.product-slider__cell-header {
+    position: relative;
+    width: 100%;
+}
+
+.product-slider__cell-image {
+    width: 100%;
+}
+
+.product-slider__second-image {
+    width: 100%;
+    object-fit: contain;
+    display: none;
+}
+
+.product-slider__image {
+    width: 100%;
+    object-fit: contain;
+}
+
+.product-slider__cell-main {
+    width: 100%;
+    padding: 10px;
+}
+
+.product-slider__cell-main h4 {
     text-align: center;
-    /* content: counter(carousel-cell); */
-    line-height: 200px;
-    font-size: 80px;
-    color: white;
+}
+
+.product-slider__cell-main p {
+    text-align: center;
+}
+
+.product-slider__open-modal {
+    position: absolute;
+    width: 70%;
+    opacity: 0;
+    left: 50%;
+    padding: 8px 10px;
+    transform: translateY(-30px) translateX(-50%);
+    background-color: rgb(23, 23, 23);
+    color: rgb(217, 217, 217);
+    border: none;
+    cursor: pointer;
+    transition: all 350ms ease;
+}
+
+.product-slider__open-modal:hover {
+    background-color: rgb(50, 50, 50);
+};
+
+.product-slider__modal {
+    width: 100%;
+    height: 400px;
+}
+
+.product-slider__carousel-dialog {
+    width: 100%;
+    height: 100%;
+}
+
+.product-slider__carousel-dialog-cell {
+    width: 100%;
+    height: 100%;
 }

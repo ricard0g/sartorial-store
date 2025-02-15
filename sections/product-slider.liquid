@@ -13,9 +13,41 @@
     >
         {% for product in section.settings.collection.products %}
             <article class="product-slider__carousel-cell">
-                <div>
-                    {{ product.featured_image | image_url: width: 200 | image_tag: alt: product.title }}
-                </div>
+                <header class="product-slider__cell-header">
+                    <a href="{{ product.url }}">
+                        <div class="product-slider__cell-image">
+                            {{
+                                product.featured_image
+                                | image_url: width: 200, crop: 'top'
+                                | image_tag: alt: product.title, class: 'product-slider__image'
+                            }}
+                        </div>
+                        <div class="product-slider__cell-image">
+                            {{
+                                product.images[1]
+                                | image_url: width: 200, crop: 'top'
+                                | image_tag: alt: product.title, class: 'product-slider__second-image'
+                            }}
+                        </div>
+                        <button data-open-modal class="product-slider__open-modal">QUICK VIEW</button>
+                        <dialog data-modal class="product-slider__modal">
+                            <div class="product-slider__carousel-dialog">
+                                {% for image in product.images %}
+                                    <div class="product-slider__carousel-dialog-cell">
+                                        {{ image | image_url: width: 200, crop: 'top' | image_tag: alt: product.title }}
+                                    </div>
+                                {% endfor %}
+                            </div>
+                            <div></div>
+                        </dialog>
+                    </a>
+                </header>
+                <main class="product-slider__cell-main">
+                    <a href="{{ product.url }}">
+                        <h4>{{ product.title }}</h4>
+                        <p>{{ product.price | money }}</p>
+                    </a>
+                </main>
             </article>
         {% endfor %}
     </div>

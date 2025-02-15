@@ -71,9 +71,6 @@ const handleClickOutside = (e) => {
     const isClickInsidePredictiveSearch = predictiveSearchResults?.contains(e.target);
     if (!isClickInsideSearch && !isClickOnSearchButton && !isClickInsidePredictiveSearch) {
         activeDropdownSearch?.classList.remove('show-main-search-small-screens');
-        setTimeout(() => {
-            activeSearchInput.value = '';
-        }, 350);
     }
 };
 
