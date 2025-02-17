@@ -1,0 +1,109 @@
+dialog.product-slider__modal {
+    width: 75%;
+    height: 70%;
+    border: none;
+    padding: 2.5vh 5vw;
+}
+
+.product-slider__modal::backdrop {
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+.product-slider__carousel-dialog {
+    width: 100%;
+    height: 100%;
+}
+
+.product-slider__carousel-dialog-cell {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.product-slider__carousel-dialog-cell img {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+}
+
+.product-slider__carousel-dialog-product-color {
+    position: relative;
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+    border: 0.5px solid black;
+    background-color: var(--product-color)
+}
+
+
+.product-slider__carousel-dialog-product-color-container {
+    display: flex;
+    column-gap: 2vw;
+}
+
+.product-slider__carousel-dialog-product-color .tooltip {
+    visibility: hidden;
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    top: -100px;
+    right: 50%;
+    transform: translateX(50%) translateY(10px);
+    width: 15ch;
+    height: 90px;
+    padding: 1vh;
+    text-align: center;
+    font-size: 0.825rem;
+    background-color: rgb(45, 45, 45);
+    color: rgb(215, 215, 215);
+    opacity: 0;
+    transition: all 300ms ease;
+}
+
+.product-slider__carousel-dialog-product-color:hover .tooltip {
+    visibility: visible;
+    opacity: 1;
+    transform: translateX(50%) translateY(0);
+}
+
+.product-slider__carousel-dialog-sizes-list {
+    display: flex;
+    column-gap: 2vw;
+    list-style: none;
+    padding: 0;
+}
+
+.product-slider__carousel-dialog-sizes-list-item {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 40px;
+    height: 40px;
+    border: 1px solid black;
+}
+
+.product-slider__carousel-dialog-add-to-cart-container {
+    margin: 3vh 0;
+    width: 100%;
+    height: auto;
+}
+
+.product-slider__carousel-dialog-add-to-cart-button {
+    display: block;
+    width: 100%;
+    height: 50px;
+    font-size: 0.85rem;
+    border: none;
+    background-color: rgb(26, 26, 26);
+    color: rgb(215, 215, 215);
+    cursor: pointer;
+    transition: all 300ms ease;
+}
+
+.product-slider__carousel-dialog-add-to-cart-button:hover {
+    background-color: rgb(190, 190, 190);
+    color: rgb(26, 26, 26);
+}

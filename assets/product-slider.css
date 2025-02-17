@@ -91,18 +91,3 @@
 .product-slider__open-modal:hover {
     background-color: rgb(50, 50, 50);
 };
-
-.product-slider__modal {
-    width: 100%;
-    height: 400px;
-}
-
-.product-slider__carousel-dialog {
-    width: 100%;
-    height: 100%;
-}
-
-.product-slider__carousel-dialog-cell {
-    width: 100%;
-    height: 100%;
-}

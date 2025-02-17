@@ -7,27 +7,31 @@ var flkty = new Flickity(elem, {
     pageDots: false,
 });
 
-// Dialog Carousel
-var dialogElem = document.querySelector('.product-slider__carousel-dialog');
-var dialogFlkty = new Flickity(dialogElem, {
-    contain: true,
-    pageDots: false,
-});
-
 // Modal
-const modal = document.querySelector('[data-modal]');
-const carousel = document.querySelector('.product-slider__container');
-
 document.addEventListener('DOMContentLoaded', () => {
+    const carousel = document.querySelector('.product-slider__container');
+    let dialogCarousels = {};
+
     carousel.addEventListener('click', (e) => {
-        if (e.target.matches('[data-open-modal]')) {
+        if (e.target.matches('[data-open-modal]') || carousel.contains(e.target)) {
             e.preventDefault();
-            e.target.nextElementSibling.showModal();
+            const dialog = e.target.nextElementSibling;
+            dialog.showModal();
+
+            // Initialize the carousel
+            if (!dialogCarousels[dialog.id]) {
+                const dialogCarousel = dialog.querySelector('.product-slider__carousel-dialog');
+                dialogCarousels[dialog.id] = new Flickity(dialogCarousel, {
+                    contain: true,
+                    pageDots: false,
+                })
+            }
         }
 
         if (e.target.matches('[data-close-modal]')) {
             e.preventDefault();
-            e.target.nextElementSibling.close();
+            const dialog = e.target.nextElementSibling;
+            dialog.close();
         }
     });
 });
