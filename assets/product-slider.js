@@ -5,6 +5,7 @@ var flkty = new Flickity(elem, {
     contain: true,
     wrapAround: true,
     pageDots: false,
+    draggable: false,
 });
 
 // Modal
@@ -13,8 +14,7 @@ document.addEventListener('DOMContentLoaded', () => {
     let dialogCarousels = {};
 
     carousel.addEventListener('click', (e) => {
-        if (e.target.matches('[data-open-modal]') || carousel.contains(e.target)) {
-            e.preventDefault();
+        if (e.target.matches('[data-open-modal]')) {
             const dialog = e.target.nextElementSibling;
             dialog.showModal();
 
@@ -22,15 +22,17 @@ document.addEventListener('DOMContentLoaded', () => {
             if (!dialogCarousels[dialog.id]) {
                 const dialogCarousel = dialog.querySelector('.product-slider__carousel-dialog');
                 dialogCarousels[dialog.id] = new Flickity(dialogCarousel, {
-                    contain: true,
+                    wrapAround: true,
+                    cellAllign: 'center',
+                    imagesLoaded: true,
                     pageDots: false,
-                })
+                    draggable: false,
+                });
             }
         }
 
-        if (e.target.matches('[data-close-modal]')) {
-            e.preventDefault();
-            const dialog = e.target.nextElementSibling;
+        if (e.target.matches('[data-close-modal]') || e.target.closest('[data-close-modal]')) {
+            const dialog = e.target.closest('dialog');
             dialog.close();
         }
     });

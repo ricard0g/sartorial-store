@@ -3,7 +3,6 @@
     flex-flow: row nowrap;
     justify-content: center;
     align-items: center;
-    /* overflow-x: hidden; */
     width: 100%;
     padding: 3.5vh 0;
     column-gap: 10vh;
@@ -81,7 +80,7 @@
     left: 50%;
     padding: 8px 10px;
     transform: translateY(-30px) translateX(-50%);
-    background-color: rgb(23, 23, 23);
+    background-color: rgb(30, 30, 30);
     color: rgb(217, 217, 217);
     border: none;
     cursor: pointer;
@@ -89,5 +88,25 @@
 }
 
 .product-slider__open-modal:hover {
-    background-color: rgb(50, 50, 50);
-};
+    background-color: rgb(60, 60, 60);
+}
+
+
+.flickity-button {
+    opacity: 0;
+    background-color: rgba(255, 255, 255, 0.5);
+    border-radius: 0;
+    transition: all 500ms ease;
+}
+
+.product-slider__carousel:hover .flickity-button {
+    opacity: 1;
+}
+
+.flickity-prev-next-button.previous {
+    left: 0;
+}
+
+.flickity-prev-next-button.next {
+    right: 0;
+}
