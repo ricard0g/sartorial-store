@@ -1,11 +1,13 @@
 // Products Carousel
 var elem = document.querySelector('.product-slider__carousel');
+const smallScreen = window.innerWidth < 769;
 var flkty = new Flickity(elem, {
     freeScroll: true,
     contain: true,
     wrapAround: true,
     pageDots: false,
-    draggable: false,
+    draggable: smallScreen,
+    prevNextButtons: !smallScreen,
 });
 
 // Modal

@@ -1,5 +1,7 @@
 #subnavbar-wrapper-xl {
     display: none;
+    position: sticky;
+    top: 0;
 }
 
 .subnavbar-wrapper {

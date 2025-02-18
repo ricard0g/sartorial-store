@@ -1,5 +1,7 @@
 #subnavbar-wrapper-sm {
     display: block;
+    position: sticky;
+    top: 2px;
 }
 
 .nav-list-mobile {
@@ -60,7 +62,7 @@
     position: absolute;
     top: 13vh;
     width: 100%;
-    min-height: 100vh;
+    min-height: 100%;
     left: 0;
     z-index: 8;
     overflow: hidden;

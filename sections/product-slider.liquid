@@ -4,10 +4,10 @@
 <script src="{{ 'flickity.pkgd.min.js' | asset_url }}" defer></script>
 <script src="{{ 'product-slider.js' | asset_url }}" defer></script>
 
-<div class="product-slider__container">
+<div class="product-slider__wrapper">
     <div class="product-slider__header">
-        <h3>Collection</h3>
-        <a href="">Collection Link</a>
+        <h3 class="product-slider__header-title">{{ section.settings.collection.title }}</h3>
+        <a href="{{ section.settings.collection.url }}">Collection Link</a>
     </div>
     <div
         class="product-slider__carousel"
@@ -19,15 +19,23 @@
                         <div class="product-slider__cell-image">
                             {{
                                 product.featured_image
-                                | image_url: width: 200, crop: 'top'
-                                | image_tag: alt: product.title, class: 'product-slider__image'
+                                | image_url: width: 250, crop: 'top'
+                                | image_tag:
+                                    alt: product.title,
+                                    class: 'product-slider__image',
+                                    widths: '150, 250, 500',
+                                    sizes: '(max-width:424px) 150px, (min-width: 425px) 200px, (min-width: 768px)  250px, 250px'
                             }}
                         </div>
                         <div class="product-slider__cell-image">
                             {{
                                 product.images[1]
-                                | image_url: width: 200, crop: 'top'
-                                | image_tag: alt: product.title, class: 'product-slider__second-image'
+                                | image_url: width: 250, crop: 'top'
+                                | image_tag:
+                                    sizes: '(max-width:424px) 150px, (min-width: 425px) and (max-width: 767px) 2000px',
+                                    alt: product.title,
+                                    class: 'product-slider__second-image',
+                                    width: 150
                             }}
                         </div>
                     </a>
