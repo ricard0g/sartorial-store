@@ -112,13 +112,13 @@ window.onscroll = throttle(() => {
         tabletNavbar.style.transform = 'translateY(-100%)';
         start = undefined;
     }
-}, 200); // Executes at most once every 150ms
+}, 50); // Executes at most once every 150ms
 
 const animation = (timestamp) => {
     if (start === undefined) start = timestamp;
     const elapsed = timestamp - start;
 
-    const shift = Math.min(0.5 * elapsed, 100);
+    const shift = Math.min(0.8 * elapsed, 100);
     tabletNavbar.style.transform = `translateY(-${100 - shift}%)`;
 
     if (shift < 100) {
