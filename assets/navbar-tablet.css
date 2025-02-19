@@ -1,6 +1,9 @@
 #subnavbar-wrapper-md {
     display: none; 
+    z-index: 100;
+    background-color: white;
 }
+
 
 .subnavbar-wrapper {
     padding: 1.5vh 1vw;

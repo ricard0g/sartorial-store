@@ -1,5 +1,17 @@
 import { mobileNavManager } from './navbar-mobile.js';
 
+// Add this throttle function at the top of your file
+const throttle = (func, limit) => {
+    let inThrottle;
+    return function (...args) {
+        if (!inThrottle) {
+            func.apply(this, args);
+            inThrottle = true;
+            setTimeout(() => (inThrottle = false), limit);
+        }
+    };
+};
+
 const navLinks = document.querySelectorAll('.nav-link');
 const subNavbarWrapper = document.querySelectorAll('.subnavbar-wrapper');
 
@@ -57,6 +69,7 @@ let activeDropdownSearch = activeParent?.querySelector('.main-search-small-scree
 let activeSearchButton = activeParent?.querySelector('.search-button');
 let activeSearchInput = activeParent?.querySelector('.header-search-input-small-screens');
 const predictiveSearchResults = document.getElementById('predictive-search-results');
+console.log(activeParent);
 
 const handleSearchButtonClick = () => {
     if (mobileNavManager.menuDrawer.style.display === 'block') {
@@ -78,4 +91,37 @@ activeSearchButton?.addEventListener('click', handleSearchButtonClick);
 document.addEventListener('click', handleClickOutside);
 window.onresize = () => {
     activeParent = searchParents.find((el) => window.getComputedStyle(el).display !== 'none');
+};
+
+// Show Tablet Navbar on Scroll Down
+const tabletNavbar = document.getElementById('subnavbar-wrapper-md');
+let start;
+
+// Replace your window.onscroll with this:
+window.onscroll = throttle(() => {
+    const desktopNavbarDimensions = document.querySelector('.main-navbar-wrapper').getBoundingClientRect();
+    const absoluteBottom = desktopNavbarDimensions.bottom + window.scrollY;
+
+    if (absoluteBottom < window.scrollY) {
+        tabletNavbar.style.display = 'block';
+        tabletNavbar.style.position = 'sticky';
+        tabletNavbar.style.top = '0';
+        window.requestAnimationFrame(animation);
+    } else {
+        tabletNavbar.style.display = 'none';
+        tabletNavbar.style.transform = 'translateY(-100%)';
+        start = undefined;
+    }
+}, 200); // Executes at most once every 150ms
+
+const animation = (timestamp) => {
+    if (start === undefined) start = timestamp;
+    const elapsed = timestamp - start;
+
+    const shift = Math.min(0.5 * elapsed, 100);
+    tabletNavbar.style.transform = `translateY(-${100 - shift}%)`;
+
+    if (shift < 100) {
+        window.requestAnimationFrame(animation);
+    }
 };
