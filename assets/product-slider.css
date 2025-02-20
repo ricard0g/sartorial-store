@@ -1,6 +1,7 @@
 .product-slider__container {
     width: 100%;
     height: auto;
+    margin-bottom: 100vh;
 }
 
 .product-slider__wrapper {
