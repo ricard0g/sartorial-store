@@ -1,4 +1,5 @@
 import { mobileNavManager } from './navbar-mobile.js';
+let searchManagerInstance;
 
 // Add this throttle function at the top of your file
 const throttle = (func, limit) => {
@@ -75,21 +76,29 @@ class MegaMenuManager {
 
 class SearchManager {
     constructor() {
+        if (window.searchManagerInstance) {
+            return window.searchManagerInstance;
+        }
+
         this.elements = {
             navbars: document.querySelectorAll('.subnavbar-wrapper'),
             searchDropdowns: document.querySelectorAll('.main-search-small-screens'),
-            predictiveSearch: document.getElementById('predictive-search-results'),
+            predictiveSearch: document.getElementById('predictive-search'),
         };
 
         this.handleSearchClick = this.handleSearchClick.bind(this);
         this.handleClickOutside = this.handleClickOutside.bind(this);
 
         this.initializeEventListeners();
+        window.searchManagerInstance = this;
+        searchManagerInstance = this;
     }
 
     initializeEventListeners() {
         document.addEventListener('click', (e) => {
+            console.log(e.target);
             if (e.target.matches('.search-button') || e.target.closest('.search-button')) {
+                console.log('hello');
                 this.handleSearchClick(e);
                 return;
             }
@@ -107,6 +116,16 @@ class SearchManager {
             mobileNavManager.closeMenu();
         }
 
+        console.log('hello');
+
+        const megaMenuOpened = megaMenuManager.megaMenus
+            .keys()
+            .find((link) => megaMenuManager.megaMenus.get(link).classList.contains('show'));
+
+        if (megaMenuOpened) {
+            megaMenuManager.hideMenu(megaMenuOpened);
+        }
+        console.log('hello2');
         // toggle search dropdown
         const dropdown = navbar.querySelector('.main-search-small-screens');
         this.toggleSearchDropdown(dropdown);
@@ -144,45 +163,22 @@ class SearchManager {
     }
 }
 
-// Show Tablet Navbar on Scroll Down
-const tabletNavbar = document.getElementById('subnavbar-wrapper-md');
-let start;
-
-// Replace your window.onscroll with this:
-window.onscroll = throttle(() => {
-    const desktopNavbarDimensions = document.querySelector('.main-navbar-wrapper').getBoundingClientRect();
-    const absoluteBottom = desktopNavbarDimensions.bottom + window.scrollY + 400;
-
-    if (absoluteBottom < window.scrollY) {
-        tabletNavbar.style.display = 'block';
-        tabletNavbar.style.position = 'sticky';
-        tabletNavbar.style.top = '0';
-        window.requestAnimationFrame(animation);
-    } else {
-        tabletNavbar.style.display = 'none';
-        tabletNavbar.style.transform = 'translateY(-100%)';
-        start = undefined;
-    }
-}, 50); // Executes at most once every 50ms
-
-const animation = (timestamp) => {
-    if (start === undefined) start = timestamp;
-    const elapsed = timestamp - start;
-
-    const shift = Math.min(0.6 * elapsed, 100);
-    tabletNavbar.style.transform = `translateY(-${100 - shift}%)`;
-
-    if (shift < 100) {
-        window.requestAnimationFrame(animation);
-    }
-};
-
 class TabletManager {
     constructor() {
-        this.navbar = document.querySelector('.main-navbar-wrapper');
-        this.desktopNavbarDimensions = document.querySelector('.main-navbar-wrapper');
-        this.animationFrame = null;
-        this.initializeScrollListener();
+        document.addEventListener('DOMContentLoaded', () => {
+            const originalNavbar = document.getElementById('subnavbar-wrapper-md');
+            this.navbar = originalNavbar.cloneNode(true);
+            this.navbar.style.display = 'none';
+            this.navbar.style.transform = 'translateY(-100%)';
+
+            document.body.insertBefore(this.navbar, originalNavbar.parentNode.parentElement);
+
+            this.desktopNavbarDimensions = document.querySelector('.main-navbar-wrapper');
+            this.animationFrame = null;
+            this.isVisible = false;
+
+            this.initializeScrollListener();
+        });
     }
 
     initializeScrollListener() {
@@ -198,42 +194,58 @@ class TabletManager {
         const mainNavbarBottom = this.desktopNavbarDimensions.getBoundingClientRect().bottom + window.scrollY + 400;
 
         if (mainNavbarBottom < window.scrollY) {
-            this.showTabletNavbar();
+            if (!this.isVisible) {
+                this.showTabletNavbar();
+            }
         } else {
             this.hideTabletNavbar();
         }
     }
 
     showTabletNavbar() {
-        tabletNavbar.style.display = 'block';
-        tabletNavbar.style.position = 'sticky';
-        tabletNavbar.style.top = '0';
+        this.navbar.style.display = 'block';
+        this.navbar.style.position = 'sticky';
+        this.navbar.style.top = '0';
         this.startAnimation();
+        searchManagerInstance.closeAllSearchDropdowns();
     }
 
     hideTabletNavbar() {
-        tabletNavbar.style.display = 'none';
-        tabletNavbar.style.transform = 'translateY(-100%)';
+        this.navbar.style.display = 'none';
+        this.navbar.style.transform = 'translateY(-100%)';
         if (this.animationFrame) {
             window.cancelAnimationFrame(this.animationFrame);
             this.animationFrame = null;
         }
+        this.isVisible = false;
     }
 
     startAnimation(startTime = null) {
         if (!startTime) {
             this.animationFrame = requestAnimationFrame((timestamp) => this.startAnimation(timestamp));
-            return;
         }
 
-        const progress = Math.min((Date.now() - startTime) * 0.6, 100);
+        const progress = Math.min((performance.now() - startTime) * 0.6, 100);
         this.navbar.style.transform = `translateY(-${100 - progress}%)`;
-
         if (progress < 100) {
             this.animationFrame = requestAnimationFrame(() => this.startAnimation(startTime));
+        } else {
+            this.isVisible = true;
+            this.animationFrame = null;
         }
     }
 }
 
 const megaMenuManager = new MegaMenuManager();
-const searchManager = new SearchManager();
+
+const tabletManager = new TabletManager();
+
+setTimeout(() => {
+    if (!window.searchManagerInstance) {
+        const searchManager = new SearchManager();
+        searchManagerInstance = window.searchManagerInstance;
+    } else {
+        searchManagerInstance = window.searchManagerInstance;
+    }
+}, 1);
+export { searchManagerInstance };

@@ -1,3 +1,17 @@
+import { searchManagerInstance } from './navbar.js';
+
+// Add this throttle function at the top of your file
+const throttle = (func, limit) => {
+    let inThrottle;
+    return function (...args) {
+        if (!inThrottle) {
+            func.apply(this, args);
+            inThrottle = true;
+            setTimeout(() => (inThrottle = false), limit);
+        }
+    };
+};
+
 class MobileNavManager {
     constructor() {
         this.hamburgerBtn = document.getElementById('hamburger-btn-mobile');
@@ -74,6 +88,101 @@ class MobileNavManager {
         this.menuDrawer.style.display = 'none';
         this.menuDrawer.style.opacity = '0';
     }
+}
+
+class MobileNavStickyManager {
+    constructor() {
+        if (window.mobileNavStickyManagerInstance) {
+            return window.mobileNavStickyManagerInstance;
+        }
+
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', () => this.initialize());
+        } else {
+            this.initialize();
+        }
+
+        window.mobileNavStickyManagerInstance = this;
+    }
+
+    initialize() {
+        const originalNavbar = document.getElementById('subnavbar-wrapper-sm');
+        const header = document.querySelector('header');
+        console.log(originalNavbar);
+        console.log('', originalNavbar.parentNode.parentNode);
+        this.navbar = originalNavbar.cloneNode(true);
+        this.navbar.style.display = 'none';
+        this.navbar.style.transform = 'translateY(-100%)';
+
+        document.body.insertBefore(this.navbar, header);
+
+        this.desktopNavbarDimensions = document.querySelector('.main-navbar-wrapper');
+        this.animationFrame = null;
+        this.isVisible = false;
+
+        this.initializeScrollListener();
+    }
+
+    initializeScrollListener() {
+        window.addEventListener(
+            'scroll',
+            throttle(() => {
+                this.handleScroll();
+            }, 50)
+        );
+    }
+
+    handleScroll() {
+        const mainNavbarBottom = this.desktopNavbarDimensions.getBoundingClientRect().bottom + window.scrollY + 400;
+
+        if (mainNavbarBottom < window.scrollY) {
+            if (!this.isVisible) {
+                this.showTabletNavbar();
+            }
+        } else {
+            this.hideTabletNavbar();
+        }
+    }
+
+    showTabletNavbar() {
+        this.navbar.style.display = 'block';
+        this.navbar.style.position = 'sticky';
+        this.navbar.style.top = '0';
+        this.startAnimation();
+        searchManagerInstance.closeAllSearchDropdowns();
+    }
+
+    hideTabletNavbar() {
+        this.navbar.style.display = 'none';
+        this.navbar.style.transform = 'translateY(-100%)';
+        if (this.animationFrame) {
+            window.cancelAnimationFrame(this.animationFrame);
+            this.animationFrame = null;
+        }
+        this.isVisible = false;
+    }
+
+    startAnimation(startTime = null) {
+        if (!startTime) {
+            this.animationFrame = requestAnimationFrame((timestamp) => this.startAnimation(timestamp));
+        }
+
+        const progress = Math.min((performance.now() - startTime) * 0.6, 100);
+        this.navbar.style.transform = `translateY(-${100 - progress}%)`;
+        if (progress < 100) {
+            this.animationFrame = requestAnimationFrame(() => this.startAnimation(startTime));
+        } else {
+            this.isVisible = true;
+            this.animationFrame = null;
+        }
+    }
+}
+
+let mobileNavStickyManager;
+if (!window.mobileNavStickyManagerInstance) {
+    mobileNavStickyManager = new MobileNavStickyManager();
+} else {
+    mobileNavStickyManager = window.mobileNavStickyManagerInstance;
 }
 
 // Since both navbar.js and navbar-mobile.js are loaded on the same page and as modules we want to prevent multiple instances of MobileNavManager

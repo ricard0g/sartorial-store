@@ -1,47 +1,49 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="{% if settings.store_description != blank %}{{ settings.store_description }}{% else %}This is Sartorial Paris Home Page. If you're a man that knows about elegant style and value, this is your place.{% endif %}" />
-    {% if settings.favicon != blank %}
-      <link rel="icon" type="image/x-icon" href="{{ settings.favicon | asset_url }}">
-    {% else %}
-      <link rel="icon" type="image/x-icon" href="{{ 'favicon-sartorial.svg' | asset_url }}">
-    {% endif %}
-    {{ content_for_header }}
-    <title>
-      {% if settings.store_title != blank %}{{ settings.store_title }}{% else %}Sartorial Paris{% endif %}
-    </title>
-    <script src="{{ 'global.js' | asset_url }}" defer></script>
-    <style>
-      @import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap');
-      @import url('https://fonts.googleapis.com/css2?family=Cormorant+Unicase:wght@300;400;500;600;700&display=swap');
-      *,
-      *::before,
-      *:after {
-        box-sizing: border-box;
-        font-family: 'Open Sans', sans-serif;
-      }
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta
+            name="description"
+            content="{% if settings.store_description != blank %}{{ settings.store_description }}{% else %}This is Sartorial Paris Home Page. If you're a man that knows about elegant style and value, this is your place.{% endif %}"
+        >
+        {% if settings.favicon != blank %}
+            <link rel="icon" type="image/x-icon" href="{{ settings.favicon | asset_url }}">
+        {% else %}
+            <link rel="icon" type="image/x-icon" href="{{ 'favicon-sartorial.svg' | asset_url }}">
+        {% endif %}
+        {{ content_for_header }}
+        <title>
+            {% if settings.store_title != blank %}{{ settings.store_title }}{% else %}Sartorial Paris{% endif %}
+        </title>
+        <script src="{{ 'global.js' | asset_url }}" defer></script>
+        <style>
+            @import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap');
+            @import url('https://fonts.googleapis.com/css2?family=Cormorant+Unicase:wght@300;400;500;600;700&display=swap');
+            *,
+            *::before,
+            *:after {
+                box-sizing: border-box;
+                font-family: 'Open Sans', sans-serif;
+            }
 
-      html {
-        font-size: 16px;
-      }
+            html {
+                font-size: 16px;
+            }
 
-      body {
-        padding: 0;
-        margin: 0;
-        overflow-x: hidden;
-      }
-    </style>
-  </head>
-  <body>
-    {% render 'navbar-tablet' %}
-    <header>
-      {% sections 'header-group' %}
-    </header>
-    <main>
-      {{ content_for_layout }}
-    </main>
-  </body>
+            body {
+                padding: 0;
+                margin: 0;
+                overflow-x: hidden;
+            }
+        </style>
+    </head>
+    <body>
+        <header>
+            {% sections 'header-group' %}
+        </header>
+        <main>
+            {{ content_for_layout }}
+        </main>
+    </body>
 </html>
