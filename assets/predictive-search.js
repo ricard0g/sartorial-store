@@ -1,3 +1,5 @@
+import { tabletManager } from './navbar.js';
+
 class PredictiveSearch extends HTMLElement {
     constructor() {
         super();
@@ -49,6 +51,10 @@ class PredictiveSearch extends HTMLElement {
     }
 
     open() {
+        if (tabletManager.isVisible) {
+            this.initializePredictiveResultsSection();
+            this.arrangeResults();
+        }
         this.predictiveSearchResults.style.display = 'block';
     }
 
@@ -56,13 +62,51 @@ class PredictiveSearch extends HTMLElement {
         this.predictiveSearchResults.style.display = 'none';
     }
 
+    arrangeResults() {
+        this.predictiveSearchResultsDiv.classList.add('predictive-search-sticky-navbar');
+        this.predictiveSearchResultsList.classList.add('predictive-search-sticky-navbar-products-list');
+        this.predictiveSearchResultstListItem.forEach((item) => {
+            item.classList.add('predictive-search-sticky-navbar-product-item-a');
+        });
+        this.predictiveSearchResultsListItemTitle.forEach((title) => {
+            title.classList.add('predictive-search-sticky-navbar-product-title');
+        });
+        this.predictiveSearchResultsLeftNavbar.classList.add('predictive-search-sticky-navbar-left-bar');
+        this.predictiveSearchResultsCollections.classList.add('predictive-search-sticky-navbar-collections');
+        this.predictiveSearchResultsProducts.classList.add('predictive-search-sticky-navbar-products');
+    }
+
+    initializePredictiveResultsSection() {
+        this.predictiveSearchResultsDiv = this.predictiveSearchResults.querySelector('#predictive-search-results');
+        this.predictiveSearchResultsList = this.predictiveSearchResultsDiv.querySelector(
+            '.predictive-search-products-list'
+        );
+        this.predictiveSearchResultstListItem = Array.from(
+            this.predictiveSearchResultsList.querySelectorAll('.predictive-search-product-item-a')
+        );
+        this.predictiveSearchResultsListItemTitle = document.querySelectorAll('.predictive-search-product-title');
+        this.predictiveSearchResultsLeftNavbar =
+            this.predictiveSearchResultsDiv.querySelector('.predictive-search-left-bar');
+        this.predictiveSearchResultsCollections = this.predictiveSearchResultsDiv.querySelector(
+            '.predictive-search-collections'
+        );
+        this.predictiveSearchResultsProducts =
+            this.predictiveSearchResultsDiv.querySelector('.predictive-search-products');
+    }
+
     debounce(fn, wait) {
         let t;
         return (...args) => {
             clearTimeout(t);
             t = setTimeout(() => fn.apply(this, args), wait);
-        }
+        };
     }
 }
 
-customElements.define('predictive-search', PredictiveSearch);
+if (!customElements.get('predictive-search')) {
+    customElements.define('predictive-search', PredictiveSearch);
+}
+
+export function getPredictiveSearch() {
+    return document.querySelector('predictive-search');
+}

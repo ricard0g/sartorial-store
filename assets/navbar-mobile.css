@@ -1,7 +1,8 @@
 #subnavbar-wrapper-sm {
     display: block;
-    position: sticky;
-    top: 2px;
+    z-index: 100;
+    background-color: white;
+    padding: 8px 0;
 }
 
 .nav-list-mobile {
@@ -11,6 +12,7 @@
     justify-content: space-between;
     align-items: center;
     padding: 0 1.5vw;
+    margin: 0 auto;
     list-style: none;
 }
 

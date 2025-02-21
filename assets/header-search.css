@@ -57,10 +57,11 @@
 
 .predictive-search-sticky-navbar-products-list {
     margin: 0 auto !important;
-    column-gap: 2vw !important;
+    column-gap: 3vw !important;
+    row-gap: 3vh !important;
 }
 
-.predictive-search-sticky-navbar-product-item a {
+.predictive-search-sticky-navbar-product-item-a {
     display: flex !important;
     flex-flow: column nowrap !important;
     justify-content: start !important;
