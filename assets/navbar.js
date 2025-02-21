@@ -1,5 +1,5 @@
 import { mobileNavManager } from './navbar-mobile.js';
-import { getPredictiveSearch } from './predictive-search.js';
+let megaMenuManager
 let searchManagerInstance;
 let tabletManager;
 
@@ -160,9 +160,9 @@ class SearchManager {
     }
 }
 
-if (window.innerWidth > 769) {
     class TabletManager {
         constructor() {
+            if (window.innerWidth < 769) return;
             document.addEventListener('DOMContentLoaded', () => {
                 const header = document.querySelector('header');
                 const originalNavbar = document.getElementById('subnavbar-wrapper-md');
@@ -175,6 +175,7 @@ if (window.innerWidth > 769) {
                 this.desktopNavbarDimensions = document.querySelector('.main-navbar-wrapper');
                 this.animationFrame = null;
                 this.isVisible = false;
+
 
                 // Initialize mega menu functionality for cloned navbar
                 this.initializeMegaMenus();
@@ -261,11 +262,6 @@ if (window.innerWidth > 769) {
         }
 
         showTabletNavbar() {
-            const predictiveSearch = getPredictiveSearch();
-            if (predictiveSearch) {
-                predictiveSearch.close();
-            }
-
             this.navbar.style.display = 'block';
             this.navbar.style.position = 'sticky';
             this.navbar.style.top = '0';
@@ -304,9 +300,9 @@ if (window.innerWidth > 769) {
     } else {
         tabletManager = window.tabletManagerInstance;
     }
-}
 
-const megaMenuManager = new MegaMenuManager();
+megaMenuManager = new MegaMenuManager();
+window.megaMenuManager = megaMenuManager;
 
 setTimeout(() => {
     if (!window.searchManagerInstance) {
@@ -316,4 +312,4 @@ setTimeout(() => {
         searchManagerInstance = window.searchManagerInstance;
     }
 }, 1);
-export { searchManagerInstance, tabletManager };
+export { searchManagerInstance, tabletManager, megaMenuManager };
