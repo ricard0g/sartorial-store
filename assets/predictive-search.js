@@ -51,7 +51,7 @@ class PredictiveSearch extends HTMLElement {
 
     onChange() {
         const searchTerm = this.input.value.trim();
-        //
+
         const megaMenuManager = window.megaMenuManager;
 
         const megaMenuOpened = megaMenuManager.megaMenus

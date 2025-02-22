@@ -1,5 +1,5 @@
 import { mobileNavManager } from './navbar-mobile.js';
-let megaMenuManager
+let megaMenuManager;
 let searchManagerInstance;
 let tabletManager;
 
@@ -116,13 +116,22 @@ class SearchManager {
             mobileNavManager.closeMenu();
         }
 
-        const megaMenuOpened = megaMenuManager.megaMenus
+        const megaMenuDesktopOpened = megaMenuManager.megaMenus
             .keys()
             .find((link) => megaMenuManager.megaMenus.get(link).classList.contains('show'));
 
-        if (megaMenuOpened) {
-            megaMenuManager.hideMenu(megaMenuOpened);
+        const megaMenuTabletOpened = tabletManager.megaMenus
+            .keys()
+            .find((link) => tabletManager.megaMenus.get(link).classList.contains('show'));
+
+        console.log(megaMenuTabletOpened);
+
+        if (megaMenuDesktopOpened) {
+            megaMenuManager.hideMenu(megaMenuDesktopOpened);
+        } else if (megaMenuTabletOpened) {
+            tabletManager.hideMenu(megaMenuTabletOpened);
         }
+
         // toggle search dropdown
         const dropdown = navbar.querySelector('.main-search-small-screens');
         this.toggleSearchDropdown(dropdown);
@@ -160,146 +169,145 @@ class SearchManager {
     }
 }
 
-    class TabletManager {
-        constructor() {
-            if (window.innerWidth < 769) return;
-            document.addEventListener('DOMContentLoaded', () => {
-                const header = document.querySelector('header');
-                const originalNavbar = document.getElementById('subnavbar-wrapper-md');
-                this.navbar = originalNavbar.cloneNode(true);
-                this.navbar.style.display = 'none';
-                this.navbar.style.transform = 'translateY(-100%)';
-
-                document.body.insertBefore(this.navbar, header);
-
-                this.desktopNavbarDimensions = document.querySelector('.main-navbar-wrapper');
-                this.animationFrame = null;
-                this.isVisible = false;
-
-
-                // Initialize mega menu functionality for cloned navbar
-                this.initializeMegaMenus();
-                this.initializeScrollListener();
-            });
-        }
-
-        initializeMegaMenus() {
-            // Create a new map for this navbar's mega menus
-            this.megaMenus = new Map();
-
-            // Get all nav links in the cloned navbar
-            const navLinks = this.navbar.querySelectorAll('.nav-link');
-
-            // Set up mega menu map
-            navLinks.forEach((link) => {
-                this.megaMenus.set(link, link.nextElementSibling);
-            });
-
-            // Add mouseover event listener to the cloned navbar
-            this.navbar.addEventListener('mouseover', (e) => {
-                const navLink = e.target.closest('.nav-link');
-                if (navLink && this.megaMenus.has(navLink)) {
-                    this.handleMouseOver(navLink);
-                }
-            });
-
-            // Add mouseleave event listener
-            this.navbar.addEventListener('mouseleave', () => {
-                const activeLink = Array.from(this.megaMenus.keys()).find((link) =>
-                    this.megaMenus.get(link).classList.contains('show')
-                );
-                if (activeLink) {
-                    this.hideMenu(activeLink);
-                }
-            });
-        }
-
-        handleMouseOver(activeLink) {
-            this.megaMenus.forEach((menu, link) => {
-                if (menu.classList.contains('show') && link !== activeLink) {
-                    this.hideMenu(link);
-                }
-            });
-
-            this.showMenu(activeLink);
-        }
-
-        showMenu(link) {
-            const menu = this.megaMenus.get(link);
-            link.classList.add('underline');
-            menu.style.display = 'block';
-            setTimeout(() => {
-                requestAnimationFrame(() => menu.classList.add('show'));
-            }, 5);
-        }
-
-        hideMenu(link) {
-            const menu = this.megaMenus.get(link);
-            link.classList.remove('underline');
-            menu.classList.remove('show');
-            menu.style.display = 'none';
-        }
-
-        initializeScrollListener() {
-            window.addEventListener(
-                'scroll',
-                throttle(() => {
-                    this.handleScroll();
-                }, 50)
-            );
-        }
-
-        handleScroll() {
-            const mainNavbarBottom = this.desktopNavbarDimensions.getBoundingClientRect().bottom + window.scrollY + 400;
-
-            if (mainNavbarBottom < window.scrollY) {
-                if (!this.isVisible) {
-                    this.showTabletNavbar();
-                }
-            } else {
-                this.hideTabletNavbar();
-            }
-        }
-
-        showTabletNavbar() {
-            this.navbar.style.display = 'block';
-            this.navbar.style.position = 'sticky';
-            this.navbar.style.top = '0';
-            this.startAnimation();
-            searchManagerInstance.closeAllSearchDropdowns();
-        }
-
-        hideTabletNavbar() {
+class TabletManager {
+    constructor() {
+        if (window.innerWidth < 769) return;
+        document.addEventListener('DOMContentLoaded', () => {
+            const header = document.querySelector('header');
+            const originalNavbar = document.getElementById('subnavbar-wrapper-md');
+            this.navbar = originalNavbar.cloneNode(true);
             this.navbar.style.display = 'none';
             this.navbar.style.transform = 'translateY(-100%)';
-            if (this.animationFrame) {
-                window.cancelAnimationFrame(this.animationFrame);
-                this.animationFrame = null;
-            }
+
+            document.body.insertBefore(this.navbar, header);
+
+            this.desktopNavbarDimensions = document.querySelector('.main-navbar-wrapper');
+            this.animationFrame = null;
             this.isVisible = false;
-        }
 
-        startAnimation(startTime = null) {
-            if (!startTime) {
-                this.animationFrame = requestAnimationFrame((timestamp) => this.startAnimation(timestamp));
-            }
+            // Initialize mega menu functionality for cloned navbar
+            this.initializeMegaMenus();
+            this.initializeScrollListener();
+        });
+    }
 
-            const progress = Math.min((performance.now() - startTime) * 0.6, 100);
-            this.navbar.style.transform = `translateY(-${100 - progress}%)`;
-            if (progress < 100) {
-                this.animationFrame = requestAnimationFrame(() => this.startAnimation(startTime));
-            } else {
-                this.isVisible = true;
-                this.animationFrame = null;
+    initializeMegaMenus() {
+        // Create a new map for this navbar's mega menus
+        this.megaMenus = new Map();
+
+        // Get all nav links in the cloned navbar
+        const navLinks = this.navbar.querySelectorAll('.nav-link');
+
+        // Set up mega menu map
+        navLinks.forEach((link) => {
+            this.megaMenus.set(link, link.nextElementSibling);
+        });
+
+        // Add mouseover event listener to the cloned navbar
+        this.navbar.addEventListener('mouseover', (e) => {
+            const navLink = e.target.closest('.nav-link');
+            if (navLink && this.megaMenus.has(navLink)) {
+                this.handleMouseOver(navLink);
             }
+        });
+
+        // Add mouseleave event listener
+        this.navbar.addEventListener('mouseleave', () => {
+            const activeLink = Array.from(this.megaMenus.keys()).find((link) =>
+                this.megaMenus.get(link).classList.contains('show')
+            );
+            if (activeLink) {
+                this.hideMenu(activeLink);
+            }
+        });
+    }
+
+    handleMouseOver(activeLink) {
+        this.megaMenus.forEach((menu, link) => {
+            if (menu.classList.contains('show') && link !== activeLink) {
+                this.hideMenu(link);
+            }
+        });
+
+        this.showMenu(activeLink);
+    }
+
+    showMenu(link) {
+        const menu = this.megaMenus.get(link);
+        link.classList.add('underline');
+        menu.style.display = 'block';
+        setTimeout(() => {
+            requestAnimationFrame(() => menu.classList.add('show'));
+        }, 5);
+    }
+
+    hideMenu(link) {
+        const menu = this.megaMenus.get(link);
+        link.classList.remove('underline');
+        menu.classList.remove('show');
+        menu.style.display = 'none';
+    }
+
+    initializeScrollListener() {
+        window.addEventListener(
+            'scroll',
+            throttle(() => {
+                this.handleScroll();
+            }, 50)
+        );
+    }
+
+    handleScroll() {
+        const mainNavbarBottom = this.desktopNavbarDimensions.getBoundingClientRect().bottom + window.scrollY + 400;
+
+        if (mainNavbarBottom < window.scrollY) {
+            if (!this.isVisible) {
+                this.showTabletNavbar();
+            }
+        } else {
+            this.hideTabletNavbar();
         }
     }
-    if (!window.tabletManagerInstance) {
-        tabletManager = new TabletManager();
-        window.tabletManagerInstance = tabletManager;
-    } else {
-        tabletManager = window.tabletManagerInstance;
+
+    showTabletNavbar() {
+        this.navbar.style.display = 'block';
+        this.navbar.style.position = 'sticky';
+        this.navbar.style.top = '0';
+        this.startAnimation();
+        searchManagerInstance.closeAllSearchDropdowns();
     }
+
+    hideTabletNavbar() {
+        this.navbar.style.display = 'none';
+        this.navbar.style.transform = 'translateY(-100%)';
+        if (this.animationFrame) {
+            window.cancelAnimationFrame(this.animationFrame);
+            this.animationFrame = null;
+        }
+        this.isVisible = false;
+    }
+
+    startAnimation(startTime = null) {
+        if (!startTime) {
+            this.animationFrame = requestAnimationFrame((timestamp) => this.startAnimation(timestamp));
+        }
+
+        const progress = Math.min((performance.now() - startTime) * 0.6, 100);
+        this.navbar.style.transform = `translateY(-${100 - progress}%)`;
+        if (progress < 100) {
+            this.animationFrame = requestAnimationFrame(() => this.startAnimation(startTime));
+        } else {
+            this.isVisible = true;
+            this.animationFrame = null;
+        }
+    }
+}
+if (!window.tabletManagerInstance) {
+    tabletManager = new TabletManager();
+    window.tabletManagerInstance = tabletManager;
+} else {
+    tabletManager = window.tabletManagerInstance;
+}
 
 megaMenuManager = new MegaMenuManager();
 window.megaMenuManager = megaMenuManager;
