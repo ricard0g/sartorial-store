@@ -1,4 +1,5 @@
 import { searchManagerInstance } from './navbar.js';
+let mobileNavManager;
 let mobileNavStickyManager;
 
 // Add this throttle function at the top of your file
@@ -15,10 +16,11 @@ const throttle = (func, limit) => {
 
 class MobileNavManager {
     constructor() {
-        this.hamburgerBtn = document.getElementById('hamburger-btn-mobile');
-        this.firstLineHamburger = document.getElementById('first-line-hamburguer');
-        this.secondLineHamburger = document.getElementById('second-line-hamburguer');
-        this.thirdLineHamburger = document.getElementById('third-line-hamburguer');
+        this.mobileNavbar = document.querySelectorAll('#subnavbar-wrapper-sm').item(1);
+        this.hamburgerBtn = this.mobileNavbar.querySelector('#hamburger-btn-mobile');
+        this.firstLineHamburger = this.mobileNavbar.querySelector('#first-line-hamburguer');
+        this.secondLineHamburger = this.mobileNavbar.querySelector('#second-line-hamburguer');
+        this.thirdLineHamburger = this.mobileNavbar.querySelector('#third-line-hamburguer');
         this.menuDrawer = document.querySelector('.mobile-navbar__container');
         this.backgroundNavbarMobile = document.querySelector('.mobile-navbar__container-background');
 
@@ -91,9 +93,9 @@ class MobileNavManager {
     }
 }
 
-if (window.innerWidth < 769) {
-    class MobileNavStickyManager {
-        constructor() {
+class MobileNavStickyManager {
+    constructor() {
+        if (window.innerWidth < 769) {
             if (window.mobileNavStickyManagerInstance) {
                 return window.mobileNavStickyManagerInstance;
             }
@@ -106,87 +108,87 @@ if (window.innerWidth < 769) {
 
             window.mobileNavStickyManagerInstance = this;
         }
+    }
 
-        initialize() {
-            const originalNavbar = document.getElementById('subnavbar-wrapper-sm');
-            const header = document.querySelector('header');
-            this.navbar = originalNavbar.cloneNode(true);
-            this.navbar.style.display = 'none';
-            this.navbar.style.transform = 'translateY(-100%)';
+    initialize() {
+        const originalNavbar = document.getElementById('subnavbar-wrapper-sm');
+        const header = document.querySelector('header');
+        this.navbar = originalNavbar.cloneNode(true);
+        this.navbar.style.display = 'none';
+        this.navbar.style.transform = 'translateY(-100%)';
 
-            document.body.insertBefore(this.navbar, header);
+        document.body.insertBefore(this.navbar, header);
 
-            this.desktopNavbarDimensions = document.querySelector('.main-navbar-wrapper');
-            this.animationFrame = null;
-            this.isVisible = false;
+        this.desktopNavbarDimensions = document.querySelector('.main-navbar-wrapper');
+        this.animationFrame = null;
+        this.isVisible = false;
 
-            this.initializeScrollListener();
-        }
+        this.initializeScrollListener();
+    }
 
-        initializeScrollListener() {
-            window.addEventListener(
-                'scroll',
-                throttle(() => {
-                    this.handleScroll();
-                }, 50)
-            );
-        }
+    initializeScrollListener() {
+        window.addEventListener(
+            'scroll',
+            throttle(() => {
+                this.handleScroll();
+            }, 50)
+        );
+    }
 
-        handleScroll() {
-            const mainNavbarBottom = this.desktopNavbarDimensions.getBoundingClientRect().bottom + window.scrollY + 400;
+    handleScroll() {
+        const mainNavbarBottom = this.desktopNavbarDimensions.getBoundingClientRect().bottom + window.scrollY + 400;
 
-            if (mainNavbarBottom < window.scrollY) {
-                if (!this.isVisible) {
-                    this.showTabletNavbar();
-                }
-            } else {
-                this.hideTabletNavbar();
+        if (mainNavbarBottom < window.scrollY) {
+            if (!this.isVisible) {
+                this.showTabletNavbar();
             }
-        }
-
-        showTabletNavbar() {
-            this.navbar.style.display = 'block';
-            this.navbar.style.position = 'sticky';
-            this.navbar.style.top = '0';
-            this.startAnimation();
-            searchManagerInstance.closeAllSearchDropdowns();
-        }
-
-        hideTabletNavbar() {
-            this.navbar.style.display = 'none';
-            this.navbar.style.transform = 'translateY(-100%)';
-            if (this.animationFrame) {
-                window.cancelAnimationFrame(this.animationFrame);
-                this.animationFrame = null;
-            }
-            this.isVisible = false;
-        }
-
-        startAnimation(startTime = null) {
-            if (!startTime) {
-                this.animationFrame = requestAnimationFrame((timestamp) => this.startAnimation(timestamp));
-            }
-
-            const progress = Math.min((performance.now() - startTime) * 0.6, 100);
-            this.navbar.style.transform = `translateY(-${100 - progress}%)`;
-            if (progress < 100) {
-                this.animationFrame = requestAnimationFrame(() => this.startAnimation(startTime));
-            } else {
-                this.isVisible = true;
-                this.animationFrame = null;
-            }
+        } else {
+            this.hideTabletNavbar();
         }
     }
-    mobileNavStickyManager = new MobileNavStickyManager();
+
+    showTabletNavbar() {
+        this.navbar.style.display = 'block';
+        this.navbar.style.position = 'sticky';
+        this.navbar.style.top = '0';
+        this.startAnimation();
+        searchManagerInstance.closeAllSearchDropdowns();
+    }
+
+    hideTabletNavbar() {
+        this.navbar.style.display = 'none';
+        this.navbar.style.transform = 'translateY(-100%)';
+        if (this.animationFrame) {
+            window.cancelAnimationFrame(this.animationFrame);
+            this.animationFrame = null;
+        }
+        this.isVisible = false;
+    }
+
+    startAnimation(startTime = null) {
+        if (!startTime) {
+            this.animationFrame = requestAnimationFrame((timestamp) => this.startAnimation(timestamp));
+        }
+
+        const progress = Math.min((performance.now() - startTime) * 0.6, 100);
+        this.navbar.style.transform = `translateY(-${100 - progress}%)`;
+        if (progress < 100) {
+            this.animationFrame = requestAnimationFrame(() => this.startAnimation(startTime));
+        } else {
+            this.isVisible = true;
+            this.animationFrame = null;
+        }
+    }
 }
+mobileNavStickyManager = new MobileNavStickyManager();
 
 // Since both navbar.js and navbar-mobile.js are loaded on the same page and as modules we want to prevent multiple instances of MobileNavManager
-let mobileNavManager;
-if (!window.mobileNavManagerInstance) {
-    mobileNavManager = new MobileNavManager();
-    window.mobileNavManagerInstance = mobileNavManager;
-} else {
-    mobileNavManager = window.mobileNavManagerInstance;
-}
+// if (!window.mobileNavManagerInstance) {
+//     mobileNavManager = new MobileNavManager();
+//     window.mobileNavManagerInstance = mobileNavManager;
+// } else {
+//     mobileNavManager = window.mobileNavManagerInstance;
+// }
+mobileNavManager = new MobileNavManager();
 
 export { mobileNavManager };

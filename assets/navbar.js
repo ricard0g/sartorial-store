@@ -116,20 +116,20 @@ class SearchManager {
             mobileNavManager.closeMenu();
         }
 
-        const megaMenuDesktopOpened = megaMenuManager.megaMenus
-            .keys()
-            .find((link) => megaMenuManager.megaMenus.get(link).classList.contains('show'));
+        if (window.innerWidth > 768) {
+            const megaMenuDesktopOpened = megaMenuManager.megaMenus
+                .keys()
+                .find((link) => megaMenuManager.megaMenus.get(link).classList.contains('show'));
 
-        const megaMenuTabletOpened = tabletManager.megaMenus
-            .keys()
-            .find((link) => tabletManager.megaMenus.get(link).classList.contains('show'));
+            const megaMenuTabletOpened = tabletManager.megaMenus
+                .keys()
+                .find((link) => tabletManager.megaMenus.get(link).classList.contains('show'));
 
-        console.log(megaMenuTabletOpened);
-
-        if (megaMenuDesktopOpened) {
-            megaMenuManager.hideMenu(megaMenuDesktopOpened);
-        } else if (megaMenuTabletOpened) {
-            tabletManager.hideMenu(megaMenuTabletOpened);
+            if (megaMenuDesktopOpened) {
+                megaMenuManager.hideMenu(megaMenuDesktopOpened);
+            } else if (megaMenuTabletOpened) {
+                tabletManager.hideMenu(megaMenuTabletOpened);
+            }
         }
 
         // toggle search dropdown
