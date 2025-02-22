@@ -89,6 +89,8 @@ class SearchManager {
             predictiveSearch: document.getElementById('predictive-search'),
         };
 
+        this.dropdownOpened = false;
+
         this.handleSearchClick = this.handleSearchClick.bind(this);
         this.handleClickOutside = this.handleClickOutside.bind(this);
 
@@ -161,12 +163,14 @@ class SearchManager {
         this.closeAllSearchDropdowns();
 
         dropdown.classList.toggle('show-main-search-small-screens');
+        this.dropdownOpened = true;
     }
 
     closeAllSearchDropdowns() {
         this.elements.searchDropdowns.forEach((dropdown) => {
             dropdown.classList.remove('show-main-search-small-screens');
         });
+        this.dropdownOpened = false;
     }
 }
 

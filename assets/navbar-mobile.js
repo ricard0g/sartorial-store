@@ -76,6 +76,10 @@ class MobileNavManager {
             line.classList.toggle(`${index === 0 ? 'first' : index === 1 ? 'second' : 'third'}-line`);
         });
 
+        if (searchManagerInstance.dropdownOpened) {
+            searchManagerInstance.closeAllSearchDropdowns();
+        }
+
         // Toggle menu drawer
         if (this.menuDrawer) {
             const isVisible = this.menuDrawer.style.display === 'block';
