@@ -52,14 +52,16 @@ class PredictiveSearch extends HTMLElement {
     onChange() {
         const searchTerm = this.input.value.trim();
 
-        const megaMenuManager = window.megaMenuManager;
+        if (window.innerWidth > 768) {
+            const megaMenuManager = window.megaMenuManager;
 
-        const megaMenuOpened = megaMenuManager.megaMenus
-            .keys()
-            .find((link) => megaMenuManager.megaMenus.get(link).classList.contains('show'));
+            const megaMenuOpened = megaMenuManager.megaMenus
+                .keys()
+                .find((link) => megaMenuManager.megaMenus.get(link).classList.contains('show'));
 
-        if (megaMenuOpened) {
-            megaMenuManager.hideMenu(megaMenuOpened);
+            if (megaMenuOpened) {
+                megaMenuManager.hideMenu(megaMenuOpened);
+            }
         }
 
         if (!searchTerm.length) {

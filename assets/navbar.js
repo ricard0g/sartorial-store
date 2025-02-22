@@ -17,6 +17,7 @@ const throttle = (func, limit) => {
 
 class MegaMenuManager {
     constructor() {
+        if (window.innerWidth < 769) return;
         this.subNavbarWrapper = document.querySelectorAll('.subnavbar-wrapper');
         this.megaMenus = new Map();
         this.initializeMegaMenus();
@@ -302,15 +303,17 @@ class TabletManager {
         }
     }
 }
-if (!window.tabletManagerInstance) {
+if (!window.tabletManagerInstance && window.innerWidth > 768) {
     tabletManager = new TabletManager();
     window.tabletManagerInstance = tabletManager;
 } else {
     tabletManager = window.tabletManagerInstance;
 }
 
-megaMenuManager = new MegaMenuManager();
-window.megaMenuManager = megaMenuManager;
+if (window.innerWidth > 768) {
+    megaMenuManager = new MegaMenuManager();
+    window.megaMenuManager = megaMenuManager;
+}
 
 setTimeout(() => {
     if (!window.searchManagerInstance) {
