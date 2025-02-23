@@ -228,6 +228,10 @@ class TabletManager {
     }
 
     handleMouseOver(activeLink) {
+        if (searchManagerInstance.dropdownOpened) {
+            searchManagerInstance.closeAllSearchDropdowns();
+        }
+
         this.megaMenus.forEach((menu, link) => {
             if (menu.classList.contains('show') && link !== activeLink) {
                 this.hideMenu(link);
