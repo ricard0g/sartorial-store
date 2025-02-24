@@ -205,9 +205,9 @@ class SearchManager {
 
         this.dropdownOpened = false;
         this.boundHandleClick = this.handleClick.bind(this);
-        
+
         this.initializeEventListeners();
-        
+
         // Store instance
         window.searchManagerInstance = this;
         searchManagerInstance = this;
@@ -220,7 +220,7 @@ class SearchManager {
 
     handleClick(e) {
         const searchButton = e.target.matches('.search-button') || e.target.closest('.search-button');
-        
+
         if (searchButton) {
             this.handleSearchClick(e);
             return;
@@ -231,6 +231,7 @@ class SearchManager {
 
     handleSearchClick(e) {
         const navbar = e.target.closest('.subnavbar-wrapper');
+        console.log(navbar);
         if (!navbar) return;
 
         // Close mobile menu if open
@@ -251,8 +252,6 @@ class SearchManager {
         const megaMenuDesktopOpened = this.findOpenMegaMenu(megaMenuManager);
         const megaMenuTabletOpened = this.findOpenTabletMenu(navbar);
 
-        console.log(megaMenuDesktopOpened, megaMenuTabletOpened);
-
         if (megaMenuDesktopOpened) {
             megaMenuManager.hideMenu(megaMenuDesktopOpened);
         } else if (megaMenuTabletOpened) {
@@ -263,23 +262,24 @@ class SearchManager {
 
     findOpenMegaMenu(manager) {
         if (!manager?.megaMenus) return null;
-        return Array.from(manager.megaMenus.keys())
-            .find(link => manager.megaMenus.get(link).classList.contains('show'));
+        return Array.from(manager.megaMenus.keys()).find((link) =>
+            manager.megaMenus.get(link).classList.contains('show')
+        );
     }
 
     findOpenTabletMenu(navbar) {
         const manager = this.getTabletManager(navbar);
+        console.log('Manager', manager);
         return this.findOpenMegaMenu(manager);
     }
 
     getTabletManager(navbar) {
-        return navbar.id === 'subnavbar-wrapper-md' 
-            ? window.mainTabletManager 
-            : window.stickyTabletManager;
+        return navbar.id === 'subnavbar-wrapper-md' ? window.mainTabletManager : window.stickyTabletManager;
     }
 
     handleClickOutside(e) {
-        const isClickRelevant = e.target.closest('.subnavbar-wrapper') ||
+        const isClickRelevant =
+            e.target.closest('.subnavbar-wrapper') ||
             e.target.closest('.search-button') ||
             e.target.closest('.predictive-search-results');
 
@@ -297,14 +297,14 @@ class SearchManager {
     }
 
     closeAllSearchDropdowns() {
-        this.elements.searchDropdowns.forEach(dropdown => {
+        this.elements.searchDropdowns.forEach((dropdown) => {
             dropdown.classList.remove('show-main-search-small-screens');
         });
         this.dropdownOpened = false;
     }
 
     hidePredictiveSearchResults() {
-        this.elements.searchDropdowns.forEach(search => {
+        this.elements.searchDropdowns.forEach((search) => {
             search.classList.remove('show-main-search-small-screens');
         });
     }
@@ -348,7 +348,7 @@ class TabletManager {
     }
 
     initialize() {
-        if (this.type === 'main') {
+        if (this.type === 'sticky') {
             const header = document.querySelector('header');
             const originalNavbar = document.getElementById('subnavbar-wrapper-md');
             this.navbar = originalNavbar.cloneNode(true);
