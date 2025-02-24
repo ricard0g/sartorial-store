@@ -84,6 +84,12 @@ class MobileNavManager {
         if (this.menuDrawer) {
             const isVisible = this.menuDrawer.style.display === 'block';
             this.menuDrawer.style.display = isVisible ? 'none' : 'block';
+
+            if (!isVisible) {
+                document.body.style.overflow = 'hidden';
+            } else {
+                document.body.style.overflow = '';
+            }
             
             // Animate opacity after display change
             requestAnimationFrame(() => {
@@ -110,6 +116,7 @@ class MobileNavManager {
 
         // Hide mega menu with animation
         menu.classList.remove('mobile-navbar__show-mega-menu');
+        document.body.style.overflow = '';
         this.onTransitionEnd(menu, () => {
             menu.style.display = 'none';
         });
@@ -131,6 +138,7 @@ class MobileNavManager {
                 this.menuDrawer.style.display = 'none';
             });
         }
+        document.body.style.overflow = '';
     }
 
     // Utility method for handling transitions

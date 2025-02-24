@@ -8,6 +8,7 @@
     background: white;
     z-index: 5;
     opacity: 0;
+    order: 0;
     transition: all 0.5s ease;
 }
 
