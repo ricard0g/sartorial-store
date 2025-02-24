@@ -88,7 +88,7 @@ class MobileNavManager {
             if (!isVisible) {
                 document.body.style.overflow = 'hidden';
             } else {
-                document.body.style.overflow = '';
+                document.body.style.overflow = 'auto';
             }
             
             // Animate opacity after display change
@@ -116,7 +116,7 @@ class MobileNavManager {
 
         // Hide mega menu with animation
         menu.classList.remove('mobile-navbar__show-mega-menu');
-        document.body.style.overflow = '';
+        document.body.style.overflow = 'auto';
         this.onTransitionEnd(menu, () => {
             menu.style.display = 'none';
         });
@@ -138,7 +138,7 @@ class MobileNavManager {
                 this.menuDrawer.style.display = 'none';
             });
         }
-        document.body.style.overflow = '';
+        document.body.style.overflow = 'auto';
     }
 
     // Utility method for handling transitions
