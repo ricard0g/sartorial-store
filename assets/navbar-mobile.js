@@ -50,10 +50,7 @@ class MobileNavManager {
         }
 
         // Handle mega menu back button clicks
-        if (
-            target.matches('.mobile-navbar__mega-menu-back') ||
-            target.closest('.mobile-navbar__mega-menu-back')
-        ) {
+        if (target.matches('.mobile-navbar__mega-menu-back') || target.closest('.mobile-navbar__mega-menu-back')) {
             this.handleMegaMenuBack(e);
             return;
         }
@@ -67,7 +64,7 @@ class MobileNavManager {
         const lines = {
             first: navbar.querySelector('#first-line-hamburguer'),
             second: navbar.querySelector('#second-line-hamburguer'),
-            third: navbar.querySelector('#third-line-hamburguer')
+            third: navbar.querySelector('#third-line-hamburguer'),
         };
 
         // Toggle hamburger animation classes
@@ -87,10 +84,12 @@ class MobileNavManager {
 
             if (!isVisible) {
                 document.body.style.overflow = 'hidden';
+                document.body.style.scrollBehavior = 'none';
             } else {
-                document.body.style.overflow = 'auto';
+                document.body.style.overflow = 'none';
+                document.body.style.scrollBehavior = 'auto';
             }
-            
+
             // Animate opacity after display change
             requestAnimationFrame(() => {
                 this.menuDrawer.style.opacity = isVisible ? '0' : '1';
@@ -117,6 +116,7 @@ class MobileNavManager {
         // Hide mega menu with animation
         menu.classList.remove('mobile-navbar__show-mega-menu');
         document.body.style.overflow = 'auto';
+        document.body.style.scrollBehavior = 'auto';
         this.onTransitionEnd(menu, () => {
             menu.style.display = 'none';
         });
@@ -124,21 +124,20 @@ class MobileNavManager {
 
     closeMenu() {
         // Find all hamburger lines in any navbar
-        document.querySelectorAll('[id^="first-line"], [id^="second-line"], [id^="third-line"]')
-            .forEach(line => {
-                const className = line.id.includes('first') ? 'first' : 
-                                line.id.includes('second') ? 'second' : 'third';
-                line.classList.remove(`${className}-line`);
-            });
+        document.querySelectorAll('[id^="first-line"], [id^="second-line"], [id^="third-line"]').forEach((line) => {
+            const className = line.id.includes('first') ? 'first' : line.id.includes('second') ? 'second' : 'third';
+            line.classList.remove(`${className}-line`);
+        });
 
         // Close menu drawer with animation
         if (this.menuDrawer) {
             this.menuDrawer.style.opacity = '0';
+            document.body.style.overflow = 'auto';
+            document.body.style.scrollBehavior = 'auto';
             this.onTransitionEnd(this.menuDrawer, () => {
                 this.menuDrawer.style.display = 'none';
             });
         }
-        document.body.style.overflow = 'auto';
     }
 
     // Utility method for handling transitions
