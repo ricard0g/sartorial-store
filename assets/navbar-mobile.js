@@ -19,6 +19,7 @@ class MobileNavManager {
         // Only store essential top-level containers
         this.menuDrawer = document.querySelector('.mobile-navbar__container');
         this.backgroundNavbarMobile = document.querySelector('.mobile-navbar__container-background');
+        this.body = document.body;
 
         this.init();
     }
@@ -83,11 +84,11 @@ class MobileNavManager {
             this.menuDrawer.style.display = isVisible ? 'none' : 'block';
 
             if (!isVisible) {
-                document.body.style.overflow = 'hidden';
-                document.body.style.scrollBehavior = 'none';
+                this.body.style.overflow = 'hidden';
+                this.body.style.scrollBehavior = 'none';
             } else {
-                document.body.style.overflow = '';
-                document.body.style.scrollBehavior = '';
+                this.body.style.overflow = '';
+                this.body.style.scrollBehavior = '';
             }
 
             // Animate opacity after display change
@@ -104,8 +105,8 @@ class MobileNavManager {
 
         // Show mega menu with animation
         menu.style.display = 'block';
-        document.body.style.overflow = 'hidden';
-        document.body.style.scrollBehavior = 'none';
+        this.body.style.overflow = 'hidden';
+        this.body.style.scrollBehavior = 'none';
         requestAnimationFrame(() => {
             menu.classList.add('mobile-navbar__show-mega-menu');
         });
@@ -117,8 +118,8 @@ class MobileNavManager {
 
         // Hide mega menu with animation
         menu.classList.remove('mobile-navbar__show-mega-menu');
-        document.body.style.overflow = '';
-        document.body.style.scrollBehavior = '';
+        this.body.style.overflow = '';
+        this.body.style.scrollBehavior = '';
         this.onTransitionEnd(menu, () => {
             menu.style.display = 'none';
         });
@@ -138,8 +139,8 @@ class MobileNavManager {
                 this.menuDrawer.style.display = 'none';
             });
         }
-        document.body.style.overflow = '';
-        document.body.style.scrollBehavior = '';
+        this.body.style.overflow = '';
+        this.body.style.scrollBehavior = '';
     }
 
     // Utility method for handling transitions
