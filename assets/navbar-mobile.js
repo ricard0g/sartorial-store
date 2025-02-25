@@ -86,8 +86,8 @@ class MobileNavManager {
                 document.body.style.overflow = 'hidden';
                 document.body.style.scrollBehavior = 'none';
             } else {
-                document.body.style.overflow = 'none';
-                document.body.style.scrollBehavior = 'auto';
+                document.body.style.overflow = '';
+                document.body.style.scrollBehavior = '';
             }
 
             // Animate opacity after display change
@@ -104,6 +104,8 @@ class MobileNavManager {
 
         // Show mega menu with animation
         menu.style.display = 'block';
+        document.body.style.overflow = 'hidden';
+        document.body.style.scrollBehavior = 'none';
         requestAnimationFrame(() => {
             menu.classList.add('mobile-navbar__show-mega-menu');
         });
@@ -115,8 +117,8 @@ class MobileNavManager {
 
         // Hide mega menu with animation
         menu.classList.remove('mobile-navbar__show-mega-menu');
-        document.body.style.overflow = 'auto';
-        document.body.style.scrollBehavior = 'auto';
+        document.body.style.overflow = '';
+        document.body.style.scrollBehavior = '';
         this.onTransitionEnd(menu, () => {
             menu.style.display = 'none';
         });
@@ -132,12 +134,12 @@ class MobileNavManager {
         // Close menu drawer with animation
         if (this.menuDrawer) {
             this.menuDrawer.style.opacity = '0';
-            document.body.style.overflow = 'auto';
-            document.body.style.scrollBehavior = 'auto';
             this.onTransitionEnd(this.menuDrawer, () => {
                 this.menuDrawer.style.display = 'none';
             });
         }
+        document.body.style.overflow = '';
+        document.body.style.scrollBehavior = '';
     }
 
     // Utility method for handling transitions

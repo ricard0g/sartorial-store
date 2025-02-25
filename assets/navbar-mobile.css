@@ -229,8 +229,7 @@
     }
 }
 
-@media only screen and (min-height: 760px) {
+/* @media only screen and (min-height: 760px) {
     .mobile-navbar__container {
-        top: 11.5vh;
     }
-}
+} */
