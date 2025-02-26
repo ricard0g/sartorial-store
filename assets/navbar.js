@@ -77,119 +77,6 @@ class MegaMenuManager {
     }
 }
 
-// class SearchManager {
-//     constructor() {
-//         if (window.searchManagerInstance) {
-//             return window.searchManagerInstance;
-//         }
-
-//         this.elements = {
-//             navbars: document.querySelectorAll('.subnavbar-wrapper'),
-//             searchDropdowns: document.querySelectorAll('.main-search-small-screens'),
-//             predictiveSearch: document.getElementById('predictive-search'),
-//         };
-
-//         this.dropdownOpened = false;
-
-//         this.handleSearchClick = this.handleSearchClick.bind(this);
-//         this.handleClickOutside = this.handleClickOutside.bind(this);
-
-//         this.initializeEventListeners();
-//         window.searchManagerInstance = this;
-//         searchManagerInstance = this;
-//     }
-
-//     initializeEventListeners() {
-//         document.addEventListener('click', (e) => {
-//             if (e.target.matches('.search-button') || e.target.closest('.search-button')) {
-//                 this.handleSearchClick(e);
-//                 return;
-//             }
-
-//             this.handleClickOutside(e);
-//         });
-//     }
-
-//     handleSearchClick(e) {
-//         const navbar = e.target.closest('.subnavbar-wrapper');
-//         if (!navbar) return;
-
-//         // close mobile menu if open
-//         if (mobileNavManager.menuDrawer?.style.display === 'block') {
-//             mobileNavManager.closeMenu();
-//         }
-
-//         if (window.innerWidth > 768) {
-//             const megaMenuDesktopOpened = megaMenuManager.megaMenus
-//                 .keys()
-//                 .find((link) => megaMenuManager.megaMenus.get(link).classList.contains('show'));
-
-//             // const megaMenuTabletOpened = tabletManager.megaMenus
-//             //     .keys()
-//             //     .find((link) => tabletManager.megaMenus.get(link).classList.contains('show'));
-
-//             const megaMenuTabletOpened =
-//                 navbar.id === 'subnavbar-wrapper-md'
-//                     ? window.mainTabletManager?.megaMenus
-//                           ?.keys()
-//                           .find((link) => window.mainTabletManager?.megaMenus?.get(link).classList.contains('show'))
-//                     : window.stickyTabletManager?.megaMenus
-//                           ?.keys()
-//                           .find((link) => window.stickyTabletManager?.megaMenus?.get(link).classList.contains('show'));
-
-//             // if (megaMenuDesktopOpened) {
-//             //     megaMenuManager.hideMenu(megaMenuDesktopOpened);
-//             // } else if (megaMenuTabletOpened) {
-//             //     tabletManager.hideMenu(megaMenuTabletOpened);
-//             // }
-//             if (megaMenuDesktopOpened) {
-//                 megaMenuManager.hideMenu(megaMenuDesktopOpened);
-//             } else if (megaMenuTabletOpened) {
-//                 const manager =
-//                     navbar.id === 'subnavbar-wrapper-md' ? window.mainTabletManager : window.stickyTabletManager;
-//                 manager.hideMenu(megaMenuTabletOpened);
-//             }
-//         }
-
-//         // toggle search dropdown
-//         const dropdown = navbar.querySelector('.main-search-small-screens');
-//         this.toggleSearchDropdown(dropdown);
-//     }
-
-//     hidePredictiveSearchResults() {
-//         this.mainSearchSmallScreens.forEach((search) => {
-//             search.classList.remove('show-main-search-small-screens');
-//         });
-//     }
-
-//     handleClickOutside(e) {
-//         const isClickRelevant =
-//             e.target.closest('.subnavbar-wrapper') ||
-//             e.target.closest('.search-button') ||
-//             e.target.closest('.predictive-search-results');
-
-//         if (!isClickRelevant) {
-//             this.closeAllSearchDropdowns();
-//         }
-//     }
-
-//     toggleSearchDropdown(dropdown) {
-//         if (!dropdown) return;
-
-//         this.closeAllSearchDropdowns();
-
-//         dropdown.classList.toggle('show-main-search-small-screens');
-//         this.dropdownOpened = true;
-//     }
-
-//     closeAllSearchDropdowns() {
-//         this.elements.searchDropdowns.forEach((dropdown) => {
-//             dropdown.classList.remove('show-main-search-small-screens');
-//         });
-//         this.dropdownOpened = false;
-//     }
-// }
-
 class SearchManager {
     constructor() {
         // Singleton pattern
@@ -328,23 +215,6 @@ class TabletManager {
 
         TabletManager.instances.set(type, this);
         return this;
-        // document.addEventListener('DOMContentLoaded', () => {
-        //     const header = document.querySelector('header');
-        //     const originalNavbar = document.getElementById('subnavbar-wrapper-md');
-        //     this.navbar = originalNavbar.cloneNode(true);
-        //     this.navbar.style.display = 'none';
-        //     this.navbar.style.transform = 'translateY(-100%)';
-
-        //     document.body.insertBefore(this.navbar, header);
-
-        //     this.desktopNavbarDimensions = document.querySelector('.main-navbar-wrapper');
-        //     this.animationFrame = null;
-        //     this.isVisible = false;
-
-        //     // Initialize mega menu functionality for cloned navbar
-        //     this.initializeMegaMenus();
-        //     this.initializeScrollListener();
-        // });
     }
 
     initialize() {
@@ -483,12 +353,6 @@ class TabletManager {
         }
     }
 }
-// if (!window.tabletManagerInstance && window.innerWidth > 768) {
-//     tabletManager = new TabletManager();
-//     window.tabletManagerInstance = tabletManager;
-// } else {
-//     tabletManager = window.tabletManagerInstance;
-// }
 if (window.innerWidth > 768) {
     const mainTabletManager = new TabletManager('main');
     window.mainTabletManager = mainTabletManager;
