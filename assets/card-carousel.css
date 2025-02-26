@@ -128,12 +128,65 @@ dialog.product-slider__modal:open::backdrop {
 }
 
 .product-slider__carousel-dialog-sizes-list-item {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 40px;
-    height: 40px;
+    position: relative;
+    width: 50px;
+    height: 50px;
+}
+
+.product-slider__carousel-dialog-size-label {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: rgb(60, 60, 60);
+    transition: all 150ms ease;
+    cursor: pointer;
+}
+
+input[type='radio'] {
+    position: relative;
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    min-width: 100%;
+    min-height: 100%;
+    margin: 0;
+    cursor: pointer;
     border: 1px solid black;
+    background-color: white;
+    transition: all 150ms ease;
+}
+
+input[type='radio']:hover {
+    background-color: rgb(60, 60, 60);
+}
+
+input[type='radio']:hover + label {
+    color: whitesmoke;
+}
+
+input[type='radio']:checked {
+    background-color: rgb(60, 60, 60);
+}
+
+input[type='radio']:checked + label {
+    color: whitesmoke;
+}
+
+.product-slider__carousel-dialog-add-to-cart {
+    display: block;
+    width: 100%;
+    height: 50px;
+    text-align: center;
+    color: whitesmoke;
+    background-color: rgb(26, 26, 26);
+    border: none;
+    cursor: pointer;
+    transition: all 300ms ease;
+}
+
+.product-slider__carousel-dialog-add-to-cart:hover {
+    background-color: rgb(60, 60, 60);
 }
 
 .product-slider__carousel-dialog-size-link {

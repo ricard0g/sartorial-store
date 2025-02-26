@@ -20,18 +20,14 @@
                             {{
                                 product.featured_image
                                 | image_url: width: 250, crop: 'top'
-                                | image_tag:
-                                    alt: product.title,
-                                    class: 'product-slider__image',
+                                | image_tag: alt: product.title, class: 'product-slider__image'
                             }}
                         </div>
                         <div class="product-slider__cell-image">
                             {{
                                 product.images[1]
                                 | image_url: width: 250, crop: 'top'
-                                | image_tag:
-                                    alt: product.title,
-                                    class: 'product-slider__second-image'
+                                | image_tag: alt: product.title, class: 'product-slider__second-image'
                             }}
                         </div>
                     </a>
@@ -76,29 +72,36 @@
                                         {% endif %}
                                     {% endfor %}
                                 </div>
-                                <h5 class="product-slider__carouse-dialog-sizes-title">Sizes</h5>
-                                <ul class="product-slider__carousel-dialog-sizes-list">
-                                    {% for variant in product.variants %}
-                                        <li class="product-slider__carousel-dialog-sizes-list-item">
-                                            <a
-                                                class="product-slider__carousel-dialog-size-link"
-                                                href="{{ variant.url }}"
-                                            >
-                                                {{ variant.title }}
-                                            </a>
-                                        </li>
-                                    {% endfor %}
-                                </ul>
-                                <div class="product-slider__carousel-dialog-add-to-cart-container">
-                                    <a class="product-slider__carousel-dialog-add-to-cart-button">ADD TO CART</a>
-                                </div>
                                 {% comment %} Form Content as It's supposed to be {% endcomment %}
-                                 {% comment %} {% form 'product' %}
-                                    <div></div>
-                                    
-
-                                    <input type="submit" value="Add To Cart" />
-                                 {% endform %} {% endcomment %}
+                                {% form 'product', product %}
+                                    <div>
+                                        <h5 class="product-slider__carouse-dialog-sizes-title">Sizes</h5>
+                                        <ul class="product-slider__carousel-dialog-sizes-list">
+                                            {% for variant in product.variants %}
+                                                <li class="product-slider__carousel-dialog-sizes-list-item">
+                                                    <input
+                                                        type="radio"
+                                                        style="--product-size: {{ variant.title }}"
+                                                        name="id"
+                                                        id="product-{{ product.id }}-variant-{{ variant.id }}"
+                                                        value="{{ variant.id }}"
+                                                    >
+                                                    <label
+                                                        class="product-slider__carousel-dialog-size-label"
+                                                        for="product-{{ product.id }}-variant-{{ variant.id }}"
+                                                    >
+                                                        {{ variant.title }}
+                                                    </label>
+                                                </li>
+                                            {% endfor %}
+                                        </ul>
+                                    </div>
+                                    <input
+                                        class="product-slider__carousel-dialog-add-to-cart"
+                                        type="submit"
+                                        value="ADD TO CART"
+                                    >
+                                {% endform %}
                                 <div class="product-slider__carousel-dialog-product-description-container">
                                     <p>
                                         {{ product.description }}
