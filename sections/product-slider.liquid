@@ -23,8 +23,6 @@
                                 | image_tag:
                                     alt: product.title,
                                     class: 'product-slider__image',
-                                    widths: '150, 250, 500',
-                                    sizes: '(max-width:424px) 150px, (min-width: 425px) 200px, (min-width: 768px)  250px, 250px'
                             }}
                         </div>
                         <div class="product-slider__cell-image">
@@ -32,10 +30,8 @@
                                 product.images[1]
                                 | image_url: width: 250, crop: 'top'
                                 | image_tag:
-                                    sizes: '(max-width:424px) 150px, (min-width: 425px) and (max-width: 767px) 2000px',
                                     alt: product.title,
-                                    class: 'product-slider__second-image',
-                                    width: 150
+                                    class: 'product-slider__second-image'
                             }}
                         </div>
                     </a>
@@ -96,6 +92,13 @@
                                 <div class="product-slider__carousel-dialog-add-to-cart-container">
                                     <a class="product-slider__carousel-dialog-add-to-cart-button">ADD TO CART</a>
                                 </div>
+                                {% comment %} Form Content as It's supposed to be {% endcomment %}
+                                 {% comment %} {% form 'product' %}
+                                    <div></div>
+                                    
+
+                                    <input type="submit" value="Add To Cart" />
+                                 {% endform %} {% endcomment %}
                                 <div class="product-slider__carousel-dialog-product-description-container">
                                     <p>
                                         {{ product.description }}

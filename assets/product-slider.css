@@ -16,6 +16,7 @@
 
 .product-slider__header {
     width: 25%;
+    margin-top: -20vh;
 }
 
 .product-slider__header-title {
@@ -47,7 +48,7 @@
     justify-content: start;
     align-content: center;
     width: 25%;
-    height: 400px;
+    height: auto;
     margin-right: 10px;
 }
 
@@ -57,11 +58,6 @@
 
 .product-slider__carousel-cell:hover .product-slider__image {
     display: none;
-}
-
-.product-slider__carousel-cell:hover .product-slider__open-modal {
-    transform: translateY(-50px) translateX(-50%);
-    opacity: 1;
 }
 
 .product-slider__carousel-cell a {
@@ -76,16 +72,21 @@
 
 .product-slider__cell-image {
     width: 100%;
+    height: auto;
 }
 
 .product-slider__second-image {
-    width: 100%;
+    max-width: 100%;
+    width: 250px;
+    height: auto;
     object-fit: contain;
     display: none;
 }
 
 .product-slider__image {
-    width: 100%;
+    max-width: 100%;
+    width: 250px;
+    height: auto;
     object-fit: contain;
 }
 
@@ -111,9 +112,10 @@
     position: absolute;
     width: 65%;
     opacity: 0;
+    bottom: 0;
     left: 50%;
     padding: 8px 10px;
-    transform: translateY(-30px) translateX(-50%);
+    transform: translateX(-50%) translateY(-10px);
     background-color: rgb(30, 30, 30);
     color: rgb(217, 217, 217);
     border: none;
@@ -123,6 +125,11 @@
 
 .product-slider__open-modal:hover {
     background-color: rgb(60, 60, 60);
+}
+
+.product-slider__carousel-cell:hover .product-slider__open-modal {
+    transform: translateX(-50%) translateY(-15px);
+    opacity: 1;
 }
 
 .flickity-button {
@@ -158,6 +165,7 @@
 
     .product-slider__header {
         width: 100%;
+        margin: 0;
     }
 
     .product-slider__carousel {
@@ -177,6 +185,18 @@
     .product-slider__open-modal {
         display: none;
     }
+
+    .product-slider__image {
+        max-width: 100%;
+        width: 200px;
+        height: auto;
+    }
+
+    .product-slider__second-image {
+        max-width: 100%;
+        width: 200px;
+        height: auto;
+    }
 }
 
 @media only screen and (max-width: 425px) {
@@ -191,5 +211,17 @@
         width: 40%;
         height: 350px;
         margin-right: 10px;
+    }
+
+    .product-slider__image {
+        max-width: 100%;
+        width: 150px;
+        height: auto;
+    }
+
+    .product-slider__second-image {
+        max-width: 100%;
+        width: 150px;
+        height: auto;
     }
 }
