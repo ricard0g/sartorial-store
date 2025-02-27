@@ -196,7 +196,7 @@ class MobileNavStickyManager {
     }
 
     handleScroll() {
-        const mainNavbarBottom = this.desktopNavbarDimensions.getBoundingClientRect().bottom + window.scrollY + 400;
+        const mainNavbarBottom = this.desktopNavbarDimensions.getBoundingClientRect().bottom + window.scrollY + 100;
 
         if (mainNavbarBottom < window.scrollY) {
             if (!this.isVisible) {

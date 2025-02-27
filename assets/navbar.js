@@ -302,10 +302,10 @@ class TabletManager {
                 this.handleScroll();
             }, 100)
         );
-    }
+    } 
 
     handleScroll() {
-        const mainNavbarBottom = this.desktopNavbarDimensions.getBoundingClientRect().bottom + window.scrollY + 400;
+        const mainNavbarBottom = this.desktopNavbarDimensions.getBoundingClientRect().bottom + window.scrollY + 200;
 
         if (mainNavbarBottom < window.scrollY) {
             if (!this.isVisible) {
