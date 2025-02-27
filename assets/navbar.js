@@ -118,7 +118,6 @@ class SearchManager {
 
     handleSearchClick(e) {
         const navbar = e.target.closest('.subnavbar-wrapper');
-        console.log(navbar);
         if (!navbar) return;
 
         // Close mobile menu if open
@@ -156,7 +155,6 @@ class SearchManager {
 
     findOpenTabletMenu(navbar) {
         const manager = this.getTabletManager(navbar);
-        console.log('Manager', manager);
         return this.findOpenMegaMenu(manager);
     }
 
@@ -268,8 +266,6 @@ class TabletManager {
     }
 
     handleMouseOver(activeLink) {
-        console.log('State of Search Dropdown', searchManagerInstance.dropdownOpened);
-
         if (searchManagerInstance.dropdownOpened) {
             searchManagerInstance.closeAllSearchDropdowns();
         }
@@ -304,7 +300,7 @@ class TabletManager {
             'scroll',
             throttle(() => {
                 this.handleScroll();
-            }, 50)
+            }, 100)
         );
     }
 
@@ -353,14 +349,19 @@ class TabletManager {
         }
     }
 }
+
 if (window.innerWidth > 1023) {
     if (!window.stickyTabletManager) {
         const stickyTabletManager = new TabletManager('sticky');
         window.stickyTabletManager = stickyTabletManager;
+
+        tabletManager = stickyTabletManager;
     }
 } else if (window.innerWidth > 768) {
-    // const mainTabletManager = new TabletManager('main');
-    // window.mainTabletManager = mainTabletManager;
+    if (!window.mainTabletManager) {
+        const mainTabletManager = new TabletManager('main');
+        window.mainTabletManager = mainTabletManager;
+    }
 
     if (!window.stickyTabletManager) {
         const stickyTabletManager = new TabletManager('sticky');
@@ -368,10 +369,6 @@ if (window.innerWidth > 1023) {
 
         tabletManager = stickyTabletManager;
     }
-    // const stickyTabletManager = new TabletManager('sticky');
-    // window.stickyTabletManager = stickyTabletManager;
-
-    // tabletManager = stickyTabletManager;
 }
 
 if (window.innerWidth > 768) {
@@ -379,6 +376,7 @@ if (window.innerWidth > 768) {
     window.megaMenuManager = megaMenuManager;
 }
 
+// Add a 1ms timeout to ensure the DOM is fully loaded and sticky navbar has been added on the top of the page.
 setTimeout(() => {
     if (!window.searchManagerInstance) {
         searchManagerInstance = new SearchManager();
@@ -387,4 +385,7 @@ setTimeout(() => {
         searchManagerInstance = window.searchManagerInstance;
     }
 }, 1);
+
+// Exporting direct instances is not the best practice, we should export Factory Functions that create or export instances.
+// Exporting direct instances makes possible to have multiple instances of the same class in the same page, that's why we use a lot the 'Singleton Pattern".
 export { searchManagerInstance, tabletManager, megaMenuManager };

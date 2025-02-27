@@ -5,6 +5,7 @@ dialog.product-slider__modal {
     padding: 0 1vh;
     opacity: 0;
     transform: translateY(-25px);
+    overflow: scroll;
     transition: all 500ms ease allow-discrete;
 }
 
@@ -257,4 +258,48 @@ input[type='radio']:checked + label {
     width: 100%;
     text-align: center;
     color: rgb(130, 130, 130);
+}
+
+@media only screen and (max-width: 1250px) {
+    dialog.product-slider__modal {
+        width: 90%;
+    }
+
+    .product-slider__carousel-dialog-content {
+        width: 100%;
+    }
+}
+
+@media only screen and (max-width: 1024px) {
+    dialog.product-slider__modal {
+        width: 60%;
+        height: 95%;
+        padding: 1vh 0;
+    }
+
+    .product-slider__carousel-dialog-wrapper {
+        flex-direction: column;
+    }
+
+    .product-slider__carousel-dialog {
+        width: 100%;
+    }
+
+    .flickity-slider {
+        width: 100% !important;
+    }
+
+    .flickity-viewport {
+        height: 55vh !important;
+    }
+
+    .product-slider__carousel-dialog-cell {
+        width: 100%;
+    }
+
+    .product-slider__carousel-dialog-image {
+        max-width: 100%;
+        height: auto;
+        object-fit: contain;
+    }
 }

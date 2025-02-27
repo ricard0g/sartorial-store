@@ -37,7 +37,7 @@
                             <div class="product-slider__carousel-dialog">
                                 {% for image in product.images %}
                                     <div class="product-slider__carousel-dialog-cell">
-                                        {{ image | image_url: width: 380, crop: 'top' | image_tag: alt: product.title }}
+                                        {{ image | image_url: width: 380, crop: 'top' | image_tag: class: 'product-slider__carousel-dialog-image', alt: product.title }}
                                     </div>
                                 {% endfor %}
                             </div>

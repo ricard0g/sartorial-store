@@ -1,5 +1,7 @@
 class CartManager {
     constructor() {
+        const cartItemCountText = document.getElementById('cart-item-count').textContent;
+        this.itemCountNumber = parseInt(cartItemCountText, 10);
         this.setupEventListeners();
     }
 
@@ -54,12 +56,18 @@ class CartManager {
 
         setTimeout(() => {
             notification.remove();
+            this.increaseItemCount();
         }, 3310);
     }
 
     handleModalDialog(form) {
         const dialog = form.closest('dialog');
         if (dialog) dialog.close();
+    }
+
+    increaseItemCount() {
+        this.itemCountNumber++;
+        document.getElementById('cart-item-count').textContent = this.itemCountNumber;
     }
 }
 

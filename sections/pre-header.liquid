@@ -22,7 +22,7 @@
     <li class="menu-item">
       <a class="icon-wrapper" href="{{ routes.cart_url }}">
         <span class="svg-wrapper">{{ 'cart-icon.svg' | inline_asset_content }}</span>
-        <span class="item-text">{{ cart.item_count }}</span>
+        <span id="cart-item-count" class="item-text">{{ cart.item_count }}</span>
       </a>
     </li>
   </ul>
