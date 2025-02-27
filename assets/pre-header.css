@@ -35,7 +35,7 @@
   font-weight: 300;
 }
 
-@media only screen and (max-width: 768px) {
+@media only screen and (max-width: 767px) {
   .pre-header {
     display: none;
   }

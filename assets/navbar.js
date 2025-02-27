@@ -365,6 +365,8 @@ if (window.innerWidth > 1023) {
     if (!window.stickyTabletManager) {
         const stickyTabletManager = new TabletManager('sticky');
         window.stickyTabletManager = stickyTabletManager;
+
+        tabletManager = stickyTabletManager;
     }
     // const stickyTabletManager = new TabletManager('sticky');
     // window.stickyTabletManager = stickyTabletManager;
