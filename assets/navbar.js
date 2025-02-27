@@ -353,14 +353,23 @@ class TabletManager {
         }
     }
 }
-if (window.innerWidth > 768) {
-    const mainTabletManager = new TabletManager('main');
-    window.mainTabletManager = mainTabletManager;
+if (window.innerWidth > 1023) {
+    if (!window.stickyTabletManager) {
+        const stickyTabletManager = new TabletManager('sticky');
+        window.stickyTabletManager = stickyTabletManager;
+    }
+} else if (window.innerWidth > 768) {
+    // const mainTabletManager = new TabletManager('main');
+    // window.mainTabletManager = mainTabletManager;
 
-    const stickyTabletManager = new TabletManager('sticky');
-    window.stickyTabletManager = stickyTabletManager;
+    if (!window.stickyTabletManager) {
+        const stickyTabletManager = new TabletManager('sticky');
+        window.stickyTabletManager = stickyTabletManager;
+    }
+    // const stickyTabletManager = new TabletManager('sticky');
+    // window.stickyTabletManager = stickyTabletManager;
 
-    tabletManager = stickyTabletManager;
+    // tabletManager = stickyTabletManager;
 }
 
 if (window.innerWidth > 768) {

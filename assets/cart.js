@@ -41,15 +41,20 @@ class CartManager {
     showCartNotification(data) {
         const notification = document.createElement('div');
         notification.classList.add('cart-notification__container');
-        notification.innerHTML = `<div class="cart-notification__added-text">Your Item Has Been Added To The Cart</div><div class="cart-notification__wrapper"><div class="cart-notification__image-container">
+        notification.innerHTML = `<div class="cart-notification__added-text"><p>Your Item Has Been Added To The Cart!</p></div><div class="cart-notification__wrapper"><div class="cart-notification__image-container">
             <img class="cart-notification__image" src=${data.featured_image.url} alt=${data.featured_image.alt} />
-        </div><div class="cart-notification__title-container"><span>${data.title}</span></div><div class="cart-notification__price-container"><span>$${data.price}</span></div></div>`;
+        </div><div class="cart-notification__title-container"><span>${data.title}</span></div><div class="cart-notification__price-container"><span>$${data.presentment_price}</span></div></div>`;
 
         document.body.appendChild(notification);
+        notification.classList.add('cart-notification__active');
+
+        setTimeout(() => {
+            notification.classList.remove('cart-notification__active');
+        }, 3000);
 
         setTimeout(() => {
             notification.remove();
-        }, 3000)
+        }, 3310);
     }
 
     handleModalDialog(form) {
