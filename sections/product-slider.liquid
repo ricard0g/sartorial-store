@@ -33,14 +33,20 @@
                     </a>
                     <button data-open-modal class="product-slider__open-modal">QUICK VIEW</button>
                     <dialog data-modal class="product-slider__modal" id="product-modal-{{ product.id }}">
-                        <div class="product-slider__carousel-dialog-wrapper">
-                            <div class="product-slider__carousel-dialog">
+                        <article class="product-slider__carousel-dialog-wrapper">
+                            <figure class="product-slider__carousel-dialog">
                                 {% for image in product.images %}
                                     <div class="product-slider__carousel-dialog-cell">
-                                        {{ image | image_url: width: 380, crop: 'top' | image_tag: class: 'product-slider__carousel-dialog-image', alt: product.title }}
+                                        {{
+                                            image
+                                            | image_url: width: 380, crop: 'top'
+                                            | image_tag:
+                                                class: 'product-slider__carousel-dialog-image',
+                                                alt: product.title
+                                        }}
                                     </div>
                                 {% endfor %}
-                            </div>
+                            </figure>
                             <div class="product-slider__carousel-dialog-content">
                                 <button data-close-modal type="button" class="product-slider__close-modal">
                                     <svg
@@ -53,69 +59,81 @@
                                         <g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path d="M3 21.32L21 3.32001" stroke="#000000" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path> <path d="M3 3.32001L21 21.32" stroke="#000000" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path> </g>
                                     </svg>
                                 </button>
-                                <h2 class="product-slider__carousel-dialog-product-title">
-                                    {{ product.title | upcase }}
-                                </h2>
-                                <p class="product-slider__carousel-dialog-product-price">{{ product.price | money }}</p>
-                                <h5>Colors</h5>
-                                <div class="product-slider__carousel-dialog-product-color-container">
-                                    {% for color_reference in product.metafields.shopify['color-pattern'].value %}
-                                        {% if forloop.first %}
-                                            <div
-                                                style="--product-color: {{ color_reference.color }}"
-                                                class="product-slider__carousel-dialog-product-color"
-                                            >
-                                                <span aria-roledescription="Tooltip for Product Color" class="tooltip">
-                                                    {{- product.title }} in {{ color_reference.label -}}
-                                                </span>
-                                            </div>
-                                        {% endif %}
-                                    {% endfor %}
-                                </div>
-                                {% comment %} Form Content as It's supposed to be {% endcomment %}
-                                {% form 'product', product %}
-                                    <div>
-                                        <h5 class="product-slider__carouse-dialog-sizes-title">Sizes</h5>
-                                        <ul class="product-slider__carousel-dialog-sizes-list">
-                                            {% for variant in product.variants %}
-                                                <li class="product-slider__carousel-dialog-sizes-list-item">
-                                                    <input
-                                                        type="radio"
-                                                        style="--product-size: {{ variant.title }}"
-                                                        name="id"
-                                                        id="product-{{ product.id }}-variant-{{ variant.id }}"
-                                                        value="{{ variant.id }}"
-                                                    >
-                                                    <label
-                                                        class="product-slider__carousel-dialog-size-label"
-                                                        for="product-{{ product.id }}-variant-{{ variant.id }}"
-                                                    >
-                                                        {{ variant.title }}
-                                                    </label>
-                                                </li>
-                                            {% endfor %}
-                                        </ul>
-                                    </div>
-                                    <input
-                                        class="product-slider__carousel-dialog-add-to-cart"
-                                        type="submit"
-                                        value="ADD TO CART"
-                                    >
-                                {% endform %}
-                                <div class="product-slider__carousel-dialog-product-description-container">
-                                    <p>
-                                        {{ product.description }}
+                                <header>
+                                    <h2 class="product-slider__carousel-dialog-product-title">
+                                        {{ product.title | upcase }}
+                                    </h2>
+                                    <p class="product-slider__carousel-dialog-product-price">
+                                        {{ product.price | money }}
                                     </p>
-                                </div>
-                                <div class="product-slider__carousel-dialog-full-details-container">
-                                    <a
-                                        class="product-slider__carousel-dialog-full-details-link"
-                                        href="{{ product.url }}"
-                                        >VIEW FULL DETAILS</a
-                                    >
-                                </div>
+                                </header>
+                                <main>
+                                    <section>
+                                        <h5>Colors</h5>
+                                        <div class="product-slider__carousel-dialog-product-color-container">
+                                            {% for color_reference in product.metafields.shopify['color-pattern'].value %}
+                                                {% if forloop.first %}
+                                                    <div
+                                                        style="--product-color: {{ color_reference.color }}"
+                                                        class="product-slider__carousel-dialog-product-color"
+                                                    >
+                                                        <span
+                                                            aria-roledescription="Tooltip for Product Color"
+                                                            class="tooltip"
+                                                        >
+                                                            {{- product.title }} in {{ color_reference.label -}}
+                                                        </span>
+                                                    </div>
+                                                {% endif %}
+                                            {% endfor %}
+                                        </div>
+                                    </section>
+                                    {% form 'product', product %}
+                                        <section>
+                                            <h5 class="product-slider__carouse-dialog-sizes-title">Sizes</h5>
+                                            <ul class="product-slider__carousel-dialog-sizes-list">
+                                                {% for variant in product.variants %}
+                                                    <li class="product-slider__carousel-dialog-sizes-list-item">
+                                                        <input
+                                                            type="radio"
+                                                            style="--product-size: {{ variant.title }}"
+                                                            name="id"
+                                                            id="product-{{ product.id }}-variant-{{ variant.id }}"
+                                                            value="{{ variant.id }}"
+                                                        >
+                                                        <label
+                                                            class="product-slider__carousel-dialog-size-label"
+                                                            for="product-{{ product.id }}-variant-{{ variant.id }}"
+                                                        >
+                                                            {{ variant.title }}
+                                                        </label>
+                                                    </li>
+                                                {% endfor %}
+                                            </ul>
+                                        </section>
+                                        <input
+                                            class="product-slider__carousel-dialog-add-to-cart"
+                                            type="submit"
+                                            value="ADD TO CART"
+                                        >
+                                    {% endform %}
+                                </main>
+                                <footer>
+                                    <section class="product-slider__carousel-dialog-product-description-container">
+                                        <p>
+                                            {{ product.description }}
+                                        </p>
+                                    </section>
+                                    <section class="product-slider__carousel-dialog-full-details-container">
+                                        <a
+                                            class="product-slider__carousel-dialog-full-details-link"
+                                            href="{{ product.url }}"
+                                            >VIEW FULL DETAILS</a
+                                        >
+                                    </section>
+                                </footer>
                             </div>
-                        </div>
+                        </article>
                     </dialog>
                 </header>
                 <main class="product-slider__cell-main">
