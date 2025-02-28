@@ -29,6 +29,10 @@ dialog.product-slider__modal:open {
     justify-content: space-evenly;
 }
 
+.product-slider__carousel-dialog-wrapper h5 {
+    margin: 1vh 0;
+}
+
 dialog.product-slider__modal::backdrop {
     background-color: rgba(0, 0, 0, 0);
     transition: all 500ms ease allow-discrete;
@@ -47,6 +51,7 @@ dialog.product-slider__modal:open::backdrop {
 .product-slider__carousel-dialog {
     width: 60%;
     height: 100%;
+    margin: 0;
 }
 
 .product-slider__carousel-dialog-cell {
@@ -71,13 +76,24 @@ dialog.product-slider__modal:open::backdrop {
 }
 
 .product-slider__carousel-dialog-product-title {
+    margin: 2vh 0 1vh 0;
     font-size: 1.25rem;
     font-weight: 400;
 }
 
 .product-slider__carousel-dialog-product-price {
+    margin: 1vh 0;
     font-size: 1.25rem;
     font-weight: 600;
+}
+
+.product-slider__carousel-dialog-product-color-wrapper {
+    margin-bottom: 2vh;
+}
+
+.product-slider__carousel-dialog-product-color-container {
+    display: flex;
+    column-gap: 2vw;
 }
 
 .product-slider__carousel-dialog-product-color {
@@ -90,10 +106,6 @@ dialog.product-slider__modal:open::backdrop {
     cursor: pointer;
 }
 
-.product-slider__carousel-dialog-product-color-container {
-    display: flex;
-    column-gap: 2vw;
-}
 
 .product-slider__carousel-dialog-product-color .tooltip {
     visibility: hidden;

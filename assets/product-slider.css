@@ -73,6 +73,7 @@
 .product-slider__cell-image {
     width: 100%;
     height: auto;
+    margin: 0;
 }
 
 .product-slider__second-image {
