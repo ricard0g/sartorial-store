@@ -4,32 +4,32 @@
 <script src="{{ 'flickity.pkgd.min.js' | asset_url }}" defer></script>
 <script src="{{ 'product-slider.js' | asset_url }}" defer></script>
 
-<div class="product-slider__wrapper">
-    <div class="product-slider__header">
+<section class="product-slider__wrapper">
+    <section class="product-slider__header">
         <h3 class="product-slider__header-title">{{ section.settings.collection.title }}</h3>
         <a href="{{ section.settings.collection.url }}">Collection Link</a>
-    </div>
-    <div
+    </section>
+    <section
         class="product-slider__carousel"
     >
         {% for product in section.settings.collection.products %}
             <article class="product-slider__carousel-cell">
                 <header class="product-slider__cell-header">
                     <a href="{{ product.url }}">
-                        <div class="product-slider__cell-image">
+                        <figure class="product-slider__cell-image">
                             {{
                                 product.featured_image
                                 | image_url: width: 250, crop: 'top'
                                 | image_tag: alt: product.title, class: 'product-slider__image'
                             }}
-                        </div>
-                        <div class="product-slider__cell-image">
+                        </figure>
+                        <figure class="product-slider__cell-image">
                             {{
                                 product.images[1]
                                 | image_url: width: 250, crop: 'top'
                                 | image_tag: alt: product.title, class: 'product-slider__second-image'
                             }}
-                        </div>
+                        </figure>
                     </a>
                     <button data-open-modal class="product-slider__open-modal">QUICK VIEW</button>
                     <dialog data-modal class="product-slider__modal" id="product-modal-{{ product.id }}">
@@ -119,18 +119,18 @@
                                     {% endform %}
                                 </main>
                                 <footer>
-                                    <section class="product-slider__carousel-dialog-product-description-container">
+                                    <div class="product-slider__carousel-dialog-product-description-container">
                                         <p>
                                             {{ product.description }}
                                         </p>
-                                    </section>
-                                    <section class="product-slider__carousel-dialog-full-details-container">
+                                    </div>
+                                    <div class="product-slider__carousel-dialog-full-details-container">
                                         <a
                                             class="product-slider__carousel-dialog-full-details-link"
                                             href="{{ product.url }}"
                                             >VIEW FULL DETAILS</a
                                         >
-                                    </section>
+                                    </div>
                                 </footer>
                             </div>
                         </article>
@@ -144,8 +144,8 @@
                 </main>
             </article>
         {% endfor %}
-    </div>
-</div>
+    </section>
+</section>
 
 {% schema %}
 {
