@@ -66,6 +66,9 @@
 }
 
 .product-slider__cell-header {
+    display: flex;
+    flex-flow: column nowrap;
+    align-items: center;
     position: relative;
     width: 100%;
 }
