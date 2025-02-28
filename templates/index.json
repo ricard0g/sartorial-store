@@ -50,10 +50,55 @@
         "link": "Link to Collection",
         "collection": "new-arrivals"
       }
+    },
+    "collections_row_gqQRpq": {
+      "type": "collections-row",
+      "blocks": {
+        "collection_cLCrUN": {
+          "type": "collection",
+          "settings": {
+            "collection": "summer-casual",
+            "title": ""
+          }
+        },
+        "collection_DFLn8y": {
+          "type": "collection",
+          "settings": {
+            "collection": "winter-casual",
+            "title": ""
+          }
+        },
+        "collection_WX43BM": {
+          "type": "collection",
+          "settings": {
+            "collection": "suiting",
+            "title": ""
+          }
+        },
+        "collection_TAqPa7": {
+          "type": "collection",
+          "settings": {
+            "collection": "spanish-suits",
+            "title": ""
+          }
+        }
+      },
+      "block_order": [
+        "collection_cLCrUN",
+        "collection_DFLn8y",
+        "collection_WX43BM",
+        "collection_TAqPa7"
+      ],
+      "settings": {
+        "show_title": false,
+        "title": "Collections",
+        "typeface": "sophisticated"
+      }
     }
   },
   "order": [
     "image-banner",
-    "product_slider_bXRmCx"
+    "product_slider_bXRmCx",
+    "collections_row_gqQRpq"
   ]
 }

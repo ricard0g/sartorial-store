@@ -1,0 +1,13 @@
+.collections-row__container {
+    width: 100%;
+    height: auto;
+}
+
+.collections-row__section-wrapper {
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: center;
+    align-items: center;
+    width: 80%;
+}
+
