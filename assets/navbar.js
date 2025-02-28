@@ -321,7 +321,7 @@ class TabletManager {
         this.navbar.style.position = 'sticky';
         this.navbar.style.top = '0';
         this.startAnimation();
-        searchManagerInstance.closeAllSearchDropdowns();
+        searchManagerInstance?.closeAllSearchDropdowns();
     }
 
     hideTabletNavbar() {
