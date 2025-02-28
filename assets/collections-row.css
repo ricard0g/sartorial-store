@@ -9,5 +9,54 @@
     justify-content: center;
     align-items: center;
     width: 80%;
+    margin: 0 auto;
 }
 
+.collections-row__section-title {
+    font-family: var(--title-typeface);
+}
+
+.collections-row__collections-wrapper {
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: center;
+    align-items: center;
+    column-gap: 5px;
+    width: 100%;
+    height: auto;
+    padding: 0;
+    list-style: none;
+}
+
+.collections-row__item {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+
+.collections-row__link {
+    display: block;
+    width: 100%;
+    height: auto;
+    text-decoration: none;
+    color: inherit;
+}
+
+.collections-row__figure {
+    width: 100%;
+    margin: 0;
+}
+
+.collections-row__image {
+    width: 100%;
+    height: auto;
+}
+
+.collections-row__figcaption {
+    text-align: center;
+}
+
+.collections-row__title {
+    font-family: var(--collection-title-typeface);
+}

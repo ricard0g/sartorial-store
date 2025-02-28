@@ -1,30 +1,43 @@
 {{ 'collections-row.css' | asset_url | stylesheet_tag }}
-<div class="collections-row__section-wrapper">
+<div
+    style="{% unless section.settings.typeface == 'normal' %}--title-typeface: 'Cormorant Unicase', serif{% endunless %}"
+    class="collections-row__section-wrapper"
+>
     {% if section.settings.show_title and section.settings.title != blank %}
         <header class="collections-row__header">
             <h2 class="collections-row__section-title">{{ section.settings.title }}</h2>
         </header>
     {% endif %}
-    
+
     <ul class="collections-row__collections-wrapper">
         {% if section.blocks.size >= 2 %}
             {% for block in section.blocks %}
                 {% if block.settings.collection != blank %}
                     {% assign collection = block.settings.collection %}
-                    <li class="collections-row__item" {{ block.shopify_attributes }}>
+                    <li
+                        style="{% unless block.settings.typeface %}--collection-title-typeface: 'Cormorant Unicase', serif;{% endunless %}"
+                        class="collections-row__item"
+                        {{ block.shopify_attributes }}
+                    >
                         <a href="{{ collection.url }}" class="collections-row__link">
                             <figure class="collections-row__figure">
                                 {% if block.settings.image != blank %}
                                     {{
                                         block.settings.image
-                                        | image_url: width: 200
-                                        | image_tag: class: 'collections-row__image', alt: block.settings.title
+                                        | image_url: width: 600
+                                        | image_tag:
+                                            class: 'collections-row__image',
+                                            alt: block.settings.title,
+                                            widths: '300, 600'
                                     }}
                                 {% else %}
                                     {{
                                         collection.featured_image
-                                        | image_url: width: 200
-                                        | image_tag: class: 'collections-row__image', alt: block.settings.title
+                                        | image_url: width: 600
+                                        | image_tag:
+                                            class: 'collections-row__image',
+                                            alt: block.settings.title,
+                                            widths: '300, 600'
                                     }}
                                 {% endif %}
                                 <figcaption class="collections-row__figcaption">
@@ -110,6 +123,25 @@
                     "label": "Title",
                     "info": "Optional. You can add a personalized title for the collection if you want. If nothing is added the collection title will be used by default."
                 },
+
+                {
+                    "type": "select",
+                    "id": "typeface",
+                    "label": "Typeface",
+                    "options": [
+                        {
+                            "value": "normal",
+                            "label": "Normal"
+                        },
+                        {
+                            "value": "sophisticated",
+                            "label": "Sophisticated"
+                        }
+                    ],
+                    "default": "sophisticated",
+                    "info": "Choose the type of font you want for the title of the collection."
+                },
+
                 {
                     "type": "image_picker",
                     "id": "image",

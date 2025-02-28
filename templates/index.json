@@ -90,7 +90,7 @@
         "collection_TAqPa7"
       ],
       "settings": {
-        "show_title": false,
+        "show_title": true,
         "title": "Collections",
         "typeface": "sophisticated"
       }
