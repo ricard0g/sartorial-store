@@ -1,0 +1,31 @@
+{{ 'banner.css' | asset_url | stylesheet_tag }}
+<div>
+    {% if section.settings.banner_image != blank %}
+        {{ section.settings.banner_image | image_url: width: 600| image_tag: class: 'banner__image', alt: 'Banner Image' }}
+    {% endif %}
+</div>
+
+{% schema %}
+{
+    "name": "Banner",
+    "tag": "section",
+    "class": "banner__container",
+    "settings": [
+        {
+            "type": "collection",
+            "id": "banner_collection",
+            "label": "Banner Collection"
+        },
+        {
+            "type": "image_picker",
+            "id": "banner_image",
+            "label": "Banner Image"
+        }
+    ],
+    "presets": [
+        {
+            "name": "Banner"
+        }
+    ]
+}
+{% endschema %}
