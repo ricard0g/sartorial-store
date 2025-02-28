@@ -1,0 +1,128 @@
+{{ 'collections-row.css' | asset_url | stylesheet_tag }}
+<div class="collections-row__section-wrapper">
+    {% if section.settings.show_title and section.settings.title != blank %}
+        <header class="collections-row__header">
+            <h2 class="collections-row__section-title">{{ section.settings.title }}</h2>
+        </header>
+    {% endif %}
+    
+    <ul class="collections-row__collections-wrapper">
+        {% if section.blocks.size >= 2 %}
+            {% for block in section.blocks %}
+                {% if block.settings.collection != blank %}
+                    {% assign collection = block.settings.collection %}
+                    <li class="collections-row__item" {{ block.shopify_attributes }}>
+                        <a href="{{ collection.url }}" class="collections-row__link">
+                            <figure class="collections-row__figure">
+                                {% if block.settings.image != blank %}
+                                    {{
+                                        block.settings.image
+                                        | image_url: width: 200
+                                        | image_tag: class: 'collections-row__image', alt: block.settings.title
+                                    }}
+                                {% else %}
+                                    {{
+                                        collection.featured_image
+                                        | image_url: width: 200
+                                        | image_tag: class: 'collections-row__image', alt: block.settings.title
+                                    }}
+                                {% endif %}
+                                <figcaption class="collections-row__figcaption">
+                                    {% if block.settings.title != blank %}
+                                        <h3 class="collections-row__title">{{ block.settings.title }}</h3>
+                                    {% else %}
+                                        <h3 class="collections-row__title">{{ collection.title }}</h3>
+                                    {% endif %}
+                                </figcaption>
+                            </figure>
+                        </a>
+                    </li>
+                {% endif %}
+            {% endfor %}
+        {% endif %}
+    </ul>
+</div>
+
+{% schema %}
+{
+    "name": "Collections Row",
+    "tag": "section",
+    "class": "collections-row__container",
+    "max_blocks": 4,
+    "settings": [
+        {
+            "type": "header",
+            "content": "General Settings"
+        },
+        {
+            "type": "checkbox",
+            "id": "show_title",
+            "label": "Show Title",
+            "default": false,
+            "info": "If checked, you will have to add a personalized title for the section."
+        },
+        {
+            "type": "header",
+            "content": "Text & Typography"
+        },
+        {
+            "type": "text",
+            "id": "title",
+            "label": "Title",
+            "default": "Collections",
+            "info": "Optional. You can add a personalized title for the section if you want. If nothing is added the default title will be used."
+        },
+        {
+            "type": "select",
+            "id": "typeface",
+            "label": "Typeface",
+            "options": [
+                {
+                    "value": "normal",
+                    "label": "Normal"
+                },
+                {
+                    "value": "sophisticated",
+                    "label": "Sophisticated"
+                }
+            ],
+            "default": "sophisticated",
+            "info": "Choose the type of font you want for the title."
+        }
+    ],
+    "blocks": [
+        {
+            "type": "collection",
+            "name": "Collection",
+            "settings": [
+                {
+                    "type": "header",
+                    "content": "Collection Block"
+                },
+                {
+                    "type": "collection",
+                    "id": "collection",
+                    "label": "Collection"
+                },
+                {
+                    "type": "text",
+                    "id": "title",
+                    "label": "Title",
+                    "info": "Optional. You can add a personalized title for the collection if you want. If nothing is added the collection title will be used by default."
+                },
+                {
+                    "type": "image_picker",
+                    "id": "image",
+                    "label": "Image",
+                    "info": "Optional. You can add a personalized image for the collection if you want. If nothing is added the collection image will be used by default."
+                }
+            ]
+        }
+    ],
+    "presets": [
+        {
+            "name": "Collections Row"
+        }
+    ]
+}
+{% endschema %}
