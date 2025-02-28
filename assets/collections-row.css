@@ -60,3 +60,20 @@
 .collections-row__title {
     font-family: var(--collection-title-typeface);
 }
+
+@media only screen and (max-width: 1024px) {
+    .collections-row__section-wrapper {
+        width: 100%;
+        padding: 0 5px;
+    }
+}
+
+@media only screen and (max-width: 768px) {
+    .collections-row__collections-wrapper {
+        flex-wrap: wrap;
+    }
+
+    .collections-row__item {
+        width: 49%;
+    }
+}

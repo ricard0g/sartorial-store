@@ -15,7 +15,7 @@
                 {% if block.settings.collection != blank %}
                     {% assign collection = block.settings.collection %}
                     <li
-                        style="{% unless block.settings.typeface %}--collection-title-typeface: 'Cormorant Unicase', serif;{% endunless %}"
+                        style="{% unless block.settings.typeface == 'normal' %}--collection-title-typeface: 'Cormorant Unicase', serif;{% endunless %}"
                         class="collections-row__item"
                         {{ block.shopify_attributes }}
                     >
@@ -66,6 +66,10 @@
         {
             "type": "header",
             "content": "General Settings"
+        },
+        {
+            "type": "paragraph",
+            "content": "This section won't display anything if you don't add AT LEAST 2 collection blocks. Make sure to add at least 2 collection blocks. This is done for User Experience and User Interface purposes."
         },
         {
             "type": "checkbox",

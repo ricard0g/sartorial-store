@@ -94,11 +94,77 @@
         "title": "Collections",
         "typeface": "sophisticated"
       }
+    },
+    "collections_row_yYhiaF": {
+      "type": "collections-row",
+      "blocks": {
+        "collection_PmGeEh": {
+          "type": "collection",
+          "settings": {
+            "collection": "summer-casual",
+            "title": ""
+          }
+        },
+        "collection_CBaWmN": {
+          "type": "collection",
+          "settings": {
+            "collection": "spanish-suits",
+            "title": ""
+          }
+        },
+        "collection_tVkANe": {
+          "type": "collection",
+          "settings": {
+            "collection": "suiting",
+            "title": ""
+          }
+        }
+      },
+      "block_order": [
+        "collection_PmGeEh",
+        "collection_CBaWmN",
+        "collection_tVkANe"
+      ],
+      "settings": {
+        "show_title": true,
+        "title": "Collections",
+        "typeface": "sophisticated"
+      }
+    },
+    "collections_row_xYeJQz": {
+      "type": "collections-row",
+      "blocks": {
+        "collection_qDg6p4": {
+          "type": "collection",
+          "settings": {
+            "collection": "summer-casual",
+            "title": ""
+          }
+        },
+        "collection_G34Wp6": {
+          "type": "collection",
+          "settings": {
+            "collection": "winter-casual",
+            "title": ""
+          }
+        }
+      },
+      "block_order": [
+        "collection_qDg6p4",
+        "collection_G34Wp6"
+      ],
+      "settings": {
+        "show_title": false,
+        "title": "Collections",
+        "typeface": "sophisticated"
+      }
     }
   },
   "order": [
     "image-banner",
     "product_slider_bXRmCx",
-    "collections_row_gqQRpq"
+    "collections_row_gqQRpq",
+    "collections_row_yYhiaF",
+    "collections_row_xYeJQz"
   ]
 }
