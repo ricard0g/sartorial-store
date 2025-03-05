@@ -300,7 +300,7 @@ class TabletManager {
             'scroll',
             throttle(() => {
                 this.handleScroll();
-            }, 100)
+            }, 50)
         );
     } 
 
