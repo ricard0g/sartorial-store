@@ -147,6 +147,13 @@
         "title": "Collections",
         "typeface": "sophisticated"
       }
+    },
+    "seo_description_JBYrK8": {
+      "type": "seo-description",
+      "settings": {
+        "title": "The Ultimate Menswear Destination",
+        "description": ""
+      }
     }
   },
   "order": [
@@ -154,6 +161,7 @@
     "product_slider_bXRmCx",
     "collections_row_gqQRpq",
     "banner_UrdMP8",
-    "collections_row_xYeJQz"
+    "collections_row_xYeJQz",
+    "seo_description_JBYrK8"
   ]
 }
