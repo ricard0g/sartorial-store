@@ -109,11 +109,11 @@
         "banner_text": "The Most Stylish Collection of This Era",
         "text_size": 20,
         "letter_spacing": 0,
-        "banner_text_color": "#ffffff",
+        "banner_text_color": "#000000",
         "italicize": false,
         "bold_text": false,
         "text_alignment": "center",
-        "text_position_vertical": "end",
+        "text_position_vertical": "start",
         "text_position_horizontal": "right",
         "typeface": "sophisticated"
       }
