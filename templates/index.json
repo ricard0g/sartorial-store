@@ -99,6 +99,25 @@
         "typeface": "sophisticated"
       }
     },
+    "banner_UrdMP8": {
+      "type": "banner",
+      "settings": {
+        "banner_collection": "new-arrivals",
+        "banner_image": "shopify://shop_images/banner-section-bg.webp",
+        "show_background_overlay": false,
+        "overlay_opacity": 0,
+        "banner_text": "The Most Stylish Collection of This Era",
+        "text_size": 20,
+        "letter_spacing": 0,
+        "banner_text_color": "#ffffff",
+        "italicize": false,
+        "bold_text": false,
+        "text_alignment": "center",
+        "text_position_vertical": "end",
+        "text_position_horizontal": "right",
+        "typeface": "sophisticated"
+      }
+    },
     "collections_row_xYeJQz": {
       "type": "collections-row",
       "blocks": {
@@ -134,6 +153,7 @@
     "image-banner",
     "product_slider_bXRmCx",
     "collections_row_gqQRpq",
+    "banner_UrdMP8",
     "collections_row_xYeJQz"
   ]
 }

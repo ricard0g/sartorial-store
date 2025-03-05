@@ -1,0 +1,39 @@
+.banner__container {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    height: 80vh;
+}
+
+.banner__wrapper {
+    position: relative;
+    display: flex;
+    justify-content: var(--horizontal-align);
+    align-items: var(--vertical-align);
+    width: 80%;
+    height: 100%;
+    background: var(--background-image);
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.banner__wrapper::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-color: black;
+    opacity: var(--background-opacity);
+    z-index: -1;
+}
+
+.banner__text-wrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: fit-content;
+    max-width: 50%;
+    height: fit-content;
+}

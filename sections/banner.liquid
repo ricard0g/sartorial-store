@@ -1,8 +1,16 @@
 {{ 'banner.css' | asset_url | stylesheet_tag }}
-<div>
-    {% if section.settings.banner_image != blank %}
-        {{ section.settings.banner_image | image_url: width: 600| image_tag: class: 'banner__image', alt: 'Banner Image' }}
-    {% endif %}
+<div
+    style="--background-image: {% if section.settings.banner_image != blank %} url('{{ section.settings.banner_image | image_url: width: 1920, height: 1080, crop: 'center' }}') {% else %} url('{{ section.settings.banner__collection.featured_image | image_url: width: 1920, height: 1080, crop: 'center' }}') {% endif %} ; --background-opacity: {{ section.settings.overlay_opacity | divided_by: 100.0 }}; --text-color: {{ section.settings.banner_text_color }}; --text-size: {{ section.settings.text_size }}px; --letter-spacing: {{ section.settings.letter_spacing }}px; {% if section.settings.italicize %}--font-style: italic;{% endif %} {% if section.settings.bold_text %}--font-weight: bold;{% endif %} {% if section.settings.text_alignment == 'left' %}--text-align: left;{% elsif section.settings.text_alignment == 'right' %}--text-align: right;{% else %}--text-align: center;{% endif %} {% if section.settings.text_position_vertical == 'top' %}--vertical-align: top;{% elsif section.settings.text_position_vertical == 'bottom' %}--vertical-align: bottom;{% else %}--vertical-align: middle;{% endif %} {% if section.settings.text_position_horizontal == 'left' %}--horizontal-align: left;{% elsif section.settings.text_position_horizontal == 'right' %}--horizontal-align: right;{% else %}--horizontal-align: center;{% endif %}"
+    class="banner__wrapper"
+>
+    <div class="banner__text-wrapper">
+        {% if section.settings.banner_text != blank %}
+            <h2 class="banner__title">{{ section.settings.banner_text }}</h2>
+        {% else %}
+            <h2 class="banner__title">{{ section.settings.banner_collection.title }}</h2>
+        {% endif %}
+        <a href="{{ section.settings.banner_collection.url }}" class="banner__link">SHOP NOW</a>
+    </div>
 </div>
 
 {% schema %}
@@ -12,6 +20,10 @@
     "class": "banner__container",
     "settings": [
         {
+            "type": "header",
+            "content": "Banner Collection & Image Settings"
+        },
+        {
             "type": "collection",
             "id": "banner_collection",
             "label": "Banner Collection"
@@ -19,7 +31,149 @@
         {
             "type": "image_picker",
             "id": "banner_image",
-            "label": "Banner Image"
+            "label": "Banner Image",
+            "info": "If no image is selected, the collection's default image will be used."
+        },
+        {
+            "type": "checkbox",
+            "id": "show_background_overlay",
+            "label": "Show Background Overlay",
+            "default": false,
+            "info": "This will add a background overlay to the banner image."
+        },
+        {
+            "type": "range",
+            "id": "overlay_opacity",
+            "label": "Overlay Opacity",
+            "min": 0,
+            "max": 100,
+            "step": 10,
+            "unit": "%",
+            "default": 0,
+            "info": "Adjust the opacity of the background overlay."
+        },
+        {
+            "type": "header",
+            "content": "Banner Text Settings"
+        },
+        {
+            "type": "text",
+            "id": "banner_text",
+            "label": "Banner Text"
+        },
+        {
+            "type": "range",
+            "id": "text_size",
+            "label": "Text Size",
+            "min": 10,
+            "max": 100,
+            "step": 1,
+            "unit": "px",
+            "default": 20
+        },
+        {
+            "type": "range",
+            "id": "letter_spacing",
+            "label": "Letter Spacing",
+            "min": -10,
+            "max": 10,
+            "step": 1,
+            "unit": "px",
+            "default": 0
+        },
+        {
+            "type": "color",
+            "id": "banner_text_color",
+            "label": "Banner Text Color",
+            "default": "#FFFFFF"
+        },
+        {
+            "type": "checkbox",
+            "id": "italicize",
+            "label": "Italicize Text",
+            "default": false
+        },
+        {
+            "type": "checkbox",
+            "id": "bold_text",
+            "label": "Bold Text",
+            "default": false
+        },
+        {
+            "type": "select",
+            "id": "text_alignment",
+            "label": "Text Alignment",
+            "options": [
+                {
+                    "value": "left",
+                    "label": "Left"
+                },
+                {
+                    "value": "center",
+                    "label": "Center"
+                },
+                {
+                    "value": "right",
+                    "label": "Right"
+                }
+            ],
+            "default": "center"
+        },
+        {
+            "type": "select",
+            "id": "text_position_vertical",
+            "label": "Text Position (Vertically)",
+            "options": [
+                {
+                    "value": "start",
+                    "label": "Top"
+                },
+                {
+                    "value": "center",
+                    "label": "Middle"
+                },
+                {
+                    "value": "end",
+                    "label": "Bottom"
+                }
+            ],
+            "default": "center"
+        },
+        {
+            "type": "select",
+            "id": "text_position_horizontal",
+            "label": "Text Position (Horizontally)",
+            "options": [
+                {
+                    "value": "left",
+                    "label": "Left"
+                },
+                {
+                    "value": "center",
+                    "label": "Center"
+                },
+                {
+                    "value": "right",
+                    "label": "Right"
+                }
+            ],
+            "default": "center"
+        },
+        {
+            "type": "select",
+            "id": "typeface",
+            "label": "Typeface",
+            "options": [
+                {
+                    "value": "normal",
+                    "label": "Normal"
+                },
+                {
+                    "value": "sophisticated",
+                    "label": "Sophisticated"
+                }
+            ],
+            "default": "sophisticated"
         }
     ],
     "presets": [
