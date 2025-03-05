@@ -1,7 +1,9 @@
 {{ 'seo-description.css' | asset_url | stylesheet_tag }}
+<script src="{{ 'seo-description.js' | asset_url }}" defer></script>
 <section class="seo-description__wrapper">
     <h2 class="seo-description__title">{{ section.settings.title }}</h2>
-    <div class="seo-description__text-content">{{ section.settings.description }}</div>
+    <div class="seo-description__text-content seo-description__text-content-is-closed">{{ section.settings.description }}</div>
+    <button class="seo-description__button">Read More</button>
 </section>
 
 {% schema %}
