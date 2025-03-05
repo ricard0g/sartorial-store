@@ -56,6 +56,9 @@
         <main>
             {{ content_for_layout }}
         </main>
+        <footer>
+            {% sections 'footer-group' %}
+        </footer>
         <script src="{{ "predictive-search.js" | asset_url }}" type="module" defer></script>
         <script src="{{ "cart.js" | asset_url }}" defer></script>
     </body>

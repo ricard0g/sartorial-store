@@ -59,12 +59,13 @@
 
 .collections-row__title {
     font-family: var(--collection-title-typeface);
+    font-size: 1.125rem;
 }
 
 @media only screen and (max-width: 1024px) {
     .collections-row__section-wrapper {
         width: 100%;
-        padding: 0 5px;
+        padding: 0;
     }
 }
 
@@ -75,5 +76,9 @@
 
     .collections-row__item {
         width: 49%;
+    }
+
+    .collections-row__title {
+        font-size:0.9rem;
     }
 }

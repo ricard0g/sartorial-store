@@ -1,0 +1,36 @@
+{{ 'seo-description.css' | asset_url | stylesheet_tag }}
+<section class="seo-description__wrapper">
+    <h2 class="seo-description__title">{{ section.settings.title }}</h2>
+    <div class="seo-description__text-content">{{ section.settings.description }}</div>
+</section>
+
+{% schema %}
+{
+    "name": "SEO Description",
+    "tag": "section",
+    "class": "seo-description__container",
+    "settings": [
+        {
+            "type": "header",
+            "content": "SEO Settings",
+            "info": "This section is used to describe and tell your customers the purpose/history of you store. It's like a mini about us section that really helps SEO rankings. The text won't appear entirely unless the visitor clicks on the 'Read More' button."
+        },
+        {
+            "type": "text",
+            "id": "title",
+            "label": "SEO Title",
+            "default": "The Ultimate Menswear Destination"
+        },
+        {
+            "type": "richtext",
+            "id": "description",
+            "label": "SEO Description"
+        }
+    ],
+    "presets": [
+        {
+            "name": "SEO Description"
+        }
+    ]
+}
+{% endschema %}
