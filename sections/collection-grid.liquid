@@ -1,5 +1,13 @@
 {{ 'collection-grid.css' | asset_url | stylesheet_tag }}
-<div class="collection-grid__wrapper">
+<div
+    style="{% unless section.settings.typeface == 'normal' %}--title-typeface: 'Cormorant Unicase', serif{% endunless %}"
+    class="collection-grid__wrapper"
+>
+    {% if section.settings.show_title and section.settings.title != blank %}
+        <h2 class="collection-grid__title">{{ section.settings.title }}</h2>
+    {% else %}
+        <h2 class="collection-grid__title">Check Our Bestsellers</h2>
+    {% endif %}
     <ul class="collection-grid__collections-wrapper">
         {% for block in section.blocks %}
             {% if block.settings.collection != blank %}
@@ -19,20 +27,20 @@
                             {% else %}
                                 {{
                                     collection.featured_image
-                                    | image_url: width: 400
+                                    | image_url: width: 800
                                     | image_tag:
                                         class: 'collection-grid__image',
                                         alt: block.settings.title,
-                                        widths: '200, 400'
+                                        widths: '400, 800'
                                 }}
                             {% endif %}
                             <figcaption class="collection-grid__figcaption">
                                 {% if block.settings.title != blank %}
-                                    <h3 class="collection-grid__title">
+                                    <h3 class="collection-grid__figcaption-title">
                                         {{ block.settings.title }}
                                     </h3>
                                 {% else %}
-                                    <h3 class="collection-grid__title">{{ collection.title }}</h3>
+                                    <h3 class="collection-grid__figcaption-title">{{ collection.title }}</h3>
                                 {% endif %}
                             </figcaption>
                         </figure>
@@ -49,7 +57,46 @@
     "tag": "section",
     "class": "collection-grid__container",
     "max_blocks": 4,
-    "settings": [],
+    "settings": [
+        {
+            "type": "header",
+            "content": "General Settings"
+        },
+        {
+            "type": "paragraph",
+            "content": "This section won't display anything if you don't add AT LEAST 2 collection blocks. Make sure to add at least 2 collection blocks. This is done for User Experience and User Interface purposes."
+        },
+        {
+            "type": "checkbox",
+            "id": "show_title",
+            "label": "Show section title",
+            "default": true
+        },
+        {
+            "type": "text",
+            "id": "title",
+            "label": "Title",
+            "default": "Collections",
+            "info": "Optional. You can add a personalized title for the section if you want. If nothing is added the default title will be used."
+        },
+        {
+            "type": "select",
+            "id": "typeface",
+            "label": "Typeface",
+            "options": [
+                {
+                    "value": "normal",
+                    "label": "Normal"
+                },
+                {
+                    "value": "sophisticated",
+                    "label": "Sophisticated"
+                }
+            ],
+            "default": "sophisticated",
+            "info": "Choose the type of font you want for the title."
+        }
+    ],
     "blocks": [
         {
             "type": "collection",
