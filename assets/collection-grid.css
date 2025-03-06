@@ -73,7 +73,7 @@
 
     .collection-grid__collections-wrapper {
         grid-template-columns: repeat(2, 1fr);
-        grid-template-rows: repeat(2, 30vh);
+        grid-template-rows: repeat(2, 25vh);
         padding: 0 5px;
         row-gap: 10vh;
     }
