@@ -118,6 +118,46 @@
         "typeface": "sophisticated"
       }
     },
+    "collection_grid_VPEdFf": {
+      "type": "collection-grid",
+      "blocks": {
+        "collection_9DGAKW": {
+          "type": "collection",
+          "settings": {
+            "collection": "italian-suits",
+            "title": ""
+          }
+        },
+        "collection_CGnEr8": {
+          "type": "collection",
+          "settings": {
+            "collection": "suiting",
+            "title": ""
+          }
+        },
+        "collection_Gz4fAD": {
+          "type": "collection",
+          "settings": {
+            "collection": "winter-casual",
+            "title": ""
+          }
+        },
+        "collection_a7NmLq": {
+          "type": "collection",
+          "settings": {
+            "collection": "spanish-suits",
+            "title": ""
+          }
+        }
+      },
+      "block_order": [
+        "collection_9DGAKW",
+        "collection_CGnEr8",
+        "collection_Gz4fAD",
+        "collection_a7NmLq"
+      ],
+      "settings": {}
+    },
     "collections_row_xYeJQz": {
       "type": "collections-row",
       "blocks": {
@@ -161,6 +201,7 @@
     "product_slider_bXRmCx",
     "collections_row_gqQRpq",
     "banner_UrdMP8",
+    "collection_grid_VPEdFf",
     "collections_row_xYeJQz",
     "seo_description_JBYrK8"
   ]

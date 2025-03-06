@@ -7,10 +7,50 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    width: 80%;
+    margin: 0 auto;
 }
 
 .collection-grid__collections-wrapper {
     display: grid;
-    grid: 2fr / 2fr;
-    gap: 5px;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(2, 50vh);
+    width: 100%;
+    height: auto;
+    padding: 0;
+    place-items: center;
+    list-style: none;
+    row-gap: 8vh;
+    column-gap: 5px;
+}
+
+.collection-grid__item {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+}
+
+.collection-grid__link {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    text-decoration: none;
+    color: inherit;
+}
+
+.collection-grid__figure {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+}
+
+.collection-grid__image {
+    width: 100%;
+    height: auto;
+    max-height: 100%;
+    object-fit: cover;
 }
