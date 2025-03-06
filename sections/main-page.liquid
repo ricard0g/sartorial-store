@@ -1,7 +1,7 @@
 {{ 'main-page.css' | asset_url | stylesheet_tag }}
-<div>
-    <h1>{{ page.title | escape }}</h1>
-    <div>
+<div class="main-page__wrapper">
+    <h1 class="main-page__title">{{ page.title | escape }}</h1>
+    <div class="main-page__content-wrapper">
         {{ page.content }}
     </div>
 </div>
@@ -10,6 +10,7 @@
 {
     "name": "Main Page",
     "tag": "section",
+    "class": "main-page__container",
     "settings": []
 }
 {% endschema %}
