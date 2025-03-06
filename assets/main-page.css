@@ -7,7 +7,22 @@
 }
 
 .main-page__wrapper {
-    width: 80%;
+    width: 40%;
     height: auto;
     margin: 0 auto;
+}
+
+.main-page__title {
+    font-size: 2rem;
+    font-weight: 700;
+    text-align: center;
+    margin-bottom: 1rem;
+}
+
+.main-page__content-wrapper p {
+    color: rgb(60, 60, 60);
+    letter-spacing: 0.5px;
+    font-size: 1.2rem;
+    font-weight: 300;
+    line-height: 1.5;
 }
