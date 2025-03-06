@@ -1,0 +1,13 @@
+.main-page__container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: auto;
+}
+
+.main-page__wrapper {
+    width: 80%;
+    height: auto;
+    margin: 0 auto;
+}
