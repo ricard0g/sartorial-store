@@ -1,0 +1,16 @@
+.collection-grid__container {
+    width: 100%;
+    height: auto;
+}
+
+.collection-grid__wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.collection-grid__collections-wrapper {
+    display: grid;
+    grid: 2fr / 2fr;
+    gap: 5px;
+}
