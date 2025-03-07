@@ -48,7 +48,7 @@
     .footer__wrapper {
         flex-flow: column nowrap;
         align-items: start;
-        width: 70%;
+        width: 80%;
     }
 
     .footer__menu-title {
