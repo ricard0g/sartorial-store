@@ -9,6 +9,51 @@
     text-align: center;
 }
 
-/* .newsletter__label {
+.newsletter__label {
     display: block;
-} */
+    margin: 3vh auto;
+}
+
+.newsletter__input {
+    width: 100%;
+    height: 8vh;
+    padding: 1vh 2vh;
+    font-size: 0.9rem;
+    border: 1px solid #e9e8e8;
+    transition: all 0.3s ease;
+}
+
+.newsletter__input:focus {
+    outline: none;
+    border: 1px solid #828282;
+}
+
+.newsletter__input::placeholder {
+    font-size: 0.9rem;
+    font-weight: 300;
+}
+
+@media only screen and (max-width: 1024px) {
+    .newsletter__wrapper {
+        width: 60%;
+    }
+
+    .newsletter__input {
+        height: 8vh;
+        font-size: 0.8rem;
+    }
+
+    .newsletter__label {
+        margin: 2vh auto;
+    }
+}
+
+@media only screen and (max-width: 768px) {
+    .newsletter__wrapper {
+        width: 80%;
+    }
+
+    .newsletter__label {
+        margin: 2vh auto;
+    }
+}

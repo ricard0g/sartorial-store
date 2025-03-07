@@ -1,8 +1,13 @@
 {{ 'newsletter.css' | asset_url | stylesheet_tag }}
 <div class="newsletter__wrapper">
     {% form 'customer' %}
-        <label class="newsletter__label" for="email-newsletter">Subscribe to our Newsletter</label>
-        <input class="newsletter__input" type="email" id="email-newsletter" name="contact[email]" placeholder="Enter your email address">
+        <input
+            class="newsletter__input"
+            type="email"
+            id="email-newsletter"
+            name="contact[email]"
+            placeholder="Enter your email address"
+        >
     {% endform %}
 </div>
 

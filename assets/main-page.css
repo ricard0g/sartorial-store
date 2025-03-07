@@ -3,6 +3,7 @@
     justify-content: center;
     align-items: center;
     width: 100%;
+    margin: 8vh auto;
     height: auto;
 }
 
@@ -26,4 +27,24 @@
     font-size: 1rem;
     font-weight: 300;
     line-height: 1.5;
+}
+
+@media only screen and (max-width: 1024px) {
+    .main-page__wrapper {
+        width: 60%;
+    }
+}
+
+@media only screen and (max-width: 768px) {
+    .main-page__wrapper {
+        width: 80%;
+    }
+
+    .main-page__title {
+        font-size: 1.5rem;
+    }
+
+    .main-page__content-wrapper p {
+        font-size: 0.9rem;
+    }
 }
