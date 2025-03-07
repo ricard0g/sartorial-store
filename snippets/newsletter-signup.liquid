@@ -1,0 +1,24 @@
+{% comment %} 
+    This is a simple newsletter signup form that collects the user's email address.
+    It uses Shopify's built-in form handling to submit the email address to the store's
+    customer list. The form includes basic validation to ensure the email address is in
+    a valid format before submission.
+
+    Usage:
+        {% render 'newsletter-signup' %}
+{% endcomment %}
+<div class="newsletter__wrapper newsletter-snippet__wrapper">
+    {% form 'customer' %}
+        <input
+            class="newsletter__input newsletter-snippet__input"
+            type="email"
+            id="email-newsletter"
+            name="contact[email]"
+            placeholder="Enter your email address"
+            value="{{ form.email }}"
+            required
+        >
+        <button type="submit" class="newsletter__submit-button nstartewsletter-snippet__submit-button">Sign Up</button>
+        <div id="newsletter-message" class="newsletter__message"></div>
+    {% endform %}
+</div>

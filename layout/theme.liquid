@@ -47,6 +47,12 @@
                 overflow: hidden !important;
                 scroll-behavior: none !important;
             }
+
+            #bottom__text {
+                margin-left: 5px;
+                font-size: 0.75rem;
+                color: rgb(104, 103, 103);
+            }
         </style>
     </head>
     <body>
@@ -56,9 +62,8 @@
         <main>
             {{ content_for_layout }}
         </main>
-        <footer>
-            {% sections 'footer-group' %}
-        </footer>
+        {% sections 'footer-group' %}
+        <p id="bottom__text">© 2025 Sartorial Paris. All Rights Reserved</p>
         <script src="{{ "predictive-search.js" | asset_url }}" type="module" defer></script>
         <script src="{{ "cart.js" | asset_url }}" defer></script>
     </body>

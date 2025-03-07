@@ -1,11 +1,62 @@
 {{ 'footer.css' | asset_url | stylesheet_tag }}
-<section></section>
+{{ 'newsletter.css' | asset_url | stylesheet_tag }}
+<section class="footer__wrapper">
+    <div class="footer__menu-wrapper">
+        <h4 class="footer__menu-title">{{ linklists.footer.title }}</h4>
+        <ul class="footer__menu-list">
+            {% for link in linklists.footer.links %}
+                <li class="footer__menu-item">
+                    <a href="{{ link.url }}">{{ link.title }}</a>
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
+    <div class="footer__menu-wrapper">
+        <h4 class="footer__menu-title">{{ linklists['terms-policies'].title }}</h4>
+        <ul class="footer__menu-list">
+            {% for link in linklists['terms-policies'].links %}
+                <li class="footer__menu-item">
+                    <a href="{{ link.url }}">{{ link.title }}</a>
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
+    <div class="footer__menu-wrapper">
+        <h4 class="footer__menu-title">Join our mailing list</h4>
+        {% render 'newsletter-signup' %}
+    </div>
+</section>
+
+<style>
+    .newsletter-snippet__wrapper {
+        margin: 0;
+        width: 100%;
+    }
+
+    .newsletter-snippet__input {
+        height: 4vh;
+    }
+
+    .newsletter-snippet__submit-button {
+        height: 4vh;
+    }
+
+    @media only screen and (max-width: 768px) {
+        .newsletter-snippet__input {
+            height: 6vh;
+        }
+
+        .newsletter-snippet__submit-button {
+            height: 5vh;
+        }
+    }
+</style>
 
 {% schema %}
 {
     "name": "Footer",
-    "tag": "section",
+    "tag": "footer",
     "class": "footer__container",
-    "settings": [],
+    "settings": []
 }
 {% endschema %}
