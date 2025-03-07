@@ -7,7 +7,11 @@
             id="email-newsletter"
             name="contact[email]"
             placeholder="Enter your email address"
+            value="{{ form.email }}"
+            required
         >
+        <button type="submit" class="newsletter__submit-button">Sign Up</button>
+        <div id="newsletter-message" class="newsletter__message"></div>
     {% endform %}
 </div>
 

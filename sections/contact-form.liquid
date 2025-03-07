@@ -1,6 +1,41 @@
 {{ 'contact-form.css' | asset_url | stylesheet_tag }}
-
-
+<div class="contact-form__wrapper">
+    <div class="contact-form__store-info">
+        <p class="contact-form__store-info-text">
+            <strong>Telephone Number: </strong><a href="tel:{{ shop.phone }}">{{ shop.phone }}</a><br>
+            <strong>Operating Hours: </strong>Monday to Friday - 9 AM to 6 PM EST / Saturday to Sunday 9 AM to 5 PM EST
+        </p>
+        <p class="contact-form__store-info-text">
+            <strong>Email: </strong><a href="mailto:{{ shop.email }}">{{ shop.email }}</a><br>
+            <strong>Operating Hours: </strong>Monday to Friday - 9 AM to 6 PM EST / Saturday to Sunday 8 AM to 5 PM EST
+        </p>
+    </div>
+    <div class="contact-form__form-wrapper">
+        {% form 'contact' %}
+            <div class="contact-form__input-wrapper">
+                <label class="contact-form__input-label" for="name">Name</label>
+                <input type="text" id="name" name="contact[name]" class="contact-form__input" placeholder="John" required>
+            </div>
+            <div class="contact-form__input-wrapper">
+                <label class="contact-form__input-label" for="email">Email</label>
+                <input id="email" type="email" name="contact[email]" class="contact-form__input" placeholder="john@doe.com" required>
+            </div>
+            <div class="contact-form__input-wrapper">
+                <label class="contact-form__input-label" for="message">Enter your Message or Question here:</label>
+                <textarea
+                    id="message"
+                    name="contact[message]"
+                    class="contact-form__input"
+                    cols="50"
+                    rows="5"
+                    placeholder="Your Message..."
+                    required
+                ></textarea>
+            </div>
+            <button type="submit" class="contact-form__submit-button">Send</button>
+        {% endform %}
+    </div>
+</div>
 
 {% schema %}
 {

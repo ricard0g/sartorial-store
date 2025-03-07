@@ -1,0 +1,112 @@
+.contact-form__container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: auto;
+    margin-bottom: 10vh;
+}
+
+.contact-form__wrapper {
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: center;
+    align-items: center;
+    width: 80%;
+}
+
+.contact-form__store-info {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+
+.contact-form__store-info-text {
+    font-size: 0.9rem;
+    font-weight: 300;
+}
+
+.contact-form__store-info-text strong {
+    color: black;
+    font-weight: 600;
+}
+
+.contact-form__store-info-text a {
+    color: #494949;
+}
+
+.contact-form__form-wrapper {
+    width: 616.48px;
+}
+
+.contact-form__input-wrapper {
+    width: 100%;
+    min-height: 8vh;
+    margin-bottom: 2vh;
+}
+
+.contact-form__input-label {
+    display: block;
+    margin-bottom: 1vh;
+}
+
+.contact-form__input {
+    width: 100%;
+    height: 6vh;
+    padding: 1vh 2vh;
+    font-size: 0.9rem;
+    border: 1px solid #e9e8e8;
+    transition: all 0.3s ease;
+}
+
+textarea.contact-form__input {
+    width: 100%;
+    height: 10vh;
+    min-height: 10vh;
+    resize: vertical;
+}
+
+.contact-form__input:focus {
+    outline: none;
+    border: 1px solid #828282;
+}
+
+.contact-form__input::placeholder {
+    font-size: 0.9rem;
+    font-weight: 300;
+}
+
+.contact-form__submit-button {
+    width: 100%;
+    height: 6vh;
+    margin-top: 2vh;
+    background-color: #494949;
+    color: white;
+    font-size: 0.9rem;
+    font-weight: 600;
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.contact-form__submit-button:hover {
+    background-color: #828282;
+}
+
+@media only screen and (max-width: 1024px) {
+    .contact-form__wrapper {
+        width: 90%;
+    }
+
+    .contact-form__form-wrapper {
+        max-width: 616.48px;
+    }
+}
+
+@media only screen and (max-width: 771px) {
+    .contact-form__form-wrapper {
+        width: 100%;
+    }
+}
