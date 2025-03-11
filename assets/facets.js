@@ -107,10 +107,18 @@ class FacetFiltersForm extends HTMLElement {
 
         // Remove Facets that are no longer returned from the server
         Array.from(facetDetailsElementsFromDom).forEach((currentEl) => {
-            if (!Array.from(facetDetailsElementsFromFetch).some(({id}) => currentEl.id === id)) {
-
+            if (!Array.from(facetDetailsElementsFromFetch).some(({ id }) => currentEl.id === id)) {
+                currentEl.remove();
             }
-        })
+        });
+
+        const matchesId = (el) => {
+            const jsFilter = event ? event.target.closest('.js-filter') : undefined;
+            return jsFilter ? el.id === jsFilter.id : false;
+        };
+
+        const facetsToRender = Array.from(facetDetailsElementsFromFetch).filter((el) => !matchesId(el));
+        const countsToRender = Array.from(facetDetailsElementsFromFetch).find(matchesId);
     }
 
     // Method to get sections that will be updated maybe using Section Rendering API
