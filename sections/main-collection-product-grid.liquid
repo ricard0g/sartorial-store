@@ -1,5 +1,10 @@
 {{ 'main-collection-product-grid.css' | asset_url | stylesheet_tag }}
-
+<div>
+    {% paginate collection.products by 10 %}
+        {% comment %} Sorting form first  {% endcomment %}
+         
+    {% endpaginate %}
+</div>
 
 {% schema %}
 {
