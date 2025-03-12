@@ -313,3 +313,51 @@ FacetFiltersForm.searchParamsInitial = window.location.search.slice(1);
 FacetFiltersForm.searchParamsPrev = window.location.search.slice(1);
 customElements.define('facet-filters-form', FacetFiltersForm);
 FacetFiltersForm.setListeners();
+
+class PriceRange extends HTMLElement {
+    constructor() {
+        super();
+        this.querySelectorAll('input').forEach((element) => {
+            element.addEventListener('change', this.onRangeChange.bind(this));
+            element.addEventListener('keydown', this.onkeydown.bind(this));
+        });
+        this.setMinMaxValues();
+    }
+
+    onRangeChange(e) {
+        this.adjustToValidValues(e.currentTarget);
+        this.setMinMaxValues();
+    }
+
+    // Method to control what characters are being typed in the input fields of price range
+    onkeydown(e) {
+        // If the key pressed is "Command" on Mac or "Windows Key" on Windows we simply finish the execution
+        // This allows for any keyboard shortcuts to be used by the user without this interrupting the shortcut
+        if (e.metaKey) return;
+
+        // Pattern allowed inside the input fields
+        const pattern = /[0-9]|\.|,|'| |Tab|Backspace|Enter|ArrowUp|ArrowDown|ArrowLeft|ArrowRight|Delete|Escape/;
+        if (!e.key.match(pattern)) e.preventDefault();
+    }
+
+    setMinMaxValues() {
+        const inputs = this.querySelectorAll('input');
+        const minInput = inputs[0];
+        const maxInput = inputs[1];
+        if (maxInput.value) minInput.setAttribute('data-max', maxInput.value);
+        if (minInput.value) maxInput.setAttribute('data-min', minInput.value);
+        if (minInput.value === '') maxInput.setAttribute('data-min', 0);
+        if (maxInput.value === '') minInput.setAttribute('data-max', maxInput.getAttribute('data-max'));
+    }
+
+    adjustToValidValues(input) {
+        const value = Number(input.value);
+        const min = Number(input.getAttribute('data-min'));
+        const max = Number(input.getAttribute('data-max'));
+
+        if (value < min) input.value = min;
+        if (value > max) input.value = max;
+    }
+}
+
+customElements.define('price-range', PriceRange);
