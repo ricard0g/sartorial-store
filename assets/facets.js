@@ -361,3 +361,24 @@ class PriceRange extends HTMLElement {
 }
 
 customElements.define('price-range', PriceRange);
+
+class FacetRemove extends HTMLElement {
+    constructor() {
+        super();
+        const facetLink = this.querySelector('a');
+        facetLink.setAttribute('role', 'button');
+        facetLink.addEventListener('click', this.closeFilter.bind(this));
+        facetLink.addEventListener('keyup', (e) => {
+            e.preventDefault();
+            if (e.code.toUpperCase === "SPACE") this.closeFilter(e);
+        })
+    }
+
+    closeFilter(e) {
+        e.preventDefault();
+        const form = this.closest('facet-filters-form') || document.querySelector('facet-filters-form');
+        form.onActiveFilterClick(e);
+    }
+}
+
+customElements.define('facet-remove', FacetRemove);
