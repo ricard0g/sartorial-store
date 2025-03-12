@@ -1,0 +1,224 @@
+{% comment %}
+    Renders Facets (filtering)
+
+    Accepts:
+    - results: {Object} Collection or Search object
+    - paginate: {Object} Pagination object
+
+    Usage:
+    {% render 'facets', results: collection, paginate: paginate %}
+{% endcomment %}
+
+{% liquid
+    assign sort_by = results.sort_by | default: results.default_sort_by
+    assign total_active_values = 0
+    assign default_presentation = 'text'
+    if results.url
+        assign results_url = results.url
+    else
+        assign terms = results.terms | escape
+        assign results_url = '?q=' | append: terms | append: '&options&5Bprefix&5D=last&sort_by=' | append: sort_by
+    endif
+%}
+
+<div>
+    <facet-filters-form>
+        <form id="FacetFiltersForm">
+            {% if results.terms %}
+                <input type="hidden" name="q" value="{{ results.terms | escape }}">
+                <input name="options[prefix]" type="hidden" value="last">
+            {% endif %}
+
+            <div>
+                <div>
+                    <div>
+                        {% unless results.filters == empty %}
+                            <h2>Filter:</h2>
+                        {% endunless %}
+                        <facet-remove>
+                            <a href="{{ results_url }}">
+                                <span>Remove All</span>
+                            </a>
+                        </facet-remove>
+                    </div>
+                    {% for filter in results.filters %}
+                        {% for value in filter.active_values %}
+                            <facet-remove>
+                                <a href="{{ value.url_to_remove }}">
+                                    <span>
+                                        {{ filter.label | escape }}: {{ value.label | escape }}
+                                        <span>
+                                            {{ 'close-icon.svg' | inline_asset_content }}
+                                        </span>
+                                    </span>
+                                </a>
+                            </facet-remove>
+                        {% endfor %}
+                        {% if filter.type == 'price_range' %}
+                            {% assign min = filter.min_value.value %}
+                            {% assign max = filter.max_value.value %}
+                            {% if min != null or max != null %}
+                                <facet-remove>
+                                    <a href="{{ filter.url_to_remove }}">
+                                        <span>
+                                            {{ min | default: 0 | money }} - {{ max | default: 0 | money }}
+                                            <span>
+                                                {{ 'close-icon.svg' | inline_asset_content }}
+                                            </span>
+                                        </span>
+                                    </a>
+                                </facet-remove>
+                            {% endif %}
+                        {% endif %}
+                    {% endfor %}
+                </div>
+            </div>
+
+            <script src="{{ 'show-more.js' | asset_url }}" defer></script>
+            {% comment %} Fiters for vertical filters {% endcomment %}
+            {% for filter in results.filter %}
+                {% liquid
+                    assign total_active_values = total_active_values | plus: filter.active_values.size
+                    assign presentation = filter.presentation | default: default_presentation
+
+                    if presentation == 'image'
+                        assign show_more_number = 12
+                        assign visual_layout_class = 'facets-layout facets-layout-grid facets-layout-grid__' | append: presentation
+                    else
+                        assign show_more_number = 10
+                        assign visual_layout_class = 'facets-layout facets-layout-list facets-layout-list__' | append: presentation
+                    endif
+                %}
+
+                {% case filter.type %}
+                    {% when 'boolean', 'list' %}
+                        <details
+                            {% if forloop.index == 1 %}
+                                open
+                            {% endif %}
+                        >
+                            <summary>
+                                <div>
+                                    <span>
+                                        {{ filter.label | escape }}
+                                        <span>({{ filter.active_values.size }})</span>
+                                    </span>
+                                    {% if filter.operator == 'AND' %}
+                                        <span> Match All </span>
+                                    {% endif %}
+                                    {{ 'icon-caret.svg' | inline_asset_content }}
+                                </div>
+                            </summary>
+                            <div>
+                                <fieldset>
+                                    <legend>{{ filter.label | escape }}</legend>
+                                    {% liquid
+                                        assign sorted_values = filter.values
+                                        # Keep the selected values grouped together when operator is AND, keeping in those that are active together before those that are inactive
+                                        if filter.operator == 'AND'
+                                            assign active_filter_values = filter.values | where: 'active', true
+                                            assign inactive_filter_values = filter.values | where: 'active', false
+                                            assign sorted_values = active_filter_values | concat: inactive_filter_values
+                                        endif
+                                    %}
+                                    <ul role="list">
+                                        {% for value in sorted_values %}
+                                            {% liquid
+                                                assign input_id = 'Filter-' | append: filter.param_name | escape | append: '-' | append: forloop.index
+                                                assign disabled = false
+                                                if value.count == 0 and value.active == false
+                                                    assign disabled = true
+                                                endif
+                                            %}
+                                            {% capture label_class %}
+                                                facets__label facet-checkbox{% if is_disabled %} disabled{% endif %}{% if value.active %} active{% endif %}
+                                            {% endcapture %}
+
+                                            {% capture text_value %}
+                                                <span aria-hidden="true">
+                                                <span>{{ value.label | escape }}</span> {{ value.count }}
+                                                </span>
+                                                <span>
+                                                    {{ value.label | escape }} (
+                                                        {% if value.count == 1 %}
+                                                            {{ value.count }} result
+                                                        {% else %}
+                                                            {{ value.count }} results
+                                                        {% endif %})
+                                                </span>
+                                            {% endcapture %}
+
+                                            <li>
+                                                {% if presentation == 'swatch' %}
+                                                    <div>
+                                                        <div>
+                                                            {% render 'swatch-input',
+                                                                input: input_id,
+                                                                type: checkbox,
+                                                                name: value.param_name,
+                                                                value: value.value,
+                                                                product_form_id: 'FacetFiltersForm',
+                                                                swatch: value.swatch,
+                                                                checked: value.active,
+                                                                disabled: disabled
+                                                            %}
+                                                        </div>
+                                                        {{ text_value }}
+                                                    </div>
+                                                {% else %}
+                                                    <label for="{{ input_id }}" class="{{ label_class }}">
+                                                        <input
+                                                            type="checkbox"
+                                                            name="{{ value.param_name }}"
+                                                            value="{{ value.value }}"
+                                                            id="{{ input_id }}"
+                                                            {% if value.active %}
+                                                                checked
+                                                            {% endif %}
+                                                            {% if disabled %}
+                                                                disabled
+                                                            {% endif %}
+                                                        >
+
+                                                        {% if presentation == 'image' %}
+                                                            <div>
+                                                                {% if value.image %}
+                                                                    {{
+                                                                        value.image
+                                                                        | image_url: width: 300
+                                                                        | image_tag:
+                                                                            class: 'facet-image',
+                                                                            alt: value.alt
+                                                                    }}
+                                                                {% endif %}
+                                                            </div>
+                                                        {% else %}
+                                                            {{ 'square.svg' | inline_asset_content }}
+
+                                                            <div>
+                                                                {{ 'icon-checkmark.svg' | inline_asset_content }}
+                                                            </div>
+                                                        {% endif %}
+                                                        {{ text_value }}
+                                                    </label>
+                                                {% endif %}
+                                            </li>
+                                        {% endfor %}
+                                    </ul>
+                                </fieldset>
+                                {% if filter.values.size > show_more_number %}
+                                    <show-more-button>
+                                        <button id="Show-More-{{ forloop.index }}-{{ section.id }}" type="button">
+                                            <span><span aria-hidden="true">+ </span></span>
+                                            <span><span aria-hidden="true">- </span></span>
+                                        </button>
+                                    </show-more-button>
+                                {% endif %}
+                            </div>
+                        </details>
+                    {% comment %} {% when 'price-range' %} {% endcomment %}
+                {% endcase %}
+            {% endfor %}
+        </form>
+    </facet-filters-form>
+</div>
