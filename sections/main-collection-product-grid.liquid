@@ -1,8 +1,71 @@
 {{ 'main-collection-product-grid.css' | asset_url | stylesheet_tag }}
 <div>
     {% paginate collection.products by 10 %}
-        {% comment %} Sorting form first  {% endcomment %}
-         
+        {% comment %} Sorting form first tabbable element {% endcomment %}
+        <facet-filters-form>
+            <form>
+                <div>
+                    <div>
+                        <h2>
+                            <label for="SortBy">Sort By:</label>
+                        </h2>
+                        <div>
+                            {% assign sort_by = collection.sort_by | default: collection.default_sort_by %}
+                            <select id="SortBy" name="sort_by">
+                                {% for option in collection.sort_options %}
+                                    <option
+                                        value="{{ option.value | escape }}"
+                                        {% if option.value == sort_by %}
+                                            selected="selected"
+                                        {% endif %}
+                                    >
+                                        {{ option.name | escape }}
+                                    </option>
+                                {% endfor %}
+                            </select>
+                            <span>
+                                {{ 'icon-caret.svg' | inline_asset_content }}
+                            </span>
+                        </div>
+                    </div>
+                </div>
+
+                <div>
+                    <h2>
+                        <span>
+                            {% if collection.results_count %}
+                                {% if collection.results_count == 1 %}
+                                    {{ collection.results_count }} result for {{ collection.terms }}
+                                {% else %}
+                                    {{ collection.results_count }} results for {{ collection.terms }}
+                                {% endif %}
+                            {% elsif collection.products_count == collection.all_products_count %}
+                                {% if collection.products_count == 1 %}
+                                    {{ collection.products_count }} product
+                                {% else %}
+                                    {{ collection.products_count }} products
+                                {% endif %}
+                            {% else %}
+                                {% if collection.products_count == 1 %}
+                                    {{ collection.all_products_count }} of {{ collection.products_count }} product
+                                {% else %}
+                                    {{ collection.all_products_count }} of {{ collection.products_count }} products
+                                {% endif %}
+                            {% endif %}
+                        </span>
+                    </h2>
+                </div>
+            </form>
+        </facet-filters-form>
+
+        <div>
+            <script src="{{ 'facets.js' | asset_url }}" defer></script>
+            <aside>
+                {% comment %} {% render 'facets' %} {% endcomment %}
+            </aside>
+
+            <div class="product-grid-container"></div>
+        </div>
     {% endpaginate %}
 </div>
 
