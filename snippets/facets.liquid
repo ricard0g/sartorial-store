@@ -216,7 +216,28 @@
                                 {% endif %}
                             </div>
                         </details>
-                    {% comment %} {% when 'price-range' %} {% endcomment %}
+                    {% when 'price-range' %}
+                        <details
+                            {% if forloop.index == 1 %}
+                                open
+                            {% endif %}
+                        >
+                            <summary>
+                                <div>
+                                    <span>{{ filter.label | escape }}</span>
+                                    {{ 'icon-caret.svg' | inline_asset_content }}
+                                </div>
+                            </summary>
+                            <div id="Facet-{{ forloop.index }}-{{ section.id }}">
+                                <div>
+                                    {% assign max_price_count = filter.range_max | money | strip_html | escape %}
+                                    <span> The highest price is {{ max_price_count }} </span>
+                                </div>
+                                <price-range>
+                                    {% render 'price-facet', filter: filter, id_prefix: 'Filter-' %}
+                                </price-range>
+                            </div>
+                        </details>
                 {% endcase %}
             {% endfor %}
         </form>

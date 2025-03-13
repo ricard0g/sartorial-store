@@ -1,0 +1,47 @@
+{% comment %}
+    Renders prices inputs.
+
+    Accepts:
+    - filter: {Object} filter object
+    - id_prefix: {String} prefix for the input ids
+    - filter_type: {String} filter type.
+
+    Usage:
+       {% render 'price-facet', filter: filter, id_prefix: 'Filter-', filter_type: filter_type %}
+{% endcomment %}
+
+<span>{{ cart.currency.symbol }}</span>
+
+<div>
+    <input
+        type="text"
+        name="{{ filter.min_value.param_name }}"
+        id="{{ id_prefix }}{{ filter.label | escape }}-GTE"
+        {% if filter.min_value.value %}
+            value="{{ filter.min_value.value }}"
+        {% endif %}
+        inputmode="decimal"
+        placeholder="0"
+        data-pattern="\d| |,|\."
+        data-min="0"
+        data-max="{{ filter.range_max | money_without_currency }}"
+    >
+    <label for="{{ id_prefix }}{{ filter.label | escape }}-GTE">From</label>
+</div>
+
+<div>
+    <input
+        type="text"
+        name="{{ filter.max_value.param_name }}"
+        id="{{ id_prefix }}{{ filter.label | escape }}-LTE"
+        {% if filter.min_value.value %}
+            value="{{ filter.min_value.value }}"
+        {% endif %}
+        inputmode="decimal"
+        placeholder="{{ filter.range_max | money_without_currency }}"
+        data-pattern="\d| |,|\."
+        data-min="0"
+        data-max="{{ filter.range_max | money_without_currency }}"
+    >
+    <label for="{{ id_prefix }}{{ filter.label | escape }}-LTE">To</label>
+</div>
