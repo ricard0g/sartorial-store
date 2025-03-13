@@ -119,14 +119,16 @@
                     </div>
                 </div>
             </form>
-            
+
             {% comment %} Mobile sorting drawer button {% endcomment %}
-            {% comment %} <div class="facets__disclosure mobile-facets__open">
-                <button class="mobile-facets__open-button button" aria-expanded="false" aria-controls="mobile-menu-facets">
-                    <span class="mobile-facets__open-label">Filter and sort</span>
-                    <span class="mobile-facets__count">{{ collection.products_count }}</span>
-                </button>
-            </div> {% endcomment %}
+            {% comment %}
+                <div class="facets__disclosure mobile-facets__open">
+                    <button class="mobile-facets__open-button button" aria-expanded="false" aria-controls="mobile-menu-facets">
+                        <span class="mobile-facets__open-label">Filter and sort</span>
+                        <span class="mobile-facets__count">{{ collection.products_count }}</span>
+                    </button>
+                </div>
+            {% endcomment %}
         </facet-filters-form>
 
         <div class="collection-content">
@@ -139,7 +141,12 @@
                 {% for product in collection.products %}
                     <div class="product-card">
                         <a href="{{ product.url }}">
-                            <img src="{{ product.featured_image | img_url: '300x300' }}" alt="{{ product.title | escape }}">
+                            <img
+                                src="{{ product.featured_image | img_url }}"
+                                width="300"
+                                height="300"
+                                alt="{{ product.title | escape }}"
+                            >
                             <h3>{{ product.title }}</h3>
                             <p>{{ product.price | money }}</p>
                         </a>
@@ -147,22 +154,24 @@
                 {% endfor %}
             </div>
         </div>
-        
+
         {% comment %} Mobile facet drawer menu {% endcomment %}
-        {% comment %} <menu-drawer class="mobile-facets__wrapper" id="mobile-menu-facets">
-            <details class="mobile-facets">
-                <summary class="mobile-facets__disclosure-button">
-                    <span class="mobile-facets__disclosure-label">Filter and sort</span>
-                </summary>
-                <facet-filters-form id="FacetFiltersFormMobile">
-                    <form class="mobile-facets__form">
-                        <div class="mobile-facets__inner">
-                            {# Mobile facet content will be populated by JavaScript #}
-                        </div>
-                    </form>
-                </facet-filters-form>
-            </details>
-        </menu-drawer> {% endcomment %}
+        {% comment %}
+            <menu-drawer class="mobile-facets__wrapper" id="mobile-menu-facets">
+                <details class="mobile-facets">
+                    <summary class="mobile-facets__disclosure-button">
+                        <span class="mobile-facets__disclosure-label">Filter and sort</span>
+                    </summary>
+                    <facet-filters-form id="FacetFiltersFormMobile">
+                        <form class="mobile-facets__form">
+                            <div class="mobile-facets__inner">
+                                {# Mobile facet content will be populated by JavaScript #}
+                            </div>
+                        </form>
+                    </facet-filters-form>
+                </details>
+            </menu-drawer>
+        {% endcomment %}
     {% endpaginate %}
 </div>
 
