@@ -12,7 +12,7 @@
 
 <span>{{ cart.currency.symbol }}</span>
 
-<div>
+<div class="price-input-container">
     <input
         type="text"
         name="{{ filter.min_value.param_name }}"
@@ -25,11 +25,12 @@
         data-pattern="\d| |,|\."
         data-min="0"
         data-max="{{ filter.range_max | money_without_currency }}"
+        class="price-input"
     >
-    <label for="{{ id_prefix }}{{ filter.label | escape }}-GTE">From</label>
+    <label for="{{ id_prefix }}{{ filter.label | escape }}-GTE" class="price-label">From</label>
 </div>
 
-<div>
+<div class="price-input-container">
     <input
         type="text"
         name="{{ filter.max_value.param_name }}"
@@ -42,6 +43,24 @@
         data-pattern="\d| |,|\."
         data-min="0"
         data-max="{{ filter.range_max | money_without_currency }}"
+        class="price-input"
     >
-    <label for="{{ id_prefix }}{{ filter.label | escape }}-LTE">To</label>
+    <label for="{{ id_prefix }}{{ filter.label | escape }}-LTE" class="price-label">To</label>
 </div>
+
+{% style %}
+    .price-input-container {
+        margin-bottom: 10px;
+    }
+
+    .price-input {
+        width: 100%;
+        padding: 5px;
+        margin-bottom: 5px;
+    }
+
+    .price-label {
+        display: block;
+        margin-bottom: 5px;
+    }
+{% endstyle %}

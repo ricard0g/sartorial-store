@@ -1,17 +1,56 @@
 {{ 'main-collection-product-grid.css' | asset_url | stylesheet_tag }}
-<div>
+<script src="{{ 'facets.js' | asset_url }}" defer></script>
+{% style %}
+    .icon {
+        width: 10px;
+        height: 10px;
+    }
+
+    .svg-wrapper {
+        max-width: 10px;
+    }
+
+    .sidebar-filters {
+        padding: 20px;
+        background-color: #f9f9f9;
+        border: 1px solid #e0e0e0;
+        border-radius: 5px;
+    }
+
+    .sidebar-filters h2 {
+        font-size: 18px;
+        margin-bottom: 10px;
+    }
+
+    .sidebar-filters label {
+        display: block;
+        margin-bottom: 5px;
+    }
+
+    .sidebar-filters select {
+        width: 100%;
+        padding: 5px;
+        margin-bottom: 20px;
+    }
+
+    .sidebar-filters .results-count {
+        font-size: 16px;
+        margin-bottom: 20px;
+    }
+{% endstyle %}
+<div class="page-width" id="product-grid" data-id="{{ section.id }}">
     {% paginate collection.products by 10 %}
         {% comment %} Sorting form first tabbable element {% endcomment %}
-        <facet-filters-form>
-            <form>
-                <div>
-                    <div>
+        <facet-filters-form class="sidebar-filters facet-filters">
+            <form id="FacetSortForm" class="facets__form">
+                <div class="facet-filters__field">
+                    <div class="select">
                         <h2>
                             <label for="SortBy">Sort By:</label>
                         </h2>
-                        <div>
+                        <div class="sort-wrapper">
                             {% assign sort_by = collection.sort_by | default: collection.default_sort_by %}
-                            <select id="SortBy" name="sort_by">
+                            <select id="SortBy" name="sort_by" class="facet-filters__sort">
                                 {% for option in collection.sort_options %}
                                     <option
                                         value="{{ option.value | escape }}"
@@ -23,15 +62,15 @@
                                     </option>
                                 {% endfor %}
                             </select>
-                            <span>
+                            <span class="svg-wrapper">
                                 {{ 'icon-caret.svg' | inline_asset_content }}
                             </span>
                         </div>
                     </div>
                 </div>
 
-                <div>
-                    <h2>
+                <div class="results-count">
+                    <h2 id="ProductCount" class="product-count">
                         <span>
                             {% if collection.results_count %}
                                 {% if collection.results_count == 1 %}
@@ -54,18 +93,76 @@
                             {% endif %}
                         </span>
                     </h2>
+                    <div class="hidden">
+                        <span id="ProductCountDesktop">
+                            {# Same content as ProductCount, used for desktop view #}
+                            {% if collection.results_count %}
+                                {% if collection.results_count == 1 %}
+                                    {{ collection.results_count }} result for {{ collection.terms }}
+                                {% else %}
+                                    {{ collection.results_count }} results for {{ collection.terms }}
+                                {% endif %}
+                            {% elsif collection.products_count == collection.all_products_count %}
+                                {% if collection.products_count == 1 %}
+                                    {{ collection.products_count }} product
+                                {% else %}
+                                    {{ collection.products_count }} products
+                                {% endif %}
+                            {% else %}
+                                {% if collection.products_count == 1 %}
+                                    {{ collection.all_products_count }} of {{ collection.products_count }} product
+                                {% else %}
+                                    {{ collection.all_products_count }} of {{ collection.products_count }} products
+                                {% endif %}
+                            {% endif %}
+                        </span>
+                    </div>
                 </div>
             </form>
+            
+            {% comment %} Mobile sorting drawer button {% endcomment %}
+            {% comment %} <div class="facets__disclosure mobile-facets__open">
+                <button class="mobile-facets__open-button button" aria-expanded="false" aria-controls="mobile-menu-facets">
+                    <span class="mobile-facets__open-label">Filter and sort</span>
+                    <span class="mobile-facets__count">{{ collection.products_count }}</span>
+                </button>
+            </div> {% endcomment %}
         </facet-filters-form>
 
-        <div>
-            <script src="{{ 'facets.js' | asset_url }}" defer></script>
-            <aside>
-                {% render 'facets' %}
+        <div class="collection-content">
+            <aside class="facets-container">
+                {% render 'facets', results: collection, paginate: paginate %}
             </aside>
 
-            <div class="product-grid-container"></div>
+            <div id="ProductGridContainer" class="product-grid-container">
+                {# Product grid will be rendered here by JavaScript #}
+                {% for product in collection.products %}
+                    <div class="product-card">
+                        <a href="{{ product.url }}">
+                            <img src="{{ product.featured_image | img_url: '300x300' }}" alt="{{ product.title | escape }}">
+                            <h3>{{ product.title }}</h3>
+                            <p>{{ product.price | money }}</p>
+                        </a>
+                    </div>
+                {% endfor %}
+            </div>
         </div>
+        
+        {% comment %} Mobile facet drawer menu {% endcomment %}
+        {% comment %} <menu-drawer class="mobile-facets__wrapper" id="mobile-menu-facets">
+            <details class="mobile-facets">
+                <summary class="mobile-facets__disclosure-button">
+                    <span class="mobile-facets__disclosure-label">Filter and sort</span>
+                </summary>
+                <facet-filters-form id="FacetFiltersFormMobile">
+                    <form class="mobile-facets__form">
+                        <div class="mobile-facets__inner">
+                            {# Mobile facet content will be populated by JavaScript #}
+                        </div>
+                    </form>
+                </facet-filters-form>
+            </details>
+        </menu-drawer> {% endcomment %}
     {% endpaginate %}
 </div>
 
