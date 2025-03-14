@@ -1,6 +1,8 @@
+{{ 'flickity.min.css' | asset_url | stylesheet_tag }}
 {{ 'main-collection-product-grid.css' | asset_url | stylesheet_tag }}
+<script src="{{ 'flickity.pkgd.min.js' | asset_url }}" defer></script>
 <script src="{{ 'collection-grid.js' | asset_url }}" defer></script>
-
+<script src="{{ 'product-slider.js' | asset_url }}" defer></script>
 <div class="collection-product-grid__wrapper">
     {% paginate collection.products by 10 %}
         <div class="collection-product-grid__header">
@@ -43,139 +45,218 @@
         <hr>
         {% comment %} Collection Grid with filters sidebar {% endcomment %}
         <div class="collection-product-grid__content-wrapper">
-            <aside></aside>
-            <div>
-                {% for product in collection.products %}
-                    <article class="product-slider__carousel-cell">
-                        <header class="product-slider__cell-header">
-                            <a href="{{ product.url }}">
-                                <figure class="product-slider__cell-image">
-                                    {{
-                                        product.featured_image
-                                        | image_url: width: 250, crop: 'top'
-                                        | image_tag: alt: product.title, class: 'product-slider__image'
-                                    }}
-                                </figure>
-                                <figure class="product-slider__cell-image">
-                                    {{
-                                        product.images[1]
-                                        | image_url: width: 250, crop: 'top'
-                                        | image_tag: alt: product.title, class: 'product-slider__second-image'
-                                    }}
-                                </figure>
-                            </a>
-                            <button data-open-modal class="product-slider__open-modal">QUICK VIEW</button>
-                            <dialog data-modal class="product-slider__modal" id="product-modal-{{ product.id }}">
-                                <article class="product-slider__carousel-dialog-wrapper">
-                                    <figure class="product-slider__carousel-dialog">
-                                        {% for image in product.images %}
-                                            <div class="product-slider__carousel-dialog-cell">
-                                                {{
-                                                    image
-                                                    | image_url: width: 380, crop: 'top'
-                                                    | image_tag:
-                                                        class: 'product-slider__carousel-dialog-image',
-                                                        alt: product.title
-                                                }}
-                                            </div>
-                                        {% endfor %}
-                                    </figure>
-                                    <div class="product-slider__carousel-dialog-content">
-                                        <button data-close-modal type="button" class="product-slider__close-modal">
-                                            <svg
-                                                width="25px"
-                                                height="25px"
-                                                viewBox="-0.5 0 25 25"
-                                                fill="none"
-                                                xmlns="http://www.w3.org/2000/svg"
-                                            >
-                                                <g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path d="M3 21.32L21 3.32001" stroke="#000000" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path> <path d="M3 3.32001L21 21.32" stroke="#000000" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path> </g>
-                                            </svg>
-                                        </button>
-                                        <header>
-                                            <h2 class="product-slider__carousel-dialog-product-title">
-                                                {{ product.title | upcase }}
-                                            </h2>
-                                            <p class="product-slider__carousel-dialog-product-price">
-                                                {{ product.price | money }}
-                                            </p>
-                                        </header>
-                                        <main>
-                                            <section class="product-slider__carousel-dialog-product-color-wrapper">
-                                                <h5>Colors</h5>
-                                                <div class="product-slider__carousel-dialog-product-color-container">
-                                                    {% for color_reference in product.metafields.shopify['color-pattern'].value %}
-                                                        {% if forloop.first %}
-                                                            <div
-                                                                style="--product-color: {{ color_reference.color }}"
-                                                                class="product-slider__carousel-dialog-product-color"
-                                                            >
-                                                                <span
-                                                                    aria-roledescription="Tooltip for Product Color"
-                                                                    class="tooltip"
-                                                                >
-                                                                    {{- product.title }} in {{ color_reference.label -}}
-                                                                </span>
-                                                            </div>
-                                                        {% endif %}
-                                                    {% endfor %}
-                                                </div>
-                                            </section>
-                                            {% form 'product', product %}
-                                                <section>
-                                                    <h5 class="product-slider__carouse-dialog-sizes-title">Sizes</h5>
-                                                    <ul class="product-slider__carousel-dialog-sizes-list">
-                                                        {% for variant in product.variants %}
-                                                            <li class="product-slider__carousel-dialog-sizes-list-item">
-                                                                <input
-                                                                    type="radio"
-                                                                    style="--product-size: {{ variant.title }}"
-                                                                    name="id"
-                                                                    id="product-{{ product.id }}-variant-{{ variant.id }}"
-                                                                    value="{{ variant.id }}"
-                                                                >
-                                                                <label
-                                                                    class="product-slider__carousel-dialog-size-label"
-                                                                    for="product-{{ product.id }}-variant-{{ variant.id }}"
-                                                                >
-                                                                    {{ variant.title }}
-                                                                </label>
-                                                            </li>
-                                                        {% endfor %}
-                                                    </ul>
-                                                </section>
+            <aside class="collection-product-grid__sidebar">
+                <form>
+                    {%- for filter in collection.filters -%}
+                        <details>
+                            <summary>
+                                <div>
+                                    <span>{{ filter.label }}</span>
+
+                                    {%- if filter.active_values.size > 0 -%}
+                                        <span>({{ filter.active_values.size }})</span>
+                                    {%- endif -%}
+                                </div>
+                            </summary>
+
+                            <div>
+                                <div>
+                                    <p>{{ filter.active_values.size }} selected</p>
+                                    {%- if filter.active_values.size > 0 -%}
+                                        <p><a href="{{ filter.url_to_remove }}">Reset</a></p>
+                                    {%- endif -%}
+                                </div>
+                                {%- case filter.type -%}
+                                    {%- when 'boolean' -%}
+                                        <ul>
+                                            <li>
+                                                <label for="Filter-{{ filter.param_name }}-{{ filter.true_value.value }}">
+                                                    <input
+                                                        type="checkbox"
+                                                        name="{{ filter.param_name }}"
+                                                        value="{{ filter.true_value.value }}"
+                                                        id="Filter-{{ filter.param_name }}"
+                                                        {% if filter.true_value.active -%}
+                                                            checked
+                                                        {%- endif %}
+                                                        {% if filter.true_value.count == 0
+                                                            and filter.true_value.active == false
+                                                        -%}
+                                                            disabled
+                                                        {%- endif -%}
+                                                    >
+                                                    {{- filter.true_value.label -}}
+                                                </label>
+                                            </li>
+                                            <li>
+                                                <label for="Filter-{{ filter.param_name }}-{{ filter.false_value.value }}">
+                                                    <input
+                                                        type="checkbox"
+                                                        name="{{ filter.param_name }}"
+                                                        value="{{ filter.false_value.value }}"
+                                                        id="Filter-{{ filter.param_name }}"
+                                                        {% if filter.false_value.active -%}
+                                                            checked
+                                                        {%- endif %}
+                                                        {% if filter.false_value.count == 0
+                                                            and filter.false_value.active == false
+                                                        -%}
+                                                            disabled
+                                                        {%- endif %}
+                                                    >
+                                                    {{- filter.false_value.label -}}
+                                                </label>
+                                            </li>
+                                        </ul>
+
+                                        <div>
+                                            <input type="submit" value="Apply">
+                                        </div>
+                                    {%- when 'list' -%}
+                                        <ul>
+                                            {%- for filter_value in filter.values -%}
+                                                <li>
+                                                    <label for="Filter-{{ filter.param_name }}-{{ forloop.index }}">
+                                                        <input
+                                                            type="checkbox"
+                                                            name="{{ filter_value.param_name }}"
+                                                            value="{{ filter_value.value }}"
+                                                            id="Filter-{{ filter.param_name }}-{{ forloop.index }}"
+                                                            {% if filter_value.active -%}
+                                                                checked
+                                                            {%- endif %}
+                                                            {% if filter_value.count == 0
+                                                                and filter_value.active == false
+                                                            -%}
+                                                                disabled
+                                                            {%- endif %}
+                                                        >
+                                                        <span>
+                                                            {%- case filter_value.display.type -%}
+                                                                {%- when 'colors' -%}
+                                                                    {% liquid
+                                                                        assign size_limit = filter_value.display.value.size | at_most: 4
+                                                                        assign rotation = '0deg'
+                                                                        if size_limit == 2
+                                                                            assign rotation = '45deg'
+                                                                        endif
+
+                                                                        assign angle_increment = 360 | divided_by: size_limit
+                                                                        assign angle = 0
+                                                                    %}
+                                                                    {%- capture conic_gradient -%}
+                                              {%- for color in filter_value.display.value limit: size_limit -%}
+                                                {{ color }} {{ angle }}deg{%- assign angle = angle | plus: angle_increment %} {{ angle }}deg{%- unless forloop.last %}, {%- endunless -%}
+                                              {%- endfor -%}
+                                            {%- endcapture -%}
+                                                                    <span
+                                                                        style="
+                                                                            width: 25px;
+                                                                            height: 25px;
+                                                                            border-radius: 50%;
+                                                                            display: flex;
+                                                                            justify-content: center;
+                                                                            align-items: center;
+                                                                            background: conic-gradient({{ conic_gradient }}); transform: rotateZ({{ rotation }});
+                                                                        "
+                                                                    ></span>
+                                                                {%- when 'image' -%}
+                                                                    {{
+                                                                        filter_value.display.value
+                                                                        | image_url: width: 25
+                                                                        | image_tag: alt: filter_value.display.value.alt
+                                                                    }}
+                                                                {%- else -%}
+                                                                    <span class="visual-display__child"></span>
+                                                            {%- endcase -%}
+                                                        </span>
+                                                        {{ filter_value.label }}
+                                                    </label>
+                                                </li>
+                                            {%- endfor -%}
+                                        </ul>
+
+                                        <div>
+                                            <input type="submit" value="Apply">
+                                        </div>
+                                    {%- when 'price_range' -%}
+                                        <div class="filter-group-display__price-range">
+                                            <div class="filter-group-display__price-range-from">
+                                                <span>{{ cart.currency.symbol }}</span>
+
                                                 <input
-                                                    class="product-slider__carousel-dialog-add-to-cart"
-                                                    type="submit"
-                                                    value="ADD TO CART"
+                                                    name="{{ filter.min_value.param_name }}"
+                                                    id="Filter-{{ filter.min_value.param_name }}"
+                                                    {% if filter.min_value.value -%}
+                                                        value="{{ filter.min_value.value | money_without_currency | replace: ',', '' }}"
+                                                    {%- endif %}
+                                                    type="number"
+                                                    placeholder="0"
+                                                    min="0"
+                                                    max="{{ filter.range_max | money_without_currency | replace: ',', '' }}"
                                                 >
-                                            {% endform %}
-                                        </main>
-                                        <footer>
-                                            <div class="product-slider__carousel-dialog-product-description-container">
-                                                <p>
-                                                    {{ product.description }}
-                                                </p>
+
+                                                <label for="Filter-{{ filter.min_value.param_name }}">From</label>
                                             </div>
-                                            <div class="product-slider__carousel-dialog-full-details-container">
-                                                <a
-                                                    class="product-slider__carousel-dialog-full-details-link"
-                                                    href="{{ product.url }}"
-                                                    >VIEW FULL DETAILS</a
+                                            <div class="filter-group-display__price-range-to">
+                                                <span>{{ cart.currency.symbol }}</span>
+
+                                                <input
+                                                    name="{{ filter.max_value.param_name }}"
+                                                    id="Filter-{{ filter.max_value.param_name }}"
+                                                    {% if filter.max_value.value -%}
+                                                        value="{{ filter.max_value.value | money_without_currency | replace: ',', '' }}"
+                                                    {%- endif %}
+                                                    type="number"
+                                                    placeholder="{{ filter.range_max | money_without_currency | replace: ',', '' }}"
+                                                    min="0"
+                                                    max="{{ filter.range_max | money_without_currency | replace: ',', '' }}"
                                                 >
+
+                                                <label for="Filter-{{ filter.max_value.param_name }}">To</label>
                                             </div>
-                                        </footer>
-                                    </div>
-                                </article>
-                            </dialog>
-                        </header>
-                        <main class="product-slider__cell-main">
-                            <a href="{{ product.url }}">
-                                <h4>{{ product.title }}</h4>
-                                <p>{{ product.price | money }}</p>
-                            </a>
-                        </main>
-                    </article>
+                                        </div>
+
+                                        <div class="filter-group-display__submit">
+                                            <input type="submit" value="Apply">
+                                        </div>
+                                {%- endcase -%}
+                            </div>
+                        </details>
+                    {%- endfor -%}
+
+                    <div>
+                        <p><a href="{{ collection.url }}?sort_by={{ collection.sort_by }}">Clear all</a></p>
+
+                        {%- for filter in collection.filters -%}
+                            {%- if filter.type == 'price_range' -%}
+                                {%- if filter.min_value.value != null or filter.max_value.value != null -%}
+                                    <p>
+                                        <a href="{{ filter.url_to_remove }}">
+                                            {%- assign min_value = filter.min_value.value | default: 0 -%}
+                                            {%- assign max_value = filter.max_value.value
+                                                | default: filter.range_max
+                                            -%}
+                                            {{ min_value | money }} - {{ max_value | money }} X
+                                        </a>
+                                    </p>
+                                {%- endif -%}
+                            {%- else -%}
+                                {%- for filter_value in filter.active_values -%}
+                                    <p>
+                                        <a href="{{ filter_value.url_to_remove }}">
+                                            {{ filter.label }}: {{ filter_value.label }} X
+                                        </a>
+                                    </p>
+                                {%- endfor -%}
+                            {%- endif -%}
+                        {%- endfor -%}
+                    </div>
+                </form>
+            </aside>
+            <div class="collection-product-grid__products-wrapper">
+                {% for product in collection.products %}
+                    {% render 'product-card', product: product %}
                 {% endfor %}
             </div>
         </div>

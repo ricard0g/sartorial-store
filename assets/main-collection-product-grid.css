@@ -41,3 +41,42 @@
     border: none;
     outline: none;
 }
+
+.collection-product-grid__content-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: start;
+    width: 100%;
+    height: auto;
+}
+
+.collection-product-grid__products-wrapper {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-auto-rows: auto;
+    column-gap: 10px;
+    width: 85%;
+}
+
+.collection-product-grid__sidebar {
+    width: 15%;
+}
+
+.flickity-button {
+    opacity: 0;
+    background-color: rgba(255, 255, 255, 0.5);
+    border-radius: 0;
+    transition: all 500ms ease;
+}
+
+.product-slider__carousel:hover .flickity-button, .product-slider__carousel-cell:hover .flickity-button {
+    opacity: 1;
+}
+
+.flickity-prev-next-button.previous {
+    left: 0;
+}
+
+.flickity-prev-next-button.next {
+    right: 0;
+}
