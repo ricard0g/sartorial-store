@@ -1,0 +1,43 @@
+.collection-product-grid__container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: auto;
+}
+
+.collection-product-grid__wrapper {
+    width: 80%;
+}
+
+.collection-product-grid__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    margin: 4vh auto 4vh auto;
+}
+
+.collection-product-grid__title {
+    font-size: 1.875rem;
+    font-weight: 400;
+    color: #333;
+    font-family: 'Cormorant Unicase', serif;
+    margin-bottom: 1vh;
+}
+
+.collection-product-grid__header span {
+    font-size: 1rem;
+    font-weight: 400;
+    font-style: italic;
+    color: #333;
+    font-family: 'Cormorant Unicase', serif;
+}
+
+#SortBy {
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    font-family: 'Cormorant Unicase', serif;
+    border: none;
+    outline: none;
+}

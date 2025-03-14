@@ -1,94 +1,183 @@
 {{ 'main-collection-product-grid.css' | asset_url | stylesheet_tag }}
-<script src="{{ 'facets.js' | asset_url }}" defer></script>
-<div class="page-width" id="product-grid" data-id="{{ section.id }}">
+<script src="{{ 'collection-grid.js' | asset_url }}" defer></script>
+
+<div class="collection-product-grid__wrapper">
     {% paginate collection.products by 10 %}
-        {% comment %} Sorting form first tabbable element {% endcomment %}
-        <facet-filters-form class="sidebar-filters facet-filters">
-            <form id="FacetSortForm" class="facets__form">
-                <div class="facet-filters__field">
-                    <div class="select">
-                        <h2>
-                            <label for="SortBy">Sort By:</label>
-                        </h2>
-                        <div class="sort-wrapper">
+        <div class="collection-product-grid__header">
+            <div class="collection-product-grid__title-wrapper">
+                <h1 class="collection-product-grid__title">{{ collection.title }}</h1>
+                <span>
+                    {% if collection.all_products_count != 0 %}
+                        {% if collection.all_products_count == 1 %}
+                            {{ collection.all_products_count }} product
+                        {% else %}
+                            {{ collection.all_products_count }} products
+                        {% endif %}
+                    {% else %}
+                        No products found
+                    {% endif %}
+                </span>
+            </div>
+            <div class="collection-product-grid__sort-wrapper">
+                <sort-by>
+                    <form method="get">
+                        <div>
                             {% assign sort_by = collection.sort_by | default: collection.default_sort_by %}
-                            <select id="SortBy" name="sort_by" class="facet-filters__sort">
+                            <select id="SortBy" name="SortBy">
                                 {% for option in collection.sort_options %}
                                     <option
-                                        value="{{ option.value | escape }}"
+                                        value="{{ option.value }}"
                                         {% if option.value == sort_by %}
-                                            selected="selected"
+                                            selected
                                         {% endif %}
                                     >
                                         {{ option.name | escape }}
                                     </option>
                                 {% endfor %}
                             </select>
-                            <span class="svg-wrapper">
-                                {{ 'icon-caret.svg' | inline_asset_content }}
-                            </span>
                         </div>
-                    </div>
-                </div>
-
-                <div class="results-count">
-                    <h2 id="ProductCount" class="product-count">
-                        <span>
-                            {% if collection.results_count %}
-                                {% if collection.results_count == 1 %}
-                                    {{ collection.results_count }} result for {{ collection.terms }}
-                                {% else %}
-                                    {{ collection.results_count }} results for {{ collection.terms }}
-                                {% endif %}
-                            {% elsif collection.products_count == collection.all_products_count %}
-                                {% if collection.products_count == 1 %}
-                                    {{ collection.products_count }} product
-                                {% else %}
-                                    {{ collection.products_count }} products
-                                {% endif %}
-                            {% else %}
-                                {% if collection.products_count == 1 %}
-                                    {{ collection.all_products_count }} of {{ collection.products_count }} product
-                                {% else %}
-                                    {{ collection.all_products_count }} of {{ collection.products_count }} products
-                                {% endif %}
-                            {% endif %}
-                        </span>
-                    </h2>
-                    <div class="hidden">
-                        <span id="ProductCountDesktop">
-                            {# Same content as ProductCount, used for desktop view #}
-                            {% if collection.results_count %}
-                                {% if collection.results_count == 1 %}
-                                    {{ collection.results_count }} result for {{ collection.terms }}
-                                {% else %}
-                                    {{ collection.results_count }} results for {{ collection.terms }}
-                                {% endif %}
-                            {% elsif collection.products_count == collection.all_products_count %}
-                                {% if collection.products_count == 1 %}
-                                    {{ collection.products_count }} product
-                                {% else %}
-                                    {{ collection.products_count }} products
-                                {% endif %}
-                            {% else %}
-                                {% if collection.products_count == 1 %}
-                                    {{ collection.all_products_count }} of {{ collection.products_count }} product
-                                {% else %}
-                                    {{ collection.all_products_count }} of {{ collection.products_count }} products
-                                {% endif %}
-                            {% endif %}
-                        </span>
-                    </div>
-                </div>
-            </form>
-        </facet-filters-form>
-
-        <div class="collection-content">
-            <aside class="facets-container">
-                {% render 'facets', results: collection, paginate: paginate %}
-            </aside>
-
-            <div id="ProductGridContainer" class="product-grid-container"></div>
+                    </form>
+                </sort-by>
+            </div>
+        </div>
+        <hr>
+        {% comment %} Collection Grid with filters sidebar {% endcomment %}
+        <div class="collection-product-grid__content-wrapper">
+            <aside></aside>
+            <div>
+                {% for product in collection.products %}
+                    <article class="product-slider__carousel-cell">
+                        <header class="product-slider__cell-header">
+                            <a href="{{ product.url }}">
+                                <figure class="product-slider__cell-image">
+                                    {{
+                                        product.featured_image
+                                        | image_url: width: 250, crop: 'top'
+                                        | image_tag: alt: product.title, class: 'product-slider__image'
+                                    }}
+                                </figure>
+                                <figure class="product-slider__cell-image">
+                                    {{
+                                        product.images[1]
+                                        | image_url: width: 250, crop: 'top'
+                                        | image_tag: alt: product.title, class: 'product-slider__second-image'
+                                    }}
+                                </figure>
+                            </a>
+                            <button data-open-modal class="product-slider__open-modal">QUICK VIEW</button>
+                            <dialog data-modal class="product-slider__modal" id="product-modal-{{ product.id }}">
+                                <article class="product-slider__carousel-dialog-wrapper">
+                                    <figure class="product-slider__carousel-dialog">
+                                        {% for image in product.images %}
+                                            <div class="product-slider__carousel-dialog-cell">
+                                                {{
+                                                    image
+                                                    | image_url: width: 380, crop: 'top'
+                                                    | image_tag:
+                                                        class: 'product-slider__carousel-dialog-image',
+                                                        alt: product.title
+                                                }}
+                                            </div>
+                                        {% endfor %}
+                                    </figure>
+                                    <div class="product-slider__carousel-dialog-content">
+                                        <button data-close-modal type="button" class="product-slider__close-modal">
+                                            <svg
+                                                width="25px"
+                                                height="25px"
+                                                viewBox="-0.5 0 25 25"
+                                                fill="none"
+                                                xmlns="http://www.w3.org/2000/svg"
+                                            >
+                                                <g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path d="M3 21.32L21 3.32001" stroke="#000000" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path> <path d="M3 3.32001L21 21.32" stroke="#000000" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path> </g>
+                                            </svg>
+                                        </button>
+                                        <header>
+                                            <h2 class="product-slider__carousel-dialog-product-title">
+                                                {{ product.title | upcase }}
+                                            </h2>
+                                            <p class="product-slider__carousel-dialog-product-price">
+                                                {{ product.price | money }}
+                                            </p>
+                                        </header>
+                                        <main>
+                                            <section class="product-slider__carousel-dialog-product-color-wrapper">
+                                                <h5>Colors</h5>
+                                                <div class="product-slider__carousel-dialog-product-color-container">
+                                                    {% for color_reference in product.metafields.shopify['color-pattern'].value %}
+                                                        {% if forloop.first %}
+                                                            <div
+                                                                style="--product-color: {{ color_reference.color }}"
+                                                                class="product-slider__carousel-dialog-product-color"
+                                                            >
+                                                                <span
+                                                                    aria-roledescription="Tooltip for Product Color"
+                                                                    class="tooltip"
+                                                                >
+                                                                    {{- product.title }} in {{ color_reference.label -}}
+                                                                </span>
+                                                            </div>
+                                                        {% endif %}
+                                                    {% endfor %}
+                                                </div>
+                                            </section>
+                                            {% form 'product', product %}
+                                                <section>
+                                                    <h5 class="product-slider__carouse-dialog-sizes-title">Sizes</h5>
+                                                    <ul class="product-slider__carousel-dialog-sizes-list">
+                                                        {% for variant in product.variants %}
+                                                            <li class="product-slider__carousel-dialog-sizes-list-item">
+                                                                <input
+                                                                    type="radio"
+                                                                    style="--product-size: {{ variant.title }}"
+                                                                    name="id"
+                                                                    id="product-{{ product.id }}-variant-{{ variant.id }}"
+                                                                    value="{{ variant.id }}"
+                                                                >
+                                                                <label
+                                                                    class="product-slider__carousel-dialog-size-label"
+                                                                    for="product-{{ product.id }}-variant-{{ variant.id }}"
+                                                                >
+                                                                    {{ variant.title }}
+                                                                </label>
+                                                            </li>
+                                                        {% endfor %}
+                                                    </ul>
+                                                </section>
+                                                <input
+                                                    class="product-slider__carousel-dialog-add-to-cart"
+                                                    type="submit"
+                                                    value="ADD TO CART"
+                                                >
+                                            {% endform %}
+                                        </main>
+                                        <footer>
+                                            <div class="product-slider__carousel-dialog-product-description-container">
+                                                <p>
+                                                    {{ product.description }}
+                                                </p>
+                                            </div>
+                                            <div class="product-slider__carousel-dialog-full-details-container">
+                                                <a
+                                                    class="product-slider__carousel-dialog-full-details-link"
+                                                    href="{{ product.url }}"
+                                                    >VIEW FULL DETAILS</a
+                                                >
+                                            </div>
+                                        </footer>
+                                    </div>
+                                </article>
+                            </dialog>
+                        </header>
+                        <main class="product-slider__cell-main">
+                            <a href="{{ product.url }}">
+                                <h4>{{ product.title }}</h4>
+                                <p>{{ product.price | money }}</p>
+                            </a>
+                        </main>
+                    </article>
+                {% endfor %}
+            </div>
         </div>
     {% endpaginate %}
 </div>
