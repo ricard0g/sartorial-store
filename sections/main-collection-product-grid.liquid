@@ -47,6 +47,33 @@
         <div class="collection-product-grid__content-wrapper">
             <aside class="collection-product-grid__sidebar">
                 <form-facets>
+                    <div>
+                        <p><a href="{{ collection.url }}?sort_by={{ collection.sort_by }}">Clear all</a></p>
+
+                        {%- for filter in collection.filters -%}
+                            {%- if filter.type == 'price_range' -%}
+                                {%- if filter.min_value.value != null or filter.max_value.value != null -%}
+                                    <p>
+                                        <a href="{{ filter.url_to_remove }}">
+                                            {%- assign min_value = filter.min_value.value | default: 0 -%}
+                                            {%- assign max_value = filter.max_value.value
+                                                | default: filter.range_max
+                                            -%}
+                                            {{ min_value | money }} - {{ max_value | money }} X
+                                        </a>
+                                    </p>
+                                {%- endif -%}
+                            {%- else -%}
+                                {%- for filter_value in filter.active_values -%}
+                                    <p>
+                                        <a href="{{ filter_value.url_to_remove }}">
+                                            {{ filter.label }}: {{ filter_value.label }} X
+                                        </a>
+                                    </p>
+                                {%- endfor -%}
+                            {%- endif -%}
+                        {%- endfor -%}
+                    </div>
                     <form>
                         {%- for filter in collection.filters -%}
                             <details
@@ -160,7 +187,7 @@
                                                                                 height: 15px;
                                                                                 border-radius: 0;
                                                                                 {% if filter_value.swatch.color == '#FFFFFF' %}
-                                                                                    border: 1px solid #888;
+                                                                                    border: 1px solid #88888830;
                                                                                  {% endif %}
                                                                                 display: flex;
                                                                                 justify-content: center;
@@ -188,37 +215,36 @@
 
                                         {%- when 'price_range' -%}
                                             <div id="PriceRange" class="filter-group-display__price-range">
-                                                <div class="filter-group-display__price-range-from">
+                                                <span class="filter-group-display__highest-text"
+                                                    >Highest price is {{ filter.range_max | money -}}
+                                                </span>
+                                                <div class="filter-group-display__price-range">
                                                     <label for="Filter-{{ filter.min_value.param_name }}">From</label>
                                                     <input
                                                         name="{{ filter.min_value.param_name }}"
                                                         id="Filter-{{ filter.min_value.param_name }}"
                                                         {% if filter.min_value.value -%}
-                                                            value="{{ filter.min_value.value | money_without_currency | replace: ',', '' }}"
+                                                            value="{{ filter.min_value.value | divided_by: 100 }}"
                                                         {%- endif %}
                                                         type="number"
-                                                        placeholder="0"
+                                                        placeholder="0 {{ cart.currency.symbol }}"
                                                         min="0"
                                                         max="{{ filter.range_max | money_without_currency | replace: ',', '' }}"
                                                     >
-
-                                                    <span>{{ cart.currency.symbol }}</span>
                                                 </div>
-                                                <div class="filter-group-display__price-range-to">
+                                                <div class="filter-group-display__price-range">
                                                     <label for="Filter-{{ filter.max_value.param_name }}">To</label>
                                                     <input
                                                         name="{{ filter.max_value.param_name }}"
                                                         id="Filter-{{ filter.max_value.param_name }}"
                                                         {% if filter.max_value.value -%}
-                                                            value="{{ filter.max_value.value | money_without_currency | replace: ',', '' }}"
+                                                            value="{{ filter.max_value.value | divided_by: 100 }}"
                                                         {%- endif %}
                                                         type="number"
-                                                        placeholder="{{ filter.range_max | money_without_currency }}"
+                                                        placeholder="{{ filter.range_max | money_without_currency }} {{ cart.currency.symbol }}"
                                                         min="0"
-                                                        max="{{ filter.range_max | money_without_currency | replace: ',', '' }}"
+                                                        max="{{ filter.range_max | money_without_currency | replace: ',', '' | divided_by: 100 | plus: 1 }}"
                                                     >
-
-                                                    <span>{{ cart.currency.symbol }}</span>
                                                 </div>
                                             </div>
 
@@ -229,34 +255,6 @@
                                 </div>
                             </details>
                         {%- endfor -%}
-
-                        <div>
-                            <p><a href="{{ collection.url }}?sort_by={{ collection.sort_by }}">Clear all</a></p>
-
-                            {%- for filter in collection.filters -%}
-                                {%- if filter.type == 'price_range' -%}
-                                    {%- if filter.min_value.value != null or filter.max_value.value != null -%}
-                                        <p>
-                                            <a href="{{ filter.url_to_remove }}">
-                                                {%- assign min_value = filter.min_value.value | default: 0 -%}
-                                                {%- assign max_value = filter.max_value.value
-                                                    | default: filter.range_max
-                                                -%}
-                                                {{ min_value | money }} - {{ max_value | money }} X
-                                            </a>
-                                        </p>
-                                    {%- endif -%}
-                                {%- else -%}
-                                    {%- for filter_value in filter.active_values -%}
-                                        <p>
-                                            <a href="{{ filter_value.url_to_remove }}">
-                                                {{ filter.label }}: {{ filter_value.label }} X
-                                            </a>
-                                        </p>
-                                    {%- endfor -%}
-                                {%- endif -%}
-                            {%- endfor -%}
-                        </div>
                     </form>
                 </form-facets>
             </aside>

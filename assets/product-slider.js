@@ -27,7 +27,6 @@ document.addEventListener('DOMContentLoaded', () => {
             // Initialize the carousel
             if (!dialogCarousels[dialog.id]) {
                 const dialogCarousel = dialog.querySelector('.product-slider__carousel-dialog');
-                console.log(dialogCarousel);
                 dialogCarousels[dialog.id] = new Flickity(dialogCarousel, {
                     wrapAround: true,
                     cellAllign: 'center',

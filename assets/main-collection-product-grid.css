@@ -64,6 +64,7 @@ hr {
     grid-auto-rows: auto;
     column-gap: 10px;
     width: 85%;
+    padding: 0 1vh;
 }
 
 .collection-product-grid__sidebar {
@@ -82,6 +83,7 @@ hr {
 summary {
     margin-bottom: 1vh;
     border-bottom: 0.1px solid #8b8b8b85;
+    cursor: pointer;
 }
 
 summary::marker {
@@ -110,9 +112,9 @@ summary::marker {
     align-items: center;
     width: 100%;
     font-size: 0.85rem;
-    font-weight: 300;
+    font-weight: 400;
     color: #282828;
-    text-transform: uppercase;
+    /* text-transform: uppercase; */
 }
 
 .collection-product-grid__filter-list-item label {
@@ -122,14 +124,6 @@ summary::marker {
     width: 100%;
     cursor: pointer;
 }
-
-/* .collection-product-grid__filter-list-item input[type="checkbox"] {
-    accent-color: #000;
-    height: 15px;
-    width: 15px;
-    margin-right: 8px;
-    border-radius: 0;
-} */
 
 .collection-product-grid__filter-list-item input[type='checkbox'] {
     /* Remove default browser styling */
@@ -143,13 +137,14 @@ summary::marker {
     margin-right: 8px;
 
     /* Add border and ensure square shape */
-    border: 1px solid #888;
+    border: 1px solid #888888;
     border-radius: 0;
     padding: 0;
 
     /* Style for checked state */
     background-color: white;
     position: relative;
+    cursor: pointer;
 }
 
 /* Style the checked state */
@@ -171,6 +166,53 @@ summary::marker {
     transform: rotate(45deg);
 }
 
+/* Price Range Input */
+.filter-group-display__price-range {
+    margin: 2.5vh 0;
+}
+
+.filter-group-display__highest-text {
+    font-size: 0.8rem;
+    font-weight: 400;
+    color: #282828;
+}
+
+#PriceRange label {
+    display: block;
+    font-size: 0.9rem;
+    margin-bottom: 10px;
+}
+
+#PriceRange input[type='number'] {
+    width: 100%;
+    padding: 1.5vh 2vh;
+    color: #282828;
+    outline: #888888;
+    border: 1px solid #888888;
+    border-radius: none;
+}
+
+#PriceRange input[type='number']::-webkit-inner-spin-button,
+#PriceRange input[type='number']::-webkit-outer-spin-button {
+    display: none;
+}
+
+.filter-group-display__submit > input {
+    width: 100%;
+    height: 5vh;
+    background-color: #494949;
+    color: white;
+    font-size: 0.9rem;
+    font-weight: 600;
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.filter-group-display__submit > input:hover {
+    background-color: #828282;
+}
+
 /* Product Card Slider buttons */
 .flickity-button {
     opacity: 0;
@@ -190,4 +232,11 @@ summary::marker {
 
 .flickity-prev-next-button.next {
     right: 0;
+}
+
+@media only screen and (max-width: 1024px) {
+    .collection-product-grid__wrapper {
+        width: 100%;
+        padding: 0 1vh;
+    }
 }
