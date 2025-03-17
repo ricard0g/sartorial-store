@@ -70,6 +70,15 @@ hr {
     width: 15%;
 }
 
+.collection-product-grid__filter-group[open] .collection-product-grid__filter-title span svg {
+    transform: rotateX(180deg);
+    transition: transform 0.3s ease;
+}
+
+.collection-product-grid__filter-title span svg {
+    transition: transform 750ms ease;
+}
+
 summary {
     margin-bottom: 1vh;
     border-bottom: 0.1px solid #8b8b8b85;
@@ -79,6 +88,90 @@ summary::marker {
     content: '';
 }
 
+.collection-product-grid__filter-title {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    font-size: 0.9rem;
+    font-weight: 400;
+    color: #282828;
+    text-transform: uppercase;
+}
+
+.collection-product-grid__filter-list {
+    list-style: none;
+    padding: 0;
+}
+
+.collection-product-grid__filter-list-item {
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    width: 100%;
+    font-size: 0.85rem;
+    font-weight: 300;
+    color: #282828;
+    text-transform: uppercase;
+}
+
+.collection-product-grid__filter-list-item label {
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    width: 100%;
+    cursor: pointer;
+}
+
+/* .collection-product-grid__filter-list-item input[type="checkbox"] {
+    accent-color: #000;
+    height: 15px;
+    width: 15px;
+    margin-right: 8px;
+    border-radius: 0;
+} */
+
+.collection-product-grid__filter-list-item input[type='checkbox'] {
+    /* Remove default browser styling */
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+
+    /* Set dimensions */
+    height: 15px;
+    width: 15px;
+    margin-right: 8px;
+
+    /* Add border and ensure square shape */
+    border: 1px solid #888;
+    border-radius: 0;
+    padding: 0;
+
+    /* Style for checked state */
+    background-color: white;
+    position: relative;
+}
+
+/* Style the checked state */
+.collection-product-grid__filter-list-item input[type='checkbox']:checked {
+    background-color: #ad9371;
+    border: none;
+}
+
+/* Add checkmark */
+.collection-product-grid__filter-list-item input[type='checkbox']:checked::after {
+    content: '';
+    position: absolute;
+    left: 5px;
+    top: 2px;
+    width: 5px;
+    height: 9px;
+    border: solid white;
+    border-width: 0 2px 2px 0;
+    transform: rotate(45deg);
+}
+
+/* Product Card Slider buttons */
 .flickity-button {
     opacity: 0;
     background-color: rgba(255, 255, 255, 0.5);

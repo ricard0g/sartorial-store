@@ -50,6 +50,7 @@
                     <form>
                         {%- for filter in collection.filters -%}
                             <details
+                                class="collection-product-grid__filter-group"
                                 {% if forloop.index <= 3 or filter.active_values.size > 0 %}
                                     open
                                 {% endif %}
@@ -76,15 +77,21 @@
                                     </div>
                                 </summary>
 
-                                <div>
-                                    <div>
+                                <div class="collection-product-grid__filter-content">
+                                    <div class="collection-product-grid__filter-reset-wrapper">
                                         {%- if filter.active_values.size > 0 -%}
-                                            <p><a href="{{ filter.url_to_remove }}">Reset</a></p>
+                                            <p class="collection-product-grid__filter-reset-p">
+                                                <a
+                                                    class="collection-product-grid__filter-reset-a"
+                                                    href="{{ filter.url_to_remove }}"
+                                                    >Reset</a
+                                                >
+                                            </p>
                                         {%- endif -%}
                                     </div>
                                     {%- case filter.type -%}
                                         {%- when 'boolean' -%}
-                                            <ul>
+                                            <ul class="collection-product-grid__filter-list">
                                                 <li>
                                                     <label for="Filter-{{ filter.param_name }}-{{ filter.true_value.value }}">
                                                         <input
@@ -126,9 +133,9 @@
                                             </ul>
 
                                         {%- when 'list' -%}
-                                            <ul>
+                                            <ul class="collection-product-grid__filter-list">
                                                 {%- for filter_value in filter.values -%}
-                                                    <li>
+                                                    <li class="collection-product-grid__filter-list-item">
                                                         <label for="Filter-{{ filter.param_name }}-{{ forloop.index }}">
                                                             <input
                                                                 type="checkbox"
@@ -145,32 +152,21 @@
                                                                 {%- endif %}
                                                             >
                                                             <span>
-                                                                {%- case filter_value.display.type -%}
-                                                                    {%- when 'colors' -%}
-                                                                        {% liquid
-                                                                            assign size_limit = filter_value.display.value.size | at_most: 4
-                                                                            assign rotation = '0deg'
-                                                                            if size_limit == 2
-                                                                                assign rotation = '45deg'
-                                                                            endif
-
-                                                                            assign angle_increment = 360 | divided_by: size_limit
-                                                                            assign angle = 0
-                                                                        %}
-                                                                        {%- capture conic_gradient -%}
-                                              {%- for color in filter_value.display.value limit: size_limit -%}
-                                                {{ color }} {{ angle }}deg{%- assign angle = angle | plus: angle_increment %} {{ angle }}deg{%- unless forloop.last %}, {%- endunless -%}
-                                              {%- endfor -%}
-                                            {%- endcapture -%}
+                                                                {%- case filter.presentation -%}
+                                                                    {%- when 'swatch' -%}
                                                                         <span
                                                                             style="
-                                                                                width: 25px;
-                                                                                height: 25px;
-                                                                                border-radius: 50%;
+                                                                                width: 15px;
+                                                                                height: 15px;
+                                                                                border-radius: 0;
+                                                                                {% if filter_value.swatch.color == '#FFFFFF' %}
+                                                                                    border: 1px solid #888;
+                                                                                 {% endif %}
                                                                                 display: flex;
                                                                                 justify-content: center;
                                                                                 align-items: center;
-                                                                                background: conic-gradient({{ conic_gradient }}); transform: rotateZ({{ rotation }});
+                                                                                margin-right: 5px;
+                                                                                background-color: {{ filter_value.swatch.color }} ;
                                                                             "
                                                                         ></span>
                                                                     {%- when 'image' -%}
