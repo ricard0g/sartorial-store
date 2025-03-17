@@ -50,17 +50,29 @@
                     <form>
                         {%- for filter in collection.filters -%}
                             <details
-                                {% if forloop.index <= 3 %}
+                                {% if forloop.index <= 3 or filter.active_values.size > 0 %}
                                     open
                                 {% endif %}
                             >
                                 <summary>
                                     <div>
-                                        <span>{{ filter.label }}</span>
-
-                                        {%- if filter.active_values.size > 0 -%}
-                                            <span>({{ filter.active_values.size }})</span>
-                                        {%- endif -%}
+                                        <h4 class="collection-product-grid__filter-title">
+                                            {{ filter.label }}
+                                            {% if filter.active_values.size > 0 %}
+                                                ({{ filter.active_values.size }})
+                                            {% endif %}
+                                            <span>
+                                                <svg
+                                                    width="20px"
+                                                    height="20px"
+                                                    viewBox="0 0 20 20"
+                                                    fill="none"
+                                                    xmlns="http://www.w3.org/2000/svg"
+                                                >
+                                                    <g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path d="M7 10L12 15L17 10" stroke="#333" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"></path> </g>
+                                                </svg>
+                                            </span>
+                                        </h4>
                                     </div>
                                 </summary>
 
