@@ -402,7 +402,7 @@ mobile-drawer {
         width: 100%;
     }
 
-    summary::marker {
+    mobile-drawer summary::marker {
         content: '';
     }
 
