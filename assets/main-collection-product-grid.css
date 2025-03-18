@@ -402,6 +402,10 @@ mobile-drawer {
         width: 100%;
     }
 
+    summary::marker {
+        content: '';
+    }
+
     #SortByMobile {
         width: 100%;
         height: 7vh;
@@ -412,6 +416,7 @@ mobile-drawer {
         font-weight: 600;
         text-align: center;
         border: none;
+        border-radius: 0;
         cursor: pointer;
         transition: all 0.3s ease;
     }
