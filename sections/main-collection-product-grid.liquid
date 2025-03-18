@@ -4,7 +4,7 @@
 <script src="{{ 'collection-grid.js' | asset_url }}" defer></script>
 <script src="{{ 'product-slider.js' | asset_url }}" defer></script>
 <div class="collection-product-grid__wrapper">
-    {% paginate collection.products by 10 %}
+    {% paginate collection.products by 9 %}
         <div class="collection-product-grid__header">
             <div class="collection-product-grid__title-wrapper">
                 <h1 class="collection-product-grid__title">{{ collection.title }}</h1>
@@ -48,26 +48,27 @@
             <aside class="collection-product-grid__sidebar">
                 <form-facets>
                     <div>
-                        <p><a href="{{ collection.url }}?sort_by={{ collection.sort_by }}">Clear all</a></p>
+                        <p class="collection-product-grid__tag">
+                            <a href="{{ collection.url }}?sort_by={{ collection.sort_by }}">Clear all</a></p>
 
                         {%- for filter in collection.filters -%}
                             {%- if filter.type == 'price_range' -%}
                                 {%- if filter.min_value.value != null or filter.max_value.value != null -%}
-                                    <p>
+                                    <p class="collection-product-grid__tag">
                                         <a href="{{ filter.url_to_remove }}">
                                             {%- assign min_value = filter.min_value.value | default: 0 -%}
                                             {%- assign max_value = filter.max_value.value
                                                 | default: filter.range_max
                                             -%}
-                                            {{ min_value | money }} - {{ max_value | money }} X
+                                            {{ min_value | money }} - {{ max_value | money }}
                                         </a>
                                     </p>
                                 {%- endif -%}
                             {%- else -%}
                                 {%- for filter_value in filter.active_values -%}
-                                    <p>
+                                    <p class="collection-product-grid__tag">
                                         <a href="{{ filter_value.url_to_remove }}">
-                                            {{ filter.label }}: {{ filter_value.label }} X
+                                            {{ filter.label }}: {{ filter_value.label }}
                                         </a>
                                     </p>
                                 {%- endfor -%}
@@ -78,7 +79,7 @@
                         {%- for filter in collection.filters -%}
                             <details
                                 class="collection-product-grid__filter-group"
-                                {% if forloop.index <= 3 or filter.active_values.size > 0 %}
+                                {% if forloop.index <= 2 or filter.active_values.size > 0 %}
                                     open
                                 {% endif %}
                             >
@@ -107,9 +108,8 @@
                                 <div class="collection-product-grid__filter-content">
                                     <div class="collection-product-grid__filter-reset-wrapper">
                                         {%- if filter.active_values.size > 0 -%}
-                                            <p class="collection-product-grid__filter-reset-p">
+                                            <p class="collection-product-grid__tag">
                                                 <a
-                                                    class="collection-product-grid__filter-reset-a"
                                                     href="{{ filter.url_to_remove }}"
                                                     >Reset</a
                                                 >
@@ -259,9 +259,14 @@
                 </form-facets>
             </aside>
             <div class="collection-product-grid__products-wrapper">
-                {% for product in collection.products %}
-                    {% render 'product-card', product: product %}
-                {% endfor %}
+                <div class="collection-product-grid__products-grid">
+                    {% for product in collection.products %}
+                        {% render 'product-card', product: product %}
+                    {% endfor %}
+                </div>
+                <div class="collection-product-grid__pagination-wrapper">
+                    {{ paginate | default_pagination }}
+                </div>
             </div>
         </div>
     {% endpaginate %}
