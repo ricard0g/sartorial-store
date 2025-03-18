@@ -49,7 +49,8 @@
                 <form-facets>
                     <div>
                         <p class="collection-product-grid__tag">
-                            <a href="{{ collection.url }}?sort_by={{ collection.sort_by }}">Clear all</a></p>
+                            <a href="{{ collection.url }}?sort_by={{ collection.sort_by }}">Clear all</a>
+                        </p>
 
                         {%- for filter in collection.filters -%}
                             {%- if filter.type == 'price_range' -%}
@@ -259,6 +260,70 @@
                 </form-facets>
             </aside>
             <div class="collection-product-grid__products-wrapper">
+                <div class="mobile-drawer-filters__btns-wrapper">
+                    <div class="mobile-drawer-filters__open-btn-wrapper">
+                        <button type="button" class="mobile-drawer-filters__open-btn">
+                            <svg
+                                width="22px"
+                                height="22px"
+                                viewBox="0 0 24 24"
+                                fill="none"
+                                xmlns="http://www.w3.org/2000/svg"
+                            >
+                                <g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path d="M5 12L5 4" stroke="#fff" stroke-linecap="round"></path> <path d="M19 20L19 17" stroke="#fff" stroke-linecap="round"></path> <path d="M5 20L5 16" stroke="#fff" stroke-linecap="round"></path> <path d="M19 13L19 4" stroke="#fff" stroke-linecap="round"></path> <path d="M12 7L12 4" stroke="#fff" stroke-linecap="round"></path> <path d="M12 20L12 11" stroke="#fff" stroke-linecap="round"></path> <circle cx="5" cy="14" r="2" stroke="#fff" stroke-linecap="round"></circle> <circle cx="12" cy="9" r="2" stroke="#fff" stroke-linecap="round"></circle> <circle cx="19" cy="15" r="2" stroke="#fff" stroke-linecap="round"></circle> </g>
+                            </svg>
+                            <span> Filter </span>
+                        </button>
+                    </div>
+                    <div class="mobile-drawer-filters__sort-wrapper">
+                        <sort-by>
+                            <form method="get">
+                                <div>
+                                    {% assign sort_by = collection.sort_by | default: collection.default_sort_by %}
+                                    <select id="SortByMobile" name="SortByMobile">
+                                        {% for option in collection.sort_options %}
+                                            <option
+                                                value="{{ option.value }}"
+                                                {% if option.value == sort_by %}
+                                                    selected
+                                                {% endif %}
+                                            >
+                                                {{ option.name | escape }}
+                                            </option>
+                                        {% endfor %}
+                                    </select>
+                                </div>
+                            </form>
+                        </sort-by>
+                    </div>
+                </div>
+                <div id="mobile-drawer-filters__filter-tags" class="collection-product-grid__filter-tags">
+                    <p class="collection-product-grid__tag">
+                        <a href="{{ collection.url }}?sort_by={{ collection.sort_by }}">Clear all</a>
+                    </p>
+
+                    {%- for filter in collection.filters -%}
+                        {%- if filter.type == 'price_range' -%}
+                            {%- if filter.min_value.value != null or filter.max_value.value != null -%}
+                                <p class="collection-product-grid__tag">
+                                    <a href="{{ filter.url_to_remove }}">
+                                        {%- assign min_value = filter.min_value.value | default: 0 -%}
+                                        {%- assign max_value = filter.max_value.value | default: filter.range_max -%}
+                                        {{ min_value | money }} - {{ max_value | money }}
+                                    </a>
+                                </p>
+                            {%- endif -%}
+                        {%- else -%}
+                            {%- for filter_value in filter.active_values -%}
+                                <p class="collection-product-grid__tag">
+                                    <a href="{{ filter_value.url_to_remove }}">
+                                        {{ filter.label }}: {{ filter_value.label }}
+                                    </a>
+                                </p>
+                            {%- endfor -%}
+                        {%- endif -%}
+                    {%- endfor -%}
+                </div>
                 <div class="collection-product-grid__products-grid">
                     {% for product in collection.products %}
                         {% render 'product-card', product: product %}
@@ -271,6 +336,213 @@
         </div>
     {% endpaginate %}
 </div>
+{% comment %} Mobile Drawer {% endcomment %}
+<mobile-drawer>
+    <div class="mobile-drawer-filters__container">
+        <div>
+            <aside class="mobile-drawer-filters__sidebar">
+                <div class="mobile-drawer-filters__header">
+                    <span class="mobile-drawer-filters__title"> Filter Options: </span>
+                    <button type="button" class="mobile-drawer-filters__close-btn">
+                        <svg
+                            width="25px"
+                            height="25px"
+                            viewBox="0 0 25 25"
+                            fill="none"
+                            xmlns="http://www.w3.org/2000/svg"
+                        >
+                            <g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path d="M3 21.32L21 3.32001" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path> <path d="M3 3.32001L21 21.32" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path> </g>
+                        </svg>
+                    </button>
+                </div>
+                <form-facets>
+                    <form>
+                        {%- for filter in collection.filters -%}
+                            <details
+                                class="collection-product-grid__filter-group"
+                                {% if forloop.index <= 2 or filter.active_values.size > 0 %}
+                                    open
+                                {% endif %}
+                            >
+                                <summary>
+                                    <div>
+                                        <h4 class="collection-product-grid__filter-title">
+                                            {{ filter.label }}
+                                            {% if filter.active_values.size > 0 %}
+                                                ({{ filter.active_values.size }})
+                                            {% endif %}
+                                            <span>
+                                                <svg
+                                                    width="20px"
+                                                    height="20px"
+                                                    viewBox="0 0 20 20"
+                                                    fill="none"
+                                                    xmlns="http://www.w3.org/2000/svg"
+                                                >
+                                                    <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                                                    <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+                                                    <g id="SVGRepo_iconCarrier">
+                                                        <path d="M7 10L12 15L17 10" stroke="#333" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"></path>
+                                                    </g>
+                                                </svg>
+                                            </span>
+                                        </h4>
+                                    </div>
+                                </summary>
+
+                                <div class="collection-product-grid__filter-content">
+                                    <div class="collection-product-grid__filter-reset-wrapper">
+                                        {%- if filter.active_values.size > 0 -%}
+                                            <p class="collection-product-grid__tag">
+                                                <a href="{{ filter.url_to_remove }}">Reset</a>
+                                            </p>
+                                        {%- endif -%}
+                                    </div>
+                                    {%- case filter.type -%}
+                                        {%- when 'boolean' -%}
+                                            <ul class="collection-product-grid__filter-list">
+                                                <li>
+                                                    <label for="Filter-{{ filter.param_name }}-{{ filter.true_value.value }}">
+                                                        <input
+                                                            type="checkbox"
+                                                            name="{{ filter.param_name }}"
+                                                            value="{{ filter.true_value.value }}"
+                                                            id="Filter-{{ filter.param_name }}"
+                                                            {% if filter.true_value.active -%}
+                                                                checked
+                                                            {%- endif %}
+                                                            {% if filter.true_value.count == 0
+                                                                and filter.true_value.active == false
+                                                            -%}
+                                                                disabled
+                                                            {%- endif -%}
+                                                        >
+                                                        {{- filter.true_value.label -}}
+                                                    </label>
+                                                </li>
+                                                <li>
+                                                    <label for="Filter-{{ filter.param_name }}-{{ filter.false_value.value }}">
+                                                        <input
+                                                            type="checkbox"
+                                                            name="{{ filter.param_name }}"
+                                                            value="{{ filter.false_value.value }}"
+                                                            id="Filter-{{ filter.param_name }}"
+                                                            {% if filter.false_value.active -%}
+                                                                checked
+                                                            {%- endif %}
+                                                            {% if filter.false_value.count == 0
+                                                                and filter.false_value.active == false
+                                                            -%}
+                                                                disabled
+                                                            {%- endif -%}
+                                                        >
+                                                        {{- filter.false_value.label -}}
+                                                    </label>
+                                                </li>
+                                            </ul>
+
+                                        {%- when 'list' -%}
+                                            <ul class="collection-product-grid__filter-list">
+                                                {%- for filter_value in filter.values -%}
+                                                    <li class="collection-product-grid__filter-list-item">
+                                                        <label for="Filter-{{ filter.param_name }}-{{ forloop.index }}">
+                                                            <input
+                                                                type="checkbox"
+                                                                name="{{ filter_value.param_name }}"
+                                                                value="{{ filter_value.value }}"
+                                                                id="Filter-{{ filter.param_name }}-{{ forloop.index }}"
+                                                                {% if filter_value.active -%}
+                                                                    checked
+                                                                {%- endif %}
+                                                                {% if filter_value.count == 0
+                                                                    and filter_value.active == false
+                                                                -%}
+                                                                    disabled
+                                                                {%- endif %}
+                                                            >
+                                                            <span>
+                                                                {%- case filter.presentation -%}
+                                                                    {%- when 'swatch' -%}
+                                                                        <span
+                                                                            style="
+                                                                                width: 15px;
+                                                                                height: 15px;
+                                                                                border-radius: 0;
+                                                                                {% if filter_value.swatch.color == '#FFFFFF' %}
+                                                                                    border: 1px solid #88888830;
+                                                                                 {% endif %}
+                                                                                display: flex;
+                                                                                justify-content: center;
+                                                                                align-items: center;
+                                                                                margin-right: 5px;
+                                                                                background-color: {{ filter_value.swatch.color }} ;
+                                                                            "
+                                                                        ></span>
+                                                                    {%- when 'image' -%}
+                                                                        {{
+                                                                            filter_value.display.value
+                                                                            | image_url: width: 25
+                                                                            | image_tag:
+                                                                                alt: filter_value.display.value.alt
+                                                                        }}
+                                                                    {%- else -%}
+                                                                        <span class="visual-display__child"></span>
+                                                                {%- endcase -%}
+                                                            </span>
+                                                            {{ filter_value.label }}
+                                                        </label>
+                                                    </li>
+                                                {%- endfor -%}
+                                            </ul>
+
+                                        {%- when 'price_range' -%}
+                                            <div id="PriceRange" class="filter-group-display__price-range">
+                                                <span class="filter-group-display__highest-text">
+                                                    Highest price is {{ filter.range_max | money }}
+                                                </span>
+                                                <div class="filter-group-display__price-range">
+                                                    <label for="Filter-{{ filter.min_value.param_name }}">From</label>
+                                                    <input
+                                                        name="{{ filter.min_value.param_name }}"
+                                                        id="Filter-{{ filter.min_value.param_name }}"
+                                                        {% if filter.min_value.value -%}
+                                                            value="{{ filter.min_value.value | divided_by: 100 }}"
+                                                        {%- endif %}
+                                                        type="number"
+                                                        placeholder="0 {{ cart.currency.symbol }}"
+                                                        min="0"
+                                                        max="{{ filter.range_max | money_without_currency | replace: ',', '' }}"
+                                                    >
+                                                </div>
+                                                <div class="filter-group-display__price-range">
+                                                    <label for="Filter-{{ filter.max_value.param_name }}">To</label>
+                                                    <input
+                                                        name="{{ filter.max_value.param_name }}"
+                                                        id="Filter-{{ filter.max_value.param_name }}"
+                                                        {% if filter.max_value.value -%}
+                                                            value="{{ filter.max_value.value | divided_by: 100 }}"
+                                                        {%- endif %}
+                                                        type="number"
+                                                        placeholder="{{ filter.range_max | money_without_currency }} {{ cart.currency.symbol }}"
+                                                        min="0"
+                                                        max="{{ filter.range_max | money_without_currency | replace: ',', '' | divided_by: 100 | plus: 1 }}"
+                                                    >
+                                                </div>
+                                            </div>
+
+                                            <div class="filter-group-display__submit">
+                                                <input type="submit" value="Apply">
+                                            </div>
+                                    {%- endcase -%}
+                                </div>
+                            </details>
+                        {%- endfor -%}
+                    </form>
+                </form-facets>
+            </aside>
+        </div>
+    </div>
+</mobile-drawer>
 
 {% schema %}
 {
