@@ -91,8 +91,8 @@ summary {
     cursor: pointer;
 }
 
-summary::marker {
-    content: '';
+summary::-webkit-details-marker ,summary::marker {
+    content: none !important;
 }
 
 .collection-product-grid__filter-title {
@@ -402,8 +402,8 @@ mobile-drawer {
         width: 100%;
     }
 
-    mobile-drawer summary::marker {
-        content: '';
+    mobile-drawer summary::-webkit-details-marker ,mobile-drawer summary::marker {
+        content: none !important;
     }
 
     #SortByMobile {
