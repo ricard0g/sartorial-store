@@ -23,7 +23,7 @@
             <div class="collection-product-grid__sort-wrapper">
                 <sort-by>
                     <form method="get">
-                        <div>
+                        <div class="collection-product-grid__sort-wrapper">
                             {% assign sort_by = collection.sort_by | default: collection.default_sort_by %}
                             <select id="SortBy" name="SortBy">
                                 {% for option in collection.sort_options %}
@@ -37,6 +37,17 @@
                                     </option>
                                 {% endfor %}
                             </select>
+                            <span>
+                                <svg
+                                    width="20px"
+                                    height="20px"
+                                    viewBox="0 0 20 20"
+                                    fill="none"
+                                    xmlns="http://www.w3.org/2000/svg"
+                                >
+                                    <g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path d="M7 10L12 15L17 10" stroke="#333" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"></path> </g>
+                                </svg>
+                            </span>
                         </div>
                     </form>
                 </sort-by>
@@ -278,7 +289,7 @@
                     <div class="mobile-drawer-filters__sort-wrapper">
                         <sort-by>
                             <form method="get">
-                                <div>
+                                <div class="mobile-drawer-filters__sort-div">
                                     {% assign sort_by = collection.sort_by | default: collection.default_sort_by %}
                                     <select id="SortByMobile" name="SortByMobile">
                                         {% for option in collection.sort_options %}
@@ -292,6 +303,17 @@
                                             </option>
                                         {% endfor %}
                                     </select>
+                                    <span>
+                                        <svg
+                                            width="20px"
+                                            height="20px"
+                                            viewBox="0 0 20 20"
+                                            fill="none"
+                                            xmlns="http://www.w3.org/2000/svg"
+                                        >
+                                            <g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path d="M7 10L12 15L17 10" stroke="#fff" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"></path> </g>
+                                        </svg>
+                                    </span>
                                 </div>
                             </form>
                         </sort-by>
