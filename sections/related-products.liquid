@@ -1,0 +1,16 @@
+{{ 'related-products.css' | asset_url | stylesheet_tag }}
+<div class="related-products__wrapper"></div>
+
+{% schema %}
+{
+    "name": "Related Products",
+    "tag": "section",
+    "class": "related-products__container",
+    "settings": [],
+    "presets": [
+        {
+            "name": "Related Products"
+        }
+    ]
+}
+{% endschema %}

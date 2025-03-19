@@ -1,0 +1,133 @@
+{{ 'related-collections.css' | asset_url | stylesheet_tag }}
+<div class="related-collections__wrapper">
+    <div class="related-collections__title-wrapper">
+        <h2 class="related-collections__title">{{ section.settings.section_title }}</h2>
+    </div>
+    <div class="related-collections__content-wrapper">
+        {% if section.blocks.size > 0 %}
+            {% for block in section.blocks %}
+                {% unless block.settings.collection == blank %}
+                    {% assign collection = block.settings.collection %}
+                    <figure>
+                        <a href="{{ collection.url }}">
+                            {% if block.settings.collection_image != blank %}
+                                {{
+                                    block.settings.collection_image
+                                    | image_url: width: 600
+                                    | image_tag: alt: collection.title, class: 'related-collections__image'
+                                }}
+                            {% else %}
+                                {{
+                                    collection.featured_image
+                                    | image_url: width: 600
+                                    | image_tag: alt: collection.title, class: 'related-collections__image'
+                                }}
+                            {% endif %}
+                        </a>
+                        <figcaption>
+                            <a>
+                                <h3 class="related-collections__collection-title">
+                                    {% if block.settings.collection_title != blank %}
+                                        <h4 class="related-collections__collection-title">
+                                            {{ block.settings.collection_title }}
+                                            <span>
+                                                <svg
+                                                    fill="#ffffff"
+                                                    height="20px"
+                                                    width="20px"
+                                                    version="1.1"
+                                                    id="Layer_1"
+                                                    xmlns="http://www.w3.org/2000/svg"
+                                                    xmlns:xlink="http://www.w3.org/1999/xlink"
+                                                    viewBox="0 0 512.005 512.005"
+                                                    xml:space="preserve"
+                                                    stroke="#ffffff"
+                                                >
+                                                    <g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <g> <g> <path d="M388.418,240.923L153.751,6.256c-8.341-8.341-21.824-8.341-30.165,0s-8.341,21.824,0,30.165L343.17,256.005 L123.586,475.589c-8.341,8.341-8.341,21.824,0,30.165c4.16,4.16,9.621,6.251,15.083,6.251c5.461,0,10.923-2.091,15.083-6.251 l234.667-234.667C396.759,262.747,396.759,249.264,388.418,240.923z"></path> </g> </g> </g>
+                                                </svg>
+                                            </span>
+                                        </h4>
+                                    {% else %}
+                                        <h4 class="related-collections__collection-title">
+                                            {{ collection.title }}
+                                            <span>
+                                                <svg
+                                                    fill="#ffffff"
+                                                    height="20px"
+                                                    width="20px"
+                                                    version="1.1"
+                                                    id="Layer_1"
+                                                    xmlns="http://www.w3.org/2000/svg"
+                                                    xmlns:xlink="http://www.w3.org/1999/xlink"
+                                                    viewBox="0 0 512.005 512.005"
+                                                    xml:space="preserve"
+                                                    stroke="#ffffff"
+                                                >
+                                                    <g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <g> <g> <path d="M388.418,240.923L153.751,6.256c-8.341-8.341-21.824-8.341-30.165,0s-8.341,21.824,0,30.165L343.17,256.005 L123.586,475.589c-8.341,8.341-8.341,21.824,0,30.165c4.16,4.16,9.621,6.251,15.083,6.251c5.461,0,10.923-2.091,15.083-6.251 l234.667-234.667C396.759,262.747,396.759,249.264,388.418,240.923z"></path> </g> </g> </g>
+                                                </svg>
+                                            </span>
+                                        </h4>
+                                    {% endif %}
+                                </h3>
+                            </a>
+                        </figcaption>
+                    </figure>
+                {% endunless %}
+            {% endfor %}
+        {% else %}
+            <p class="related-collections__no-collections">No collections available.</p>
+        {% endif %}
+    </div>
+</div>
+
+{% schema %}
+{
+    "name": "Related Collections",
+    "tag": "section",
+    "class": "related-collections__container",
+    "max_blocks": 2,
+    "settings": [
+        {
+            "type": "header",
+            "content": "Related Collections",
+            "info": "This section displays two related collections side by side."
+        },
+        {
+            "type": "text",
+            "id": "section_title",
+            "label": "Section Title",
+            "default": "Similar Collections"
+        }
+    ],
+    "blocks": [
+        {
+            "type": "collection",
+            "name": "Collection",
+            "settings": [
+                {
+                    "type": "collection",
+                    "id": "collection",
+                    "label": "Select a collection"
+                },
+                {
+                    "type": "text",
+                    "id": "collection_title",
+                    "label": "Collection Title",
+                    "default": "Collection Title"
+                },
+                {
+                    "type": "image_picker",
+                    "id": "collection_image",
+                    "label": "Collection Image",
+                    "info": "Upload an image for the collection. If no image is uploaded, the collection's default image will be used."
+                }
+            ]
+        }
+    ],
+    "presets": [
+        {
+            "name": "Related Collections"
+        }
+    ]
+}
+{% endschema %}

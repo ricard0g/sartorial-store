@@ -3,7 +3,11 @@
         "product-grid": {
             "type": "main-collection-product-grid",
             "settings": {}
+        },
+        "related-collections": {
+            "type": "related-collections",
+            "settings": {}
         }
     },
-    "order": ["product-grid"]
+    "order": ["product-grid", "related-collections"]
 }
