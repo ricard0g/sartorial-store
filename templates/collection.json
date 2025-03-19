@@ -1,13 +1,47 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
-    "sections": {
-        "product-grid": {
-            "type": "main-collection-product-grid",
-            "settings": {}
-        },
-        "related-collections": {
-            "type": "related-collections",
-            "settings": {}
-        }
+  "sections": {
+    "product-grid": {
+      "type": "main-collection-product-grid",
+      "settings": {}
     },
-    "order": ["product-grid", "related-collections"]
+    "related-collections": {
+      "type": "related-collections",
+      "blocks": {
+        "collection_h9hGEt": {
+          "type": "collection",
+          "settings": {
+            "collection": "winter-casual",
+            "collection_title": "Collection Title"
+          }
+        },
+        "collection_tWjydc": {
+          "type": "collection",
+          "settings": {
+            "collection": "italian-suits",
+            "collection_title": "Collection Title"
+          }
+        }
+      },
+      "block_order": [
+        "collection_h9hGEt",
+        "collection_tWjydc"
+      ],
+      "settings": {
+        "section_title": "Similar Collections"
+      }
+    }
+  },
+  "order": [
+    "product-grid",
+    "related-collections"
+  ]
 }
