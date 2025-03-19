@@ -1,0 +1,51 @@
+.related-collections__container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+
+.related-collections__wrapper {
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: center;
+    align-items: center;
+    width: 80%;
+}
+
+.related-collections__title-wrapper {
+    width: 100%;
+}
+
+.related-collections__title {
+    text-align: start;
+    font-size: 1.5rem;
+    font-weight: 500;
+}
+
+.related-collections__content-wrapper {
+    position: relative;
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: center;
+    align-items: start;
+    width: 100%;
+}
+
+.related-collections__figure {
+    width: 100%;
+    height: 70vh;
+}
+
+.related-collections__figure a {
+    display: inline-block;
+    width: 100%;
+    height: 100%;
+}
+
+.related-collections__image {
+    max-width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: top;
+}

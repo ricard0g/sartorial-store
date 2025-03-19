@@ -8,7 +8,7 @@
             {% for block in section.blocks %}
                 {% unless block.settings.collection == blank %}
                     {% assign collection = block.settings.collection %}
-                    <figure>
+                    <figure class="related-collections__figure">
                         <a href="{{ collection.url }}">
                             {% if block.settings.collection_image != blank %}
                                 {{
@@ -113,7 +113,6 @@
                     "type": "text",
                     "id": "collection_title",
                     "label": "Collection Title",
-                    "default": "Collection Title"
                 },
                 {
                     "type": "image_picker",
