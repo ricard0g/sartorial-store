@@ -1,0 +1,41 @@
+{{ 'flickity.min.css' | asset_url | stylesheet_tag }}
+{{ 'main-product.css' | asset_url | stylesheet_tag }}
+<script src="{{ 'flickity.pkgd.min.js' | asset_url }}" defer></script>
+<script src="{{ 'main-product.js' | asset_url }}"nav defer></script>
+<div class="main-product__wrapper">
+    <div class="main-product__images-wrapper">
+        <div class="main-product__carousel-nav">
+            {% for image in product.images %}
+                <div class="main-product__carousel-nav-cell">
+                    {{ image | image_url: width: 80  | image_tag }}
+                </div>
+            {% endfor %}
+        </div>
+        <div class="main-product__carousel-main">
+            {% for image in product.images %}
+                <div elemelemclass="main-product__carousel-main-cell">
+                    {{ image | image_url: width: 300 | image_tag }}
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+    <div>
+        <h1>{{ product.title }}</h1>
+        <p>{{ product.price | money }}</p>
+        <p>{{ product.description }}</p>
+    </div>
+</div>
+
+{% schema %}
+{
+    "name": "Main Product",
+    "tag": "section",
+    "class": "main-product__container",
+    "settings": [],
+    "presets": [
+        {
+            "name": "Main Product"
+        }
+    ]
+}
+{% endschema %}

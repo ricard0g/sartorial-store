@@ -1,0 +1,37 @@
+.main-product__container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+
+.main-product__wrapper {
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: center;
+    align-items: start;
+    width: 80%;
+}
+
+.main-product__images-wrapper {
+    width: 60%;
+}
+
+.main-product__carousel-nav {
+    width: 50%;
+    transform: rotate(90deg) translate(30px, -100%);
+    transform-origin: left top;
+}
+
+.main-product__carousel-nav-cell {
+    width: 80px !important;
+    height: 80px !important;
+    transform: rotate(-90deg) !important;
+    margin-right: 50px;
+    cursor: pointer;
+}
+
+
+.main-product__carousel-main {
+    display: none;
+}
