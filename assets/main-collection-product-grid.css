@@ -403,6 +403,10 @@ mobile-drawer {
         margin-left: 5px;
     }
 
+    .collection-product-grid__sort-wrapper {
+        display: none;
+    }
+
     .mobile-drawer-filters__sort-wrapper {
         display: flex;
         justify-content: center;
