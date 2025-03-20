@@ -102,6 +102,12 @@
     margin-bottom: 1rem;
 }
 
+.main-product__colors-container {
+    display: flex;
+    column-gap: 10px;
+    padding: 0;
+}
+
 .main-product__product-color {
     position: relative;
     width: 25px;

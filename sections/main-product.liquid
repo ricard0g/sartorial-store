@@ -32,19 +32,40 @@
             <p class="main-product__price">{{ product.price | money }}</p>
         </section>
         <section class="main-product__color-wrapper">
-            <h3>Colors</h3>
-            {% for color_reference in product.metafields.shopify['color-pattern'].value %}
-                {% if forloop.first %}
-                    <div style="--product-color: {{ color_reference.color }}" class="main-product__product-color">
-                        <span
-                            aria-roledescription="Tooltip for Product Color"
-                            class="tooltip"
-                        >
-                            {{ product.title }} in {{ color_reference.label }}
-                        </span>
-                    </div>
-                {% endif %}
-            {% endfor %}
+            {% if product.metafields.shopify['color-pattern'].value != blank %}
+                <h3>Colors</h3>
+                <div class="main-product__colors-container">
+                    {% for color_reference in product.metafields.shopify['color-pattern'].value %}
+                        {% if forloop.first %}
+                            <div
+                                style="--product-color: {{ color_reference.color }}"
+                                class="main-product__product-color"
+                            >
+                                <span
+                                    aria-roledescription="Tooltip for Product Color"
+                                    class="tooltip"
+                                >
+                                    {{ product.title }} in {{ color_reference.label }}
+                                </span>
+                            </div>
+                        {% endif %}
+                    {% endfor %}
+                </div>
+            {% elsif product.metafields.shopify['dial-color'].value != blank %}
+                <h3>Colors</h3>
+                <div class="main-product__colors-container">
+                    {% for color_reference in product.metafields.shopify['dial-color'].value %}
+                        <div style="--product-color: {{ color_reference.color }}" class="main-product__product-color">
+                            <span
+                                aria-roledescription="Tooltip for Product Color"
+                                class="tooltip"
+                            >
+                                {{ product.title }} in {{ color_reference.label }}
+                            </span>
+                        </div>
+                    {% endfor %}
+                </div>
+            {% endif %}
         </section>
         {% form 'product', product %}
             <section class="main-product__sizes-wrapper">
