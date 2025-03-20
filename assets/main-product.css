@@ -147,7 +147,9 @@
 
 .main-product__sizes-list {
     display: flex;
+    flex-flow: row wrap;
     column-gap: 1vw;
+    row-gap: 1vh;
     list-style: none;
     padding: 0;
     margin-bottom: 3vh;
@@ -217,6 +219,13 @@ input[type='radio']:checked + label {
 
 .main-product__description-container {
     margin: 3vh 0;
+}
+
+.main-product__description-container p {
+    font-size: 0.9rem;
+    font-weight: 300;
+    letter-spacing: 0.5px;
+    text-wrap: balance;
 }
 
 /* Flickity Buttons */

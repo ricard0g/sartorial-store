@@ -62,26 +62,47 @@
                         </p>
                     </header>
                     <main>
-                        <section class="product-slider__carousel-dialog-product-color-wrapper">
-                            <h5>Colors</h5>
-                            <div class="product-slider__carousel-dialog-product-color-container">
-                                {% for color_reference in product.metafields.shopify['color-pattern'].value %}
-                                    {% if forloop.first %}
-                                        <div
-                                            style="--product-color: {{ color_reference.color }}"
-                                            class="product-slider__carousel-dialog-product-color"
-                                        >
-                                            <span
-                                                aria-roledescription="Tooltip for Product Color"
-                                                class="tooltip"
+                        {% if product.metafields.shopify['color-pattern'].value != blank %}
+                            <section class="product-slider__carousel-dialog-product-color-wrapper">
+                                <h5>Colors</h5>
+                                <div class="product-slider__carousel-dialog-product-color-container">
+                                    {% for color_reference in product.metafields.shopify['color-pattern'].value %}
+                                        {% if forloop.first %}
+                                            <div
+                                                style="--product-color: {{ color_reference.color }}"
+                                                class="product-slider__carousel-dialog-product-color"
                                             >
-                                                {{- product.title }} in {{ color_reference.label -}}
-                                            </span>
-                                        </div>
-                                    {% endif %}
-                                {% endfor %}
-                            </div>
-                        </section>
+                                                <span
+                                                    aria-roledescription="Tooltip for Product Color"
+                                                    class="tooltip"
+                                                >
+                                                    {{- product.title }} in {{ color_reference.label -}}
+                                                </span>
+                                            </div>
+                                        {% endif %}
+                                    {% endfor %}
+                                </div>
+                            </section>
+                        {% elsif product.metafields.shopify['dial-color'].value != blank %}
+                            <section class="product-slider__carousel-dialog-product-color-wrapper">
+                                <h5>Colors</h5>
+                                <div class="product-slider__carousel-dialog-product-color-container">
+                                    {% for color_reference in product.metafields.shopify['dial-color'].value %}
+                                            <div
+                                                style="--product-color: {{ color_reference.color }}"
+                                                class="product-slider__carousel-dialog-product-color"
+                                            >
+                                                <span
+                                                    aria-roledescription="Tooltip for Product Color"
+                                                    class="tooltip"
+                                                >
+                                                    {{- product.title }} in {{ color_reference.label -}}
+                                                </span>
+                                            </div>
+                                    {% endfor %}
+                                </div>
+                            </section>
+                        {% endif %}
                         {% form 'product', product %}
                             <section>
                                 <h5 class="product-slider__carouse-dialog-sizes-title">Sizes</h5>
@@ -113,11 +134,6 @@
                         {% endform %}
                     </main>
                     <footer>
-                        <div class="product-slider__carousel-dialog-product-description-container">
-                            <p>
-                                {{ product.description }}
-                            </p>
-                        </div>
                         <div class="product-slider__carousel-dialog-full-details-container">
                             <a
                                 class="product-slider__carousel-dialog-full-details-link"
