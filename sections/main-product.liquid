@@ -6,7 +6,7 @@
     <div class="main-product__images-wrapper">
         <div class="main-product__carousel-nav">
             {% for image in product.images %}
-                <div class="main-product__carousel-nav-cell {% if forloop.index == 1 %}is-nav-selected{% endif %}">
+                <div class="main-product__carousel-nav-cell {% if forloop.first %}is-nav-selected{% endif %}">
                     {{ image | image_url: width: 70 | image_tag }}
                 </div>
             {% endfor %}
@@ -14,15 +14,68 @@
         <div class="main-product__carousel-main">
             {% for image in product.images %}
                 <div class="main-product__carousel-main-cell">
-                    {{ image | image_url: width: 500 | image_tag }}
+                    {{
+                        image
+                        | image_url: width: 500
+                        | image_tag: alt: product.title, class: 'main-product__carousel-main-image'
+                    }}
                 </div>
             {% endfor %}
         </div>
     </div>
     <div class="main-product__content-wrapper">
-        <h1>{{ product.title }}</h1>
-        <p>{{ product.price | money }}</p>
-        <p>{{ product.description }}</p>
+        <section class="main-product__info-wrapper">
+            <h1 class="main-product__title">{{ product.title }}</h1>
+            <p class="main-product__vendor-text">
+                <a class="main-product__vendor-link" href="{{ shop.url }}">{{ product.vendor }}</a>
+            </p>
+            <p class="main-product__price">{{ product.price | money }}</p>
+        </section>
+        <section class="main-product__color-wrapper">
+            <h3>Colors</h3>
+            {% for color_reference in product.metafields.shopify['color-pattern'].value %}
+                {% if forloop.first %}
+                    <div style="--product-color: {{ color_reference.color }}" class="main-product__product-color">
+                        <span
+                            aria-roledescription="Tooltip for Product Color"
+                            class="tooltip"
+                        >
+                            {{ product.title }} in {{ color_reference.label }}
+                        </span>
+                    </div>
+                {% endif %}
+            {% endfor %}
+        </section>
+        {% form 'product', product %}
+            <section class="main-product__sizes-wrapper">
+                <h3 class="main-product__sizes-title">Sizes</h3>
+                <ul class="main-product__sizes-list">
+                    {% for variant in product.variants %}
+                        <li class="main-product__sizes-list-item">
+                            <input
+                                type="radio"
+                                style="--product-size: {{ variant.title }}"
+                                name="id"
+                                id="product-{{ product.id }}-variant-{{ variant.id }}"
+                                value="{{ variant.id }}"
+                            >
+                            <label
+                                class="main-product__carousel-dialog-size-label"
+                                for="product-{{ product.id }}-variant-{{ variant.id }}"
+                            >
+                                {{ variant.title }}
+                            </label>
+                        </li>
+                    {% endfor %}
+                </ul>
+                <input
+                    class="main-product__carousel-dialog-add-to-cart"
+                    type="submit"
+                    value="ADD TO CART"
+                >
+                {{ form | payment_button }}
+            </section>
+        {% endform %}
     </div>
 </div>
 

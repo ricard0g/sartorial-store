@@ -3,6 +3,7 @@
     justify-content: center;
     align-items: center;
     width: 100%;
+    margin: 5vh auto;
 }
 
 .main-product__wrapper {
@@ -48,6 +49,150 @@
     width: 100%;
 }
 
+.main-product__carousel-main-image {
+    max-width: 100%;
+    image-rendering: optimizeQuality;
+    height: auto;
+    object-fit: contain;
+}
+
 .main-product__content-wrapper {
-    width: 50%;
+    width: 40%;
+}
+
+.main-product__product-color {
+    position: relative;
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+    border: 0.5px solid black;
+    background-color: var(--product-color);
+    cursor: pointer;
+}
+
+.main-product__product-color .tooltip {
+    visibility: hidden;
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    top: -100px;
+    right: 50%;
+    transform: translateX(50%) translateY(10px);
+    width: 15ch;
+    height: 90px;
+    padding: 1vh;
+    text-align: center;
+    font-size: 0.825rem;
+    background-color: rgb(45, 45, 45);
+    color: rgb(215, 215, 215);
+    opacity: 0;
+    transition: all 300ms ease;
+}
+
+.main-product__product-color:hover .tooltip {
+    visibility: visible;
+    opacity: 1;
+    transform: translateX(50%) translateY(0);
+}
+
+.main-product__sizes-list {
+    display: flex;
+    column-gap: 1vw;
+    list-style: none;
+    padding: 0;
+}
+
+.main-product__sizes-list-item {
+    position: relative;
+    width: 50px;
+    height: 50px;
+}
+
+.main-product__carousel-dialog-size-label {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: rgb(60, 60, 60);
+    transition: all 150ms ease;
+    cursor: pointer;
+}
+
+input[type='radio'] {
+    position: relative;
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    min-width: 100%;
+    min-height: 100%;
+    margin: 0;
+    cursor: pointer;
+    border: 1px solid black;
+    background-color: white;
+    transition: all 150ms ease;
+}
+
+input[type='radio']:hover {
+    background-color: rgb(60, 60, 60);
+}
+
+input[type='radio']:hover + label {
+    color: whitesmoke;
+}
+
+input[type='radio']:checked {
+    background-color: rgb(60, 60, 60);
+}
+
+input[type='radio']:checked + label {
+    color: whitesmoke;
+}
+
+.main-product__carousel-dialog-add-to-cart {
+    display: block;
+    width: 100%;
+    height: 50px;
+    text-align: center;
+    color: whitesmoke;
+    background-color: rgb(26, 26, 26);
+    border: none;
+    cursor: pointer;
+    transition: all 300ms ease;
+}
+
+.main-product__carousel-dialog-add-to-cart:hover {
+    background-color: rgb(60, 60, 60);
+}
+
+shopify-accelerated-checkout {
+    --shopify-accelerated-checkout-button-block-size: 44px;
+    --shopify-accelerated-checkout-button-border-radius: 0px;
+    --shopify-accelerated-checkout-button-box-shadow: none;
+    --shopify-accelerated-checkout-skeleton-background-color: #dedede;
+    --shopify-accelerated-checkout-skeleton-animation-opacity-start: 1;
+    --shopify-accelerated-checkout-skeleton-animation-opacity-end: 0.5;
+    --shopify-accelerated-checkout-skeleton-animation-duration: 4s;
+    --shopify-accelerated-checkout-skeleton-animation-timing-function: ease;
+}
+
+/* Flickity Buttons */
+.flickity-button {
+    opacity: 0;
+    background-color: rgba(255, 255, 255, 0.5);
+    border-radius: 0;
+    transition: all 500ms ease;
+}
+
+.main-product__carousel-main:hover .flickity-button,
+.main-product__carousel-main-cell:hover .flickity-button {
+    opacity: 1;
+}
+
+.flickity-prev-next-button.previous {
+    left: 0;
+}
+
+.flickity-prev-next-button.next {
+    right: 0;
 }
