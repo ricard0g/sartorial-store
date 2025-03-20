@@ -73,9 +73,11 @@
                     type="submit"
                     value="ADD TO CART"
                 >
-                {{ form | payment_button }}
             </section>
         {% endform %}
+        <section class="main-product__description-container">
+            {{ product.description }}
+        </section>
     </div>
 </div>
 

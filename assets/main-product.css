@@ -16,6 +16,7 @@
 
 .main-product__images-wrapper {
     display: flex;
+    column-gap: 5px;
     width: 60%;
 }
 
@@ -58,6 +59,47 @@
 
 .main-product__content-wrapper {
     width: 40%;
+    padding: 0 1vh;
+}
+
+.main-product__title {
+    font-size: 1.5rem;
+    font-weight: 400;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    margin-bottom: 3vh;
+}
+
+.main-product__vendor-text {
+    margin-bottom: 3vh;
+}
+
+.main-product__vendor-link {
+    font-size: 0.8rem;
+    letter-spacing: 0.5px;
+    color: black;
+    text-transform: uppercase;
+}
+
+.main-product__price {
+    font-size: 1.3rem;
+    font-weight: 600;
+    margin: 2vh 0;
+}
+
+.main-product__color-wrapper {
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: center;
+    align-items: start;
+    margin-bottom: 3vh;
+}
+
+.main-product__color-wrapper h3 {
+    font-size: 0.8rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    margin-bottom: 1rem;
 }
 
 .main-product__product-color {
@@ -96,11 +138,19 @@
     transform: translateX(50%) translateY(0);
 }
 
+.main-product__sizes-title {
+    font-size: 0.8rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    margin-bottom: 1vh;
+}
+
 .main-product__sizes-list {
     display: flex;
     column-gap: 1vw;
     list-style: none;
     padding: 0;
+    margin-bottom: 3vh;
 }
 
 .main-product__sizes-list-item {
@@ -165,15 +215,8 @@ input[type='radio']:checked + label {
     background-color: rgb(60, 60, 60);
 }
 
-shopify-accelerated-checkout {
-    --shopify-accelerated-checkout-button-block-size: 44px;
-    --shopify-accelerated-checkout-button-border-radius: 0px;
-    --shopify-accelerated-checkout-button-box-shadow: none;
-    --shopify-accelerated-checkout-skeleton-background-color: #dedede;
-    --shopify-accelerated-checkout-skeleton-animation-opacity-start: 1;
-    --shopify-accelerated-checkout-skeleton-animation-opacity-end: 0.5;
-    --shopify-accelerated-checkout-skeleton-animation-duration: 4s;
-    --shopify-accelerated-checkout-skeleton-animation-timing-function: ease;
+.main-product__description-container {
+    margin: 3vh 0;
 }
 
 /* Flickity Buttons */
