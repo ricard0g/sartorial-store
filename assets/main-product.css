@@ -14,24 +14,40 @@
 }
 
 .main-product__images-wrapper {
+    display: flex;
     width: 60%;
 }
 
 .main-product__carousel-nav {
-    width: 50%;
-    transform: rotate(90deg) translate(30px, -100%);
-    transform-origin: left top;
+    width: 10%;
+    margin-right: 10px;
 }
 
 .main-product__carousel-nav-cell {
-    width: 80px !important;
-    height: 80px !important;
-    transform: rotate(-90deg) !important;
-    margin-right: 50px;
+    width: 100%;
+    opacity: 0.5;
     cursor: pointer;
 }
 
+.main-product__carousel-nav-cell:hover {
+    opacity: 1;
+}
+
+.main-product__carousel-nav-cell.is-nav-selected {
+    opacity: 1;
+}
 
 .main-product__carousel-main {
-    display: none;
+    width: 85%;
+}
+
+.main-product__carousel-main-cell {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+
+.main-product__content-wrapper {
+    width: 50%;
 }
