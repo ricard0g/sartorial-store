@@ -16,9 +16,9 @@
         <title>
             {% if settings.store_title != blank %}{{ settings.store_title }}{% else %}Sartorial Paris{% endif %}
         </title>
-        {% if template.name == 'product' %}
-            <script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.min.js" async></script>
-        {% endif %}
+        {% comment %} {% if template.name == 'product' %}
+            <script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.min.js" defer></script>
+        {% endif %} {% endcomment %}
         <script src="{{ 'global.js' | asset_url }}" defer></script>
         {{ 'global.css' | asset_url | stylesheet_tag }}
         <style>
