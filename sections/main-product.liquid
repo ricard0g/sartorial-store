@@ -7,7 +7,7 @@
         <div class="main-product__carousel-nav">
             {% for image in product.images %}
                 <div class="main-product__carousel-nav-cell {% if forloop.first %}is-nav-selected{% endif %}">
-                    {{ image | image_url: width: 70 | image_tag: widths: '50 ,60, 70'}}
+                    {{ image | image_url: width: 70 | image_tag: widths: '50 ,60, 70' }}
                 </div>
             {% endfor %}
         </div>
@@ -89,11 +89,14 @@
                         </li>
                     {% endfor %}
                 </ul>
-                <input
-                    class="main-product__carousel-dialog-add-to-cart"
-                    type="submit"
-                    value="ADD TO CART"
-                >
+                <div class="main-product__payment-btns-wrapper">
+                    <input
+                        class="main-product__carousel-dialog-add-to-cart"
+                        type="submit"
+                        value="ADD TO CART"
+                    >
+                    {{ form | payment_button }}
+                </div>
             </section>
         {% endform %}
         <section class="main-product__description-container">

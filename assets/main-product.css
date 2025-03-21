@@ -210,19 +210,60 @@ input[type='radio']:checked + label {
     color: whitesmoke;
 }
 
+.main-product__payment-btns-wrapper {
+    display: flex;
+    justify-content: space-between;
+}
+
 .main-product__carousel-dialog-add-to-cart {
     display: block;
-    width: 100%;
+    width: 49%;
     height: 50px;
     text-align: center;
-    color: whitesmoke;
-    background-color: rgb(26, 26, 26);
-    border: none;
+    color: rgb(26, 26, 26);
+    background-color: transparent;
+    border: 1px solid rgb(26, 26, 26);
     cursor: pointer;
     transition: all 300ms ease;
 }
 
 .main-product__carousel-dialog-add-to-cart:hover {
+    box-shadow: 0px 0px 3px 1px rgb(60, 60, 60);
+}
+
+.shopify-payment-button {
+    width: 49%;
+}
+
+shopify-accelerated-checkout {
+    --shopify-accelerated-checkout-button-block-size: 50px;
+    --shopify-accelerated-checkout-button-border-radius: 0px;
+    --shopify-accelerated-checkout-button-box-shadow: none;
+    --shopify-accelerated-checkout-skeleton-background-color: #dedede;
+    --shopify-accelerated-checkout-skeleton-animation-opacity-start: 1;
+    --shopify-accelerated-checkout-skeleton-animation-opacity-end: 0.4;
+    --shopify-accelerated-checkout-skeleton-animation-duration: 4s;
+    --shopify-accelerated-checkout-skeleton-animation-timing-function: ease;
+}
+
+.shopify-payment-button__button:hover {
+
+    background-color: rgb(26, 26, 26);
+}
+
+.shopify-payment-button__button--unbranded {
+    background-color: rgb(26, 26, 26);
+    color: whitesmoke;
+    font-weight: 400;
+    font-size: 0.83rem;
+    text-transform: uppercase;
+}
+
+.shopify-payment-button__button--unbranded:hover:not([disabled]) {
+    background-color: rgb(60, 60, 60);
+}
+
+.shopify-payment-button__button--unbranded:hover {
     background-color: rgb(60, 60, 60);
 }
 
@@ -327,7 +368,7 @@ input[type='radio']:checked + label {
 
     .main-product__title {
         font-size: 1.2rem;
-        margin-bottom: 2vh
+        margin-bottom: 2vh;
     }
 
     .main-product__vendor-text {
@@ -356,9 +397,26 @@ input[type='radio']:checked + label {
         column-gap: 2vw;
         row-gap: 2vh;
     }
-    
+
     .main-product__carousel-dialog-size-label {
         font-size: 0.85rem;
+    }
+
+    .main-product__payment-btns-wrapper {
+        flex-flow: column nowrap;
+        justify-content: center;
+        align-items: center;
+        margin: 5.5vh 0;
+        row-gap: 1vh;
+    }
+
+    .main-product__carousel-dialog-add-to-cart{
+        display: block;
+        width: 100%;
+    }
+
+    .shopify-payment-button {
+        width: 100%;
     }
 
     .main-product__description-container p {
@@ -383,7 +441,6 @@ input[type='radio']:checked + label {
         width: 100%;
         max-height: 50vh;
     }
-
 
     .main-product__content-wrapper {
         width: 90%;
