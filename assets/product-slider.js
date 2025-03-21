@@ -22,6 +22,7 @@ document.addEventListener('DOMContentLoaded', () => {
     carousel.addEventListener('click', (e) => {
         if (e.target.matches('[data-open-modal]')) {
             const dialog = e.target.nextElementSibling;
+            console.log(e.target);
             dialog.showModal();
 
             // Initialize the carousel
