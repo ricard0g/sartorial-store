@@ -14,7 +14,7 @@
       "settings": {}
     },
     "related_products_frbngt": {
-      "type": "related-products",
+      "type": "product-recommendations",
       "settings": {}
     }
   },
