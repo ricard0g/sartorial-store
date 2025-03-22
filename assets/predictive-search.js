@@ -1,4 +1,4 @@
-import { tabletManager, megaMenuManager } from './navbar.js';
+import { tabletManager } from './navbar.js';
 
 class PredictiveSearch extends HTMLElement {
     static selectors = {
@@ -51,18 +51,6 @@ class PredictiveSearch extends HTMLElement {
 
     onChange() {
         const searchTerm = this.input.value.trim();
-
-        if (window.innerWidth > 768) {
-            const megaMenuManager = window.megaMenuManager;
-
-            const megaMenuOpened = megaMenuManager.megaMenus
-                .keys()
-                .find((link) => megaMenuManager.megaMenus.get(link).classList.contains('show'));
-
-            if (megaMenuOpened) {
-                megaMenuManager.hideMenu(megaMenuOpened);
-            }
-        }
 
         if (!searchTerm.length) {
             this.close();
