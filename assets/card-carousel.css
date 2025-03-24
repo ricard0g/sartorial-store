@@ -63,6 +63,7 @@ dialog.product-slider__modal:open::backdrop {
 }
 
 .product-slider__carousel-dialog-content {
+    max-width: 50%;
     padding: 0 2vh;
 }
 
@@ -135,7 +136,9 @@ dialog.product-slider__modal:open::backdrop {
 
 .product-slider__carousel-dialog-sizes-list {
     display: flex;
+    flex-wrap: wrap;
     column-gap: 1vw;
+    row-gap: 1vh;
     list-style: none;
     margin: 2vh 0;
     padding: 0;

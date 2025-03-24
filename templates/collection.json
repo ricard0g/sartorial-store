@@ -20,14 +20,12 @@
           "type": "collection",
           "settings": {
             "collection": "winter-casual",
-            "collection_title": "Collection Title"
           }
         },
         "collection_tWjydc": {
           "type": "collection",
           "settings": {
             "collection": "italian-suits",
-            "collection_title": "Collection Title"
           }
         }
       },
