@@ -1,24 +1,29 @@
+/* Base dialog styles */
 dialog.product-slider__modal {
     width: 75%;
     height: 70%;
     border: none;
     padding: 0 1vh;
-    opacity: 0;
-    transform: translateY(-25px);
+    opacity: 0; /* Start at 0 */
+    transform: translateY(20px); /* Start at moved position */
     overflow: scroll;
-    transition: all 500ms ease allow-discrete;
+    transition: opacity 500ms ease, transform 500ms ease;
 }
 
-dialog.product-slider__modal:open {
+/* Dialog when it becomes visible */
+dialog.product-slider__modal[open] {
     opacity: 1;
     transform: translateY(0);
 }
 
-@starting-style {
-    dialog.product-slider__modal:open {
-        opacity: 0;
-        transform: translateY(20px);
-    }
+/* Backdrop styles */
+dialog.product-slider__modal::backdrop {
+    background-color: rgba(0, 0, 0, 0);
+    transition: background-color 500ms ease;
+}
+
+dialog.product-slider__modal[open]::backdrop {
+    background-color: rgba(0, 0, 0, 0.5);
 }
 
 .product-slider__carousel-dialog-wrapper {
@@ -31,21 +36,6 @@ dialog.product-slider__modal:open {
 
 .product-slider__carousel-dialog-wrapper h5 {
     margin: 1vh 0;
-}
-
-dialog.product-slider__modal::backdrop {
-    background-color: rgba(0, 0, 0, 0);
-    transition: all 500ms ease allow-discrete;
-}
-
-dialog.product-slider__modal:open::backdrop {
-    background-color: rgba(0, 0, 0, 0.5);
-}
-
-@starting-style {
-    dialog.product-slider__modal:open::backdrop {
-        background-color: rgba(0, 0, 0, 0);
-    }
 }
 
 .product-slider__carousel-dialog {
@@ -106,7 +96,6 @@ dialog.product-slider__modal:open::backdrop {
     background-color: var(--product-color);
     cursor: pointer;
 }
-
 
 .product-slider__carousel-dialog-product-color .tooltip {
     visibility: hidden;
@@ -275,7 +264,6 @@ input[type='radio']:checked + label {
     text-align: center;
     color: rgb(130, 130, 130);
 }
-
 
 /* Flickity Buttons */
 .flickity-button {
