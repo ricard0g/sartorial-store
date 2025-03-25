@@ -25,6 +25,7 @@
 .main-404__title {
     font-size: 2rem;
     font-weight: 300;
+    text-align: center;
     text-transform: uppercase;
     font-family: 'Cormorant Unicase', serif;
     margin: 0;
@@ -35,4 +36,28 @@
     font-size: 1.25rem;
     font-weight: 400;
     margin-top: 1rem;
+}
+
+@media only screen and (max-width: 1024px) {
+    .main-404__wrapper {
+        width: 100%;
+    }
+}
+
+@media only screen and (max-width: 768px) {
+    .main-404__container {
+        height: 70vh;
+    }
+
+    .main-404__text {
+        font-size: 1.25rem;
+    }
+
+    .main-404__title {
+        font-size: 1.5rem;
+    }
+
+    .main-404__link {
+        font-size: 1rem;
+    }
 }
