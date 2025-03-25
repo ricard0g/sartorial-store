@@ -1,6 +1,24 @@
-{{ 'main-account.css' | asset_url | stylesheet_tag }}
+{{ 'customer.css' | asset_url | stylesheet_tag }}
 <div class="main-account__wrapper">
-
+    <div class="main-account__header">
+        <h1>Account Details</h1>
+        {{ 'Logout' | customer_logout_link }}
+    </div>
+    <div class="main-account__content-wrapper">
+        <div class="main-account__account-details-wrapper">
+            <h4 class="main-account__first-name">
+                {{ customer.first_name }}
+                {{ customer.last_name }}
+            </h4>
+            <p>{{ customer.email }}</p>
+            <h4 class="main-account__address">Primary Address</h4>
+            <p>{{ customer.default_address | format_address }}</p>
+            <p>
+                <a class="main-account__addresses-link" href="{{ routes.account_addresses_url }}">View Addresses ({{ customer.addresses_count }})</a>
+            </p>
+        </div>
+        <div class="main-account__orders-wrapper"></div>
+    </div>
 </div>
 
 {% schema %}
