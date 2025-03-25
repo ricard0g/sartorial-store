@@ -1,0 +1,84 @@
+/* Register Page */
+.main-register__container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    margin: 7vh auto;
+}
+
+.main-register__wrapper {
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: center;
+    align-items: center;
+    width: 40%;
+}
+
+.main-register__wrapper h1 {
+    font-size: 1.5rem;
+    font-family: 'Cormorant Unicase', serif;
+    text-align: center;
+    width: 100%;
+    font-weight: 400;
+}
+
+.main-register__form-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 616.48px;
+}
+
+.main-register__form-wrapper form {
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+
+.main-register__input-wrapper {
+    width: 100%;
+    min-height: 8vh;
+    margin-bottom: 2vh;
+}
+
+.main-register__form-wrapper label {
+    display: block;
+    font-size: 0.9rem;
+    margin-bottom: 1vh;
+    text-transform: uppercase;
+}
+
+.main-register__input-wrapper input {
+    width: 100%;
+    height: 5vh;
+    padding: 1vh 2vh;
+    font-size: 0.9rem;
+    border: 1px solid #e9e8e8;
+    border-radius: 0;
+    outline: none;
+    transition: all 0.3s ease;
+}
+
+.main-register__input-wrapper input:focus {
+    border: 1px solid #828282;
+}
+
+.main-register__input-wrapper .submit-btn {
+    width: 100%;
+    height: 5vh;
+    margin-top: 2vh;
+    background-color: #494949;
+    color: white;
+    font-size: 0.9rem;
+    font-weight: 600;
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.main-register__input-wrapper .submit-btn:hover {
+    background-color: #828282;
+}
