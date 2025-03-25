@@ -1,0 +1,51 @@
+{{ 'main-list-collections.css' | asset_url | stylesheet_tag }}
+<div class="main-list-collections__wrapper">
+    <h1>Collections</h1>
+    <ul class="main-list-collections__list">
+        {% for collection in collections %}
+            <li class="main-list-collections__item">
+                <figure class="main-list-collections__figure">
+                    <a class="main-list-collections__link-figure">
+                        {{
+                            collection.image
+                            | image_url: width: 600, height: 600
+                            | image_tag: alt: collection.title, class: 'main-list-collections__image'
+                        }}
+                    </a>
+                    <figcaption class="main-list-collections__caption-wrapper">
+                        <a href="{{ collection.url }}">
+                            <h4 class="main-list-collections__title">
+                                {{ collection.title }}
+                                <span>
+                                    <svg
+                                        fill="#ffffff"
+                                        height="10px"
+                                        width="10px"
+                                        version="1.1"
+                                        id="Layer_1"
+                                        xmlns="http://www.w3.org/2000/svg"
+                                        xmlns:xlink="http://www.w3.org/1999/xlink"
+                                        viewBox="0 0 512.005 512.005"
+                                        xml:space="preserve"
+                                        stroke="#ffffff"
+                                    >
+                                        <g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <g> <g> <path d="M388.418,240.923L153.751,6.256c-8.341-8.341-21.824-8.341-30.165,0s-8.341,21.824,0,30.165L343.17,256.005 L123.586,475.589c-8.341,8.341-8.341,21.824,0,30.165c4.16,4.16,9.621,6.251,15.083,6.251c5.461,0,10.923-2.091,15.083-6.251 l234.667-234.667C396.759,262.747,396.759,249.264,388.418,240.923z"></path> </g> </g> </g>
+                                    </svg>
+                                </span>
+                            </h4>
+                        </a>
+                    </figcaption>
+                </figure>
+            </li>
+        {% endfor %}
+    </ul>
+</div>
+
+{% schema %}
+{
+    "name": "Main List Collections",
+    "tag": "section",
+    "class": "main-list-collections__container",
+    "settings": []
+}
+{% endschema %}
