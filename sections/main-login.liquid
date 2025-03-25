@@ -1,0 +1,33 @@
+{{ 'customer.css' | asset_url | stylesheet_tag }}
+<div class="main-login__wrapper">
+    <h1>Login</h1>
+    <div class="main-login__form-wrapper">
+        {% form 'customer_login' %}
+            {{ form.errors | default_errors }}
+
+            <div class="main-login__input-wrapper">
+                <label for="email">Email</label>
+                <input type="email" name="customer[email]">
+            </div>
+
+            <div class="main-login__input-wrapper">
+                <label for="password">Password</label>
+                <input type="password" name="customer[password]">
+            </div>
+
+            <div class="main-login__input-wrapper">
+                <input type="submit" value="Login" class="submit-btn">
+                <p class="main-login__register-link">New Customer? <a href="{{ routes.account_register_url }}">Sign Up →</a></p>
+            </div>
+        {% endform %}
+    </div>
+</div>
+
+{% schema %}
+{
+    "name": "Login",
+    "tag": "section",
+    "class": "main-login__container",
+    "settings": []
+}
+{% endschema %}
