@@ -1,0 +1,42 @@
+{{ 'customer.css' | asset_url | stylesheet_tag }}
+<div class="main-register__wrapper">
+    <h1>Create Account</h1>
+    <div class="main-register__form-wrapper">
+        {% form 'create_customer', return_to: routes.all_products_collection_url %}
+            {{ form.errors | default_errors }}
+
+            <div class="main-register__first-name">
+                <label for="first-name">First Name</label>
+                <input type="text" name="customer[first-name]" id="first-name" required>
+            </div>
+
+            <div class="main-register__last-name">
+                <label for="last-name">Last Name</label>
+                <input type="text" name="customer[last-name]" id="last-name" required>
+            </div>
+
+            <div class="main-register__email">
+                <label for="email">Email</label>
+                <input type="email" name="customer[email]" id="email" required>
+            </div>
+
+            <div class="main-register__password">
+                <label for="password">Password</label>
+                <input type="password" name="customer[password]" id="password" required>
+            </div>
+
+            <div class="main-register__submit">
+                <input type="submit" value="Create Account" class="submit-btn">
+            </div>
+        {% endform %}
+    </div>
+</div>
+
+{% schema %}
+{
+    "name": "Customer Registration",
+    "tag": "section",
+    "class": "main-register__container",
+    "settings": []
+}
+{% endschema %}
