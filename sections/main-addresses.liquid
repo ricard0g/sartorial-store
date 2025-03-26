@@ -99,7 +99,18 @@
 
                                 <div class="main-addresses__input-wrapper">
                                     <label>Country</label>
-                                    <select></select>
+                                    <select>
+                                        {% for country in localization.available_countries %}
+                                            <option
+                                                value="{{ country.code }}"
+                                                {% if country.code == customer.default_address.country_code %}
+                                                    selected
+                                                {% endif %}
+                                            >
+                                                {{ country.name }}
+                                            </option>
+                                        {% endfor %}
+                                    </select>
                                 </div>
 
                                 <div class="main-addresses__input-wrapper">
