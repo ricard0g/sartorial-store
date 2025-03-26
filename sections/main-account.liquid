@@ -14,10 +14,48 @@
             <h4 class="main-account__address">Primary Address</h4>
             <p>{{ customer.default_address | format_address }}</p>
             <p>
-                <a class="main-account__addresses-link" href="{{ routes.account_addresses_url }}">View Addresses ({{ customer.addresses_count }})</a>
+                <a class="main-account__addresses-link" href="{{ routes.account_addresses_url }}"
+                    >View Addresses ({{ customer.addresses_count }})</a
+                >
             </p>
         </div>
-        <div class="main-account__orders-wrapper"></div>
+        <div class="main-account__orders-wrapper">
+            <h4 class="main-account__orders-title">Order History</h4>
+            <div class="main-account__orders-table-wrapper">
+                {% if customer.orders_count > 0 %}
+                    {% paginate customer.order by 10 %}
+                        {% for order in customer.orders %}
+                            <table class="main-account__order-table">
+                                <thead>
+                                    <tr>
+                                        <th>Order</th>
+                                        <th>Date</th>
+                                        <th>Payment Status</th>
+                                        <th>Fulfillment Status</th>
+                                        <th>Total</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>
+                                            <a href="{{ order.customer_url }}">{{ order.name }}</a>
+                                        </td>
+                                        <td>{{ order.created_at | date: '%B %d, %Y' }}</td>
+                                        <td>{{ order.financial_status }}</td>
+                                        <td>{{ order.fulfillment_status }}</td>
+                                        <td>{{ order.total_price | money }}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        {% endfor %}
+
+                        {{ paginate | default_pagination }}
+                    {% endpaginate %}
+                {% else %}
+                    <p class="main-account__no-orders">You haven't placed any orders yet.</p>
+                {% endif %}
+            </div>
+        </div>
     </div>
 </div>
 
