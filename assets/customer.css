@@ -52,7 +52,8 @@
 }
 
 .main-register__form-wrapper label,
-.main-login__form-wrapper label {
+.main-login__form-wrapper label,
+.main-addresses__input-wrapper label {
     display: block;
     font-size: 0.9rem;
     margin-bottom: 1vh;
@@ -60,7 +61,9 @@
 }
 
 .main-register__input-wrapper input,
-.main-login__input-wrapper input {
+.main-login__input-wrapper input,
+.main-addresses__input-wrapper input,
+.main-addresses__input-wrapper select {
     width: 100%;
     height: 5vh;
     padding: 1vh 2vh;
@@ -72,7 +75,9 @@
 }
 
 .main-register__input-wrapper input:focus,
-.main-login__input-wrapper input:focus {
+.main-login__input-wrapper input:focus,
+.main-addresses__input-wrapper input:focus,
+.main-addresses__input-wrapper select:focus {
     border: 1px solid #828282;
 }
 
@@ -252,7 +257,8 @@
     text-transform: uppercase;
 }
 
-.main-account__orders-wrapper, .main-addresses__addresses-wrapper {
+.main-account__orders-wrapper,
+.main-addresses__addresses-wrapper {
     display: flex;
     flex-flow: column nowrap;
     justify-content: center;
@@ -296,25 +302,36 @@
 }
 
 @media only screen and (max-width: 768px) {
-    .main-account__container {
+    .main-account__container,
+    .main-addresses__container {
         flex-flow: column nowrap;
         justify-content: start;
         align-items: center;
     }
 
-    .main-account__wrapper {
+    .main-account__wrapper,
+    .main-addresses__wrapper {
         width: 100%;
         padding: 2vh;
     }
 
-    .main-account__content-wrapper {
+    .main-account__content-wrapper,
+    .main-addresses__content-wrapper {
         flex-flow: column nowrap;
         justify-content: center;
-        align-items: center;
+        align-items: start;
         width: 100%;
     }
 
     .main-account__account-details-wrapper {
+        border-bottom: 1px solid #e9e8e8;
+        padding-bottom: 4vh;
+        margin-bottom: 4vh;
+    }
+    
+    .main-addresses__add-address-wrapper {
+        width: 100%;
+        border-right: none;
         border-bottom: 1px solid #e9e8e8;
         padding-bottom: 4vh;
         margin-bottom: 4vh;
@@ -333,4 +350,110 @@
         border-right: none;
         margin-left: 0;
     }
+
+    .main-addresses__addresses-wrapper {
+        width: 100%;
+        margin-left: 0;
+    }
+}
+
+/* Addresses page */
+add-address,
+edit-address {
+    width: 100%;
+}
+
+.main-addresses__adress-table {
+    width: 100%;
+}
+
+.main-addresses__add-address-form {
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+
+.main-addresses__add-address-form h4,
+.main-addresses__view-address h4,
+.main-addresses__edit-address-title {
+    font-size: 1.1rem;
+    width: 100%;
+    font-weight: 500;
+    text-transform: uppercase;
+    margin-bottom: 2vh;
+}
+
+.main-addresses__add-form,
+.main-addresses__edit-form {
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: start;
+    align-items: start;
+    row-gap: 2vh;
+    width: 100%;
+}
+
+.main-addresses__input-wrapper {
+    width: 100%;
+}
+
+.main-addresses__view-address p {
+    font-size: 0.9rem;
+    font-weight: 300;
+    color: #333;
+    margin: 1vh 0;
+}
+
+.main-addresses__buttons {
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: start;
+    align-items: center;
+    column-gap: 10px;
+}
+
+.main-addresses__edit-button,
+.main-addresses__submit-button {
+    min-width: 80px;
+    height: 40px;
+    margin-top: 2vh;
+    padding: 1vh 2vw;
+    background-color: #494949;
+    color: white;
+    font-size: 0.8rem;
+    font-weight: 400;
+    text-transform: uppercase;
+    border: none;
+    border-radius: 0;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.main-addresses__edit-button:hover,
+.main-addresses__submit-button:hover {
+    background-color: #828282;
+}
+
+#DeleteBtn,
+.main-addresses__cancel-button {
+    width: 80px;
+    height: 40px;
+    margin-top: 2vh;
+    background-color: transparent;
+    color: #494949;
+    font-size: 0.8rem;
+    font-weight: 400;
+    text-transform: uppercase;
+    border: 1px solid #494949;
+    border-radius: 0;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+#DeleteBtn:hover,
+.main-addresses__cancel-button:hover {
+    background-color: #494949;
+    color: white;
 }
