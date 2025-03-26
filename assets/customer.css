@@ -138,7 +138,8 @@
 }
 
 /* Account Page */
-.main-account__container {
+.main-account__container,
+.main-addresses__container {
     display: flex;
     justify-content: start;
     align-items: center;
@@ -147,7 +148,8 @@
     margin: 5vh auto;
 }
 
-.main-account__wrapper {
+.main-account__wrapper,
+.main-addresses__wrapper {
     display: flex;
     flex-flow: column nowrap;
     justify-content: center;
@@ -155,7 +157,8 @@
     width: 90%;
 }
 
-.main-account__header {
+.main-account__header,
+.main-addresses__header {
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -164,21 +167,24 @@
     border-bottom: 1px solid #e9e8e8;
 }
 
-.main-account__header h1 {
+.main-account__header h1,
+.main-addresses__header h1 {
     font-size: 1.5rem;
     font-family: 'Cormorant Unicase', serif;
-    width: 100%;
+    width: 60%;
     font-weight: 400;
 }
 
-.main-account__header a {
+.main-account__header a,
+.main-addresses__header a {
     font-size: 0.9rem;
     color: #333;
     font-weight: 600;
     text-transform: uppercase;
 }
 
-.main-account__content-wrapper {
+.main-account__content-wrapper,
+.main-addresses__content-wrapper {
     display: flex;
     flex-flow: row nowrap;
     justify-content: start;
@@ -188,13 +194,37 @@
     padding: 1vh 2vh;
 }
 
-.main-account__account-details-wrapper {
+.main-account__account-details-wrapper,
+.main-addresses__add-address-wrapper {
     display: flex;
     flex-flow: column nowrap;
-    justify-content: center;
+    justify-content: start;
     align-items: start;
     width: 25%;
     border-right: 1px solid #e9e8e8;
+}
+
+.main-addresses__add-address-wrapper {
+    min-height: 20vh;
+}
+
+.main-addresses__action-button {
+    width: 50%;
+    height: 5vh;
+    margin-top: 2vh;
+    background-color: #494949;
+    color: white;
+    font-size: 0.8rem;
+    font-weight: 400;
+    text-transform: uppercase;
+    border: none;
+    border-radius: 0;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.main-addresses__action-button:hover {
+    background-color: #828282;
 }
 
 .main-account__first-name,
@@ -222,7 +252,7 @@
     text-transform: uppercase;
 }
 
-.main-account__orders-wrapper {
+.main-account__orders-wrapper, .main-addresses__addresses-wrapper {
     display: flex;
     flex-flow: column nowrap;
     justify-content: center;
@@ -294,7 +324,7 @@
         width: 100%;
         margin-left: 0;
         padding: 0;
-        overflow: scroll
+        overflow: scroll;
     }
 
     .main-account__account-details-wrapper,

@@ -1,0 +1,155 @@
+{{ 'customer.css' | asset_url | stylesheet_tag }}
+<div class="main-addresses__wrapper">
+    <div class="main-addresses__header">
+        <h1>Your Addresses</h1>
+        <p><a href="{{ routes.account_url }}">Return to Account Details</a> / {{ 'Logout' | customer_logout_link }}</p>
+    </div>
+    <div class="main-addresses__content-wrapper">
+        <div class="main-addresses__add-address-wrapper">
+            <button type="button" class="main-addresses__action-button">Add a New Address</button>
+        </div>
+        <div class="main-addresses__addresses-wrapper">
+            {% if customer.addresses_count > 0 %}
+                {% if customer.default_address != null %}
+                    <div class="main-addresses__address-table">
+                        <div class="main-addresses__view-address">
+                            <h4>{{ customer.default_address.first_name }} - (Default)</h4>
+                            <p>{{ customer.default_address.address1 }}</p>
+                            {% if customer.default_address.address2 %}
+                                <p>{{ customer.default_address.address2 }}</p>
+                            {% endif %}
+
+                            <p>
+                                {{ customer.default_address.city }},
+                                {% if customer.default_address.province_code -%}
+                                    {{- customer.default_address.province_code -}}
+                                {%- endif -%}
+                                , {{ customer.default_address.country_code }}
+                            </p>
+                            <p>{{ customer.default_address.zip }}</p>
+                            <p>{{ customer.default_address.phone }}</p>
+                            <div>
+                                <button type="button" class="main-addresses__edit-button">Edit</button>
+                                <form
+                                    class="main-addresses__addresses-delete-form"
+                                    method="post"
+                                    action="/account/addresses/{{ customer.default_address.id }}"
+                                >
+                                    <input type="hidden" name="_method" value="delete">
+                                    <button type="submit">Delete</button>
+                                </form>
+                            </div>
+                        </div>
+                        <div class="main-addresses__edit-address">
+                            <h4 class="main-addresses__edit-address-title">Edit Address</h4>
+                            {% form 'customer_address', customer.default_address %}
+                                <div class="main-addresses__input-wrapper">
+                                    <label>First Name</label>
+                                    <input
+                                        type="text"
+                                        name="address[first_name]"
+                                        value="{{ customer.default_address.first_name }}"
+                                    >
+                                </div>
+
+                                <div class="main-addresses__input-wrapper">
+                                    <label>Last Name</label>
+                                    <input
+                                        type="text"
+                                        name="address[last_name]"
+                                        value="{{ customer.default_address.last_name }}"
+                                    >
+                                </div>
+
+                                <div class="main-addresses__input-wrapper">
+                                    <label>Company</label>
+                                    <input
+                                        type="text"
+                                        name="address[company]"
+                                        value="{{ customer.default_address.company }}"
+                                    >
+                                </div>
+
+                                <div class="main-addresses__input-wrapper">
+                                    <label>Address 1</label>
+                                    <input
+                                        type="text"
+                                        name="address[address1]"
+                                        value="{{ customer.default_address.address1 }}"
+                                    >
+                                </div>
+
+                                <div class="main-addresses__input-wrapper">
+                                    <label>Address 2</label>
+                                    <input
+                                        type="text"
+                                        name="address[address2]"
+                                        value="{{ customer.default_address.address2 }}"
+                                    >
+                                </div>
+
+                                <div class="main-addresses__input-wrapper">
+                                    <label>City</label>
+                                    <input
+                                        type="text"
+                                        name="address[city]"
+                                        value="{{ customer.default_address.city }}"
+                                    >
+                                </div>
+
+                                <div class="main-addresses__input-wrapper">
+                                    <label>Country</label>
+                                    <select></select>
+                                </div>
+
+                                <div class="main-addresses__input-wrapper">
+                                    <label>Province</label>
+                                    <input
+                                        type="select"
+                                        name="address[province]"
+                                        value="{{ customer.default_address.province }}"
+                                    >
+                                </div>
+
+                                <div class="main-addresses__input-wrapper">
+                                    <label>Postal/ZIP Code</label>
+                                    <input
+                                        type="text"
+                                        name="address[zip]"
+                                        value="{{ customer.default_address.zip }}"
+                                    >
+                                </div>
+
+                                <div class="main-addresses__input-wrapper">
+                                    <label>Phone Number</label>
+                                    <input
+                                        type="tel"
+                                        name="address[phone]"
+                                        value="{{ customer.default_address.phone }}"
+                                    >
+                                </div>
+                            {% endform %}
+                        </div>
+                    </div>
+                {% endif %}
+                {% for address in customer.addresses %}
+                    <div class="main-addresses__address-table">
+                        <div class="main-addresses__view-address">
+                            <h4>{{ address.first_name }}</h4>
+                        </div>
+                        <div class="main-addresses__edit-address"></div>
+                    </div>
+                {% endfor %}
+            {% endif %}
+        </div>
+    </div>
+</div>
+
+{% schema %}
+{
+    "name": "Customer Addresses",
+    "tag": "section",
+    "class": "main-addresses__container",
+    "settings": []
+}
+{% endschema %}
