@@ -1,0 +1,35 @@
+{{ 'customer.css' | asset_url | stylesheet_tag }}
+<div class="activate-account__wrapper">
+    <h1>Activate Account</h1>
+    <p>Create your password to activate your account</p>
+    <div class="activate-account__form-wrapper">
+        {% form 'activate_customer_password', class: 'activate-account__form-wrapper' %}
+            {{ form.errors | default_errors }}
+
+            <div class="activate-account__input-wrapper">
+                <label>Password</label>
+                <input type="password" name="customer[password]">
+            </div>
+
+            <div class="activate-account__input-wrapper">
+                <label>Password Confirmation</label>
+                <input type="password" name="customer[password_confirmation]">
+            </div>
+
+            <div class="activate-account__input-wrapper">
+                <input type="submit" value="Activate account" class="activate-btn">
+                or
+                <input type="submit" name="decline" value="Decline invitation">
+            </div>
+        {% endform %}
+    </div>
+</div>
+
+{% schema %}
+{
+    "name": "Activate Account",
+    "tag": "section",
+    "class": "activate-account__container",
+    "settings": []
+}
+{% endschema %}
