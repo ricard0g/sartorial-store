@@ -1,7 +1,8 @@
 /* Register Page */
 .main-register__container,
 .main-login__container,
-.activate-account__container {
+.activate-account__container,
+.reset-password__container {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -19,7 +20,8 @@
     width: 40%;
 }
 
-.main-login__wrapper {
+.main-login__wrapper,
+.reset-password__wrapper {
     display: flex;
     flex-flow: column nowrap;
     justify-content: center;
@@ -28,7 +30,8 @@
 
 .main-register__wrapper h1,
 .main-login__wrapper h1,
-.activate-account__wrapper h1 {
+.activate-account__wrapper h1,
+.reset-password__wrapper h1 {
     font-size: 1.5rem;
     font-family: 'Cormorant Unicase', serif;
     text-align: center;
@@ -38,7 +41,8 @@
 
 .main-register__form-wrapper,
 .main-login__form-wrapper,
-.activate-account__form-wrapper {
+.activate-account__form-wrapper,
+.reset-password__form-wrapper {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -48,7 +52,8 @@
 
 .main-register__form-wrapper form,
 .main-login__form-wrapper form,
-.activate-account__form-wrapper form {
+.activate-account__form-wrapper form,
+.reset-password__form-wrapper form {
     display: flex;
     flex-flow: column nowrap;
     justify-content: center;
@@ -71,7 +76,8 @@
 .main-register__input-wrapper,
 .main-login__input-wrapper,
 .main-addresses__input-wrapper,
-.activate-account__input-wrapper {
+.activate-account__input-wrapper,
+.reset-password__input-wrapper {
     width: 100%;
     min-height: 8vh;
     margin-bottom: 2vh;
@@ -80,7 +86,8 @@
 .main-register__form-wrapper label,
 .main-login__form-wrapper label,
 .main-addresses__input-wrapper label,
-.activate-account__input-wrapper label {
+.activate-account__input-wrapper label,
+.reset-password__input-wrapper label {
     display: block;
     font-size: 0.9rem;
     margin-bottom: 1vh;
@@ -91,7 +98,8 @@
 .main-login__input-wrapper input,
 .main-addresses__input-wrapper input,
 .main-addresses__input-wrapper select,
-.activate-account__input-wrapper input {
+.activate-account__input-wrapper input,
+.reset-password__input-wrapper input {
     width: 100%;
     height: 5vh;
     padding: 1vh 2vh;
@@ -106,7 +114,8 @@
 .main-login__input-wrapper input:focus,
 .main-addresses__input-wrapper input:focus,
 .main-addresses__input-wrapper select:focus,
-.activate-account__input-wrapper input:focus {
+.activate-account__input-wrapper input:focus,
+.reset-password__input-wrapper input:focus {
     border: 1px solid #828282;
 }
 
@@ -120,7 +129,7 @@
 
 .main-register__input-wrapper .submit-btn,
 .main-login__input-wrapper .submit-btn,
-.activate-account__input-wrapper .activate-btn {
+.activate-account__input-wrapper .activate-btn, .reset-password__input-wrapper .submit-btn {
     width: 100%;
     height: 5vh;
     margin-top: 2vh;
@@ -135,7 +144,7 @@
 
 .main-register__input-wrapper .submit-btn:hover,
 .main-login__input-wrapper .submit-btn:hover,
-.activate-account__input-wrapper .activate-btn:hover {
+.activate-account__input-wrapper .activate-btn:hover, .reset-password__input-wrapper .submit-btn:hover {
     background-color: #828282;
 }
 
@@ -160,13 +169,15 @@
 @media only screen and (max-width: 1024px) {
     .main-register__wrapper,
     .main-login__wrapper,
-    .activate-account__wrapper {
+    .activate-account__wrapper,
+    .reset-password__wrapper {
         width: 90%;
     }
 
     .main-register__form-wrapper,
     .main-login__form-wrapper,
-    .activate-account__form-wrapper {
+    .activate-account__form-wrapper,
+    .reset-password__form-wrapper {
         max-width: 616.48px;
         width: 100%;
     }
@@ -553,7 +564,7 @@ edit-address {
 }
 
 @media only screen and (max-width: 768px) {
-    .activate-account__wrapper p {
+    .activate-account__wrapper p, .reset-password__wrapper p {
         font-size: 0.9rem;
         margin: 2vh 0 6vh 0;
     }
