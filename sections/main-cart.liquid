@@ -1,0 +1,48 @@
+{{ 'main-cart.css' | asset_url | stylesheet_tag }}
+<div class="main-cart__wrapper">
+    <div class="main-cart__header">
+        <h1>Shopping Cart</h1>
+        <a href="{{ routes.all_products_collection_url }}">Continue Shopping</a>
+    </div>
+    <div class="main-cart__content-wrapper">
+        <div class="main-cart__line-items-wrapper">
+            <form class="main-cart__line-items-form" action="{{ routes.cart_url }}" method="post">
+                {% for item in cart.items %}
+                    <div class="main-cart__item">
+                        <div class="main-cart__item-image-wrapper">
+                            {{
+                                item.product.featured_image
+                                | image_url: width: 300, height: 300
+                                | image_tag: class: 'main-cart__item-image'
+                            }}
+                        </div>
+                        <div class="main-cart__item-content-wrapper">
+                            <h2>{{ item.product.title }}</h2>
+                            <p>Size: {{ item.variant.option1 }}</p>
+                            {% for color_reference in item.product.metafields.shopify['color-pattern'].value %}
+                                {% if forloop.first %}
+                                    <p>Color: {{ color_reference.label }}</p>
+                                {% endif %}
+                            {% endfor %}
+                            <p>{{ item.product.price | money }}</p>
+                            <input
+                                type
+                            >
+                        </div>
+                    </div>
+                {% endfor %}
+                <input type="submit" name="checkout" value="Checkout">
+            </form>
+        </div>
+        <div class="main-cart__payment-wrapper"></div>
+    </div>
+</div>
+
+{% schema %}
+{
+    "name": "Main Cart",
+    "tag": "section",
+    "class": "main-cart__container",
+    "settings": []
+}
+{% endschema %}
