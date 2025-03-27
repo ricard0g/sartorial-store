@@ -11,13 +11,19 @@
 }
 
 .main-register__wrapper,
-.main-login__wrapper,
 .activate-account__wrapper {
     display: flex;
     flex-flow: column nowrap;
     justify-content: center;
     align-items: center;
     width: 40%;
+}
+
+.main-login__wrapper {
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: center;
+    align-items: center;
 }
 
 .main-register__wrapper h1,
@@ -37,6 +43,7 @@
     justify-content: center;
     align-items: center;
     width: 616.48px;
+    margin: 0 auto;
 }
 
 .main-register__form-wrapper form,
@@ -47,6 +54,18 @@
     justify-content: center;
     align-items: center;
     width: 100%;
+    animation: fadeIn 0.5s linear;
+}
+
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
 .main-register__input-wrapper,
@@ -91,6 +110,14 @@
     border: 1px solid #828282;
 }
 
+.main-login__input-wrapper p {
+    font-size: 0.9rem;
+    font-weight: 400;
+    font-style: italic;
+    color: #333;
+    margin: 1vh 0;
+}
+
 .main-register__input-wrapper .submit-btn,
 .main-login__input-wrapper .submit-btn,
 .activate-account__input-wrapper .activate-btn {
@@ -110,6 +137,16 @@
 .main-login__input-wrapper .submit-btn:hover,
 .activate-account__input-wrapper .activate-btn:hover {
     background-color: #828282;
+}
+
+.forgot-password {
+    display: block;
+    width: 100%;
+    margin: 1vh auto;
+    text-align: start;
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: #333;
 }
 
 .main-register__logged-in-text {
@@ -431,8 +468,10 @@ edit-address {
 }
 
 .main-addresses__edit-button,
-.main-addresses__submit-button {
+.main-addresses__submit-button,
+#SubmitReset {
     min-width: 80px;
+    width: auto;
     height: 40px;
     margin-top: 2vh;
     padding: 1vh 2vw;
@@ -448,12 +487,14 @@ edit-address {
 }
 
 .main-addresses__edit-button:hover,
-.main-addresses__submit-button:hover {
+.main-addresses__submit-button:hover,
+#SubmitReset:hover {
     background-color: #828282;
 }
 
 #DeleteBtn,
-.main-addresses__cancel-button {
+.main-addresses__cancel-button,
+.main-login__cancel-reset {
     width: 80px;
     height: 40px;
     margin-top: 2vh;
@@ -469,7 +510,8 @@ edit-address {
 }
 
 #DeleteBtn:hover,
-.main-addresses__cancel-button:hover {
+.main-addresses__cancel-button:hover,
+.main-login__cancel-reset:hover {
     background-color: #494949;
     color: white;
 }

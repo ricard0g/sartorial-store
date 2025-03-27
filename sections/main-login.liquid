@@ -1,8 +1,8 @@
 {{ 'customer.css' | asset_url | stylesheet_tag }}
-<div class="main-login__wrapper">
+<div id="LoginForm" class="main-login__wrapper">
     <h1>Login</h1>
     <div class="main-login__form-wrapper">
-        {% form 'customer_login' %}
+        {% form 'customer_login', class: 'main-login__login-form' %}
             {{ form.errors | default_errors }}
 
             <div class="main-login__input-wrapper">
@@ -13,15 +13,52 @@
             <div class="main-login__input-wrapper">
                 <label for="password">Password</label>
                 <input type="password" name="customer[password]">
+                <a class="forgot-password" onclick="showRecoveryPasswordForm()" href="#">Forgot Your Password?</a>
             </div>
 
             <div class="main-login__input-wrapper">
                 <input type="submit" value="Login" class="submit-btn">
-                <p class="main-login__register-link">New Customer? <a href="{{ routes.account_register_url }}">Sign Up →</a></p>
+                <p class="main-login__register-link">
+                    New Customer? <a href="{{ routes.account_register_url }}">Sign Up →</a>
+                </p>
             </div>
         {% endform %}
     </div>
 </div>
+
+<div id="ResetForm" class="main-login__wrapper" style="display: none;">
+    <h1>Reset Password</h1>
+    <div class="main-login__form-wrapper">
+        {% form 'recover_customer_password' %}
+            {{ form.errors | default_errors }}
+
+            <div class="main-login__input-wrapper">
+                <label>Email</label>
+                <input type="email" name="email">
+                <p>We will send you an email to reset your password</p>
+            </div>
+
+            <div class="main-login__input-wrapper">
+                <input id="SubmitReset" type="submit" value="Submit">
+                <button onclick="hideRecoveryPasswordForm()" type="button" class="main-login__cancel-reset">
+                    Cancel
+                </button>
+            </div>
+        {% endform %}
+    </div>
+</div>
+
+<script>
+    function showRecoveryPasswordForm() {
+        document.querySelector("#LoginForm").style.display = 'none';
+        document.querySelector("#ResetForm").style.display = 'flex';
+    }
+
+    function hideRecoveryPasswordForm() {
+        document.querySelector("#LoginForm").style.display = 'flex';
+        document.querySelector("#ResetForm").style.display = 'none';
+    }
+</script>
 
 {% schema %}
 {
