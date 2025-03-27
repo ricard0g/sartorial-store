@@ -3,7 +3,7 @@
     <h1>Activate Account</h1>
     <p>Create your password to activate your account</p>
     <div class="activate-account__form-wrapper">
-        {% form 'activate_customer_password', class: 'activate-account__form-wrapper' %}
+        {% form 'activate_customer_password', class: 'activate-account__form' %}
             {{ form.errors | default_errors }}
 
             <div class="activate-account__input-wrapper">
@@ -16,10 +16,9 @@
                 <input type="password" name="customer[password_confirmation]">
             </div>
 
-            <div class="activate-account__input-wrapper">
-                <input type="submit" value="Activate account" class="activate-btn">
-                or
-                <input type="submit" name="decline" value="Decline invitation">
+            <div id="SubmitBtns" class="activate-account__input-wrapper">
+                <input id="ActivateBtn" type="submit" value="Activate account" class="activate-btn">
+                <input class="cancel-btn" type="submit" name="decline" value="Decline invitation">
             </div>
         {% endform %}
     </div>
