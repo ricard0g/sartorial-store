@@ -139,6 +139,7 @@ quantity-input {
     height: 40px;
     text-align: center;
     border: 1px solid #e9e8e8;
+    border-radius: 0;
     outline: none;
 }
 
