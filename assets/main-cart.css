@@ -6,7 +6,7 @@
 }
 
 .main-cart__wrapper {
-    width: 80%;
+    width: 70%;
     padding: 4vh 0;
 }
 
@@ -18,3 +18,133 @@
     border-bottom: 1px solid #e9e8e8;
 }
 
+.main-cart__content-wrapper {
+    display: flex;
+    padding: 4vh 0;
+}
+
+.main-cart__line-items-wrapper {
+    width: 70%;
+    padding-right: 2vw;
+    border-right: 1px solid #e9e8e8;
+}
+
+.main-cart__item {
+    display: flex;
+    justify-content: start;
+    align-items: start;
+    column-gap: 1vw;
+    margin-bottom: 2vh;
+}
+
+.main-cart__item-image-wrapper {
+    width: 300px;
+    height: 300px;
+}
+
+.main-cart__item-image {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    object-position: top;
+}
+
+.main-cart__item-content-wrapper {
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: space-around;
+    align-items: start;
+}
+
+.main-cart__product-title {
+    font-size: 1.125rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    margin: 0 0 1.5vh 0;
+    color: #333;
+}
+
+.main-cart__product-detail {
+    font-size: 0.9rem;
+    font-weight: 300;
+    color: #333;
+    margin: 0 0 0.5vh 0;
+}
+
+.main-cart__product-detail strong {
+    font-weight: 500;
+}
+
+.main-cart__item-quantity-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 0;
+}
+
+quantity-input {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 40px;
+}
+
+.main-cart__quantity-btn {
+    display: inline-block;
+    width: 40px;
+    height: 40px;
+    background-color: #f2f2f2;
+    border: 1px solid #e9e8e8;
+    border-radius: 0;
+    cursor: pointer;
+}
+
+.main-cart__quantity-btn:hover {
+    background-color: #e9e8e8;
+}
+
+.main-cart__quantity-btn span {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    font-size: 1rem;
+}
+
+.main-cart__item-quantity {
+    width: 40px;
+    height: 40px;
+    text-align: center;
+    border: 1px solid #e9e8e8;
+    outline: none;
+}
+
+.main-cart__input-quantity:focus {
+    outline: none;
+    border: none;
+}
+
+/* Remove number input arrows/spinners */
+.main-cart__item-quantity::-webkit-inner-spin-button,
+.main-cart__item-quantity::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+/* Firefox */
+.main-cart__item-quantity {
+    -moz-appearance: textfield;
+}
+
+.main-cart__product-price {
+    font-size: 1rem;
+    font-weight: 500;
+    color: #333;
+    margin: 2vh 0;
+}
+
+.main-cart__payment-wrapper {
+    width: 30%;
+    padding-left: 2vw;
+}

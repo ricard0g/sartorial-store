@@ -72,3 +72,63 @@ class CartManager {
 }
 
 const cartManager = new CartManager();
+
+// Quantity Input
+class QuantityInput extends HTMLElement {
+    constructor() {
+        super();
+        this.minusBtn = this.querySelector('[data-func="minus"]');
+        this.plusBtn = this.querySelector('[data-func="plus"]');
+        this.input = this.querySelector('input');
+        this.totalText = document.getElementById('TotalCartPrice');
+
+        this.setupEventListeners();
+    }
+
+    setupEventListeners() {
+        this.minusBtn.addEventListener('click', () => {
+            this.updateQuantity(-1);
+        });
+        this.plusBtn.addEventListener('click', () => {
+            this.updateQuantity(1);
+        });
+        this.input.addEventListener('input', () => {
+            this.validateInput();
+        });
+    }
+
+    updateQuantity(num) {
+        const currentValue = parseInt(this.input.value, 10);
+        const newValue = currentValue + num;
+        if (newValue) {
+            this.input.value = newValue;
+            this.updateTotal();
+        }
+    }
+
+    async updateTotal() {
+        try {
+            let updates = {
+                [this.dataset.id]: this.input.value,
+            };
+
+            console.log('Updating cart with:', updates);
+            const response = await fetch('/cart/update.js', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ updates }),
+            });
+
+            if (!response.ok) throw new Error('Network response was not ok');
+
+            const data = await response.json();
+            this.totalText.textContent = data.total_price / 100;
+        } catch (e) {
+            consoe.error('Error updating cart:', e);
+        }
+    }
+}
+
+customElements.define('quantity-input', QuantityInput);

@@ -1,4 +1,5 @@
 {{ 'main-cart.css' | asset_url | stylesheet_tag }}
+<script src="{{ 'cart.js' | asset_url }}" defer></script>
 <div class="main-cart__wrapper">
     <div class="main-cart__header">
         <h1>Shopping Cart</h1>
@@ -12,29 +13,57 @@
                         <div class="main-cart__item-image-wrapper">
                             {{
                                 item.product.featured_image
-                                | image_url: width: 300, height: 300
-                                | image_tag: class: 'main-cart__item-image'
+                                | image_url: width: 400, height: 400
+                                | image_tag:
+                                    alt: item.product.title,
+                                    class: 'main-cart__item-image',
+                                    widths: '250, 300, 400'
                             }}
                         </div>
                         <div class="main-cart__item-content-wrapper">
-                            <h2>{{ item.product.title }}</h2>
-                            <p>Size: {{ item.variant.option1 }}</p>
+                            <h2 class="main-cart__product-title">{{ item.product.title }}</h2>
+                            <p class="main-cart__product-detail">
+                                Size: <strong>{{ item.variant.option1 }}</strong>
+                            </p>
                             {% for color_reference in item.product.metafields.shopify['color-pattern'].value %}
                                 {% if forloop.first %}
-                                    <p>Color: {{ color_reference.label }}</p>
+                                    <p class="main-cart__product-detail">
+                                        Color: <strong>{{ color_reference.label }}</strong>
+                                    </p>
                                 {% endif %}
                             {% endfor %}
-                            <p>{{ item.product.price | money }}</p>
-                            <input
-                                type
-                            >
+                            <p class="main-cart__product-price">{{ item.product.price | money }}</p>
+                            <div class="main-cart__item-quantity-wrapper">
+                                <quantity-input data-id="{{ item.id }}">
+                                    <span class="main-cart__quantity-btn" data-func="minus">
+                                        <span>-</span>
+                                    </span>
+                                    <input
+                                        type="number"
+                                        name="updates[]"
+                                        value="{{ item.quantity }}"
+                                        min="0"
+                                        class="main-cart__item-quantity"
+                                    >
+                                    <span class="main-cart__quantity-btn" data-func="plus">
+                                        <span>+</span>
+                                    </span>
+                                </quantity-input>
+                            </div>
+                            <a class="main-cart__remove-btn" href="{{ item.url_to_remove }}">Remove</a>
                         </div>
                     </div>
                 {% endfor %}
                 <input type="submit" name="checkout" value="Checkout">
             </form>
         </div>
-        <div class="main-cart__payment-wrapper"></div>
+        <div class="main-cart__payment-wrapper">
+            <div class="main-cart__total-text-wrapper">
+                <p class="main-cart__total-text">
+                    <span>Subtotal</span><span id="TotalCartPrice">{{ cart.items_subtotal_price | money }}</span>
+                </p>
+            </div>
+        </div>
     </div>
 </div>
 
