@@ -1,7 +1,8 @@
-<script src="{{ 'flickity.pkgd.min.js' | asset_url  }}" defer></script>
-<script src="{{ 'main-product.js' | asset_url }}" defer></script>
 {{ 'flickity.min.css' | asset_url | stylesheet_tag }}
 {{ 'main-product.css' | asset_url | stylesheet_tag }}
+<script src="{{ 'flickity.pkgd.min.js' | asset_url  }}" defer></script>
+<script src="{{ 'main-product.js' | asset_url }}" defer></script>
+{% comment %} <script src="{{ 'cart.js' | asset_url }}" defer></script> {% endcomment %}
 <div class="main-product__wrapper">
     <div class="main-product__images-wrapper">
         <div class="main-product__carousel-nav">
