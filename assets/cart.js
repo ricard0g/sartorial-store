@@ -81,6 +81,7 @@ class QuantityInput extends HTMLElement {
         this.plusBtn = this.querySelector('[data-func="plus"]');
         this.input = this.querySelector('input');
         this.totalText = document.getElementById('TotalCartPrice');
+        this.currency = this.totalText.textContent.charAt(0);
 
         this.setupEventListeners();
     }
@@ -124,7 +125,7 @@ class QuantityInput extends HTMLElement {
             if (!response.ok) throw new Error('Network response was not ok');
 
             const data = await response.json();
-            this.totalText.textContent = data.total_price / 100;
+            this.totalText.textContent = `${this.currency}${data.total_price / 100}`;
         } catch (e) {
             consoe.error('Error updating cart:', e);
         }
