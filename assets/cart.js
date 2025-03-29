@@ -139,10 +139,10 @@ class CartManager {
         }, this.options.notificationDuration);
 
         // Clean up DOM after animation completes
-        setTimeout(() => {
-            notification.remove();
-            this.increaseItemCount();
-        }, this.options.notificationDuration + this.options.animationDuration);
+        // setTimeout(() => {
+        //     notification.remove();
+        //     this.increaseItemCount();
+        // }, this.options.notificationDuration + this.options.animationDuration);
     }
 
     /**
