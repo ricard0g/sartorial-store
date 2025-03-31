@@ -21,9 +21,9 @@
         </div>
         <div class="main-account__orders-wrapper">
             <h4 class="main-account__orders-title">Order History</h4>
-            <div class="main-account__orders-table-wrapper">
-                {% if customer.orders_count > 0 %}
-                    {% paginate customer.order by 10 %}
+            <div class="main-account__orders-table-wrapper" style="width: 100%;">
+                {% if customer.orders_count != blank %}
+                    {% paginate customer.orders by 10 %}
                         {% for order in customer.orders %}
                             <table class="main-account__order-table">
                                 <thead>

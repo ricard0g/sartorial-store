@@ -2,7 +2,8 @@
 .main-register__container,
 .main-login__container,
 .activate-account__container,
-.reset-password__container {
+.reset-password__container,
+.main-order__container {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -129,7 +130,8 @@
 
 .main-register__input-wrapper .submit-btn,
 .main-login__input-wrapper .submit-btn,
-.activate-account__input-wrapper .activate-btn, .reset-password__input-wrapper .submit-btn {
+.activate-account__input-wrapper .activate-btn,
+.reset-password__input-wrapper .submit-btn {
     width: 100%;
     height: 5vh;
     margin-top: 2vh;
@@ -144,7 +146,8 @@
 
 .main-register__input-wrapper .submit-btn:hover,
 .main-login__input-wrapper .submit-btn:hover,
-.activate-account__input-wrapper .activate-btn:hover, .reset-password__input-wrapper .submit-btn:hover {
+.activate-account__input-wrapper .activate-btn:hover,
+.reset-password__input-wrapper .submit-btn:hover {
     background-color: #828282;
 }
 
@@ -201,7 +204,8 @@
     color: #333;
 }
 
-.main-login__register-link a {
+.main-login__register-link a,
+.main-order__order-table table a {
     color: #333;
     font-weight: 600;
 }
@@ -210,7 +214,7 @@
 .main-account__container,
 .main-addresses__container {
     display: flex;
-    justify-content: start;
+    justify-content: center;
     align-items: center;
     width: 100%;
     padding: 0 2vw;
@@ -218,7 +222,8 @@
 }
 
 .main-account__wrapper,
-.main-addresses__wrapper {
+.main-addresses__wrapper,
+.main-order__wrapper {
     display: flex;
     flex-flow: column nowrap;
     justify-content: center;
@@ -227,7 +232,8 @@
 }
 
 .main-account__header,
-.main-addresses__header {
+.main-addresses__header,
+.main-order__header {
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -237,7 +243,8 @@
 }
 
 .main-account__header h1,
-.main-addresses__header h1 {
+.main-addresses__header h1,
+.main-order__header h1 {
     font-size: 1.5rem;
     font-family: 'Cormorant Unicase', serif;
     width: 60%;
@@ -245,7 +252,8 @@
 }
 
 .main-account__header a,
-.main-addresses__header a {
+.main-addresses__header a,
+.main-order__header a {
     font-size: 0.9rem;
     color: #333;
     font-weight: 600;
@@ -253,7 +261,8 @@
 }
 
 .main-account__content-wrapper,
-.main-addresses__content-wrapper {
+.main-addresses__content-wrapper,
+.main-order__content-wrapper {
     display: flex;
     flex-flow: row nowrap;
     justify-content: start;
@@ -264,7 +273,8 @@
 }
 
 .main-account__account-details-wrapper,
-.main-addresses__add-address-wrapper {
+.main-addresses__add-address-wrapper,
+.main-order__order-info {
     display: flex;
     flex-flow: column nowrap;
     justify-content: start;
@@ -298,7 +308,9 @@
 
 .main-account__first-name,
 .main-account__address,
-.main-account__orders-title {
+.main-account__orders-title,
+.main-order__order-info h4,
+.main-order__order-table-wrapper h4 {
     margin: 1vh 0;
     color: #494949;
     font-size: 1.125rem;
@@ -307,7 +319,9 @@
 }
 
 .main-account__account-details-wrapper p,
-.main-account__no-orders {
+.main-account__no-orders,
+.main-order__order-info p,
+.main-order__order-table-wrapper p {
     font-size: 0.9rem;
     font-weight: 300;
     color: #333;
@@ -322,7 +336,8 @@
 }
 
 .main-account__orders-wrapper,
-.main-addresses__addresses-wrapper {
+.main-addresses__addresses-wrapper,
+.main-order__order-table-wrapper {
     display: flex;
     flex-flow: column nowrap;
     justify-content: center;
@@ -332,7 +347,12 @@
 }
 
 /* Orders Table */
-.main-account__order-table {
+.main-order__order-table {
+    width: 100%;
+}
+
+.main-account__order-table,
+.main-order__order-table table {
     width: 100%;
     margin: 4vh 0;
     border: 1px solid #e9e8e8;
@@ -340,34 +360,74 @@
     border-spacing: 0;
 }
 
-.main-account__order-table thead {
+.main-account__order-table thead,
+.main-order__order-table thead {
     border-bottom: 1px solid #e9e8e8;
 }
 
-.main-account__order-table thead tr {
+.main-account__order-table thead tr,
+.main-order__order-table thead tr,
+.main-order__order-table tfoot tr {
     text-align: left;
 }
 
-.main-account__order-table thead tr th {
+.main-account__order-table thead tr th,
+.main-order__order-table thead tr th,
+.main-order__order-table tfoot tr th {
     padding: 2vh;
     font-size: 0.9rem;
     font-weight: 500;
     color: #333;
 }
 
-.main-account__order-table tbody tr {
+.main-account__order-table tbody tr,
+.main-order__order-table tbody tr,
+.main-order__order-table tfoot tr {
     text-align: left;
 }
-.main-account__order-table tbody tr td {
+
+.main-account__order-table tbody tr td,
+.main-order__order-table tbody tr td,
+.main-order__order-table tfoot tr td {
     padding: 2vh;
     font-size: 0.9rem;
     font-weight: 300;
     color: #333;
 }
 
+.main-order__order-table tfoot {
+    border-top: 1px solid #e9e8e8;
+}
+
+.main-order__order-foot-title {
+    font-size: 1rem !important;
+    font-weight: 400 !important;
+    color: #333;
+}
+
+.main-order__order-foot-money {
+    font-size: 1rem !important;
+    font-weight: 400 !important;
+    color: #333;
+}
+
+#TotalPriceTitle {
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: #333;
+}
+
+#TotalPrice {
+    font-size: 1.2rem;
+    font-weight: 600;
+    text-align: right;
+    color: #333;
+}
+
 @media only screen and (max-width: 768px) {
     .main-account__container,
-    .main-addresses__container {
+    .main-addresses__container,
+    .main-order__container {
         flex-flow: column nowrap;
         justify-content: start;
         align-items: center;
@@ -375,13 +435,15 @@
 
     .main-account__wrapper,
     .main-addresses__wrapper,
-    .activate-account__wrapper {
+    .activate-account__wrapper,
+    .main-order__wrapper {
         width: 100%;
         padding: 2vh;
     }
 
     .main-account__content-wrapper,
-    .main-addresses__content-wrapper {
+    .main-addresses__content-wrapper,
+    .main-order__content-wrapper {
         flex-flow: column nowrap;
         justify-content: center;
         align-items: start;
@@ -394,7 +456,8 @@
         margin-bottom: 4vh;
     }
 
-    .main-addresses__add-address-wrapper {
+    .main-addresses__add-address-wrapper,
+    .main-order__order-info {
         width: 100%;
         border-right: none;
         border-bottom: 1px solid #e9e8e8;
@@ -402,7 +465,8 @@
         margin-bottom: 4vh;
     }
 
-    .main-account__orders-table-wrapper {
+    .main-account__orders-table-wrapper,
+    .main-order__order-table-wrapper {
         width: 100%;
         margin-left: 0;
         padding: 0;
@@ -565,7 +629,8 @@ edit-address {
 }
 
 @media only screen and (max-width: 768px) {
-    .activate-account__wrapper p, .reset-password__wrapper p {
+    .activate-account__wrapper p,
+    .reset-password__wrapper p {
         font-size: 0.9rem;
         margin: 2vh 0 6vh 0;
     }

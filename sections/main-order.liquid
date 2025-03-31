@@ -1,0 +1,80 @@
+{{ 'customer.css' | asset_url | stylesheet_tag }}
+<div class="main-order__wrapper">
+    <div class="main-order__header">
+        <h1>Order Details</h1>
+        <p><a href="{{ routes.account_url }}">Return to Account Details</a> / {{ 'Logout' | customer_logout_link }}</p>
+    </div>
+    <div class="main-order__content-wrapper">
+        <div class="main-order__order-info">
+            <h4>Billing Address</h4>
+            <p><strong>Payment Status: </strong>{{ order.financial_status }}</p>
+            <p>{{ order.billing_address | format_address }}</p>
+            <h4>Shipping Address</h4>
+            <p><strong>Fulfillment Status: </strong>{{ order.fulfillment_status }}</p>
+            <p>{{ order.shipping_address | format_address }}</p>
+        </div>
+        <div class="main-order__order-table-wrapper">
+            <h4>Order {{ order.name }}</h4>
+            <p>Placed on {{ order.created_at | date: '%B %d, %Y' }} at {{ order.created_at | date: '%I:%M %p' }}</p>
+            <div class="main-order__order-table">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>
+                                {% if order.item_count > 1 %}
+                                    Products
+                                {% else %}
+                                    Product
+                                {% endif %}
+                            </th>
+                            <th>SKU</th>
+                            <th>Price</th>
+                            <th>Quantity</th>
+                            <th>Total</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for item in order.line_items %}
+                            <tr>
+                                <td>
+                                    <a href="{{ item.product.url }}">
+                                        {{ item.product.title }}
+                                    </a>
+                                </td>
+                                <td>{{ item.sku }}</td>
+                                <td>{{ item.price | money }}</td>
+                                <td>{{ item.quantity }}</td>
+                                <td>{{ item.line_price | money }}</td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                    <tfoot>
+                        <tr>
+                            <th class="main-order__order-foot-title" colspan="4">Subtotal</th>
+                            <td class="main-order__order-foot-money">{{ order.subtotal_price | money }}</td>
+                        </tr>
+                        <tr>
+                            <th class="main-order__order-foot-title" colspan="4">
+                                Shipping ({{ order.shipping_methods.first.title }})
+                            </th>
+                            <td class="main-order__order-foot-money">{{ order.shipping_price | money }}</td>
+                        </tr>
+                        <tr>
+                            <th id="TotalPriceTitle" colspan="3">Total</th>
+                            <td id="TotalPrice">{{ order.total_price | money }}</td>
+                        </tr>
+                    </tfoot>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% schema %}
+{
+    "name": "Order Page",
+    "tag": "section",
+    "class": "main-order__container",
+    "settings": []
+}
+{% endschema %}
