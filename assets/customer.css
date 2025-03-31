@@ -196,6 +196,7 @@
     width: 100%;
     margin: 3vh auto;
     text-align: end;
+    font-style: italic;
     font-size: 0.9rem;
     color: #333;
 }

@@ -1,6 +1,6 @@
 {{ 'customer.css' | asset_url | stylesheet_tag }}
 
-{% if customer.has_account == nil %}
+{% if customer.has_account == null %}
     <div class="main-register__wrapper">
         <h1>Create Account</h1>
         <div class="main-register__form-wrapper">
@@ -35,6 +35,9 @@
 
                 <div class="main-register__input-wrapper">
                     <input type="submit" value="Create Account" class="submit-btn">
+                    <p class="main-login__register-link">
+                        Already a Customer? <a href="{{ routes.account_login_url }}">Login →</a>
+                    </p>
                 </div>
             {% endform %}
         </div>
