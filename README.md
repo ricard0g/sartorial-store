@@ -47,7 +47,7 @@ Dive into what makes Sartorial Paris exceptional:
 
 ### Powerful Yet Minimal App Integration 📲
 
--   Search & Discovery App → The secret sauce behind our stellar filtering and recommendation system
+-   Search & Discovery App → Just the app I used for the Search and Filtering system.
     That's it! Proof that with the right implementation, you don't need a dozen apps to create an exceptional experience.
 
 ### Tech Stack 🚀

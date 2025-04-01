@@ -3,23 +3,13 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <meta
-            name="description"
-            content="{% if settings.store_description != blank %}{{ settings.store_description }}{% else %}This is Sartorial Paris Home Page. If you're a man that knows about elegant style and value, this is your place.{% endif %}"
-        >
-        {% if settings.favicon != blank %}
-            <link rel="icon" type="image/x-icon" href="{{ settings.favicon | asset_url }}">
-        {% else %}
-            <link rel="icon" type="image/x-icon" href="{{ 'favicon-sartorial.svg' | asset_url }}">
-        {% endif %}
-        {{ content_for_header }}
         <title>
             {% if settings.store_title != blank %}{{ settings.store_title }}{% else %}Sartorial Paris{% endif %}
         </title>
+        {{ content_for_header }}
         {% if template.name == 'product' %}
             <script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.min.js"></script>
         {% endif %}
-        <script src="{{ 'global.js' | asset_url }}" defer></script>
         {{ 'global.css' | asset_url | stylesheet_tag }}
         <style>
             @import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap');
@@ -57,6 +47,17 @@
                 color: rgb(104, 103, 103);
             }
         </style>
+        <script src="{{ 'global.js' | asset_url }}" defer></script>
+        {% if settings.favicon != blank %}
+            <link rel="icon" type="image/x-icon" href="{{ settings.favicon | asset_url }}">
+        {% else %}
+            <link rel="icon" type="image/x-icon" href="{{ 'favicon-sartorial.svg' | asset_url }}">
+        {% endif %}
+        <meta
+            name="description"
+            content="{% if settings.store_description != blank %}{{ settings.store_description }}{% else %}This is Sartorial Paris Home Page. If you're a man that knows about elegant style and value, this is your place.{% endif %}"
+        >
+        {% render 'meta-tags' %}
     </head>
     <body>
         <header>
