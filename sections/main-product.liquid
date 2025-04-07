@@ -18,7 +18,7 @@
                     {{
                         image
                         | image_url: width: 500
-                        | image_tag: alt: product.title, class: 'main-product__carousel-main-image'
+                        | image_tag: alt: product.title, class: 'main-product__carousel-main-image', preload: true
                     }}
                 </div>
             {% endfor %}
