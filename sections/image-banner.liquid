@@ -1,11 +1,4 @@
-{{ 'image-banner.css' | asset_url | stylesheet_tag }}
-<link
-    rel="preload"
-    fetchpriority="high"
-    as="image"
-    href="{{ 'background-image.webp' | asset_url }}"
-    type="image/webp"
->
+{{ 'image-banner.css' | asset_url | stylesheet_tag: preload: true }}
 <div
     class="banner-container"
     style="{% if section.settings.background_image != blank %}--background-image: url('{{ section.settings.background_image | image_url: width: 1920, height: 1080, crop: "center" }}'); {% else %}--background-image: url('{{ 'background-image.webp' | asset_url }}');{% endif %} --background-opacity: {{ section.settings.background_opacity | divided_by: 100.0 }}; --title-color: {{ section.settings.title_color }}; --title-size-desktop: {{ section.settings.title_size_desktop }}px; --title-size-mobile: {{ section.settings.title_size_mobile }}px; {% unless section.settings.typeface == 'normal' %} --title-typeface: 'Cormorant Unicase', serif{% endunless %}; --title-width-desktop: {{ section.settings.title_width_desktop }}px; --title-width-tablet: {{ section.settings.title_width_tablet }}px; --title-width-mobile: {{ section.settings.title_width_mobile }}px; --title-letter-spacing: {{ section.settings.title_letter_spacing }}px;"

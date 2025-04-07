@@ -20,14 +20,14 @@
                             {{
                                 product.featured_image
                                 | image_url: width: 250, crop: 'top'
-                                | image_tag: alt: product.title, class: 'product-slider__image'
+                                | image_tag: alt: product.title, class: 'product-slider__image', loading: 'lazy'
                             }}
                         </figure>
                         <figure class="product-slider__cell-image">
                             {{
                                 product.images[1]
                                 | image_url: width: 250, crop: 'top'
-                                | image_tag: alt: product.title, class: 'product-slider__second-image'
+                                | image_tag: alt: product.title, class: 'product-slider__second-image', loading: 'lazy'
                             }}
                         </figure>
                     </a>
@@ -42,7 +42,8 @@
                                             | image_url: width: 380, crop: 'top'
                                             | image_tag:
                                                 class: 'product-slider__carousel-dialog-image',
-                                                alt: product.title
+                                                alt: product.title,
+                                                loading: 'lazy'
                                         }}
                                     </div>
                                 {% endfor %}
