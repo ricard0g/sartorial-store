@@ -34,13 +34,14 @@
 
 .footer__menu-item a {
     text-decoration: none;
-    color: rgb(104, 103, 103);
+    color: rgb(74, 74, 74);
     font-size: 0.85rem;
     transition: all 0.3s ease;
 }
 
 .footer__menu-item a:hover {
-    color: #3c3c3c;
+    color: #323232;
+    font-weight: 600;
     text-decoration: underline;
 }
 

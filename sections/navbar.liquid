@@ -9,11 +9,11 @@
 <nav id="subnavbar-wrapper-xl" class="subnavbar-wrapper">
     <ul class="nav-list">
         <li class="nav-item" id="logo">
-            <a href="{{ routes.root_url }}">
+            <a aria-label="Sartorial Store Home" href="{{ routes.root_url }}">
                 {% if settings.logo != blank %}
                     {{ settings.logo | image_url: width: settings.logo_width }}
                 {% else %}
-                    <img src="{{ 'sartorial-logo.webp' | asset_url }}" width="150" height="auto">
+                    <img src="{{ 'sartorial-logo.webp' | asset_url }}" alt="Sartorial Logo" width="150" height="auto">
                 {% endif -%}
             </a>
         </li>
